@@ -87,7 +87,6 @@ void Error_Handler(void);
 #define CTP_SDA_GPIO_Port GPIOD
 #define CTP_INT_Pin GPIO_PIN_14
 #define CTP_INT_GPIO_Port GPIOD
-#define CTP_INT_EXTI_IRQn EXTI15_10_IRQn
 #define CTP_RST_Pin GPIO_PIN_15
 #define CTP_RST_GPIO_Port GPIOD
 #define DPAD_RX_Pin GPIO_PIN_0
