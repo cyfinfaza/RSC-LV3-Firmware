@@ -1,0 +1,2 @@
+# LV3-CAN-Subsystem
+This folder contains the CAN library used by all the Rutgers Solar Car LV3 firmware projects. The library contains the CAN behavior logic as well as definitions for all parameters that get synced between boards. These parameters are defined in `./Define/Parameters.def` and are copied in from a Google Sheets spreadsheet which can be found [here](https://docs.google.com/spreadsheets/d/1AlzHPLXnisMNnQ3OENVSZAYfQ4ZKVRGzkC8vVAt61TM/edit?gid=0).

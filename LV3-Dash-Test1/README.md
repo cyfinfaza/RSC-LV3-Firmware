@@ -1,0 +1,4 @@
+# LV3-Dash-Test1  
+This program runs the **LVGL Widgets Demo on LVGL v8** on an LV3 Dash r0 board (based on STM32H743).  
+The board interfaces with [this display module](https://www.buydisplay.com/sunlight-readable-4-3-inch-high-brightness-480x272-tft-lcd-display), specifically the version with "Capacitive Touch Panel". Output to the RGB parallel display interface is handled by the STM32 LTDC, and input is handled by an I2C interface with the module's FT5206 touch controller.  
+To support the display orientation in the dashboard module, software rotation is implemented in the LVGL flush callback (not handled by LVGL itself).
