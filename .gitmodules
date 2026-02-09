@@ -1,0 +1,3 @@
+[submodule "LV3-Dash-Test2/Drivers/lvgl"]
+	path = LV3-Dash-Test2/Drivers/lvgl
+	url = https://github.com/lvgl/lvgl.git

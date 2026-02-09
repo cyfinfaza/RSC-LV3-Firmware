@@ -240,7 +240,27 @@ SECTIONS
     . = ALIGN(8);
   } >DTCMRAM
 
+  /* START ADDED SECTIONS */
 
+  /* Section for AXI SRAM (D1 Domain) - 512KB */
+  .ram_d1 (NOLOAD) :
+  {
+    . = ALIGN(4);
+    *(.ram_d1)
+    *(.ram_d1*)
+    . = ALIGN(4);
+  } >RAM
+
+  /* Section for SRAM1/2/3 (D2 Domain) - 288KB */
+  .ram_d2 (NOLOAD) :
+  {
+    . = ALIGN(4);
+    *(.ram_d2)
+    *(.ram_d2*)
+    . = ALIGN(4);
+  } >RAM_D2
+
+  /* END ADDED SECTIONS */
 
   /* Remove information from the standard libraries */
   /DISCARD/ :
