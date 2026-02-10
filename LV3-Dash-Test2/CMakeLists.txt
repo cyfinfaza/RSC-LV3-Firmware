@@ -41,6 +41,14 @@ add_subdirectory(cmake/stm32cubemx)
 add_subdirectory(Drivers/lvgl)
 target_link_libraries(lvgl PUBLIC stm32cubemx)
 
+# Add Squareline Studio UI
+# add_subdirectory(Drivers/UI)
+# target_link_libraries(ui PUBLIC lvgl)
+
+# Add EEZ Studio UI
+add_subdirectory(eez-ui)
+# target_link_libraries(eez-ui PUBLIC lvgl)
+
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
@@ -57,6 +65,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
     Core/Inc
     Drivers/lvgl/demos
+    Drivers/UI
 )
 
 # Add project symbols (macros)
@@ -71,6 +80,7 @@ list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
     lvgl
+    eez-ui # Replaced ui with eez-ui
     # Add user defined libraries
 )
 

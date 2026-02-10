@@ -23,16 +23,21 @@
 /* USER CODE BEGIN Includes */
 
 #include "FT5206.h"
+#include "actions.h"
 #include "demos/music/lv_demo_music.h"
 #include "demos/widgets/lv_demo_widgets.h"
 #include "lv_demos.h"
 #include "lvgl.h"
+#include "screens.h"
 #include "stm32h7xx_hal_ltdc.h"
+#include "ui.h"
+#include <src/display/lv_display.h>
 #include <src/drivers/display/st_ltdc/lv_st_ltdc.h>
 #include <src/lv_api_map_v8.h>
+#include <src/widgets/list/lv_list.h>
+#include <src/widgets/slider/lv_slider.h>
 #include <stdint.h>
 #include <string.h>
-
 
 /* USER CODE END Includes */
 
@@ -108,6 +113,25 @@ static void MX_DMA2D_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+void action_action1(lv_event_t *e) {
+  // Switch to screen "Other" with animation
+  lv_scr_load_anim(objects.other, LV_SCREEN_LOAD_ANIM_MOVE_TOP, 250, 0, false);
+  lv_anim_t *a = lv_anim_get(objects.other, NULL);
+  if (a) {
+    lv_anim_set_path_cb(a, lv_anim_path_ease_out);
+  }
+}
+
+void action_action2(lv_event_t *e) {
+  // Switch to screen "Main" with animation
+  lv_scr_load_anim(objects.main, LV_SCREEN_LOAD_ANIM_MOVE_BOTTOM, 250, 0,
+                   false);
+  lv_anim_t *a = lv_anim_get(objects.main, NULL);
+  if (a) {
+    lv_anim_set_path_cb(a, lv_anim_path_ease_out);
+  }
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -168,8 +192,8 @@ int main(void) {
   // Set the LTDC framebuffer address
   HAL_LTDC_SetAddress(&hltdc, (uint32_t)ltdc_framebuffer, 0);
 
-  // Set backlight timer duty cycle to 100%
-  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 100);
+  // Set backlight timer duty cycle to 25%
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 25);
   // Enable backlight control timer
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
@@ -189,7 +213,15 @@ int main(void) {
   lv_indev_set_type(indev_touch, LV_INDEV_TYPE_POINTER);
   lv_indev_set_read_cb(indev_touch, FT5206_Read);
 
-  lv_demo_widgets();
+  // lv_demo_widgets();
+  ui_init();
+
+  int last_slider_val = 0;
+
+  lv_obj_t *some_label = lv_list_add_text(objects.params_list, "hello");
+  lv_obj_t *some_slider =
+      lv_list_add_button(objects.params_list, NULL, "something");
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -198,6 +230,15 @@ int main(void) {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    int slider_val = lv_slider_get_value(objects.brightness_slider);
+    if (slider_val != last_slider_val) {
+      last_slider_val = slider_val;
+      // gamma correction for perceived brightness
+      float normalized_val = slider_val / 100.0f;
+      float gamma_corrected_val = normalized_val * normalized_val;
+      uint32_t duty_cycle = (uint32_t)(gamma_corrected_val * 100);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, duty_cycle);
+    }
 
     lv_timer_handler();
     // HAL_Delay(2);

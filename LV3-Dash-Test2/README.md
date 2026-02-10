@@ -1,5 +1,5 @@
 # LV3-Dash-Test2
-This program runs the **LVGL Widgets Demo on LVGL v9** on an LV3 Dash r0 board (based on STM32H743).  
-This program is a re-implementation of LV3-Dash-Test1 using LVGL v9
+This program runs an **LVGL UI made with EEZ Studio (or Squarline Studio) on LVGL v9**.  
+It can also run the Widgets demo. It is based on LV3-Dash-Test1.  
 The board interfaces with [this display module](https://www.buydisplay.com/sunlight-readable-4-3-inch-high-brightness-480x272-tft-lcd-display), specifically the version with "Capacitive Touch Panel". Output to the RGB parallel display interface is handled by the STM32 LTDC, and input is handled by an I2C interface with the module's FT5206 touch controller.  
-LVGL is configured to use its built-in LTDC driver in partial refresh mode, and display rotation is handled by LVGL in software. Some tearing artifacts are present as a result of using partial refresh mode instead of full refresh mode, but rotation is only supported in partial refresh mode.
+LVGL is configured to use its built-in LTDC driver in partial refresh mode, and display rotation is handled by LVGL in software. Some tearing artifacts are present as a result of using partial refresh mode instead of full refresh mode, but rotation is only supported in partial refresh mode.  
