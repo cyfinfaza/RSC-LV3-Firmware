@@ -11,6 +11,13 @@ extern FDCAN_HandleTypeDef hfdcan2;
 #define LV3_CAN_INSTANCE FDCAN2
 #endif
 
+#ifdef LV3_CAN_DRIVER_IMPL__LV3_DASH_R0
+#include "stm32h7xx_hal.h"
+extern FDCAN_HandleTypeDef hfdcan2;
+#define LV3_CAN_HANDLE hfdcan2
+#define LV3_CAN_INSTANCE FDCAN2
+#endif
+
 void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan,
                                uint32_t RxFifo0ITs) {
   if (hfdcan->Instance == LV3_CAN_INSTANCE) {
@@ -31,6 +38,26 @@ void LV3_CAN_Driver_Init() {
   HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_1); // G
   HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_2); // R
   HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_3); // B
+
+  HAL_FDCAN_Start(&hfdcan2);
+
+  HAL_FDCAN_ActivateNotification(&hfdcan2, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0);
+
+  // fdcan allow all messages
+  FDCAN_FilterTypeDef filter;
+  filter.IdType = FDCAN_STANDARD_ID;
+  filter.FilterIndex = 0;
+  filter.FilterType = FDCAN_FILTER_MASK;
+  filter.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
+  filter.FilterID1 = 0x000;
+  filter.FilterID2 = 0x000;
+  HAL_FDCAN_ConfigFilter(&hfdcan2, &filter);
+
+#endif
+
+#ifdef LV3_CAN_DRIVER_IMPL__LV3_DASH_R0
+
+  // This board has no CAN status LED
 
   HAL_FDCAN_Start(&hfdcan2);
 

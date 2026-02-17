@@ -49,6 +49,9 @@ target_link_libraries(lvgl PUBLIC stm32cubemx)
 add_subdirectory(eez-ui)
 # target_link_libraries(eez-ui PUBLIC lvgl)
 
+# Add LV3-CAN-Subsystem library
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../LV3-CAN-Subsystem ${CMAKE_CURRENT_BINARY_DIR}/LV3-CAN-Subsystem)
+
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
@@ -71,6 +74,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add project symbols (macros)
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined symbols
+    
 )
 
 # Remove wrong libob.a library dependency when using cpp files
@@ -79,8 +83,13 @@ list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
+    # Add user defined libraries
     lvgl
     eez-ui # Replaced ui with eez-ui
-    # Add user defined libraries
+    LV3-CAN-Subsystem
 )
 
+# Apply driver implementation define to the CAN subsystem
+target_compile_definitions(LV3-CAN-Subsystem PRIVATE
+    LV3_CAN_DRIVER_IMPL__LV3_DASH_R0
+)

@@ -23,21 +23,26 @@
 /* USER CODE BEGIN Includes */
 
 #include "FT5206.h"
+#include "LV3_CAN.h"
 #include "actions.h"
 #include "demos/music/lv_demo_music.h"
 #include "demos/widgets/lv_demo_widgets.h"
 #include "lv_demos.h"
 #include "lvgl.h"
 #include "screens.h"
+#include "stm32h7xx_hal.h"
+#include "stm32h7xx_hal_gpio.h"
 #include "stm32h7xx_hal_ltdc.h"
 #include "ui.h"
 #include <src/display/lv_display.h>
 #include <src/drivers/display/st_ltdc/lv_st_ltdc.h>
 #include <src/lv_api_map_v8.h>
+#include <src/widgets/led/lv_led.h>
 #include <src/widgets/list/lv_list.h>
 #include <src/widgets/slider/lv_slider.h>
 #include <stdint.h>
 #include <string.h>
+#include <sys/_types.h>
 
 /* USER CODE END Includes */
 
@@ -48,6 +53,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+#define SCREEN_FADE_ON_TIME 500
 
 /* USER CODE END PD */
 
@@ -90,6 +97,8 @@ __attribute__((aligned(32)));
 uint8_t lvgl_draw_buffer_1[FRAME_SIZE / 2] __attribute__((section(".ram_d1")));
 uint8_t lvgl_draw_buffer_2[FRAME_SIZE / 2] __attribute__((section(".ram_d1")));
 
+unsigned int main_loop_start_timestamp = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -131,6 +140,11 @@ void action_action2(lv_event_t *e) {
     lv_anim_set_path_cb(a, lv_anim_path_ease_out);
   }
 }
+
+uint32_t main_switch = 0;
+
+const LV3_CAN_Binding lv3_can_bindings[] = {
+    {&main_switch, SW_HV_MAIN, LV3_CAN_BindMode_Read}};
 
 /* USER CODE END 0 */
 
@@ -193,7 +207,7 @@ int main(void) {
   HAL_LTDC_SetAddress(&hltdc, (uint32_t)ltdc_framebuffer, 0);
 
   // Set backlight timer duty cycle to 25%
-  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 25);
+  // __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 25);
   // Enable backlight control timer
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
@@ -222,6 +236,12 @@ int main(void) {
   lv_obj_t *some_slider =
       lv_list_add_button(objects.params_list, NULL, "something");
 
+  LV3_CAN_Init(98, LV3_CAN_BusMode_Normal, lv3_can_bindings,
+               sizeof(lv3_can_bindings) / sizeof(LV3_CAN_Binding));
+
+  main_loop_start_timestamp = HAL_GetTick();
+  uint32_t backlight_duty_cycle = 0;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -236,11 +256,22 @@ int main(void) {
       // gamma correction for perceived brightness
       float normalized_val = slider_val / 100.0f;
       float gamma_corrected_val = normalized_val * normalized_val;
-      uint32_t duty_cycle = (uint32_t)(gamma_corrected_val * 100);
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, duty_cycle);
+      backlight_duty_cycle = (uint32_t)(gamma_corrected_val * 100);
     }
-
+    if (HAL_GetTick() - main_loop_start_timestamp < SCREEN_FADE_ON_TIME) {
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1,
+                            backlight_duty_cycle *
+                                (HAL_GetTick() - main_loop_start_timestamp) /
+                                SCREEN_FADE_ON_TIME);
+    } else {
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, backlight_duty_cycle);
+    }
+    lv_led_set_brightness(objects.main_switch_led_element,
+                          main_switch ? 255 : 0);
+    HAL_GPIO_WritePin(LED_USR_GPIO_Port, LED_USR_Pin,
+                      main_switch ? GPIO_PIN_SET : GPIO_PIN_RESET);
     lv_timer_handler();
+    LV3_CAN_Loop();
     // HAL_Delay(2);
   }
   /* USER CODE END 3 */
@@ -315,12 +346,12 @@ void PeriphCommonClock_Config(void) {
    */
   PeriphClkInitStruct.PeriphClockSelection =
       RCC_PERIPHCLK_ADC | RCC_PERIPHCLK_SPI1 | RCC_PERIPHCLK_FDCAN;
-  PeriphClkInitStruct.PLL2.PLL2M = 8;
-  PeriphClkInitStruct.PLL2.PLL2N = 100;
-  PeriphClkInitStruct.PLL2.PLL2P = 2;
+  PeriphClkInitStruct.PLL2.PLL2M = 6;
+  PeriphClkInitStruct.PLL2.PLL2N = 80;
+  PeriphClkInitStruct.PLL2.PLL2P = 4;
   PeriphClkInitStruct.PLL2.PLL2Q = 4;
   PeriphClkInitStruct.PLL2.PLL2R = 2;
-  PeriphClkInitStruct.PLL2.PLL2RGE = RCC_PLL2VCIRANGE_0;
+  PeriphClkInitStruct.PLL2.PLL2RGE = RCC_PLL2VCIRANGE_1;
   PeriphClkInitStruct.PLL2.PLL2VCOSEL = RCC_PLL2VCOMEDIUM;
   PeriphClkInitStruct.PLL2.PLL2FRACN = 0;
   PeriphClkInitStruct.Spi123ClockSelection = RCC_SPI123CLKSOURCE_PLL2;
@@ -506,10 +537,10 @@ static void MX_FDCAN2_Init(void) {
   hfdcan2.Init.AutoRetransmission = DISABLE;
   hfdcan2.Init.TransmitPause = DISABLE;
   hfdcan2.Init.ProtocolException = DISABLE;
-  hfdcan2.Init.NominalPrescaler = 16;
+  hfdcan2.Init.NominalPrescaler = 10;
   hfdcan2.Init.NominalSyncJumpWidth = 1;
-  hfdcan2.Init.NominalTimeSeg1 = 1;
-  hfdcan2.Init.NominalTimeSeg2 = 1;
+  hfdcan2.Init.NominalTimeSeg1 = 13;
+  hfdcan2.Init.NominalTimeSeg2 = 2;
   hfdcan2.Init.DataPrescaler = 1;
   hfdcan2.Init.DataSyncJumpWidth = 1;
   hfdcan2.Init.DataTimeSeg1 = 1;
@@ -517,11 +548,11 @@ static void MX_FDCAN2_Init(void) {
   hfdcan2.Init.MessageRAMOffset = 0;
   hfdcan2.Init.StdFiltersNbr = 0;
   hfdcan2.Init.ExtFiltersNbr = 0;
-  hfdcan2.Init.RxFifo0ElmtsNbr = 0;
+  hfdcan2.Init.RxFifo0ElmtsNbr = 8;
   hfdcan2.Init.RxFifo0ElmtSize = FDCAN_DATA_BYTES_8;
-  hfdcan2.Init.RxFifo1ElmtsNbr = 0;
+  hfdcan2.Init.RxFifo1ElmtsNbr = 8;
   hfdcan2.Init.RxFifo1ElmtSize = FDCAN_DATA_BYTES_8;
-  hfdcan2.Init.RxBuffersNbr = 0;
+  hfdcan2.Init.RxBuffersNbr = 8;
   hfdcan2.Init.RxBufferSize = FDCAN_DATA_BYTES_8;
   hfdcan2.Init.TxEventsNbr = 8;
   hfdcan2.Init.TxBuffersNbr = 16;

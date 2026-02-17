@@ -20,6 +20,7 @@ typedef struct _objects_t {
     lv_obj_t *main;
     lv_obj_t *other;
     lv_obj_t *brightness_slider;
+    lv_obj_t *main_switch_led_element;
     lv_obj_t *params_list;
 } objects_t;
 
