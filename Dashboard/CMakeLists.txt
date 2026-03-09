@@ -37,6 +37,16 @@ add_executable(${CMAKE_PROJECT_NAME})
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
+# Add LVGL
+add_subdirectory(Drivers/lvgl)
+target_link_libraries(lvgl PUBLIC stm32cubemx)
+
+# Add LV3-CAN-Subsystem library
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../LV3-CAN-Subsystem ${CMAKE_CURRENT_BINARY_DIR}/LV3-CAN-Subsystem)
+
+# Add EEZ Studio UI
+add_subdirectory(EEZ-UI)
+
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
@@ -45,11 +55,13 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+    Core/Src/FT5206.c
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
+    Core/Inc
 )
 
 # Add project symbols (macros)
@@ -65,4 +77,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
 
     # Add user defined libraries
+    lvgl
+    LV3-CAN-Subsystem
+    EEZ-UI
 )

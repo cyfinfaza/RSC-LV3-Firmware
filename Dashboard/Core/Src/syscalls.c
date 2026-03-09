@@ -123,6 +123,13 @@ clock_t _times(struct tms *buf) {
   return -1;
 }
 
+int _gettimeofday(struct timeval *tv, struct timezone *tz) {
+  (void)tv;
+  (void)tz;
+  errno = ENOSYS;
+  return -1;
+}
+
 int _stat(const char *file, struct stat *st) {
   (void)file;
   st->st_mode = S_IFCHR;
@@ -198,6 +205,7 @@ __strong_reference(stdin, stderr);
 __strong_reference(_read, read);
 __strong_reference(_write, write);
 __strong_reference(_times, times);
+__strong_reference(_gettimeofday, gettimeofday);
 __strong_reference(_execve, execve);
 __strong_reference(_fork, fork);
 __strong_reference(_link, link);

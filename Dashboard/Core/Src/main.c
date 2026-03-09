@@ -22,6 +22,14 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "FT5206.h"
+#include "lvgl.h"
+#include "stm32h7xx_hal_ltdc.h"
+#include "stm32h7xx_hal_tim.h"
+#include "ui.h"
+#include <src/misc/lv_timer.h>
+#include <string.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -60,6 +68,20 @@ UART_HandleTypeDef huart4;
 HCD_HandleTypeDef hhcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
+
+#define DISP_WIDTH 480
+#define DISP_HEIGHT 272
+#define FRAME_SIZE (DISP_WIDTH * DISP_HEIGHT * 2) // Using RGB565
+uint8_t ltdc_framebuffer[FRAME_SIZE] __attribute__((section(".ram_d1")));
+
+uint8_t lvgl_draw_buffer_1[FRAME_SIZE / 2] __attribute__((section(".ram_d1")));
+uint8_t lvgl_draw_buffer_2[FRAME_SIZE / 2] __attribute__((section(".ram_d1")));
+
+unsigned int main_loop_start_timestamp = 0;
+
+unsigned int backlight_level = 25; // 0-100%
+
+#define SCREEN_FADE_ON_TIME 500
 
 /* USER CODE END PV */
 
@@ -138,6 +160,37 @@ int main(void) {
   MX_DMA2D_Init();
   /* USER CODE BEGIN 2 */
 
+  // Clear framebuffer
+  memset(ltdc_framebuffer, 0, FRAME_SIZE);
+
+  // Set LTDC framebuffer address
+  HAL_LTDC_SetAddress(&hltdc, (uint32_t)ltdc_framebuffer, 0);
+
+  // Ensure backlight is at 0% and start PWM
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+
+  // Initialize LVGL
+  lv_init();
+  lv_tick_set_cb(HAL_GetTick);
+
+  // Set up display
+  lv_disp_t *disp = lv_st_ltdc_create_partial(
+      lvgl_draw_buffer_1, lvgl_draw_buffer_2, FRAME_SIZE / 2, 0);
+  lv_disp_set_rotation(disp, LV_DISP_ROTATION_180);
+
+  // Set up touch input
+  FT5206_Init();
+  lv_indev_t *indev_touch = lv_indev_create();
+  lv_indev_set_type(indev_touch, LV_INDEV_TYPE_POINTER);
+  lv_indev_set_read_cb(indev_touch, FT5206_Read);
+
+  // Initialize EEZ Studio UI
+  ui_init();
+
+  // Record main loop start timestamp for backlight fade-in effect
+  main_loop_start_timestamp = HAL_GetTick();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -146,6 +199,18 @@ int main(void) {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+    // Backlight control
+    if (HAL_GetTick() - main_loop_start_timestamp < SCREEN_FADE_ON_TIME) {
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1,
+                            backlight_level *
+                                (HAL_GetTick() - main_loop_start_timestamp) /
+                                SCREEN_FADE_ON_TIME);
+    } else {
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, backlight_level);
+    }
+
+    lv_timer_handler();
   }
   /* USER CODE END 3 */
 }
