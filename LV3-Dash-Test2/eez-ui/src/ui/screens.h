@@ -22,6 +22,7 @@ typedef struct _objects_t {
     lv_obj_t *brightness_slider;
     lv_obj_t *main_switch_led_element;
     lv_obj_t *params_list;
+    lv_obj_t *obj0;
 } objects_t;
 
 extern objects_t objects;

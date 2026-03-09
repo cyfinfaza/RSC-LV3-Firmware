@@ -11,6 +11,7 @@
     "styles.h",
     "ui.c",
     "ui.h",
+    "ui_image_home_icon.c",
     "vars.h"
   ]
 }

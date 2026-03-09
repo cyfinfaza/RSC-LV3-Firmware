@@ -41,6 +41,7 @@
 #include <src/widgets/list/lv_list.h>
 #include <src/widgets/slider/lv_slider.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 #include <sys/_types.h>
 
@@ -124,7 +125,7 @@ static void MX_DMA2D_Init(void);
 
 void action_action1(lv_event_t *e) {
   // Switch to screen "Other" with animation
-  lv_scr_load_anim(objects.other, LV_SCREEN_LOAD_ANIM_MOVE_TOP, 250, 0, false);
+  lv_scr_load_anim(objects.other, LV_SCREEN_LOAD_ANIM_OVER_LEFT, 150, 0, false);
   lv_anim_t *a = lv_anim_get(objects.other, NULL);
   if (a) {
     lv_anim_set_path_cb(a, lv_anim_path_ease_out);
@@ -133,12 +134,56 @@ void action_action1(lv_event_t *e) {
 
 void action_action2(lv_event_t *e) {
   // Switch to screen "Main" with animation
-  lv_scr_load_anim(objects.main, LV_SCREEN_LOAD_ANIM_MOVE_BOTTOM, 250, 0,
-                   false);
+  lv_scr_load_anim(objects.main, LV_SCREEN_LOAD_ANIM_OUT_RIGHT, 150, 0, false);
   lv_anim_t *a = lv_anim_get(objects.main, NULL);
   if (a) {
     lv_anim_set_path_cb(a, lv_anim_path_ease_out);
   }
+}
+
+static void anim_delete_cb(lv_anim_t *a) { lv_obj_delete(a->var); }
+
+void show_top_notification(const char *text) {
+  lv_obj_t *notif = lv_obj_create(lv_layer_top());
+  lv_obj_add_flag(notif, LV_OBJ_FLAG_FLOATING);
+
+  lv_obj_set_size(notif, lv_pct(100), 50);
+  lv_obj_set_y(notif, -60);
+  lv_obj_set_style_bg_color(notif, lv_color_hex(0x222222), 0);
+  lv_obj_set_style_text_color(notif, lv_color_white(), 0);
+  lv_obj_set_style_radius(notif, 0, 0);
+  lv_obj_set_style_border_side(notif, LV_BORDER_SIDE_BOTTOM, 0);
+  lv_obj_set_style_border_width(notif, 2, 0);
+  lv_obj_set_style_border_color(notif, lv_color_hex(0x888888), 0);
+  lv_obj_set_style_pad_all(notif, 0, 0);
+  lv_obj_set_scrollbar_mode(notif, LV_SCROLLBAR_MODE_OFF);
+
+  lv_obj_t *label = lv_label_create(notif);
+  lv_label_set_text(label, text);
+  lv_obj_center(label);
+
+  lv_anim_t a;
+
+  lv_anim_init(&a);
+  lv_anim_set_var(&a, notif);
+  lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)lv_obj_set_y);
+  lv_anim_set_path_cb(&a, lv_anim_path_ease_out);
+  lv_anim_set_duration(&a, 500);
+  lv_anim_set_values(&a, -60, 0);
+  lv_anim_start(&a);
+
+  lv_anim_set_path_cb(&a, lv_anim_path_ease_in);
+  lv_anim_set_delay(&a, 3500);
+  lv_anim_set_values(&a, 0, -60);
+  lv_anim_set_deleted_cb(&a, anim_delete_cb);
+  lv_anim_start(&a);
+}
+
+void action_prompt_action(lv_event_t *e) {
+  // Show a prompt message box
+  char buf[64];
+  sprintf(buf, "Current time: %d ms", HAL_GetTick());
+  show_top_notification(buf);
 }
 
 uint32_t main_switch = 0;

@@ -9,6 +9,7 @@ extern "C" {
 
 extern void action_action1(lv_event_t * e);
 extern void action_action2(lv_event_t * e);
+extern void action_prompt_action(lv_event_t * e);
 
 #ifdef __cplusplus
 }
