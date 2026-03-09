@@ -90,8 +90,7 @@ HCD_HandleTypeDef hhcd_USB_OTG_FS;
 #define DISP_HEIGHT 272
 #define FRAME_SIZE                                                             \
   (DISP_WIDTH * DISP_HEIGHT * 2) // 2 bytes per pixel for RGB565
-uint8_t ltdc_framebuffer[FRAME_SIZE] __attribute__((section(".ram_d1")))
-__attribute__((aligned(32)));
+uint8_t ltdc_framebuffer[FRAME_SIZE] __attribute__((section(".ram_d1")));
 // uint8_t ltdc_framebuffer2[FRAME_SIZE] __attribute__((section(".ram_d1")))
 // __attribute__((aligned(32)));
 
