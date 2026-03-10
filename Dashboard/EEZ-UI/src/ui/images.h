@@ -7,6 +7,16 @@
 extern "C" {
 #endif
 
+extern const lv_img_dsc_t img_rsc_short_transparent;
+extern const lv_img_dsc_t img_driver_dashboard_icon;
+extern const lv_img_dsc_t img_hv_battery_icon;
+extern const lv_img_dsc_t img_mppt_icon;
+extern const lv_img_dsc_t img_lv_battery_icon;
+extern const lv_img_dsc_t img_health_monitor_icon;
+extern const lv_img_dsc_t img_console_icon;
+extern const lv_img_dsc_t img_list_icon;
+extern const lv_img_dsc_t img_settings_icon;
+
 #ifndef EXT_IMG_DESC_T
 #define EXT_IMG_DESC_T
 typedef struct _ext_img_desc_t {
@@ -15,7 +25,7 @@ typedef struct _ext_img_desc_t {
 } ext_img_desc_t;
 #endif
 
-extern const ext_img_desc_t images[1];
+extern const ext_img_desc_t images[9];
 
 #ifdef __cplusplus
 }

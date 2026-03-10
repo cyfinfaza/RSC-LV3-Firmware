@@ -106,6 +106,31 @@ static void MX_DMA2D_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+unsigned int get_var_testvar() {
+  return HAL_GetTick();
+}
+
+void set_var_testvar(int32_t value) {
+
+}
+
+int last_swipe_dir = -1;
+
+int32_t get_var_gesture_direction() {
+    return last_swipe_dir;
+}
+
+// Flow will only read this
+void set_var_gesture_direction(int32_t value) { }
+
+void action_accept_gesture(lv_event_t *e) {
+    // Grab the device that triggered the event
+    lv_indev_t * indev = lv_event_get_indev(e);
+    
+    // Save the exact direction into our backing variable
+    last_swipe_dir = (int32_t)lv_indev_get_gesture_dir(indev);
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -211,6 +236,8 @@ int main(void) {
     }
 
     lv_timer_handler();
+    ui_tick();
+    
   }
   /* USER CODE END 3 */
 }

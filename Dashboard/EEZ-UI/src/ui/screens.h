@@ -12,19 +12,30 @@ extern "C" {
 enum ScreensEnum {
     _SCREEN_ID_FIRST = 1,
     SCREEN_ID_MAIN = 1,
-    _SCREEN_ID_LAST = 1
+    SCREEN_ID_SETTINGS = 2,
+    _SCREEN_ID_LAST = 2
 };
 
 typedef struct _objects_t {
     lv_obj_t *main;
+    lv_obj_t *settings;
     lv_obj_t *obj0;
     lv_obj_t *obj1;
+    lv_obj_t *obj2;
+    lv_obj_t *obj3;
+    lv_obj_t *obj4;
+    lv_obj_t *obj5;
+    lv_obj_t *obj6;
+    lv_obj_t *obj7;
 } objects_t;
 
 extern objects_t objects;
 
 void create_screen_main();
 void tick_screen_main();
+
+void create_screen_settings();
+void tick_screen_settings();
 
 void create_user_widget_widget1(lv_obj_t *parent_obj, void *flowState, int startWidgetIndex);
 void tick_user_widget_widget1(void *flowState, int startWidgetIndex);
@@ -41,9 +52,10 @@ enum Themes {
 };
 enum Colors {
     COLOR_ID_BG,
+    COLOR_ID_TEXT,
 };
 void change_color_theme(uint32_t themeIndex);
-extern uint32_t theme_colors[1][1];
+extern uint32_t theme_colors[1][2];
 
 #ifdef __cplusplus
 }
