@@ -13,7 +13,7 @@
 objects_t objects;
 
 static const char *screen_names[] = { "Main", "Settings" };
-static const char *object_names[] = { "main", "settings", "obj0", "obj1", "obj2", "obj3", "obj4", "obj5", "obj6", "obj7" };
+static const char *object_names[] = { "main", "settings", "obj0", "obj1", "obj2", "obj3", "obj4", "obj5", "obj6", "obj7", "brightness_slider" };
 
 //
 // Event handlers
@@ -387,10 +387,18 @@ void create_screen_settings() {
     {
         lv_obj_t *parent_obj = obj;
         {
+            // brightness_slider
+            lv_obj_t *obj = lv_slider_create(parent_obj);
+            objects.brightness_slider = obj;
+            lv_obj_set_pos(obj, 0, 0);
+            lv_obj_set_size(obj, 10, 150);
+            lv_slider_set_value(obj, 25, LV_ANIM_OFF);
+        }
+        {
             lv_obj_t *obj = lv_label_create(parent_obj);
             lv_obj_set_pos(obj, 160, 104);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_label_set_text(obj, "Settings page?");
+            lv_label_set_text(obj, "Brightness");
         }
     }
     

@@ -24,10 +24,12 @@
 
 #include "FT5206.h"
 #include "lvgl.h"
+#include "screens.h"
 #include "stm32h7xx_hal_ltdc.h"
 #include "stm32h7xx_hal_tim.h"
 #include "ui.h"
 #include <src/misc/lv_timer.h>
+#include <src/widgets/slider/lv_slider.h>
 #include <string.h>
 
 /* USER CODE END Includes */
@@ -226,6 +228,8 @@ int main(void) {
     /* USER CODE BEGIN 3 */
 
     // Backlight control
+    int brightness_slider_value = lv_slider_get_value(objects.brightness_slider);
+    backlight_level = brightness_slider_value;
     if (HAL_GetTick() - main_loop_start_timestamp < SCREEN_FADE_ON_TIME) {
       __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1,
                             backlight_level *
