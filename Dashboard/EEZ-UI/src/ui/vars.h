@@ -20,6 +20,8 @@ enum FlowGlobalVariables {
 
 extern int32_t get_var_gesture_direction();
 extern void set_var_gesture_direction(int32_t value);
+extern int32_t get_var_display_brightness();
+extern void set_var_display_brightness(int32_t value);
 
 #ifdef __cplusplus
 }

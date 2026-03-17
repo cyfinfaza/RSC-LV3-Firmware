@@ -13,7 +13,7 @@
 objects_t objects;
 
 static const char *screen_names[] = { "Main", "Settings" };
-static const char *object_names[] = { "main", "settings", "obj0", "obj1", "obj2", "obj3", "obj4", "obj5", "obj6", "obj7", "brightness_slider" };
+static const char *object_names[] = { "main", "settings", "obj0", "obj1", "obj2", "obj3", "obj4", "obj5", "obj6", "obj7", "brightness_slider", "obj8" };
 
 //
 // Event handlers
@@ -55,6 +55,31 @@ static void event_handler_cb_settings_settings(lv_event_t *e) {
     if (event == LV_EVENT_GESTURE) {
         e->user_data = (void *)0;
         flowPropagateValueLVGLEvent(flowState, 1, 0, e);
+    }
+}
+
+static void event_handler_cb_settings_brightness_slider(lv_event_t *e) {
+    lv_event_code_t event = lv_event_get_code(e);
+    void *flowState = lv_event_get_user_data(e);
+    (void)flowState;
+    
+    if (event == LV_EVENT_VALUE_CHANGED) {
+        lv_obj_t *ta = lv_event_get_target_obj(e);
+        if (tick_value_change_obj != ta) {
+            int32_t value = lv_slider_get_value(ta);
+            assignIntegerProperty(flowState, 0, 3, value, "Failed to assign Value in Slider widget");
+        }
+    }
+}
+
+static void event_handler_cb_settings_obj8(lv_event_t *e) {
+    lv_event_code_t event = lv_event_get_code(e);
+    void *flowState = lv_event_get_user_data(e);
+    (void)flowState;
+    
+    if (event == LV_EVENT_PRESSED) {
+        e->user_data = (void *)0;
+        action_save_brightness_to_eeprom(e);
     }
 }
 
@@ -392,13 +417,31 @@ void create_screen_settings() {
             objects.brightness_slider = obj;
             lv_obj_set_pos(obj, 0, 0);
             lv_obj_set_size(obj, 10, 150);
-            lv_slider_set_value(obj, 25, LV_ANIM_OFF);
+            lv_obj_add_event_cb(obj, event_handler_cb_settings_brightness_slider, LV_EVENT_ALL, flowState);
         }
         {
             lv_obj_t *obj = lv_label_create(parent_obj);
             lv_obj_set_pos(obj, 160, 104);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_label_set_text(obj, "Brightness");
+        }
+        {
+            lv_obj_t *obj = lv_button_create(parent_obj);
+            objects.obj8 = obj;
+            lv_obj_set_pos(obj, 238, 161);
+            lv_obj_set_size(obj, 100, 50);
+            lv_obj_add_event_cb(obj, event_handler_cb_settings_obj8, LV_EVENT_ALL, flowState);
+            add_style_base_button(obj);
+            {
+                lv_obj_t *parent_obj = obj;
+                {
+                    lv_obj_t *obj = lv_label_create(parent_obj);
+                    lv_obj_set_pos(obj, 0, 0);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_label_set_text(obj, "Save");
+                }
+            }
         }
     }
     
@@ -408,6 +451,15 @@ void create_screen_settings() {
 void tick_screen_settings() {
     void *flowState = getFlowState(0, 1);
     (void)flowState;
+    {
+        int32_t new_val = evalIntegerProperty(flowState, 0, 3, "Failed to evaluate Value in Slider widget");
+        int32_t cur_val = lv_slider_get_value(objects.brightness_slider);
+        if (new_val != cur_val) {
+            tick_value_change_obj = objects.brightness_slider;
+            lv_slider_set_value(objects.brightness_slider, new_val, LV_ANIM_ON);
+            tick_value_change_obj = NULL;
+        }
+    }
 }
 
 void create_user_widget_widget1(lv_obj_t *parent_obj, void *flowState, int startWidgetIndex) {

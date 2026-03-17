@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 
 #include "FT5206.h"
+#include "eeprom.h"
 #include "lvgl.h"
 #include "screens.h"
 #include "stm32h7xx_hal_ltdc.h"
@@ -133,6 +134,23 @@ void action_accept_gesture(lv_event_t *e) {
     last_swipe_dir = (int32_t)lv_indev_get_gesture_dir(indev);
 }
 
+int32_t get_var_display_brightness() {
+    return backlight_level;
+}
+
+void set_var_display_brightness(int32_t value) {
+    backlight_level = value;
+}
+
+uint16_t VirtAddVarTab[NB_OF_VAR] = {0x1000, 0x1001, 0x1002};
+#define EEPROM_BRIGHTNESS_VIRT_ADDR 0x1000
+
+void action_save_brightness_to_eeprom(void) {
+    HAL_FLASH_Unlock();
+    EE_WriteVariable(EEPROM_BRIGHTNESS_VIRT_ADDR, (uint16_t)backlight_level);
+    HAL_FLASH_Lock();
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -187,6 +205,17 @@ int main(void) {
   MX_DMA2D_Init();
   /* USER CODE BEGIN 2 */
 
+  HAL_FLASH_Unlock();
+  EE_Init();
+  
+  uint16_t saved_brightness = 25; // default
+  if(EE_ReadVariable(EEPROM_BRIGHTNESS_VIRT_ADDR, &saved_brightness) == 0) {
+      if(saved_brightness <= 100) {
+          backlight_level = saved_brightness;
+      }
+  }
+  HAL_FLASH_Lock();
+
   // Clear framebuffer
   memset(ltdc_framebuffer, 0, FRAME_SIZE);
 
@@ -204,7 +233,7 @@ int main(void) {
   // Set up display
   lv_disp_t *disp = lv_st_ltdc_create_partial(
       lvgl_draw_buffer_1, lvgl_draw_buffer_2, FRAME_SIZE / 2, 0);
-  lv_disp_set_rotation(disp, LV_DISP_ROTATION_180);
+  // lv_disp_set_rotation(disp, LV_DISP_ROTATION_180);
 
   // Set up touch input
   FT5206_Init();
@@ -228,8 +257,8 @@ int main(void) {
     /* USER CODE BEGIN 3 */
 
     // Backlight control
-    int brightness_slider_value = lv_slider_get_value(objects.brightness_slider);
-    backlight_level = brightness_slider_value;
+    // int brightness_slider_value = lv_slider_get_value(objects.brightness_slider);
+    // backlight_level = brightness_slider_value;
     if (HAL_GetTick() - main_loop_start_timestamp < SCREEN_FADE_ON_TIME) {
       __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1,
                             backlight_level *

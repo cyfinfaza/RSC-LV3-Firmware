@@ -8,6 +8,7 @@ extern "C" {
 #endif
 
 extern void action_accept_gesture(lv_event_t * e);
+extern void action_save_brightness_to_eeprom(lv_event_t * e);
 
 #ifdef __cplusplus
 }

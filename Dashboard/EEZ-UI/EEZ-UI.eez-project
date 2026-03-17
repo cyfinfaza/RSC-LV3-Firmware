@@ -116,6 +116,14 @@
         "defaultValue": "2",
         "persistent": false,
         "native": true
+      },
+      {
+        "objID": "b9ca253f-946c-4557-b819-65cce6d29364",
+        "name": "display_brightness",
+        "type": "integer",
+        "defaultValue": "25",
+        "persistent": false,
+        "native": true
       }
     ],
     "structures": [],
@@ -130,6 +138,16 @@
       "componentGroups": [],
       "userProperties": [],
       "name": "accept_gesture",
+      "implementationType": "native"
+    },
+    {
+      "objID": "77fbaec3-f690-4c4d-cd0a-67936c1283a6",
+      "components": [],
+      "connectionLines": [],
+      "localVariables": [],
+      "componentGroups": [],
+      "userProperties": [],
+      "name": "save_brightness_to_eeprom",
       "implementationType": "native"
     }
   ],
@@ -1730,13 +1748,13 @@
               "max": 100,
               "maxType": "literal",
               "mode": "NORMAL",
-              "value": 25,
-              "valueType": "literal",
+              "value": "display_brightness",
+              "valueType": "expression",
               "previewValue": 25,
               "valueLeft": 0,
               "valueLeftType": "literal",
               "previewValueLeft": 0,
-              "enableAnimation": false
+              "enableAnimation": true
             },
             {
               "objID": "2b4f8d7b-eb46-49fc-887b-9c8c7cf7b533",
@@ -1779,6 +1797,104 @@
               "textType": "literal",
               "longMode": "WRAP",
               "recolor": false
+            },
+            {
+              "objID": "a0875675-0d9a-48f5-abaf-3eddcc251e32",
+              "type": "LVGLButtonWidget",
+              "left": 238,
+              "top": 161,
+              "width": 100,
+              "height": 50,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "d5ef5918-b9df-4e73-d9d9-0a8065a359d6",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [
+                {
+                  "objID": "8ca6a94f-d0f1-475a-c106-b94d278e59da",
+                  "eventName": "PRESSED",
+                  "handlerType": "action",
+                  "action": "save_brightness_to_eeprom",
+                  "userData": 0
+                }
+              ],
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "px",
+              "heightUnit": "px",
+              "children": [
+                {
+                  "objID": "e18e0c1d-fad3-4beb-8a78-ec0dab6ac7eb",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 34,
+                  "height": 16,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "a5aa1352-73d5-43cc-88b9-a8bc52a75422",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "9b2f1aa3-f467-43bd-906f-a1b1a743b875",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "align": "CENTER"
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "Save",
+                  "textType": "literal",
+                  "longMode": "WRAP",
+                  "recolor": false
+                }
+              ],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_ON_FOCUS|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlag": true,
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "useStyle": "Base Button",
+              "localStyles": {
+                "objID": "36ae6c7b-57cd-4671-9d10-613d384dcfcd"
+              },
+              "group": "",
+              "groupIndex": 0
             }
           ],
           "widgetFlags": "CLICKABLE|PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLLABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER",
@@ -1808,8 +1924,8 @@
           "type": "LVGLActionComponent",
           "left": 829,
           "top": 170,
-          "width": 341,
-          "height": 53,
+          "width": 342,
+          "height": 54,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -1831,7 +1947,7 @@
           "left": 551,
           "top": 66,
           "width": 186,
-          "height": 71,
+          "height": 70,
           "customInputs": [],
           "customOutputs": [],
           "A": "gesture_direction",
