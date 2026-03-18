@@ -13,6 +13,7 @@ void init_style_basic_screen_MAIN_DEFAULT(lv_style_t *style) {
     lv_style_set_layout(style, LV_LAYOUT_FLEX);
     lv_style_set_flex_main_place(style, LV_FLEX_ALIGN_SPACE_BETWEEN);
     lv_style_set_text_font(style, &ui_font_barlow_16_medium);
+    lv_style_set_bg_color(style, lv_color_hex(0xff000000));
 };
 
 lv_style_t *get_style_basic_screen_MAIN_DEFAULT() {

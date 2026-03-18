@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include "LV3_CAN_Parameters_XMacro.h"
 
 #define LV3_CAN_HEARTBEAT_INTERVAL 1000
 #define LV3_CAN_HEARTBEAT_PULSE 250
@@ -105,10 +106,7 @@ typedef struct {
  * @brief Unique IDs for all parameters (message type 0) known to the LV3 CAN system
  */
 #define X(can_id, name, refresh_interval, ttl, has_safe_state, safe_state) name,
-typedef enum {
-#include "../Define/Parameters.def"
-	LV3_CAN_ParamCount
-} LV3_CAN_Param;
+typedef enum { LV3_CAN_Parameters_XMacro LV3_CAN_ParamCount } LV3_CAN_Param;
 #undef X
 
 /**

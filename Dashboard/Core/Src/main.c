@@ -26,12 +26,18 @@
 #include "eeprom.h"
 #include "lvgl.h"
 #include "screens.h"
+#include "stm32h7xx_hal_gpio.h"
 #include "stm32h7xx_hal_ltdc.h"
 #include "stm32h7xx_hal_tim.h"
 #include "ui.h"
+#include <src/lv_api_map_v8.h>
 #include <src/misc/lv_timer.h>
 #include <src/widgets/slider/lv_slider.h>
+#include <src/widgets/table/lv_table.h>
+#include <stdint.h>
 #include <string.h>
+#include <stdio.h>
+#include "LV3_CAN.h"
 
 /* USER CODE END Includes */
 
@@ -151,6 +157,39 @@ void action_save_brightness_to_eeprom(void) {
     HAL_FLASH_Lock();
 }
 
+#define X(can_id, name, refresh_interval, ttl, has_safe_state, safe_state) \
+    uint32_t lv3c_param_##name = 0;
+  LV3_CAN_Parameters_XMacro
+  #undef X
+
+const LV3_CAN_Binding lv3_can_bindings[] = {
+#define X(can_id, name, refresh_interval, ttl, has_safe_state, safe_state) \
+    {&lv3c_param_##name, name, LV3_CAN_BindMode_Read},
+  LV3_CAN_Parameters_XMacro
+  #undef X
+};
+
+uint32_t get_var_main_switch() {
+    return lv3c_param_SW_HV_MAIN;
+}
+
+void set_var_main_switch(int32_t value) {
+}
+
+char can_parameters_table_buffer[LV3_CAN_ParamCount][8] = {0};
+void action_update_can_parameters_table() {
+  HAL_GPIO_WritePin(LED_USR_GPIO_Port, LED_USR_Pin, GPIO_PIN_SET);
+  int row = 0;
+  #define X(can_id, name, refresh_interval, ttl, has_safe_state, safe_state) \
+    sprintf(can_parameters_table_buffer[row], "%lu", lv3c_param_##name); \
+    lv_table_set_cell_value(objects.can_parameters_table, row, 0, #name); \
+    lv_table_set_cell_value(objects.can_parameters_table, row, 1, can_parameters_table_buffer[row]); \
+    row++;
+  LV3_CAN_Parameters_XMacro
+  #undef X
+  HAL_GPIO_WritePin(LED_USR_GPIO_Port, LED_USR_Pin, GPIO_PIN_RESET);
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -244,6 +283,13 @@ int main(void) {
   // Initialize EEZ Studio UI
   ui_init();
 
+  lv_table_set_col_width(objects.can_parameters_table, 0, 200);
+  lv_table_set_col_width(objects.can_parameters_table, 1, 100);
+
+  // Start LV3 CAN
+  LV3_CAN_Init(98, LV3_CAN_BusMode_Normal, lv3_can_bindings,
+               sizeof(lv3_can_bindings) / sizeof(LV3_CAN_Binding));
+
   // Record main loop start timestamp for backlight fade-in effect
   main_loop_start_timestamp = HAL_GetTick();
 
@@ -270,6 +316,7 @@ int main(void) {
 
     lv_timer_handler();
     ui_tick();
+    LV3_CAN_Loop();
     
   }
   /* USER CODE END 3 */

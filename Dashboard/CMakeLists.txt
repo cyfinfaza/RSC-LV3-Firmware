@@ -82,3 +82,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     LV3-CAN-Subsystem
     EEZ-UI
 )
+
+# Apply driver implementation define to the CAN subsystem
+target_compile_definitions(LV3-CAN-Subsystem PRIVATE
+    LV3_CAN_DRIVER_IMPL__LV3_DASH_R0
+)
