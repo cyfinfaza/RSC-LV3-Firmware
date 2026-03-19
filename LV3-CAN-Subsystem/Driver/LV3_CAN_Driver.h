@@ -3,6 +3,21 @@
 #include <stdint.h>
 #include "LV3_CAN.h"
 
+#ifdef LV3_CAN_DRIVER_IMPL__LV3_CORE_R0
+#include "stm32g4xx_hal.h"
+extern TIM_HandleTypeDef htim5;
+extern FDCAN_HandleTypeDef hfdcan2;
+#define LV3_CAN_HANDLE hfdcan2
+#define LV3_CAN_INSTANCE FDCAN2
+#endif
+
+#ifdef LV3_CAN_DRIVER_IMPL__LV3_DASH_R0
+#include "stm32h7xx_hal.h"
+extern FDCAN_HandleTypeDef hfdcan2;
+#define LV3_CAN_HANDLE hfdcan2
+#define LV3_CAN_INSTANCE FDCAN2
+#endif
+
 /**
  * @brief Initialize the LV3 CAN driver for the specific hardware platform
  *
@@ -48,3 +63,8 @@ uint32_t LV3_CAN_Driver_GetTick();
  * @return Current system health data structure
  */
 LV3_CAN_SystemHealthData LV3_CAN_Driver_GetSystemHealthData();
+
+/**
+ * @brief Called by the LV3 CAN library to forward received CAN messages from CAN peripherals other than LV3_CAN_INSTANCE
+ */
+void LV3_CAN_AUX_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs);
