@@ -1,0 +1,2 @@
+# RSC-LV3-Firmware  
+This is a monorepo containing the individual firmware projects for each of low-voltage system modules on the 2026 Rutgers Solar Car, as well as shared libraries (just the CAN subsystem right now).
