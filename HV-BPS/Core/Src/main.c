@@ -85,6 +85,14 @@ unsigned int last_message_id = 0;
 
 uint16_t bms_supply_rail = 0;
 
+uint16_t pack_ccl = 0;
+uint16_t pack_dcl = 0;
+int16_t pack_current = 0;
+uint16_t pack_dod = 0;
+
+uint16_t bms_relay_state = 0;
+uint8_t pack_soc = 0;
+
 // packed struct for cell voltage broadcast message
 typedef struct __attribute__((packed)) {
   uint16_t voltage;             // * 0.1mV
@@ -92,7 +100,9 @@ typedef struct __attribute__((packed)) {
   uint16_t open_voltage;        // * 0.1mV
 } cell_voltage_data_t;
 
-cell_voltage_data_t cell_voltages[24];
+cell_voltage_data_t cell_voltage_data[24];
+
+uint32_t cell_voltages[24];
 
 int8_t thermistor_temp[8]; // degrees C
 
@@ -104,6 +114,22 @@ void LV3_CAN_AUX_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan,
       uint8_t rx_data[8];
       HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &rx_header, rx_data);
       last_message_id = rx_header.Identifier;
+      if (last_message_id == 0x100) {
+        pack_soc = rx_data[6];
+        bms_relay_state = (rx_data[0] << 8) | rx_data[1];
+      }
+      if (last_message_id == 0x101) {
+        struct {
+          uint16_t ccl;
+          uint16_t dcl;
+          int16_t current;
+          uint16_t dod;
+        } __attribute__((packed)) * bms_status = (void *)rx_data;
+        pack_ccl = bms_status->ccl;
+        pack_dcl = bms_status->dcl;
+        pack_current = bms_status->current;
+        pack_dod = bms_status->dod;
+      }
       if (last_message_id == 0x111) {
         // copy bytes 2 and 3 to bms_supply_rail
         bms_supply_rail = (rx_data[2] << 8) | rx_data[3];
@@ -112,11 +138,12 @@ void LV3_CAN_AUX_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan,
         // cell voltage broadcast message
         uint8_t cell_index = rx_data[0];
         if (cell_index < 24) {
-          cell_voltages[cell_index].voltage = (rx_data[1] << 8) | rx_data[2];
-          cell_voltages[cell_index].internal_resistance =
+          cell_voltage_data[cell_index].voltage = (rx_data[1] << 8) | rx_data[2];
+          cell_voltage_data[cell_index].internal_resistance =
               (rx_data[3] << 8) | rx_data[4];
-          cell_voltages[cell_index].open_voltage =
+          cell_voltage_data[cell_index].open_voltage =
               (rx_data[5] << 8) | rx_data[6];
+          cell_voltages[cell_index] = cell_voltage_data[cell_index].voltage;
         }
       }
       if (last_message_id == 0x76) {
@@ -151,8 +178,32 @@ int32_t max_thermistor_temp = 0;
 
 const LV3_CAN_Binding lv3_can_bindings[] = {
     {&average_thermistor_temp, HV_TEMP, LV3_CAN_BindMode_Write},
-    {&max_thermistor_temp, HV_MAX_TEMP, LV3_CAN_BindMode_Write}
-  };
+    {&max_thermistor_temp, HV_MAX_TEMP, LV3_CAN_BindMode_Write},
+    {&cell_voltages[0], HV_CELL_VOLTAGE_1, LV3_CAN_BindMode_Write},
+    {&cell_voltages[1], HV_CELL_VOLTAGE_2, LV3_CAN_BindMode_Write},
+    {&cell_voltages[2], HV_CELL_VOLTAGE_3, LV3_CAN_BindMode_Write},
+    {&cell_voltages[3], HV_CELL_VOLTAGE_4, LV3_CAN_BindMode_Write},
+    {&cell_voltages[4], HV_CELL_VOLTAGE_5, LV3_CAN_BindMode_Write},
+    {&cell_voltages[5], HV_CELL_VOLTAGE_6, LV3_CAN_BindMode_Write},
+    {&cell_voltages[6], HV_CELL_VOLTAGE_7, LV3_CAN_BindMode_Write},
+    {&cell_voltages[7], HV_CELL_VOLTAGE_8, LV3_CAN_BindMode_Write},
+    {&cell_voltages[8], HV_CELL_VOLTAGE_9, LV3_CAN_BindMode_Write},
+    {&cell_voltages[9], HV_CELL_VOLTAGE_10, LV3_CAN_BindMode_Write},
+    {&cell_voltages[10], HV_CELL_VOLTAGE_11, LV3_CAN_BindMode_Write},
+    {&cell_voltages[11], HV_CELL_VOLTAGE_12, LV3_CAN_BindMode_Write},
+    {&cell_voltages[12], HV_CELL_VOLTAGE_13, LV3_CAN_BindMode_Write},
+    {&cell_voltages[13], HV_CELL_VOLTAGE_14, LV3_CAN_BindMode_Write},
+    {&cell_voltages[14], HV_CELL_VOLTAGE_15, LV3_CAN_BindMode_Write},
+    {&cell_voltages[15], HV_CELL_VOLTAGE_16, LV3_CAN_BindMode_Write},
+    {&cell_voltages[16], HV_CELL_VOLTAGE_17, LV3_CAN_BindMode_Write},
+    {&cell_voltages[17], HV_CELL_VOLTAGE_18, LV3_CAN_BindMode_Write},
+    {&cell_voltages[18], HV_CELL_VOLTAGE_19, LV3_CAN_BindMode_Write},
+    {&cell_voltages[19], HV_CELL_VOLTAGE_20, LV3_CAN_BindMode_Write},
+    {&cell_voltages[20], HV_CELL_VOLTAGE_21, LV3_CAN_BindMode_Write},
+    {&cell_voltages[21], HV_CELL_VOLTAGE_22, LV3_CAN_BindMode_Write},
+    {&cell_voltages[22], HV_CELL_VOLTAGE_23, LV3_CAN_BindMode_Write},
+    {&cell_voltages[23], HV_CELL_VOLTAGE_24, LV3_CAN_BindMode_Write},
+    };
 
 /* USER CODE END 0 */
 
