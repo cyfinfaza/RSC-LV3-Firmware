@@ -37,7 +37,9 @@ add_executable(${CMAKE_PROJECT_NAME})
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
-# Add LVGL
+# Add LVGL (disable examples to speed up build)
+set(CONFIG_LV_BUILD_EXAMPLES OFF)
+set(CONFIG_LV_BUILD_DEMOS OFF)
 add_subdirectory(Drivers/lvgl)
 target_link_libraries(lvgl PUBLIC stm32cubemx)
 

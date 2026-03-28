@@ -3,6 +3,11 @@
 #if defined(LV3_CAN_DRIVER_IMPL__LV3_CORE_R0) ||                               \
     defined(LV3_CAN_DRIVER_IMPL__LV3_DASH_R0)
 
+__weak void LV3_CAN_AUX_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan,
+                                      uint32_t RxFifo0ITs) {
+  // Default weak implementation does nothing, can be overridden by user code if needed
+}
+
 void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan,
                                uint32_t RxFifo0ITs) {
   if (hfdcan->Instance == LV3_CAN_INSTANCE) {
