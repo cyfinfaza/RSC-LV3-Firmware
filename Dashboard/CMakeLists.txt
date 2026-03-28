@@ -37,11 +37,28 @@ add_executable(${CMAKE_PROJECT_NAME})
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
-# Add LVGL (disable examples to speed up build)
-set(CONFIG_LV_BUILD_EXAMPLES OFF)
-set(CONFIG_LV_BUILD_DEMOS OFF)
+# Add LVGL
+set(CONFIG_LV_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(CONFIG_LV_BUILD_DEMOS OFF CACHE BOOL "" FORCE)
 add_subdirectory(Drivers/lvgl)
 target_link_libraries(lvgl PUBLIC stm32cubemx)
+
+# Exclude unused desktop/OS platform drivers from the LVGL build (STM32 only needs display/)
+set(LVGL_DRIVERS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Drivers/lvgl/src/drivers")
+file(GLOB_RECURSE LVGL_UNUSED_DRIVERS
+    "${LVGL_DRIVERS_DIR}/evdev/*.c"
+    "${LVGL_DRIVERS_DIR}/libinput/*.c"
+    "${LVGL_DRIVERS_DIR}/nuttx/*.c"
+    "${LVGL_DRIVERS_DIR}/opengles/*.c"
+    "${LVGL_DRIVERS_DIR}/qnx/*.c"
+    "${LVGL_DRIVERS_DIR}/sdl/*.c"
+    "${LVGL_DRIVERS_DIR}/uefi/*.c"
+    "${LVGL_DRIVERS_DIR}/wayland/*.c"
+    "${LVGL_DRIVERS_DIR}/windows/*.c"
+    "${LVGL_DRIVERS_DIR}/x11/*.c"
+    "${LVGL_DRIVERS_DIR}/draw/eve/*.c"
+)
+set_source_files_properties(${LVGL_UNUSED_DRIVERS} TARGET_DIRECTORY lvgl PROPERTIES HEADER_FILE_ONLY TRUE)
 
 # Add LV3-CAN-Subsystem library
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../LV3-CAN-Subsystem ${CMAKE_CURRENT_BINARY_DIR}/LV3-CAN-Subsystem)
