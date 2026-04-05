@@ -35,6 +35,7 @@
 #include <src/widgets/slider/lv_slider.h>
 #include <src/widgets/table/lv_table.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
 #include "LV3_CAN.h"
@@ -89,6 +90,7 @@ uint8_t lvgl_draw_buffer_2[FRAME_SIZE / 2] __attribute__((section(".ram_d1")));
 unsigned int main_loop_start_timestamp = 0;
 
 unsigned int backlight_level = 25; // 0-100%
+bool flip_screen_state = false; // 0 for normal, 1 for flipped
 
 #define SCREEN_FADE_ON_TIME 500
 
@@ -148,12 +150,27 @@ void set_var_display_brightness(int32_t value) {
     backlight_level = value;
 }
 
+bool get_var_flip_screen() {
+    return flip_screen_state;
+}
+
+void set_var_flip_screen(bool value) {
+    flip_screen_state = value;
+    if (flip_screen_state) {
+        lv_disp_set_rotation(lv_disp_get_default(), LV_DISP_ROTATION_180);
+    } else {
+        lv_disp_set_rotation(lv_disp_get_default(), LV_DISP_ROTATION_0);
+    }
+}
+
 uint16_t VirtAddVarTab[NB_OF_VAR] = {0x1000, 0x1001, 0x1002};
 #define EEPROM_BRIGHTNESS_VIRT_ADDR 0x1000
+#define EEPROM_FLIP_SCREEN_VIRT_ADDR 0x1001
 
 void action_save_brightness_to_eeprom(void) {
     HAL_FLASH_Unlock();
     EE_WriteVariable(EEPROM_BRIGHTNESS_VIRT_ADDR, (uint16_t)backlight_level);
+    EE_WriteVariable(EEPROM_FLIP_SCREEN_VIRT_ADDR, (uint16_t)flip_screen_state);
     HAL_FLASH_Lock();
 }
 
@@ -253,6 +270,11 @@ int main(void) {
           backlight_level = saved_brightness;
       }
   }
+
+  uint16_t saved_flip_screen = 0;
+  if(EE_ReadVariable(EEPROM_FLIP_SCREEN_VIRT_ADDR, &saved_flip_screen) == 0) {
+      flip_screen_state = saved_flip_screen;
+  }
   HAL_FLASH_Lock();
 
   // Clear framebuffer
@@ -272,7 +294,11 @@ int main(void) {
   // Set up display
   lv_disp_t *disp = lv_st_ltdc_create_partial(
       lvgl_draw_buffer_1, lvgl_draw_buffer_2, FRAME_SIZE / 2, 0);
-  // lv_disp_set_rotation(disp, LV_DISP_ROTATION_180);
+  if (flip_screen_state) {
+      lv_disp_set_rotation(disp, LV_DISP_ROTATION_180);
+  } else {
+      lv_disp_set_rotation(disp, LV_DISP_ROTATION_0);
+  }
 
   // Set up touch input
   FT5206_Init();

@@ -14,13 +14,15 @@ enum ScreensEnum {
     SCREEN_ID_MAIN = 1,
     SCREEN_ID_SETTINGS = 2,
     SCREEN_ID_CAN_PARAMETERS = 3,
-    _SCREEN_ID_LAST = 3
+    SCREEN_ID_DRIVER_DASHBOARD = 4,
+    _SCREEN_ID_LAST = 4
 };
 
 typedef struct _objects_t {
     lv_obj_t *main;
     lv_obj_t *settings;
     lv_obj_t *can_parameters;
+    lv_obj_t *driver_dashboard;
     lv_obj_t *obj0;
     lv_obj_t *obj1;
     lv_obj_t *obj2;
@@ -30,10 +32,12 @@ typedef struct _objects_t {
     lv_obj_t *obj6;
     lv_obj_t *obj7;
     lv_obj_t *obj8;
-    lv_obj_t *brightness_slider;
     lv_obj_t *obj9;
-    lv_obj_t *can_parameters_table;
+    lv_obj_t *brightness_slider;
     lv_obj_t *obj10;
+    lv_obj_t *obj11;
+    lv_obj_t *can_parameters_table;
+    lv_obj_t *obj12;
 } objects_t;
 
 extern objects_t objects;
@@ -46,6 +50,9 @@ void tick_screen_settings();
 
 void create_screen_can_parameters();
 void tick_screen_can_parameters();
+
+void create_screen_driver_dashboard();
+void tick_screen_driver_dashboard();
 
 void create_user_widget_widget1(lv_obj_t *parent_obj, void *flowState, int startWidgetIndex);
 void tick_user_widget_widget1(void *flowState, int startWidgetIndex);

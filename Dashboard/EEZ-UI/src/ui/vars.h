@@ -24,6 +24,8 @@ extern int32_t get_var_display_brightness();
 extern void set_var_display_brightness(int32_t value);
 extern int32_t get_var_main_switch();
 extern void set_var_main_switch(int32_t value);
+extern bool get_var_flip_screen();
+extern void set_var_flip_screen(bool value);
 
 #ifdef __cplusplus
 }
