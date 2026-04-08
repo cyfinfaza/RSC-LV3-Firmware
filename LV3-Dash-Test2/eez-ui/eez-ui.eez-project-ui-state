@@ -22,7 +22,6 @@
           },
           {
             "type": "border",
-            "selected": 2,
             "size": 240,
             "location": "right",
             "children": [
@@ -116,7 +115,7 @@
             {
               "type": "row",
               "id": "#3db5c2c2-bd55-4c25-9dd3-9d7a6d3fb0b9",
-              "weight": 15,
+              "weight": 18.699193595786173,
               "children": [
                 {
                   "type": "tabset",
@@ -164,8 +163,7 @@
                       "enableClose": false,
                       "icon": "svg:hierarchy"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
@@ -188,23 +186,10 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 55.55034396497811,
-              "selected": 1,
+              "weight": 51.85115036919194,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
-                {
-                  "type": "tab",
-                  "id": "#b4d64869-5763-467e-a844-05ca199169d7",
-                  "name": "Settings",
-                  "component": "editor",
-                  "config": {
-                    "objectPath": "[eez-ui.eez-project]:/settings",
-                    "subObjectPath": "[eez-ui.eez-project]:/settings",
-                    "permanent": false
-                  },
-                  "icon": "material:settings"
-                },
                 {
                   "type": "tab",
                   "id": "#aec8d36d-093d-463e-a69b-f2eb8b35033c",
@@ -216,7 +201,8 @@
                   },
                   "icon": "svg:page"
                 }
-              ]
+              ],
+              "active": true
             },
             {
               "type": "row",

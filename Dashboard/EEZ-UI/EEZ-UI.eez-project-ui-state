@@ -1,9 +1,9 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/1",
+    "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/0",
     "selectedUserWidgetObject": "[EEZ-UI.eez-project]:/userWidgets/0",
     "selectedActionObject": "[EEZ-UI.eez-project]:/actions/0",
-    "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/-1",
+    "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/1",
     "selectedStyleObject": "[EEZ-UI.eez-project]:/lvglStyles/styles/2",
     "selectedThemeObject": "[EEZ-UI.eez-project]:/themes/0",
     "selectedThemeColorObject": "[EEZ-UI.eez-project]:/colors/1",
@@ -203,11 +203,22 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 51.916313658787985,
+              "weight": 45.44857026057524,
               "selected": 2,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
+                {
+                  "type": "tab",
+                  "id": "#e19d0844-67f3-40f5-ab44-c8bf4dae3898",
+                  "name": "Driver Dashboard",
+                  "component": "editor",
+                  "config": {
+                    "objectPath": "[EEZ-UI.eez-project]:/userPages/3",
+                    "permanent": false
+                  },
+                  "icon": "svg:page"
+                },
                 {
                   "type": "tab",
                   "id": "#f22e533b-1e56-4350-951a-9edfc20c16f0",
@@ -242,17 +253,18 @@
                   },
                   "icon": "svg:page"
                 }
-              ]
+              ],
+              "active": true
             },
             {
               "type": "row",
               "id": "#41bbf7fd-bc44-4075-b81b-fde1180a5fd0",
-              "weight": 22.515033374514744,
+              "weight": 28.98277677272749,
               "children": [
                 {
                   "type": "tabset",
                   "id": "#82376b0b-d463-4531-a345-c26fce362f02",
-                  "weight": 2.167950693374422,
+                  "weight": 1.7482614742698193,
                   "children": [
                     {
                       "type": "tab",
@@ -262,13 +274,12 @@
                       "enableClose": false,
                       "icon": "svg:properties"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
                   "id": "#a5775af4-8fc8-4720-b8af-2ffc9e532790",
-                  "weight": 0.8320493066255779,
+                  "weight": 1.2517385257301807,
                   "children": [
                     {
                       "type": "tab",
@@ -1125,10 +1136,10 @@
       },
       "transform": {
         "translate": {
-          "x": -303,
-          "y": -147
+          "x": -186.40234375,
+          "y": -132.08984375
         },
-        "scale": 1
+        "scale": 0.9
       },
       "timeline": {
         "isEditorActive": false,
@@ -1169,16 +1180,23 @@
       "selectionBack": {
         "0": {
           "0": {
-            "$selected": true
+            "0": {
+              "$selected": true
+            }
+          },
+          "1": {
+            "0": {
+              "0": {}
+            }
           }
         }
       },
       "transform": {
         "translate": {
-          "x": -312.0000305175781,
-          "y": -132.4000244140625
+          "x": -159.28858856656666,
+          "y": -177.8937906293727
         },
-        "scale": 1
+        "scale": 0.9
       },
       "timeline": {
         "isEditorActive": false,
@@ -1195,6 +1213,42 @@
           "y": 0
         },
         "scale": 1
+      }
+    },
+    "[EEZ-UI.eez-project]:/userPages/2[flow-state]": {
+      "selectionFront": {},
+      "selectionBack": {},
+      "transform": {
+        "translate": {
+          "x": -658,
+          "y": -154
+        },
+        "scale": 1
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[EEZ-UI.eez-project]:/userPages/3[flow-state]": {
+      "selectionFront": {},
+      "selectionBack": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -397.15234375,
+          "y": -137.3671875
+        },
+        "scale": 0.9
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
       }
     }
   },
@@ -1215,13 +1269,13 @@
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
     "TEXT",
-    "PADDING",
     "BORDER",
-    "LAYOUT"
+    "MISCELLANEOUS",
+    "PADDING"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 1,
+  "flowZoom": 0.9,
   "implementationLanguage": "C",
   "openDialogDefaultPath": "C:\\Users\\cyfin\\Downloads\\settings_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png"
 }
