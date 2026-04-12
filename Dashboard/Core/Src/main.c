@@ -175,9 +175,13 @@ void action_save_brightness_to_eeprom(void) {
 }
 
 #define X(can_id, name, refresh_interval, ttl, has_safe_state, safe_state) \
-    uint32_t lv3c_param_##name = 0;
+    uint32_t lv3c_param_##name = 0; \
+    uint32_t get_var_lv3c_##name() { \
+        return lv3c_param_##name; \
+    } \
+    void set_var_lv3c_##name(int32_t value) { }
   LV3_CAN_Parameters_XMacro
-  #undef X
+#undef X
 
 const LV3_CAN_Binding lv3_can_bindings[] = {
 #define X(can_id, name, refresh_interval, ttl, has_safe_state, safe_state) \
@@ -185,13 +189,6 @@ const LV3_CAN_Binding lv3_can_bindings[] = {
   LV3_CAN_Parameters_XMacro
   #undef X
 };
-
-uint32_t get_var_main_switch() {
-    return lv3c_param_SW_HV_MAIN;
-}
-
-void set_var_main_switch(int32_t value) {
-}
 
 char can_parameters_table_buffer[LV3_CAN_ParamCount][8] = {0};
 void action_update_can_parameters_table() {

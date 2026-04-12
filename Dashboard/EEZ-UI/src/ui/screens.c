@@ -12,8 +12,8 @@
 
 objects_t objects;
 
-static const char *screen_names[] = { "Main", "Settings", "CAN Parameters", "Driver Dashboard" };
-static const char *object_names[] = { "main", "settings", "can_parameters", "driver_dashboard", "obj0", "obj1", "obj2", "obj3", "obj4", "obj5", "obj6", "obj7", "obj8", "obj9", "brightness_slider", "obj10", "obj11", "can_parameters_table", "obj12" };
+static const char *screen_names[] = { "Main", "Settings", "CAN Parameters", "Driver Dashboard", "HV Battery" };
+static const char *object_names[] = { "main", "settings", "can_parameters", "driver_dashboard", "hv_battery", "obj0", "obj1", "obj2", "obj3", "obj4", "obj5", "obj6", "obj7", "obj8", "obj9", "brightness_slider", "obj10", "obj11", "can_parameters_table", "obj12" };
 
 //
 // Event handlers
@@ -685,6 +685,22 @@ void tick_screen_driver_dashboard() {
     (void)flowState;
 }
 
+void create_screen_hv_battery() {
+    void *flowState = getFlowState(0, 4);
+    (void)flowState;
+    lv_obj_t *obj = lv_obj_create(0);
+    objects.hv_battery = obj;
+    lv_obj_set_pos(obj, 0, 0);
+    lv_obj_set_size(obj, 480, 272);
+    
+    tick_screen_hv_battery();
+}
+
+void tick_screen_hv_battery() {
+    void *flowState = getFlowState(0, 4);
+    (void)flowState;
+}
+
 void create_user_widget_widget1(lv_obj_t *parent_obj, void *flowState, int startWidgetIndex) {
     (void)flowState;
     (void)startWidgetIndex;
@@ -723,6 +739,7 @@ tick_screen_func_t tick_screen_funcs[] = {
     tick_screen_settings,
     tick_screen_can_parameters,
     tick_screen_driver_dashboard,
+    tick_screen_hv_battery,
 };
 void tick_screen(int screen_index) {
     tick_screen_funcs[screen_index]();
@@ -835,6 +852,7 @@ void change_color_theme(uint32_t theme_index) {
     lv_obj_invalidate(objects.settings);
     lv_obj_invalidate(objects.can_parameters);
     lv_obj_invalidate(objects.driver_dashboard);
+    lv_obj_invalidate(objects.hv_battery);
 }
 static const char *theme_names[] = { "Default" };
 uint32_t theme_colors[1][2] = {
@@ -868,4 +886,5 @@ eez_flow_init_fonts(fonts, sizeof(fonts) / sizeof(ext_font_desc_t));
     create_screen_settings();
     create_screen_can_parameters();
     create_screen_driver_dashboard();
+    create_screen_hv_battery();
 }

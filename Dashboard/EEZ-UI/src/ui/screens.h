@@ -15,7 +15,8 @@ enum ScreensEnum {
     SCREEN_ID_SETTINGS = 2,
     SCREEN_ID_CAN_PARAMETERS = 3,
     SCREEN_ID_DRIVER_DASHBOARD = 4,
-    _SCREEN_ID_LAST = 4
+    SCREEN_ID_HV_BATTERY = 5,
+    _SCREEN_ID_LAST = 5
 };
 
 typedef struct _objects_t {
@@ -23,6 +24,7 @@ typedef struct _objects_t {
     lv_obj_t *settings;
     lv_obj_t *can_parameters;
     lv_obj_t *driver_dashboard;
+    lv_obj_t *hv_battery;
     lv_obj_t *obj0;
     lv_obj_t *obj1;
     lv_obj_t *obj2;
@@ -53,6 +55,9 @@ void tick_screen_can_parameters();
 
 void create_screen_driver_dashboard();
 void tick_screen_driver_dashboard();
+
+void create_screen_hv_battery();
+void tick_screen_hv_battery();
 
 void create_user_widget_widget1(lv_obj_t *parent_obj, void *flowState, int startWidgetIndex);
 void tick_user_widget_widget1(void *flowState, int startWidgetIndex);

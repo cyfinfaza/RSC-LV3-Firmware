@@ -126,18 +126,18 @@
         "native": true
       },
       {
-        "objID": "4bcd19b1-2981-49cd-fd18-f1ba035a3465",
-        "name": "main_switch",
-        "type": "integer",
-        "defaultValue": "0",
-        "persistent": false,
-        "native": true
-      },
-      {
         "objID": "478dd718-bb12-408b-8605-e9c482314a17",
         "name": "flip_screen",
         "type": "boolean",
         "defaultValue": "false",
+        "persistent": false,
+        "native": true
+      },
+      {
+        "objID": "37686dac-3afa-4bb8-b26b-1b4fdeb16b11",
+        "name": "lv3c_sw_hv_main",
+        "type": "integer",
+        "defaultValue": "0",
         "persistent": false,
         "native": true
       }
@@ -1665,7 +1665,7 @@
           "left": 591,
           "top": 235,
           "width": 323,
-          "height": 53,
+          "height": 54,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -1691,7 +1691,7 @@
           "left": 389,
           "top": 398,
           "width": 360,
-          "height": 53,
+          "height": 54,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -1716,8 +1716,8 @@
           "type": "LVGLActionComponent",
           "left": 363,
           "top": -113,
-          "width": 372,
-          "height": 53,
+          "width": 373,
+          "height": 54,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -2262,7 +2262,7 @@
           "left": 829,
           "top": 170,
           "width": 342,
-          "height": 53,
+          "height": 54,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -2284,7 +2284,7 @@
           "left": 551,
           "top": 66,
           "width": 186,
-          "height": 69,
+          "height": 70,
           "customInputs": [],
           "customOutputs": [],
           "A": "gesture_direction",
@@ -2449,7 +2449,7 @@
               "groupIndex": 0,
               "color": "#00ff3d",
               "colorType": "literal",
-              "brightness": "main_switch*255",
+              "brightness": "lv3c_sw_hv_main*255",
               "brightnessType": "expression"
             }
           ],
@@ -2472,7 +2472,7 @@
           "left": 834,
           "top": 207,
           "width": 342,
-          "height": 53,
+          "height": 54,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -2494,7 +2494,7 @@
           "left": 556,
           "top": 103,
           "width": 186,
-          "height": 69,
+          "height": 70,
           "customInputs": [],
           "customOutputs": [],
           "A": "gesture_direction",
@@ -2507,7 +2507,7 @@
           "left": 1019,
           "top": 390,
           "width": 87,
-          "height": 53,
+          "height": 54,
           "customInputs": [],
           "customOutputs": [],
           "milliseconds": "100"
@@ -2543,7 +2543,7 @@
           "left": 453,
           "top": 378,
           "width": 165,
-          "height": 69,
+          "height": 70,
           "customInputs": [],
           "customOutputs": [],
           "value": "Flow.isPageActive()"
@@ -2720,7 +2720,7 @@
           "left": 829,
           "top": 170,
           "width": 342,
-          "height": 53,
+          "height": 54,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -2742,7 +2742,7 @@
           "left": 551,
           "top": 66,
           "width": 186,
-          "height": 69,
+          "height": 70,
           "customInputs": [],
           "customOutputs": [],
           "A": "gesture_direction",
@@ -2770,6 +2770,57 @@
       "componentGroups": [],
       "userProperties": [],
       "name": "Driver Dashboard",
+      "left": 0,
+      "top": 0,
+      "width": 480,
+      "height": 272,
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
+    },
+    {
+      "objID": "36bd408b-b933-4c2a-ffd1-a56745c9dfc6",
+      "components": [
+        {
+          "objID": "9607cabd-5fe5-4395-eaaf-3a562078f615",
+          "type": "LVGLScreenWidget",
+          "left": 0,
+          "top": 0,
+          "width": 480,
+          "height": 272,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "9c7562de-5e75-4a58-c7f7-9c98f40f6119",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "leftUnit": "px",
+          "topUnit": "px",
+          "widthUnit": "px",
+          "heightUnit": "px",
+          "children": [],
+          "widgetFlags": "CLICKABLE|PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLLABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER",
+          "hiddenFlagType": "literal",
+          "clickableFlag": true,
+          "clickableFlagType": "literal",
+          "checkedStateType": "literal",
+          "disabledStateType": "literal",
+          "states": "",
+          "localStyles": {
+            "objID": "67681508-6511-49bb-f52a-4899b74b8163"
+          },
+          "groupIndex": 0
+        }
+      ],
+      "connectionLines": [],
+      "localVariables": [],
+      "componentGroups": [],
+      "userProperties": [],
+      "name": "HV Battery",
       "left": 0,
       "top": 0,
       "width": 480,
