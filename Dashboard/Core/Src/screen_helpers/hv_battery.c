@@ -62,12 +62,12 @@ void HVBattery_Update(void) {
         lv_label_set_text(cell_label, buf);
         
         // Apply color to all max (red) and min (cyan) cell voltages
-        if (voltage == max_voltage) {
-            lv_obj_set_style_text_color(cell, lv_color_hex(0xFF8800), 0);  // Red
+        if (voltage > UPPER_VOLTAGE_THRESHOLD || voltage < LOWER_VOLTAGE_THRESHOLD) {
+            lv_obj_set_style_text_color(cell, lv_color_hex(0xFF0000), 0);  // Bright Red for out-of-range
+        } else if (voltage == max_voltage) {
+            lv_obj_set_style_text_color(cell, lv_color_hex(0xFF8800), 0);  // Orange
         } else if (voltage == min_voltage) {
             lv_obj_set_style_text_color(cell, lv_color_hex(0x0088FF), 0);  // Cyan
-        } else if (voltage > UPPER_VOLTAGE_THRESHOLD || voltage < LOWER_VOLTAGE_THRESHOLD) {
-            lv_obj_set_style_text_color(cell, lv_color_hex(0xFF0000), 0);  // Bright Red for out-of-range
         } else {
             lv_obj_set_style_text_color(cell, lv_color_hex(0xFFFFFF), 0);  // White for normal
         }

@@ -13,7 +13,7 @@
 objects_t objects;
 
 static const char *screen_names[] = { "Main", "Settings", "CAN Parameters", "Driver Dashboard", "HV Battery" };
-static const char *object_names[] = { "main", "settings", "can_parameters", "driver_dashboard", "hv_battery", "obj0", "obj1", "obj2", "obj3", "obj4", "obj5", "obj6", "obj7", "obj8", "obj9", "obj10", "obj11", "brightness_slider", "obj12", "default_screen_dropdown", "obj13", "obj14", "obj15", "obj16", "obj17", "obj18", "can_parameters_table", "obj19", "obj20", "obj21", "cell_voltages_1_12", "obj22", "obj23", "obj24", "obj25", "obj26", "obj27", "obj28", "obj29", "obj30", "obj31", "obj32", "obj33", "cell_voltages_13_24", "obj34", "obj35", "obj36", "obj37", "obj38", "obj39", "obj40", "obj41", "obj42", "obj43", "obj44", "obj45" };
+static const char *object_names[] = { "main", "settings", "can_parameters", "driver_dashboard", "hv_battery", "obj0", "obj1", "obj2", "obj3", "obj4", "obj5", "obj6", "obj7", "obj8", "obj9", "obj10", "obj11", "brightness_slider", "obj12", "default_screen_dropdown", "obj13", "obj14", "obj15", "obj16", "obj17", "obj18", "can_parameters_table", "obj19", "obj20", "cell_voltages_1_12", "obj21", "obj22", "obj23", "obj24", "obj25", "obj26", "obj27", "obj28", "obj29", "obj30", "obj31", "obj32", "cell_voltages_13_24", "obj33", "obj34", "obj35", "obj36", "obj37", "obj38", "obj39", "obj40", "obj41", "obj42", "obj43", "obj44" };
 
 //
 // Event handlers
@@ -200,17 +200,6 @@ static void event_handler_cb_driver_dashboard_obj19(lv_event_t *e) {
     
     if (event == LV_EVENT_PRESSED) {
         e->user_data = (void *)0;
-        flowPropagateValueLVGLEvent(flowState, 0, 0, e);
-    }
-}
-
-static void event_handler_cb_driver_dashboard_obj20(lv_event_t *e) {
-    lv_event_code_t event = lv_event_get_code(e);
-    void *flowState = lv_event_get_user_data(e);
-    (void)flowState;
-    
-    if (event == LV_EVENT_PRESSED) {
-        e->user_data = (void *)0;
         flowPropagateValueLVGLEvent(flowState, 2, 0, e);
     }
 }
@@ -230,7 +219,7 @@ static void event_handler_cb_hv_battery_hv_battery(lv_event_t *e) {
     }
 }
 
-static void event_handler_cb_hv_battery_obj21(lv_event_t *e) {
+static void event_handler_cb_hv_battery_obj20(lv_event_t *e) {
     lv_event_code_t event = lv_event_get_code(e);
     void *flowState = lv_event_get_user_data(e);
     (void)flowState;
@@ -921,17 +910,15 @@ void create_screen_driver_dashboard() {
         lv_obj_t *parent_obj = obj;
         {
             lv_obj_t *obj = lv_spinner_create(parent_obj);
-            objects.obj19 = obj;
             lv_obj_set_pos(obj, 165, 66);
             lv_obj_set_size(obj, 151, 141);
-            lv_obj_add_event_cb(obj, event_handler_cb_driver_dashboard_obj19, LV_EVENT_ALL, flowState);
         }
         {
             lv_obj_t *obj = lv_button_create(parent_obj);
-            objects.obj20 = obj;
+            objects.obj19 = obj;
             lv_obj_set_pos(obj, 23, 27);
             lv_obj_set_size(obj, 50, 50);
-            lv_obj_add_event_cb(obj, event_handler_cb_driver_dashboard_obj20, LV_EVENT_ALL, flowState);
+            lv_obj_add_event_cb(obj, event_handler_cb_driver_dashboard_obj19, LV_EVENT_ALL, flowState);
             add_style_square_icon_button(obj);
             lv_obj_set_style_margin_top(obj, 12, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_margin_bottom(obj, 12, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -988,10 +975,10 @@ void create_screen_hv_battery() {
                 lv_obj_t *parent_obj = obj;
                 {
                     lv_obj_t *obj = lv_button_create(parent_obj);
-                    objects.obj21 = obj;
+                    objects.obj20 = obj;
                     lv_obj_set_pos(obj, 23, 27);
                     lv_obj_set_size(obj, 50, 50);
-                    lv_obj_add_event_cb(obj, event_handler_cb_hv_battery_obj21, LV_EVENT_ALL, flowState);
+                    lv_obj_add_event_cb(obj, event_handler_cb_hv_battery_obj20, LV_EVENT_ALL, flowState);
                     add_style_square_icon_button(obj);
                     {
                         lv_obj_t *parent_obj = obj;
@@ -1055,6 +1042,36 @@ void create_screen_hv_battery() {
                     lv_obj_set_style_flex_main_place(obj, LV_FLEX_ALIGN_SPACE_BETWEEN, LV_PART_MAIN | LV_STATE_DEFAULT);
                     {
                         lv_obj_t *parent_obj = obj;
+                        {
+                            lv_obj_t *obj = lv_obj_create(parent_obj);
+                            lv_obj_set_pos(obj, 0, 0);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
+                            lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                            lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                            lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                            lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                            lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                            lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                            lv_obj_set_style_radius(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                            add_style_cell_voltage_container(obj);
+                            {
+                                lv_obj_t *parent_obj = obj;
+                                {
+                                    lv_obj_t *obj = lv_label_create(parent_obj);
+                                    objects.obj21 = obj;
+                                    lv_obj_set_pos(obj, 0, 0);
+                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                                    lv_obj_set_style_text_color(obj, lv_color_hex(0xff888888), LV_PART_MAIN | LV_STATE_DEFAULT);
+                                    lv_label_set_text(obj, "1");
+                                }
+                                {
+                                    lv_obj_t *obj = lv_label_create(parent_obj);
+                                    lv_obj_set_pos(obj, 0, 0);
+                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                                    lv_label_set_text(obj, "-- V");
+                                }
+                            }
+                        }
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
@@ -1385,6 +1402,35 @@ void create_screen_hv_battery() {
                                 }
                             }
                         }
+                    }
+                }
+                {
+                    // cell_voltages_13_24
+                    lv_obj_t *obj = lv_obj_create(parent_obj);
+                    objects.cell_voltages_13_24 = obj;
+                    lv_obj_set_pos(obj, -358, 0);
+                    lv_obj_set_size(obj, 75, LV_PCT(100));
+                    lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_radius(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_flex_flow(obj, LV_FLEX_FLOW_COLUMN, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_layout(obj, LV_LAYOUT_FLEX, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    {
+                        static lv_coord_t dsc[] = {0, LV_GRID_TEMPLATE_LAST};
+                        lv_obj_set_style_grid_row_dsc_array(obj, dsc, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    }
+                    {
+                        static lv_coord_t dsc[] = {0, LV_GRID_TEMPLATE_LAST};
+                        lv_obj_set_style_grid_column_dsc_array(obj, dsc, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    }
+                    lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_pad_row(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_flex_main_place(obj, LV_FLEX_ALIGN_SPACE_BETWEEN, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    {
+                        lv_obj_t *parent_obj = obj;
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
@@ -1415,35 +1461,6 @@ void create_screen_hv_battery() {
                                 }
                             }
                         }
-                    }
-                }
-                {
-                    // cell_voltages_13_24
-                    lv_obj_t *obj = lv_obj_create(parent_obj);
-                    objects.cell_voltages_13_24 = obj;
-                    lv_obj_set_pos(obj, -358, 0);
-                    lv_obj_set_size(obj, 75, LV_PCT(100));
-                    lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_obj_set_style_radius(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_obj_set_style_flex_flow(obj, LV_FLEX_FLOW_COLUMN, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_obj_set_style_layout(obj, LV_LAYOUT_FLEX, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    {
-                        static lv_coord_t dsc[] = {0, LV_GRID_TEMPLATE_LAST};
-                        lv_obj_set_style_grid_row_dsc_array(obj, dsc, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    }
-                    {
-                        static lv_coord_t dsc[] = {0, LV_GRID_TEMPLATE_LAST};
-                        lv_obj_set_style_grid_column_dsc_array(obj, dsc, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    }
-                    lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_obj_set_style_pad_row(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_obj_set_style_flex_main_place(obj, LV_FLEX_ALIGN_SPACE_BETWEEN, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    {
-                        lv_obj_t *parent_obj = obj;
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
@@ -1761,36 +1778,6 @@ void create_screen_hv_battery() {
                                 {
                                     lv_obj_t *obj = lv_label_create(parent_obj);
                                     objects.obj44 = obj;
-                                    lv_obj_set_pos(obj, 0, 0);
-                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                                    lv_obj_set_style_text_color(obj, lv_color_hex(0xff888888), LV_PART_MAIN | LV_STATE_DEFAULT);
-                                    lv_label_set_text(obj, "1");
-                                }
-                                {
-                                    lv_obj_t *obj = lv_label_create(parent_obj);
-                                    lv_obj_set_pos(obj, 0, 0);
-                                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                                    lv_label_set_text(obj, "-- V");
-                                }
-                            }
-                        }
-                        {
-                            lv_obj_t *obj = lv_obj_create(parent_obj);
-                            lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
-                            lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                            lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                            lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                            lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                            lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                            lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                            lv_obj_set_style_radius(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-                            add_style_cell_voltage_container(obj);
-                            {
-                                lv_obj_t *parent_obj = obj;
-                                {
-                                    lv_obj_t *obj = lv_label_create(parent_obj);
-                                    objects.obj45 = obj;
                                     lv_obj_set_pos(obj, 0, 0);
                                     lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
                                     lv_obj_set_style_text_color(obj, lv_color_hex(0xff888888), LV_PART_MAIN | LV_STATE_DEFAULT);

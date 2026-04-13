@@ -3379,15 +3379,7 @@
                 "childStyles": []
               },
               "timeline": [],
-              "eventHandlers": [
-                {
-                  "objID": "06160e70-bd06-4bf7-ba84-27f40a6794a0",
-                  "eventName": "PRESSED",
-                  "handlerType": "flow",
-                  "action": "accept_gesture",
-                  "userData": 0
-                }
-              ],
+              "eventHandlers": [],
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "px",
