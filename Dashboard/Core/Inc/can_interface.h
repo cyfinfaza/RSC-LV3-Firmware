@@ -7,6 +7,9 @@
 // for each parameter, registers them with LV3_CAN as read bindings so they are
 // updated automatically, and exposes EEZ Studio get/set variable functions so
 // the UI can display live values.
+//
+// Screen-specific UI logic (populating table widgets, etc.) lives in
+// Core/Inc/screen_helpers/ rather than here.
 
 #include <stdint.h>
 #include "LV3_CAN.h"
@@ -24,10 +27,5 @@
 // to its corresponding parameter name on the CAN bus
 extern const LV3_CAN_Binding lv3_can_bindings[];
 
-// Initialize the LV3 CAN subsystem with the parameter bindings and set up the
-// CAN parameters debug table column widths
+// Initialize the LV3 CAN subsystem with the parameter bindings
 void CAN_Interface_Init(void);
-
-// EEZ Studio action — refreshes the CAN parameters debug table widget with
-// current values from all lv3c_param_* mirror variables
-void action_update_can_parameters_table(void);

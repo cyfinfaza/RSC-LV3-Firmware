@@ -80,12 +80,16 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/persistent_settings.c
     Core/Src/can_interface.c
     Core/Src/adc_sensors.c
+    Core/Src/screen_helpers/screen_helper.c
+    Core/Src/screen_helpers/can_parameters.c
+    Core/Src/screen_helpers/hv_battery.c
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
     Core/Inc
+    Core/Inc/screen_helpers
 )
 
 # Add project symbols (macros)

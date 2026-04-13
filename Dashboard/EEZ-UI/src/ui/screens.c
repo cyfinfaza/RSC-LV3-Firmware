@@ -13,7 +13,7 @@
 objects_t objects;
 
 static const char *screen_names[] = { "Main", "Settings", "CAN Parameters", "Driver Dashboard", "HV Battery" };
-static const char *object_names[] = { "main", "settings", "can_parameters", "driver_dashboard", "hv_battery", "obj0", "obj1", "obj2", "obj3", "obj4", "obj5", "obj6", "obj7", "obj8", "obj9", "obj10", "brightness_slider", "obj11", "obj12", "obj13", "obj14", "can_parameters_table", "obj15", "obj16", "obj17", "obj18", "obj19", "obj20", "obj21", "obj22", "obj23", "obj24", "obj25", "obj26", "obj27", "obj28", "obj29", "obj30", "obj31", "obj32", "obj33", "obj34", "obj35", "obj36", "obj37", "obj38", "obj39" };
+static const char *object_names[] = { "main", "settings", "can_parameters", "driver_dashboard", "hv_battery", "obj0", "obj1", "obj2", "obj3", "obj4", "obj5", "obj6", "obj7", "obj8", "obj9", "obj10", "brightness_slider", "obj11", "obj12", "obj13", "obj14", "can_parameters_table", "obj15", "cell_voltages_1_12", "obj16", "obj17", "obj18", "obj19", "obj20", "obj21", "obj22", "obj23", "obj24", "obj25", "obj26", "obj27", "cell_voltages_13_24", "obj28", "obj29", "obj30", "obj31", "obj32", "obj33", "obj34", "obj35", "obj36", "obj37", "obj38", "obj39" };
 
 //
 // Event handlers
@@ -754,31 +754,30 @@ void create_screen_hv_battery() {
     lv_obj_set_size(obj, 480, 272);
     lv_obj_add_event_cb(obj, event_handler_cb_hv_battery_hv_battery, LV_EVENT_ALL, flowState);
     add_style_basic_screen(obj);
-    lv_obj_set_style_pad_top(obj, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_bottom(obj, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_left(obj, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_right(obj, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_layout(obj, LV_LAYOUT_NONE, LV_PART_MAIN | LV_STATE_DEFAULT);
     {
         lv_obj_t *parent_obj = obj;
         {
             lv_obj_t *obj = lv_obj_create(parent_obj);
-            lv_obj_set_pos(obj, 0, 0);
+            lv_obj_set_pos(obj, 295, 0);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_PCT(100));
-            lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_radius(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_flex_flow(obj, LV_FLEX_FLOW_ROW, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_layout(obj, LV_LAYOUT_FLEX, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_top(obj, 13, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_bottom(obj, 12, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_left(obj, 12, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_right(obj, 12, LV_PART_MAIN | LV_STATE_DEFAULT);
             {
                 lv_obj_t *parent_obj = obj;
                 {
+                    // cell_voltages_1_12
                     lv_obj_t *obj = lv_obj_create(parent_obj);
+                    objects.cell_voltages_1_12 = obj;
                     lv_obj_set_pos(obj, 0, 0);
-                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_PCT(100));
+                    lv_obj_set_size(obj, 76, LV_PCT(100));
                     lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -803,7 +802,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -833,7 +832,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -863,7 +862,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -893,7 +892,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -923,7 +922,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -953,7 +952,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -983,7 +982,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1013,7 +1012,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1043,7 +1042,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1073,7 +1072,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1103,7 +1102,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1133,7 +1132,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1163,9 +1162,11 @@ void create_screen_hv_battery() {
                     }
                 }
                 {
+                    // cell_voltages_13_24
                     lv_obj_t *obj = lv_obj_create(parent_obj);
+                    objects.cell_voltages_13_24 = obj;
                     lv_obj_set_pos(obj, -358, 0);
-                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_PCT(100));
+                    lv_obj_set_size(obj, 75, LV_PCT(100));
                     lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1190,7 +1191,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1220,7 +1221,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1250,7 +1251,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1280,7 +1281,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1310,7 +1311,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1340,7 +1341,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1370,7 +1371,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1400,7 +1401,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1430,7 +1431,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1460,7 +1461,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1490,7 +1491,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1520,7 +1521,7 @@ void create_screen_hv_battery() {
                         {
                             lv_obj_t *obj = lv_obj_create(parent_obj);
                             lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, 72, LV_SIZE_CONTENT);
+                            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
                             lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
                             lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);

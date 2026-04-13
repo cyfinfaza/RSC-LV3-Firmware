@@ -181,16 +181,6 @@
       "userProperties": [],
       "name": "save_brightness_to_eeprom",
       "implementationType": "native"
-    },
-    {
-      "objID": "d98e7158-0f19-4233-dc43-deffcab44d59",
-      "components": [],
-      "connectionLines": [],
-      "localVariables": [],
-      "componentGroups": [],
-      "userProperties": [],
-      "name": "update_can_parameters_table",
-      "implementationType": "native"
     }
   ],
   "userPages": [
@@ -2612,7 +2602,7 @@
           "type": "LVGLActionComponent",
           "left": 834,
           "top": 207,
-          "width": 341,
+          "width": 342,
           "height": 53,
           "customInputs": [],
           "customOutputs": [],
@@ -2635,70 +2625,12 @@
           "left": 556,
           "top": 103,
           "width": 186,
-          "height": 71,
+          "height": 69,
           "customInputs": [],
           "customOutputs": [],
           "A": "gesture_direction",
           "B": "2",
           "operator": "="
-        },
-        {
-          "objID": "bbe1ca7c-403c-4566-a160-82848c80c338",
-          "type": "DelayActionComponent",
-          "left": 1019,
-          "top": 390,
-          "width": 87,
-          "height": 53,
-          "customInputs": [],
-          "customOutputs": [],
-          "milliseconds": "100"
-        },
-        {
-          "objID": "7bc9ff7d-277d-497c-e5db-875d38fa900c",
-          "type": "StartActionComponent",
-          "left": 301,
-          "top": 363,
-          "width": 87,
-          "height": 24,
-          "customInputs": [],
-          "customOutputs": []
-        },
-        {
-          "objID": "dbc2dc6e-9dbd-4f3f-fead-f213f7f2ab93",
-          "type": "CallActionActionComponent",
-          "left": 713,
-          "top": 393,
-          "width": 205,
-          "height": 24,
-          "customInputs": [],
-          "customOutputs": [],
-          "action": "update_can_parameters_table",
-          "userPropertyValues": {
-            "objID": "354cab30-faea-456c-b83b-f6ef6658f82e",
-            "values": {}
-          }
-        },
-        {
-          "objID": "44c9eb55-5f93-4e03-e1a2-f4410853b936",
-          "type": "IsTrueActionComponent",
-          "left": 453,
-          "top": 378,
-          "width": 165,
-          "height": 71,
-          "customInputs": [],
-          "customOutputs": [],
-          "value": "Flow.isPageActive()"
-        },
-        {
-          "objID": "ccf266d5-84be-443d-c90b-a615714aa4f8",
-          "type": "LVGLActionComponent",
-          "left": 729,
-          "top": 311,
-          "width": 87,
-          "height": 36,
-          "customInputs": [],
-          "customOutputs": [],
-          "actions": []
         }
       ],
       "connectionLines": [
@@ -2714,41 +2646,6 @@
           "source": "07147c41-765d-47cd-d28b-ab291e38ee3a",
           "output": "GESTURE",
           "target": "2e7de234-22b0-423b-dcfb-f6b5d15437a2",
-          "input": "@seqin"
-        },
-        {
-          "objID": "636f7ff6-69d0-4b8b-f4b8-da45eff61396",
-          "source": "dbc2dc6e-9dbd-4f3f-fead-f213f7f2ab93",
-          "output": "@seqout",
-          "target": "bbe1ca7c-403c-4566-a160-82848c80c338",
-          "input": "@seqin"
-        },
-        {
-          "objID": "6e612e77-f388-4782-e6a9-184e4f370692",
-          "source": "7bc9ff7d-277d-497c-e5db-875d38fa900c",
-          "output": "@seqout",
-          "target": "44c9eb55-5f93-4e03-e1a2-f4410853b936",
-          "input": "@seqin"
-        },
-        {
-          "objID": "00238950-d96b-413e-a1f5-c2cdc25021ec",
-          "source": "bbe1ca7c-403c-4566-a160-82848c80c338",
-          "output": "@seqout",
-          "target": "44c9eb55-5f93-4e03-e1a2-f4410853b936",
-          "input": "@seqin"
-        },
-        {
-          "objID": "803e41bd-729b-4e0b-e7db-76e83f54b1e3",
-          "source": "44c9eb55-5f93-4e03-e1a2-f4410853b936",
-          "output": "True",
-          "target": "dbc2dc6e-9dbd-4f3f-fead-f213f7f2ab93",
-          "input": "@seqin"
-        },
-        {
-          "objID": "27416be7-5019-4a1d-a6a9-abb3de9e4c21",
-          "source": "44c9eb55-5f93-4e03-e1a2-f4410853b936",
-          "output": "False",
-          "target": "44c9eb55-5f93-4e03-e1a2-f4410853b936",
           "input": "@seqin"
         }
       ],
@@ -2962,9 +2859,9 @@
             {
               "objID": "13fb6919-4845-4e40-8066-7fdd490c592e",
               "type": "LVGLContainerWidget",
-              "left": 0,
+              "left": 295,
               "top": 0,
-              "width": 154,
+              "width": 185,
               "height": 100,
               "customInputs": [],
               "customOutputs": [],
@@ -2986,7 +2883,7 @@
                   "type": "LVGLContainerWidget",
                   "left": 0,
                   "top": 0,
-                  "width": 72,
+                  "width": 76,
                   "height": 100,
                   "customInputs": [],
                   "customOutputs": [],
@@ -2998,9 +2895,10 @@
                   },
                   "timeline": [],
                   "eventHandlers": [],
+                  "identifier": "cell_voltages_1_12",
                   "leftUnit": "px",
                   "topUnit": "px",
-                  "widthUnit": "content",
+                  "widthUnit": "px",
                   "heightUnit": "%",
                   "children": [
                     {
@@ -3008,7 +2906,7 @@
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
@@ -3022,7 +2920,7 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
@@ -3138,16 +3036,16 @@
                       "groupIndex": 0
                     },
                     {
-                      "objID": "8cbea1f0-3de9-4f75-9a21-b9bdc4c39427",
+                      "objID": "4a52eb76-2f8e-4da5-efe0-a9d0725e4c5f",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "751743aa-239a-4678-a9b9-6cbeb93af474",
+                        "objID": "c213ad56-afeb-4009-863f-c8c5f50ba724",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -3156,11 +3054,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "3544ef97-1558-4c43-c586-2f90412dcf29",
+                          "objID": "91ac28b0-89d6-4593-b85b-a9c03b66b160",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3169,7 +3067,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "db31f030-9d85-4b23-a737-ee54c58df6f8",
+                            "objID": "93e7ec4c-a608-4e5e-8d1f-a32449730f66",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3192,7 +3090,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "90c504c7-5285-4a98-f5a9-5de849248a35",
+                            "objID": "68a3e6ef-a861-4dbf-977c-9b34d4b8766b",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -3210,7 +3108,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "b535bbef-c70e-413e-a185-84b4a6d4637f",
+                          "objID": "6dfff05e-7082-41a6-8d47-e254f870ce8c",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3219,7 +3117,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "14eb5643-e2c4-4122-e2cc-49b353769ac7",
+                            "objID": "5536c6c8-f926-459c-8995-d67ed1489625",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3242,7 +3140,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "41f65f20-3f37-4d6b-d2f4-66ecd4d817f3"
+                            "objID": "9fa34ff4-2362-434d-c9b7-2f32c9a62c2f"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -3266,22 +3164,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "634de37b-8a22-419e-d920-22ac0fefb88c"
+                        "objID": "bad55e01-05e2-47d7-9e8b-12b2b8954802"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "17db29ae-cbdb-46f8-8e80-3106e67cc5db",
+                      "objID": "4bc470b8-ab83-4d45-f31a-cdf9ecd7b80a",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "0c57bdac-9e09-470a-e509-07337a125592",
+                        "objID": "ee0dc9e0-48fd-4f4a-d1f8-5f0e47f9dfd6",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -3290,11 +3188,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "14e1a54c-f817-4674-d2aa-b9c816b7f193",
+                          "objID": "72115766-43af-4a72-90ec-e1cea22d79d8",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3303,7 +3201,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "5978ba85-d255-49da-cc6b-2aa21ebcc6c7",
+                            "objID": "1be2446e-d279-430d-a0a9-3ba7fac66ff2",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3326,7 +3224,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "7e8a22e2-5d1d-4016-9aeb-04c3628ca226",
+                            "objID": "3590b918-c183-4ddf-bb2c-6866d0afab4f",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -3344,7 +3242,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "77ff685f-84dd-4203-85b0-da2c1a286299",
+                          "objID": "5407fd70-b352-4a7a-f23a-d60e4058845d",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3353,7 +3251,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "3b0831c6-3c32-4788-8b03-e3393f9be46f",
+                            "objID": "0b045773-7457-4805-8b93-f6996c5bdd59",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3376,7 +3274,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "73cdad48-30a3-47c7-fc9a-2b57fc2c6ff2"
+                            "objID": "c4fbb3b3-5d29-4915-ddd2-4877833b743f"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -3400,22 +3298,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "84ebfa47-4f65-4c92-a232-dda7837e819e"
+                        "objID": "ba3c2a87-78bd-4f2e-da46-93e271935eff"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "c38ba2ff-5943-4972-ca89-c32fc1ff4f9b",
+                      "objID": "8a7b76cd-5f55-4d39-c650-d0961adc8120",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "8bd7db8a-e604-42eb-a0eb-89607e25678b",
+                        "objID": "4acbbfdf-c771-4c3e-da6a-5f2560f40f35",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -3424,11 +3322,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "1619f03d-9e8b-4709-b7c9-964fccb7765d",
+                          "objID": "cd88bbc9-4698-4746-fdcc-215810a5ebe3",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3437,7 +3335,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "45455e9b-21eb-41d2-c9aa-675e6c8e04a3",
+                            "objID": "9a05e6dd-fcc7-460a-f288-5b75ebf71986",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3460,7 +3358,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "47f00412-d7d5-43ef-fbfa-bed7f6824f87",
+                            "objID": "1640fcc7-bfd2-4f01-98b5-4d3e4c234b21",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -3478,7 +3376,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "0cb72381-d878-4550-9bd0-fdadacf0da0c",
+                          "objID": "29984b99-1a55-496b-ddef-536c00a3910e",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3487,7 +3385,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "48a1c4a9-22cf-4bdc-cd33-4c21d88cc581",
+                            "objID": "d397333e-55bc-40e5-d452-276a1497e5ca",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3510,7 +3408,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "5f30e3eb-75be-458e-f1a1-544a43210406"
+                            "objID": "fe2e8a37-af43-4923-d57f-1069999625d3"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -3534,22 +3432,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "78a3dc2a-80fb-40df-a9ed-7223569d38f1"
+                        "objID": "28eb553f-08dc-461f-b76c-eb4e0a96bcd6"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "b6ba9da9-d696-4275-d537-9c9ac3fe5780",
+                      "objID": "05e9a9cf-2c33-4e78-fb12-a42c560482d1",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "27dd4bf3-fb74-4e0f-cb12-6dc44c8c6eb3",
+                        "objID": "88d186e4-e968-4db2-ac3f-854c4c3a5254",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -3558,11 +3456,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "b1cbbd7c-b7cf-48cc-ab90-f312a8db500e",
+                          "objID": "c3c19e31-65b0-48b8-ae49-6592d928891f",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3571,7 +3469,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "7138c5a1-3e00-48eb-a029-941eb50f19ba",
+                            "objID": "ad58556c-5cd6-45a9-927b-b9622316c9ef",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3594,7 +3492,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "52f6cc81-cb42-4a50-ee0e-1ba372711cd7",
+                            "objID": "db27b7a9-3853-4f0e-a2de-0165c0daf0a6",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -3612,7 +3510,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "baa9256a-8a70-4dae-c05e-e0396e7fab22",
+                          "objID": "6038aaa8-b14b-4db0-d402-826a738a8268",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3621,7 +3519,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "5a08b7f4-21e3-48e3-8fa5-8a84ccc66296",
+                            "objID": "ab14bb12-08e8-415f-d5da-f896aec4e6fd",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3644,7 +3542,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "01d5a67a-b32f-4635-ba21-1c59454e8ba0"
+                            "objID": "689329ec-b4eb-4cfe-df2f-732ac75af50e"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -3668,22 +3566,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "964526c2-038a-4231-d078-1ac6e6418aeb"
+                        "objID": "bbe353ef-9875-4850-c419-3429b8065a95"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "ad4d85e7-925e-43e1-e1a1-1ddd26f99b61",
+                      "objID": "3ce007d2-a340-488f-d9da-6688d032f34d",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "ba3b9605-444d-4460-bbd4-4016f6f740a8",
+                        "objID": "f3a95809-6c72-4490-ea0b-9a83fde6bf3f",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -3692,11 +3590,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "a2ca424f-6762-4df0-a0da-4eb27bb9bada",
+                          "objID": "c681b0c7-99fe-4065-97ed-c8e065916c04",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3705,7 +3603,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "b1ad418a-d2e2-48b6-9ea5-500c11abe110",
+                            "objID": "bd8b78b7-cbbb-4ce2-c499-ba8c5520c136",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3728,7 +3626,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "6c53e15e-5a28-48ee-b7db-074fe4c03741",
+                            "objID": "5494cf5c-d67c-43f8-bb8e-697d0e05b402",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -3746,7 +3644,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "49cc9a4d-8a63-4496-84de-8fead9b0d7cb",
+                          "objID": "27be6ab6-029b-4a59-ef9b-7736b1debe2c",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3755,7 +3653,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "91aeb21f-055d-4b9a-bbcc-124e32ae7884",
+                            "objID": "ea310076-0dc0-4321-d8e9-a583c8810d7b",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3778,7 +3676,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "8650eb4f-3b36-423f-da5c-8ba741774f0f"
+                            "objID": "d8d16384-750c-4536-db4e-3557cc629b06"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -3802,22 +3700,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "057453ee-1a60-46fd-d68a-7dc9a2f9b135"
+                        "objID": "b7607821-4210-4e0e-ac9d-08503266589a"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "136bfd59-ff1e-41f3-b5e5-307be057e736",
+                      "objID": "d0ecb043-0900-43af-fe13-3e3525413c8a",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "132633d1-1515-4d41-8404-8f8f385ec9cc",
+                        "objID": "690b7199-1ebf-471d-f833-0530af26e0fa",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -3826,11 +3724,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "6d7368e4-8d87-4aae-8b13-fab751550b14",
+                          "objID": "5ec38554-c6ec-40e3-9efd-b0ff96df7d77",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3839,7 +3737,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "428d9185-48b8-4f25-a8a1-d364e9c74c34",
+                            "objID": "a27dc5c7-1459-4108-a61e-8b1d4992ba01",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3862,7 +3760,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "0a77f953-7955-4dc6-fa83-a5494dfeccee",
+                            "objID": "7747d2bc-2cb8-445e-9c3b-942f62c2a5e9",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -3880,7 +3778,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "8bb0f16b-7de5-4870-ffcf-5eada3335d74",
+                          "objID": "b3724b5a-31f0-43e3-ecad-6c95558064a6",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3889,7 +3787,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "53b13b93-d874-4698-87bd-d121d0378ef7",
+                            "objID": "67b76a23-b2e9-4c69-bda4-05cb6e38cf07",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3912,7 +3810,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "328f7a79-b1d1-4723-9bd3-f7e0adbfee2a"
+                            "objID": "ca55fba5-6a2c-40d1-b554-11adae73011f"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -3936,22 +3834,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "ded842c0-bf20-4b1e-b419-84f7c9fa9e1a"
+                        "objID": "ddcfb383-3adc-4e36-cbd6-f9bf9a46cafc"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "83317282-02de-4285-85f1-e62358e71240",
+                      "objID": "6244d77c-fe0d-4265-adae-f6f4b4553fd4",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "be6b3c0c-b42f-493d-a57b-d18085f90d3c",
+                        "objID": "961af711-81b1-4b68-b2fb-1c2f736fb8e6",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -3960,11 +3858,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "8fa7974c-54c0-467d-8e4e-cc8bb87388d7",
+                          "objID": "24de1951-e737-4fbe-ec0c-ad1be1cbc707",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -3973,7 +3871,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "dd8f8023-47ee-4514-846c-84373b3bf82a",
+                            "objID": "8528ccc6-359d-4998-c0e9-83af94891f62",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -3996,7 +3894,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "5f23cb42-a115-43c2-e463-73a0eecb4a5b",
+                            "objID": "2800da32-27e6-4ce0-d14d-5dc2f1048df7",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -4014,7 +3912,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "8ae86c19-6cf3-4a30-b7a6-521317aa246c",
+                          "objID": "4b4fa6f4-74ae-47e6-edf5-1e08a0b7af41",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4023,7 +3921,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "ed699fbc-5701-46bf-969b-5741314d3f85",
+                            "objID": "0c1cb779-9a7e-49c4-91a1-9b6cd864da25",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4046,7 +3944,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "a279d04c-5095-4c63-c25e-fa62bda5df51"
+                            "objID": "32016a8d-e7a5-40f6-ffb2-3f9e514579b6"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -4070,22 +3968,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "6c81705f-b310-4750-dd15-054c893485cc"
+                        "objID": "14380010-2065-4f5e-ab0a-2a821dc16de4"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "976e9304-ceb9-41b1-f73e-b48714cc7867",
+                      "objID": "13173874-d65b-43a4-fe93-a515ff906188",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "898efc1e-a3ec-43cf-9dd8-d9684bd11251",
+                        "objID": "7bd93ed5-8756-423e-a796-174cd8a1c63f",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -4094,11 +3992,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "2dd710e4-deea-44fc-f50f-d9c5864d2dc5",
+                          "objID": "d03c843c-80f7-425c-93bd-a6bdb7c3fb93",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4107,7 +4005,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "85ff997a-d907-4328-b543-71f0a81feb5d",
+                            "objID": "a7d44c08-49b3-4770-c57a-e07b86091f4d",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4130,7 +4028,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "93a6c305-abc4-4d79-c870-bce1b448d50c",
+                            "objID": "eebd3368-b6b2-4999-985b-2282b6f81eaa",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -4148,7 +4046,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "f479fe6a-3537-41c8-f67a-a14b481bf07e",
+                          "objID": "5984b756-20b6-45ac-cf55-3e52244dccf4",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4157,7 +4055,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "cea262d4-068f-43cc-a54d-397e562f3251",
+                            "objID": "7e74e2f7-6e9e-411f-d8da-68490463e3f7",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4180,7 +4078,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "676a79c7-f447-4a8b-da53-aeb5c20a0e29"
+                            "objID": "ae76be9f-8f2d-45a6-93d4-e6da230abf31"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -4204,22 +4102,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "c4e33a5c-8004-4a0a-9da9-b2fbb4ec86ff"
+                        "objID": "4294896d-35ec-4e0a-8abc-c06e2dd05381"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "d3e8fc1a-31e7-4c4a-edbe-a16f9878aa29",
+                      "objID": "e9b1edfa-927c-4002-fbbd-78a9f5252241",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "591dc849-b226-4b71-909f-f4c9b631a12e",
+                        "objID": "f43eaa18-2484-4ddc-9d8b-0239b6701753",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -4228,11 +4126,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "a78c1d9a-b3c3-4fd6-8598-44b0f747d5c5",
+                          "objID": "4eb683b9-4e20-49c7-d26f-d934e2f690ac",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4241,7 +4139,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "6c1e030d-1579-4c65-f1fc-96299cb1594f",
+                            "objID": "f80eb17f-1459-44e4-f03a-42cdc5f477e1",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4264,7 +4162,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "e3279656-2596-4bd2-94f6-9753656b6a9f",
+                            "objID": "532c8218-52a0-497b-d505-bd6cadee1399",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -4282,7 +4180,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "a55d9f66-723e-48a9-b6c1-5b954c25cf7f",
+                          "objID": "3ed1e0e8-2e24-43b7-edd8-248c73447517",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4291,7 +4189,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "2da0436b-0c0e-412b-b3c3-4738e99451dc",
+                            "objID": "d532133c-deaa-4836-891d-3ba7df338fd4",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4314,7 +4212,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "b932a562-2787-45ab-d646-13f049c155fa"
+                            "objID": "e326b28d-41d5-4de0-97e2-4a548d938d06"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -4338,22 +4236,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "45644703-9063-4019-a5c1-e63f29dbc1b0"
+                        "objID": "324bb939-5adc-45c6-bc45-2c5192d2b5a6"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "dc9a203e-7061-4c39-f12b-c144b52ff923",
+                      "objID": "0fb7d884-2ccb-41f0-8c9c-3eec1b14de9b",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "4e459a61-d8ca-4d7f-cb54-c07d485a29b0",
+                        "objID": "c9d1e858-0507-4944-be2c-4dbae147a3e0",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -4362,11 +4260,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "6057d7f7-e52b-4e84-9823-d85fb17dc4fe",
+                          "objID": "adf51231-2c27-4c0f-b896-df1a81ba4b07",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4375,7 +4273,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "3814a08d-b24e-4279-fab2-a0a9d2e5bf24",
+                            "objID": "c4dd65b0-2dd0-4753-82dc-599205854244",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4398,7 +4296,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "0c08153d-187c-41ba-f40d-a974bad7f904",
+                            "objID": "f96fbc17-f5bb-497b-dd33-c8026f9f289b",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -4416,7 +4314,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "e27de3c5-9201-4508-c1ee-34e75ca6d0b1",
+                          "objID": "6610ad4e-bfaa-4b97-8507-8e7c66267deb",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4425,7 +4323,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "a618b667-21cc-4cc6-e758-fd9841e4f3ac",
+                            "objID": "eb66b68b-31ab-42d5-acbe-ee4d73a93808",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4448,7 +4346,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "5e4e2e39-ccbb-4004-f20a-a57a49ac848a"
+                            "objID": "594a53ad-189e-4c37-ab12-46f8ab0c7cec"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -4472,22 +4370,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "76440763-539f-4aa1-c585-d6f096e8fa4d"
+                        "objID": "d1e305c7-926b-4106-851e-74a351fc748d"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "7881b1ff-46e6-4ea3-d767-a81237fe965a",
+                      "objID": "0b953ee3-4260-4be2-bd70-0bba21c7f5cf",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "b82619ca-99d6-42a0-e965-ada67d6c8902",
+                        "objID": "c134dba2-0897-4b64-a655-f1da0708d3e4",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -4496,11 +4394,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "1bf5b546-ad90-49fc-c80f-ef3542e32637",
+                          "objID": "bc8e19be-c957-4bc5-8095-bf0c10017235",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4509,7 +4407,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "977fd478-3ad7-45da-b55c-60229ce8f1f3",
+                            "objID": "5dc239ae-c907-4031-bf32-a287a52235ca",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4532,7 +4430,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "5729ce71-da54-4912-f66a-e6e04f1e0b78",
+                            "objID": "74cb477e-7ed1-4d6f-b67d-8d50c23f4bd3",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -4550,7 +4448,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "8fe93c70-fea8-44fb-c668-69b3d57b7832",
+                          "objID": "788dac94-9eba-4a10-f8c7-1ce6d37410af",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4559,7 +4457,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "40c2bc6f-bd60-43a9-a577-015475a9e163",
+                            "objID": "b75ebfc1-5cbf-4a4d-cf61-4dc7d0ce9ce5",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4582,7 +4480,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "80b169fd-3508-4047-d6c0-e820674aa2eb"
+                            "objID": "20bf6a7d-0e46-4039-9f93-eca4f8cdd2ae"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -4606,7 +4504,7 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "a1945958-7299-494d-9a04-fee8f6b0e213"
+                        "objID": "c4aefe8c-c899-46a6-9bf7-0a2bd93a5e72"
                       },
                       "group": "",
                       "groupIndex": 0
@@ -4649,7 +4547,7 @@
                   "type": "LVGLContainerWidget",
                   "left": -358,
                   "top": 0,
-                  "width": 72,
+                  "width": 75,
                   "height": 100,
                   "customInputs": [],
                   "customOutputs": [],
@@ -4661,22 +4559,23 @@
                   },
                   "timeline": [],
                   "eventHandlers": [],
+                  "identifier": "cell_voltages_13_24",
                   "leftUnit": "px",
                   "topUnit": "px",
-                  "widthUnit": "content",
+                  "widthUnit": "px",
                   "heightUnit": "%",
                   "children": [
                     {
-                      "objID": "3a1ac87b-9749-4705-fafc-611f7db83780",
+                      "objID": "f28a6abc-a347-4d30-b6cf-0a31eaf7f247",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "064f9010-a19f-41ef-fffe-0a743a8b110e",
+                        "objID": "7811b8a8-d87a-4af0-f178-af00a4bc9476",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -4685,11 +4584,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "8afa3a88-2c5b-4d3b-979a-13937cfe08d8",
+                          "objID": "b79b9897-5e37-4571-8226-42f34b1268ce",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4698,7 +4597,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "a273e1ef-654b-418e-aa95-12622612373f",
+                            "objID": "7e33c3d8-bfc2-4660-962e-b397aa90e5db",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4721,7 +4620,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "91d126ac-b46c-4628-e562-68dc0763c5be",
+                            "objID": "6d27dcd1-7447-4c40-9462-e9591a3197fe",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -4739,7 +4638,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "9862b518-0c7b-41ad-e6a9-da9e5793e6eb",
+                          "objID": "92de4e26-d3a4-488f-c89e-159cf452cff9",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4748,7 +4647,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "3051c0ac-f56d-4d43-aed3-70991b0eb3ef",
+                            "objID": "923c7713-0935-416c-9c32-14b317b4680d",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4771,7 +4670,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "8b5c6d45-d7c6-4070-eb7d-8a79c14e36de"
+                            "objID": "a9db504b-02d9-4485-d691-2fee6ba8a8d0"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -4795,22 +4694,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "2afb66cd-9daa-4121-9e10-b51682fade62"
+                        "objID": "0f1a6359-fe86-4ba7-b4f0-0483128f8025"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "54b142d4-6c91-4c92-bd03-76c5aa58ccc1",
+                      "objID": "7dc0a1b8-e444-484f-c03e-6e03996f1fee",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "a93d6cde-2259-4322-f69c-a52633302e56",
+                        "objID": "a9e05334-69f5-4e6c-e7a1-9149a721c5c4",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -4819,11 +4718,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "ac4918e5-2bac-467b-d3f0-cdab887de714",
+                          "objID": "f8e8a74c-87ae-41e9-cd18-14e8af95ff02",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4832,7 +4731,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "c82eb020-43f8-45a2-c5c6-f8394b919ffb",
+                            "objID": "98949f22-b4d5-4aa0-c83e-afa6254dd163",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4855,7 +4754,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "73d82cd2-1cd9-4226-9ca8-82d5ffb5f9d4",
+                            "objID": "da703dfc-6206-48cb-c57b-e0bb14f973e9",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -4873,7 +4772,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "c8c5ac8a-4790-4c42-f30e-1b7b5f967a01",
+                          "objID": "1276e353-46be-44ac-8230-4773a6a894a4",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4882,7 +4781,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "b4e84aac-6aa9-4e52-bcce-e67de649eca1",
+                            "objID": "3f5cb748-1c30-41c6-8d5b-85d21a942d00",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4905,7 +4804,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "b7a35b91-8a9d-4919-99fe-add939e0d7a1"
+                            "objID": "88999d4f-ea07-43a6-84e7-00742c7b98ba"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -4929,22 +4828,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "67683004-0227-4091-ab50-c0c104d900a8"
+                        "objID": "fef0fb7c-59ad-4d49-f0f3-71bfeec6f100"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "aaa85b8f-a6fe-4c97-c851-f1ffcd797361",
+                      "objID": "428e48d8-d4c6-49d2-a527-5c68d520eadf",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "438d103f-a148-41dc-fb0c-13787aadc5aa",
+                        "objID": "776c94f5-6cc7-4478-ab8a-090a9e759ac4",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -4953,11 +4852,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "3212eb3f-eedb-4da2-bb38-3e693aed5d9c",
+                          "objID": "2a5cfd20-77db-463d-96d4-b76b8224245e",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -4966,7 +4865,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "a0251074-f8ad-4098-bff8-56875190de84",
+                            "objID": "608ad101-7def-4054-96a3-fdc49844d348",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -4989,7 +4888,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "c6ea6ba4-0716-4d83-85e5-45d513626254",
+                            "objID": "33cf11d7-dcbb-479f-d8f8-1e4f9a09986e",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -5007,7 +4906,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "ab0e2b0d-f598-494b-ca3a-1b53bc2401fd",
+                          "objID": "3d0299f3-dee7-4a72-88b6-719d4446e076",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5016,7 +4915,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "49cb2d52-2637-4897-dfce-aa7de197ef2a",
+                            "objID": "7c7e6e88-96a8-42a4-8209-f9ecc7785847",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5039,7 +4938,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "4ac51f2b-b5d9-4640-afd6-7cc0dd45aed9"
+                            "objID": "156942cf-4de6-4145-ab37-9c17d381faac"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -5063,22 +4962,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "b63d3a3d-6c98-4359-aad6-86443c61ed77"
+                        "objID": "3417a772-70e9-4f02-813f-871263e05c58"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "93b4dd46-d2ba-4ea7-c9aa-3dfea88f131f",
+                      "objID": "221138ed-1a61-424c-801e-4e2bf99199af",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "8bf22725-61c9-4055-aba7-e72b5582e435",
+                        "objID": "ab454ffd-38df-4235-d07c-a15725186ecc",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -5087,11 +4986,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "26ce7ecf-d408-4af8-8c26-4f6c5f535951",
+                          "objID": "190396a3-db3f-402f-fe6c-e8c8e0783b76",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5100,7 +4999,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "d7027cec-24ed-4d1c-cf29-99c56ae4f243",
+                            "objID": "c1e0abe3-5d1e-4b29-e415-0efe66eff6ed",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5123,7 +5022,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "b1ed0e38-6223-41f8-b147-d5780f4c7d9d",
+                            "objID": "c507a27d-9828-4cbc-ca03-39e6ea8b69e8",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -5141,7 +5040,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "73052d78-ca45-4115-b173-6a0cda4a6644",
+                          "objID": "f1b50b98-6d81-4742-8bf1-2d8ad193c629",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5150,7 +5049,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "54f0d5e9-6de8-4bab-d56c-3972cd5d29bb",
+                            "objID": "6b4737f2-3715-4359-f443-d65282b0ee74",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5173,7 +5072,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "3fbcef28-4925-4906-fc9f-0ddad16c4e8f"
+                            "objID": "c1536407-c260-4b79-a3d4-17cab19df45c"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -5197,22 +5096,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "8e4b05c6-2a76-40fe-f8eb-8dcbb8513fca"
+                        "objID": "39300634-85df-4702-f154-b569efb64936"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "f7488484-e2d9-4b65-b4cf-8529390402db",
+                      "objID": "3c32662f-0816-4646-cd0a-efd83af6e81b",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "2bccea27-365d-4ffe-d8cc-5b80f598f85b",
+                        "objID": "dfb225b4-83a4-4596-db7a-5e137aacf321",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -5221,11 +5120,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "0ceaf017-c406-4dd6-d1ac-5552bd521a25",
+                          "objID": "2d09c985-5c57-4d19-92d5-0a307a9c12ef",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5234,7 +5133,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "7b9a5bfd-ff43-4039-b616-a7792ab45320",
+                            "objID": "c722f6c0-d406-40f5-d874-87cbfbf777cd",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5257,7 +5156,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "97d6b848-70cd-4556-ebc6-c910653f6ba1",
+                            "objID": "771ae7e4-5a18-4496-d8dd-3c5a9477f1a6",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -5275,7 +5174,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "5aeca24f-d7e5-407a-f7e6-bf72a3a66ca7",
+                          "objID": "703e0c9b-4fa9-465c-96e9-1caaccc0461d",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5284,7 +5183,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "7deed747-cdda-4913-d633-fef8446e88f0",
+                            "objID": "d10e2ad8-9287-4f44-b6cb-496a75ca0a23",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5307,7 +5206,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "764f9170-b8da-4b6a-9062-9f14b1f36ce2"
+                            "objID": "8159ba1f-117c-4138-ff0e-ff9cbd24d3e7"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -5331,22 +5230,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "b7149fb4-053e-416b-ec21-54a057ca55f1"
+                        "objID": "e9ab92a8-ad40-47bd-e0e7-d3b1e438767e"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "ac3e74de-095e-444a-8294-7da77365f554",
+                      "objID": "3aa75f54-6ef6-455c-b0cc-98fa06fb31da",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "f2b55ec2-55dc-4e74-e7fa-3ecdd385d046",
+                        "objID": "a9adf1f4-787d-407f-acaf-5bd470d8836a",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -5355,11 +5254,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "e6387aaa-3668-4c29-c4d8-b6d3569a8d1e",
+                          "objID": "54c6246a-9ac5-4c26-e88f-36df82f4694d",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5368,7 +5267,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "a0d14532-b9cb-45be-c56b-2d1cd9613b4d",
+                            "objID": "42c95a98-e600-4de0-be2e-ce10e4b83221",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5391,7 +5290,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "6471d1f2-e59e-456a-b961-1afa539c8b61",
+                            "objID": "2494aba4-8bf4-449a-8c8c-66097b94d766",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -5409,7 +5308,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "ed0ad630-2374-4810-9b39-dc29efda7000",
+                          "objID": "bbc33c62-b30e-49ac-c35c-729e98661293",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5418,7 +5317,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "e363333a-7579-4323-9713-1d982086d998",
+                            "objID": "41560c64-e69c-47ba-9617-ee5fa68f173a",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5441,7 +5340,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "706a45c1-9663-4a7d-f28f-ee5d5becf208"
+                            "objID": "e2c17ae2-3d48-4d04-f958-8db732b5971d"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -5465,22 +5364,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "9bc5d6b5-e43d-4cde-c6bc-4a5691d0e256"
+                        "objID": "d8e28328-b83c-4de7-e545-ab849a0f0fd9"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "f3084fe7-bdc6-460e-aa5d-f1e944eb3ccc",
+                      "objID": "3ffd26c7-e007-4eee-df07-91f30b65a932",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "6e6fddca-445c-4138-cd43-b5543a953f62",
+                        "objID": "b5ce3cb9-544e-40cb-c634-17eeb75888d0",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -5489,11 +5388,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "1b438b5a-5ee8-4434-debe-53093e70db08",
+                          "objID": "bb965c12-ed5d-4b9e-8a76-10c9ff2e8c81",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5502,7 +5401,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "4573f311-d3d3-48ac-971d-a3ff0420f9b9",
+                            "objID": "20a4b92f-d6a6-4fef-a0d1-b18472b7de36",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5525,7 +5424,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "1f2439cf-551b-4c55-bc6e-b386ca8acb5c",
+                            "objID": "f2b08e09-f15a-4a58-8555-60c4b2f76599",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -5543,7 +5442,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "bf51c251-ddca-40de-a9ab-14c7ba62f45f",
+                          "objID": "5fe807ed-8905-4003-b7ec-3fbba5058d5a",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5552,7 +5451,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "02035ebf-56b4-407c-807e-f82f07da71db",
+                            "objID": "8b7a216f-cccd-4042-e366-e7dde10b94f0",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5575,7 +5474,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "3806a13e-021f-46d8-b998-c3830f882f94"
+                            "objID": "be37863d-ed09-4fa8-f01b-244af8554006"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -5599,22 +5498,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "b9fb5968-55ab-4247-e3d3-a25bd891a5e4"
+                        "objID": "b4e1f83d-96c6-4581-93ba-83e7c5d59c85"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "5ce75dc4-38bb-4bf1-ffe9-b811f520e48e",
+                      "objID": "f2c28f1b-30f7-4485-bcba-b805b89b93bd",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "f9d5b418-88ba-4412-d559-cd4f22b91786",
+                        "objID": "1c4e9df5-94d5-4274-bcb6-3e1244dcbc2f",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -5623,11 +5522,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "184761d9-a501-41d9-e76f-0e17b5949fff",
+                          "objID": "884a4360-705f-49ea-fdc5-ccc609c01bf8",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5636,7 +5535,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "d97a58c0-bd48-4385-ed51-10fcc5fa0890",
+                            "objID": "b5b5b0dc-b591-42c0-f1bf-0544e57faf5c",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5659,7 +5558,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "f9d79a61-6cd3-4e42-a037-e673a56daf12",
+                            "objID": "e0fdcdea-5efb-4d9d-860e-8e8cd9ad1ab2",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -5677,7 +5576,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "1b1574af-247f-429b-f64e-595fd41956b2",
+                          "objID": "6ba51bd5-f6b0-4630-98e4-139e28056ef2",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5686,7 +5585,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "d5f9f7a9-5adf-45b4-8abe-67cf7b3eaed9",
+                            "objID": "c79e9900-97a0-4fd1-a537-d6416b11acf0",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5709,7 +5608,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "e93b430c-029b-402f-d969-867bf050ad84"
+                            "objID": "87d35990-abfd-4834-c7b6-ebd8ce42fc2e"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -5733,22 +5632,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "7d02e0a3-2b48-4fb4-ae09-1158dd7ce9ac"
+                        "objID": "475ad4a0-e87c-477f-98ed-0c22d3fb3ee2"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "cdbe1d09-9491-4658-afcd-d8569d3cd8ed",
+                      "objID": "a00881a7-4c58-4885-d690-0303567c2164",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "f43cf630-a2bc-4453-85fe-252870a0f905",
+                        "objID": "1e02e289-fcb4-4823-a97c-c70bd2fef503",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -5757,11 +5656,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "7c0771f9-0608-4b96-e4b0-1670555c9c00",
+                          "objID": "2d43f046-19d2-4df0-beb2-4b225d4a656d",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5770,7 +5669,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "67219a7c-90d2-4127-8b38-f96a04c29d23",
+                            "objID": "6ef85fd9-2d88-4d50-cbfa-866016ef2f63",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5793,7 +5692,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "13df2dd1-079c-4015-c692-dbadb80dd6f5",
+                            "objID": "142aa7cb-a487-4dd7-832a-33912a1610fd",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -5811,7 +5710,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "af42c7c5-f6c4-4be7-e569-613b21cc1148",
+                          "objID": "3a1c439e-684e-4031-d991-4faa3f8bb97a",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5820,7 +5719,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "4ccf6793-6330-4509-b83b-e118657da81c",
+                            "objID": "b4c346eb-db5c-4ac1-acee-1761fc489d1c",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5843,7 +5742,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "63a611a8-7eab-4e44-9404-344a755b9fb4"
+                            "objID": "3a77d57d-ab80-43e8-9c5d-9322a3e7069d"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -5867,22 +5766,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "d1488b0c-47b9-468e-fb12-ef6a23395b20"
+                        "objID": "0bf377fb-b482-49a8-af74-d277ff92cebe"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "8a5c2513-5506-4f63-9b67-a11dde2d2d07",
+                      "objID": "4d6b4e83-11c7-4bd5-f802-b3ca19da7d93",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "2834e86d-1d26-4ab7-e4b9-0c19222f8dd7",
+                        "objID": "c4719de6-48c6-4d81-9434-bcb7d1ca791d",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -5891,11 +5790,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "a8b96749-85c9-41c2-cad6-a30c82f2ba5c",
+                          "objID": "3fff1275-9fd6-42ef-d3e4-6c8c7f9facbe",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5904,7 +5803,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "c30ce932-2bd1-4d3b-bb42-ff1bd5f0585f",
+                            "objID": "e5719528-97b9-41ee-8874-b54a841959ee",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5927,7 +5826,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "73c9fcf1-5002-475f-842e-70909b4a5940",
+                            "objID": "200628c2-6ae2-4516-871d-522af9764555",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -5945,7 +5844,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "be69f63f-78f1-41da-d67b-25b4ca405683",
+                          "objID": "a8c89d27-6f68-498d-f197-4de28c66ce9f",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -5954,7 +5853,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "e2985357-c270-4e1b-e332-d18c20ddbc85",
+                            "objID": "759577e3-a412-406c-e80d-a6b70db812ba",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -5977,7 +5876,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "31713619-1621-46c5-af02-c47530d24e9b"
+                            "objID": "516fdf39-5961-4a90-86e3-99970c1b1de0"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -6001,22 +5900,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "c367343f-11f2-485e-9de3-77cb69898d85"
+                        "objID": "29ad656f-1bbd-4b2e-a7fe-068e33cd1429"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "f2aaacc4-3f75-4a5c-c180-229317d0e45a",
+                      "objID": "696f3425-6359-4dab-eca2-f6cddc8359e9",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "8a2a21da-075f-4cc5-84cb-de309b9e89d2",
+                        "objID": "fdd88d2a-8eb6-4c57-f55c-6ec7523865ec",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -6025,11 +5924,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "0cab729b-dee8-469c-d0e4-170d24eef583",
+                          "objID": "843c2448-ad36-4a71-9fb0-08bcc6c43798",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -6038,7 +5937,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "13924e88-5225-4262-ac58-430327711d8e",
+                            "objID": "797c349a-fde5-4023-b6fd-355f79d01001",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -6061,7 +5960,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "a1b04a9a-76df-4c38-f8ad-fed515d2093f",
+                            "objID": "4397f87a-68a6-45d0-c69f-3d210b5d1b95",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -6079,7 +5978,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "d27db74b-258c-4d22-f421-5a5ddbf48317",
+                          "objID": "f5382ad4-687f-49cb-fe6e-518e0bec5eee",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -6088,7 +5987,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "4642b509-a04e-4b5d-dc83-3d18c101a85a",
+                            "objID": "d5d763fb-b0de-4301-e0ec-9bc8074aabcd",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -6111,7 +6010,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "815af2d8-9924-4000-8f81-589809a39c18"
+                            "objID": "7a317a12-c485-423e-84fc-26709af4328f"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -6135,22 +6034,22 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "9f62be9f-804e-4cce-f6c5-e9207993d8cc"
+                        "objID": "479e6b2b-6698-4a42-c036-1fe83f30e8e2"
                       },
                       "group": "",
                       "groupIndex": 0
                     },
                     {
-                      "objID": "46abfd38-f75a-4068-f9f9-4549d0d11c17",
+                      "objID": "ba0431e7-6ab7-4624-90ab-b473106266f4",
                       "type": "LVGLContainerWidget",
                       "left": 0,
                       "top": 0,
-                      "width": 72,
+                      "width": 100,
                       "height": 16,
                       "customInputs": [],
                       "customOutputs": [],
                       "style": {
-                        "objID": "ab5c0f16-ad01-4489-c787-d3a74443d54e",
+                        "objID": "503cca9a-5c01-456c-f5f8-02bff2619c64",
                         "useStyle": "default",
                         "conditionalStyles": [],
                         "childStyles": []
@@ -6159,11 +6058,11 @@
                       "eventHandlers": [],
                       "leftUnit": "px",
                       "topUnit": "px",
-                      "widthUnit": "px",
+                      "widthUnit": "%",
                       "heightUnit": "content",
                       "children": [
                         {
-                          "objID": "35a911c0-dac4-4191-85ae-df79f611d35a",
+                          "objID": "4a6cbe43-cf4c-407e-c238-228620911963",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -6172,7 +6071,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "743ea3bc-ef42-4a5e-fab0-614964a535d0",
+                            "objID": "33254276-e63d-4013-e264-66267ff09ef6",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -6195,7 +6094,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "9a4e4cc7-2903-46ab-cf63-d1c935380f00",
+                            "objID": "15c3d93a-5771-4874-f982-0aa66d225ac7",
                             "definition": {
                               "MAIN": {
                                 "DEFAULT": {
@@ -6213,7 +6112,7 @@
                           "previewValue": ""
                         },
                         {
-                          "objID": "67c17ac0-a514-4e25-d261-c48de726d807",
+                          "objID": "08d5bee5-b432-44ac-e12a-edf0298728d7",
                           "type": "LVGLLabelWidget",
                           "left": 0,
                           "top": 0,
@@ -6222,7 +6121,7 @@
                           "customInputs": [],
                           "customOutputs": [],
                           "style": {
-                            "objID": "cefac4eb-ee5c-4255-d5bd-b50d3ce8bb88",
+                            "objID": "443db56b-c3e1-4f03-84aa-96909a2a7062",
                             "useStyle": "default",
                             "conditionalStyles": [],
                             "childStyles": []
@@ -6245,7 +6144,7 @@
                           "disabledStateType": "literal",
                           "states": "",
                           "localStyles": {
-                            "objID": "48ef0a9e-d9b5-41db-d650-ee1b8311ee16"
+                            "objID": "f4be38ff-5f14-4082-fee5-21458350b9f6"
                           },
                           "group": "",
                           "groupIndex": 0,
@@ -6269,7 +6168,7 @@
                       "states": "",
                       "useStyle": "Cell Voltage Container",
                       "localStyles": {
-                        "objID": "49db9c25-dab9-4164-cf69-3817e0e3cabb"
+                        "objID": "b1fda4c9-a00b-4505-bd48-3995a01d3c0d"
                       },
                       "group": "",
                       "groupIndex": 0
@@ -6325,7 +6224,11 @@
                   "MAIN": {
                     "DEFAULT": {
                       "flex_flow": "ROW",
-                      "layout": "FLEX"
+                      "layout": "FLEX",
+                      "pad_top": 13,
+                      "pad_bottom": 12,
+                      "pad_left": 12,
+                      "pad_right": 12
                     }
                   }
                 }
@@ -6347,10 +6250,7 @@
             "definition": {
               "MAIN": {
                 "DEFAULT": {
-                  "pad_top": 10,
-                  "pad_bottom": 10,
-                  "pad_left": 10,
-                  "pad_right": 10
+                  "layout": "NONE"
                 }
               }
             }
@@ -6362,7 +6262,7 @@
           "type": "LVGLActionComponent",
           "left": 954,
           "top": 186,
-          "width": 341,
+          "width": 342,
           "height": 53,
           "customInputs": [],
           "customOutputs": [],
@@ -6385,7 +6285,7 @@
           "left": 676,
           "top": 82,
           "width": 186,
-          "height": 71,
+          "height": 69,
           "customInputs": [],
           "customOutputs": [],
           "A": "gesture_direction",

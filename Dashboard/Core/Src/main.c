@@ -26,6 +26,7 @@
 #include "persistent_settings.h"
 #include "can_interface.h"
 #include "adc_sensors.h"
+#include "screen_helper.h"
 #include "ui.h"
 
 /* USER CODE END Includes */
@@ -152,6 +153,7 @@ int main(void)
   ui_init();
   CAN_Interface_Init();
   ADC_Sensors_Init();
+  ScreenHelper_Init();
 
   /* USER CODE END 2 */
 
@@ -166,6 +168,7 @@ int main(void)
     lv_timer_handler();
     ui_tick();
     LV3_CAN_Loop();
+    ScreenHelper_Loop();
 
   }
   /* USER CODE END 3 */

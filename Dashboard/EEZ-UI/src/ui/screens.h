@@ -43,6 +43,7 @@ typedef struct _objects_t {
     lv_obj_t *obj14;
     lv_obj_t *can_parameters_table;
     lv_obj_t *obj15;
+    lv_obj_t *cell_voltages_1_12;
     lv_obj_t *obj16;
     lv_obj_t *obj17;
     lv_obj_t *obj18;
@@ -55,6 +56,7 @@ typedef struct _objects_t {
     lv_obj_t *obj25;
     lv_obj_t *obj26;
     lv_obj_t *obj27;
+    lv_obj_t *cell_voltages_13_24;
     lv_obj_t *obj28;
     lv_obj_t *obj29;
     lv_obj_t *obj30;
