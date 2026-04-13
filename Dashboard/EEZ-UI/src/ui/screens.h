@@ -39,9 +39,9 @@ typedef struct _objects_t {
     lv_obj_t *brightness_slider;
     lv_obj_t *obj11;
     lv_obj_t *obj12;
-    lv_obj_t *can_parameters_table;
     lv_obj_t *obj13;
     lv_obj_t *obj14;
+    lv_obj_t *can_parameters_table;
     lv_obj_t *obj15;
     lv_obj_t *obj16;
     lv_obj_t *obj17;
@@ -65,6 +65,8 @@ typedef struct _objects_t {
     lv_obj_t *obj35;
     lv_obj_t *obj36;
     lv_obj_t *obj37;
+    lv_obj_t *obj38;
+    lv_obj_t *obj39;
 } objects_t;
 
 extern objects_t objects;

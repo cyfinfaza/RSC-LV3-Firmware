@@ -26,6 +26,10 @@ extern bool get_var_flip_screen();
 extern void set_var_flip_screen(bool value);
 extern int32_t get_var_lv3c_sw_hv_main();
 extern void set_var_lv3c_sw_hv_main(int32_t value);
+extern float get_var_v_sense_5();
+extern void set_var_v_sense_5(float value);
+extern float get_var_v_sense_12();
+extern void set_var_v_sense_12(float value);
 
 #ifdef __cplusplus
 }

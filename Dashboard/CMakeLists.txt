@@ -79,6 +79,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/display.c
     Core/Src/persistent_settings.c
     Core/Src/can_interface.c
+    Core/Src/adc_sensors.c
 )
 
 # Add include paths
@@ -108,4 +109,9 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 # Apply driver implementation define to the CAN subsystem
 target_compile_definitions(LV3-CAN-Subsystem PRIVATE
     LV3_CAN_DRIVER_IMPL__LV3_DASH_R0
+)
+
+# Link options
+target_link_options(${CMAKE_PROJECT_NAME} PRIVATE
+    -u _printf_float
 )
