@@ -231,6 +231,36 @@ void remove_style_label_in_icon_button(lv_obj_t *obj) {
 };
 
 //
+// Style: Cell Voltage Container
+//
+
+void init_style_cell_voltage_container_MAIN_DEFAULT(lv_style_t *style) {
+    lv_style_set_layout(style, LV_LAYOUT_FLEX);
+    lv_style_set_flex_flow(style, LV_FLEX_FLOW_ROW);
+    lv_style_set_flex_main_place(style, LV_FLEX_ALIGN_SPACE_BETWEEN);
+};
+
+lv_style_t *get_style_cell_voltage_container_MAIN_DEFAULT() {
+    static lv_style_t *style;
+    if (!style) {
+        style = (lv_style_t *)lv_malloc(sizeof(lv_style_t));
+        lv_style_init(style);
+        init_style_cell_voltage_container_MAIN_DEFAULT(style);
+    }
+    return style;
+};
+
+void add_style_cell_voltage_container(lv_obj_t *obj) {
+    (void)obj;
+    lv_obj_add_style(obj, get_style_cell_voltage_container_MAIN_DEFAULT(), LV_PART_MAIN | LV_STATE_DEFAULT);
+};
+
+void remove_style_cell_voltage_container(lv_obj_t *obj) {
+    (void)obj;
+    lv_obj_remove_style(obj, get_style_cell_voltage_container_MAIN_DEFAULT(), LV_PART_MAIN | LV_STATE_DEFAULT);
+};
+
+//
 //
 //
 
@@ -243,6 +273,7 @@ void add_style(lv_obj_t *obj, int32_t styleIndex) {
         add_style_grid_button,
         add_style_inline_icon,
         add_style_label_in_icon_button,
+        add_style_cell_voltage_container,
     };
     add_style_funcs[styleIndex](obj);
 }
@@ -256,6 +287,7 @@ void remove_style(lv_obj_t *obj, int32_t styleIndex) {
         remove_style_grid_button,
         remove_style_inline_icon,
         remove_style_label_in_icon_button,
+        remove_style_cell_voltage_container,
     };
     remove_style_funcs[styleIndex](obj);
 }

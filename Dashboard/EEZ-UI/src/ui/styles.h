@@ -39,6 +39,11 @@ lv_style_t *get_style_label_in_icon_button_MAIN_DEFAULT();
 void add_style_label_in_icon_button(lv_obj_t *obj);
 void remove_style_label_in_icon_button(lv_obj_t *obj);
 
+// Style: Cell Voltage Container
+lv_style_t *get_style_cell_voltage_container_MAIN_DEFAULT();
+void add_style_cell_voltage_container(lv_obj_t *obj);
+void remove_style_cell_voltage_container(lv_obj_t *obj);
+
 #ifdef __cplusplus
 }
 #endif

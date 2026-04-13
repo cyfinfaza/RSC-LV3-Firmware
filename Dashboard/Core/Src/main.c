@@ -258,6 +258,8 @@ int main(void) {
   MX_DMA2D_Init();
   /* USER CODE BEGIN 2 */
 
+  lv3c_param_hv_cell_voltage_1 = 1234; // Example value, in practice this would come from CAN messages
+
   HAL_FLASH_Unlock();
   EE_Init();
   
