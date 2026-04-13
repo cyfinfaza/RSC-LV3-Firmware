@@ -29,6 +29,12 @@ lv_style_t *get_style_grid_button_MAIN_PRESSED();
 void add_style_grid_button(lv_obj_t *obj);
 void remove_style_grid_button(lv_obj_t *obj);
 
+// Style: Square Icon Button
+lv_style_t *get_style_square_icon_button_MAIN_DEFAULT();
+lv_style_t *get_style_square_icon_button_MAIN_PRESSED();
+void add_style_square_icon_button(lv_obj_t *obj);
+void remove_style_square_icon_button(lv_obj_t *obj);
+
 // Style: Inline Icon
 lv_style_t *get_style_inline_icon_MAIN_DEFAULT();
 void add_style_inline_icon(lv_obj_t *obj);
@@ -43,6 +49,11 @@ void remove_style_label_in_icon_button(lv_obj_t *obj);
 lv_style_t *get_style_cell_voltage_container_MAIN_DEFAULT();
 void add_style_cell_voltage_container(lv_obj_t *obj);
 void remove_style_cell_voltage_container(lv_obj_t *obj);
+
+// Style: Heading
+lv_style_t *get_style_heading_MAIN_DEFAULT();
+void add_style_heading(lv_obj_t *obj);
+void remove_style_heading(lv_obj_t *obj);
 
 #ifdef __cplusplus
 }

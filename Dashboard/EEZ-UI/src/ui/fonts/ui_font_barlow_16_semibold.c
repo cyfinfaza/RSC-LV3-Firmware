@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Size: 16 px
  * Bpp: 4
- * Opts: --bpp 4 --size 16 --no-compress --font ..\..\..\..\..\Downloads\Barlow\Barlow-SemiBold.ttf --range 32-127 --format lvgl
+ * Opts: --bpp 4 --size 16 --no-compress --font ..\..\..\..\..\Downloads\Barlow\Barlow-SemiBold.ttf --symbols 0xF107 --range 32-127 --format lvgl
  ******************************************************************************/
 
 #ifdef __has_include
