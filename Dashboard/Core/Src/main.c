@@ -22,23 +22,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-#include "FT5206.h"
-#include "eeprom.h"
-#include "lvgl.h"
-#include "screens.h"
-#include "stm32h7xx_hal_gpio.h"
-#include "stm32h7xx_hal_ltdc.h"
-#include "stm32h7xx_hal_tim.h"
+#include "display.h"
+#include "persistent_settings.h"
+#include "can_interface.h"
 #include "ui.h"
-#include <src/lv_api_map_v8.h>
-#include <src/misc/lv_timer.h>
-#include <src/widgets/slider/lv_slider.h>
-#include <src/widgets/table/lv_table.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <string.h>
-#include <stdio.h>
-#include "LV3_CAN.h"
 
 /* USER CODE END Includes */
 
@@ -79,21 +66,6 @@ HCD_HandleTypeDef hhcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
 
-#define DISP_WIDTH 480
-#define DISP_HEIGHT 272
-#define FRAME_SIZE (DISP_WIDTH * DISP_HEIGHT * 2) // Using RGB565
-uint8_t ltdc_framebuffer[FRAME_SIZE] __attribute__((section(".ram_d1")));
-
-uint8_t lvgl_draw_buffer_1[FRAME_SIZE / 2] __attribute__((section(".ram_d1")));
-uint8_t lvgl_draw_buffer_2[FRAME_SIZE / 2] __attribute__((section(".ram_d1")));
-
-unsigned int main_loop_start_timestamp = 0;
-
-unsigned int backlight_level = 25; // 0-100%
-bool flip_screen_state = false; // 0 for normal, 1 for flipped
-
-#define SCREEN_FADE_ON_TIME 500
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -116,93 +88,6 @@ static void MX_DMA2D_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
-unsigned int get_var_testvar() {
-  return HAL_GetTick();
-}
-
-void set_var_testvar(int32_t value) {
-
-}
-
-int last_swipe_dir = -1;
-
-int32_t get_var_gesture_direction() {
-    return last_swipe_dir;
-}
-
-// Flow will only read this
-void set_var_gesture_direction(int32_t value) { }
-
-void action_accept_gesture(lv_event_t *e) {
-    // Grab the device that triggered the event
-    lv_indev_t * indev = lv_event_get_indev(e);
-    
-    // Save the exact direction into our backing variable
-    last_swipe_dir = (int32_t)lv_indev_get_gesture_dir(indev);
-}
-
-int32_t get_var_display_brightness() {
-    return backlight_level;
-}
-
-void set_var_display_brightness(int32_t value) {
-    backlight_level = value;
-}
-
-bool get_var_flip_screen() {
-    return flip_screen_state;
-}
-
-void set_var_flip_screen(bool value) {
-    flip_screen_state = value;
-    if (flip_screen_state) {
-        lv_disp_set_rotation(lv_disp_get_default(), LV_DISP_ROTATION_180);
-    } else {
-        lv_disp_set_rotation(lv_disp_get_default(), LV_DISP_ROTATION_0);
-    }
-}
-
-uint16_t VirtAddVarTab[NB_OF_VAR] = {0x1000, 0x1001, 0x1002};
-#define EEPROM_BRIGHTNESS_VIRT_ADDR 0x1000
-#define EEPROM_FLIP_SCREEN_VIRT_ADDR 0x1001
-
-void action_save_brightness_to_eeprom(void) {
-    HAL_FLASH_Unlock();
-    EE_WriteVariable(EEPROM_BRIGHTNESS_VIRT_ADDR, (uint16_t)backlight_level);
-    EE_WriteVariable(EEPROM_FLIP_SCREEN_VIRT_ADDR, (uint16_t)flip_screen_state);
-    HAL_FLASH_Lock();
-}
-
-#define X(can_id, name, refresh_interval, ttl, has_safe_state, safe_state) \
-    uint32_t lv3c_param_##name = 0; \
-    uint32_t get_var_lv3c_##name() { \
-        return lv3c_param_##name; \
-    } \
-    void set_var_lv3c_##name(int32_t value) { }
-  LV3_CAN_Parameters_XMacro
-#undef X
-
-const LV3_CAN_Binding lv3_can_bindings[] = {
-#define X(can_id, name, refresh_interval, ttl, has_safe_state, safe_state) \
-    {&lv3c_param_##name, name, LV3_CAN_BindMode_Read},
-  LV3_CAN_Parameters_XMacro
-  #undef X
-};
-
-char can_parameters_table_buffer[LV3_CAN_ParamCount][8] = {0};
-void action_update_can_parameters_table() {
-  HAL_GPIO_WritePin(LED_USR_GPIO_Port, LED_USR_Pin, GPIO_PIN_SET);
-  int row = 0;
-  #define X(can_id, name, refresh_interval, ttl, has_safe_state, safe_state) \
-    sprintf(can_parameters_table_buffer[row], "%lu", lv3c_param_##name); \
-    lv_table_set_cell_value(objects.can_parameters_table, row, 0, #name); \
-    lv_table_set_cell_value(objects.can_parameters_table, row, 1, can_parameters_table_buffer[row]); \
-    row++;
-  LV3_CAN_Parameters_XMacro
-  #undef X
-  HAL_GPIO_WritePin(LED_USR_GPIO_Port, LED_USR_Pin, GPIO_PIN_RESET);
-}
 
 /* USER CODE END 0 */
 
@@ -258,65 +143,10 @@ int main(void) {
   MX_DMA2D_Init();
   /* USER CODE BEGIN 2 */
 
-  lv3c_param_hv_cell_voltage_1 = 1234; // Example value, in practice this would come from CAN messages
-
-  HAL_FLASH_Unlock();
-  EE_Init();
-  
-  uint16_t saved_brightness = 25; // default
-  if(EE_ReadVariable(EEPROM_BRIGHTNESS_VIRT_ADDR, &saved_brightness) == 0) {
-      if(saved_brightness <= 100) {
-          backlight_level = saved_brightness;
-      }
-  }
-
-  uint16_t saved_flip_screen = 0;
-  if(EE_ReadVariable(EEPROM_FLIP_SCREEN_VIRT_ADDR, &saved_flip_screen) == 0) {
-      flip_screen_state = saved_flip_screen;
-  }
-  HAL_FLASH_Lock();
-
-  // Clear framebuffer
-  memset(ltdc_framebuffer, 0, FRAME_SIZE);
-
-  // Set LTDC framebuffer address
-  HAL_LTDC_SetAddress(&hltdc, (uint32_t)ltdc_framebuffer, 0);
-
-  // Ensure backlight is at 0% and start PWM
-  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-
-  // Initialize LVGL
-  lv_init();
-  lv_tick_set_cb(HAL_GetTick);
-
-  // Set up display
-  lv_disp_t *disp = lv_st_ltdc_create_partial(
-      lvgl_draw_buffer_1, lvgl_draw_buffer_2, FRAME_SIZE / 2, 0);
-  if (flip_screen_state) {
-      lv_disp_set_rotation(disp, LV_DISP_ROTATION_180);
-  } else {
-      lv_disp_set_rotation(disp, LV_DISP_ROTATION_0);
-  }
-
-  // Set up touch input
-  FT5206_Init();
-  lv_indev_t *indev_touch = lv_indev_create();
-  lv_indev_set_type(indev_touch, LV_INDEV_TYPE_POINTER);
-  lv_indev_set_read_cb(indev_touch, FT5206_Read);
-
-  // Initialize EEZ Studio UI
+  PersistentSettings_Init();
+  Display_Init();
   ui_init();
-
-  lv_table_set_col_width(objects.can_parameters_table, 0, 200);
-  lv_table_set_col_width(objects.can_parameters_table, 1, 100);
-
-  // Start LV3 CAN
-  LV3_CAN_Init(98, LV3_CAN_BusMode_Normal, lv3_can_bindings,
-               sizeof(lv3_can_bindings) / sizeof(LV3_CAN_Binding));
-
-  // Record main loop start timestamp for backlight fade-in effect
-  main_loop_start_timestamp = HAL_GetTick();
+  CAN_Interface_Init();
 
   /* USER CODE END 2 */
 
@@ -327,22 +157,11 @@ int main(void) {
 
     /* USER CODE BEGIN 3 */
 
-    // Backlight control
-    // int brightness_slider_value = lv_slider_get_value(objects.brightness_slider);
-    // backlight_level = brightness_slider_value;
-    if (HAL_GetTick() - main_loop_start_timestamp < SCREEN_FADE_ON_TIME) {
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1,
-                            backlight_level *
-                                (HAL_GetTick() - main_loop_start_timestamp) /
-                                SCREEN_FADE_ON_TIME);
-    } else {
-      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, backlight_level);
-    }
-
+    Display_BacklightUpdate();
     lv_timer_handler();
     ui_tick();
     LV3_CAN_Loop();
-    
+
   }
   /* USER CODE END 3 */
 }
