@@ -75,7 +75,7 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     Core/Src/FT5206.c
-    Core/Src/EEPROM.c
+    Core/Src/eeprom.c
     Core/Src/display.c
     Core/Src/persistent_settings.c
     Core/Src/can_interface.c
