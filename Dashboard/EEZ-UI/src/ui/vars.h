@@ -30,6 +30,26 @@ extern float get_var_v_sense_5();
 extern void set_var_v_sense_5(float value);
 extern float get_var_v_sense_12();
 extern void set_var_v_sense_12(float value);
+extern int32_t get_var_lv3c_hv_pack_temp();
+extern void set_var_lv3c_hv_pack_temp(int32_t value);
+extern int32_t get_var_lv3c_hv_pack_max_temp();
+extern void set_var_lv3c_hv_pack_max_temp(int32_t value);
+extern int32_t get_var_lv3c_hv_pack_soc();
+extern void set_var_lv3c_hv_pack_soc(int32_t value);
+extern int32_t get_var_lv3c_hv_pack_current();
+extern void set_var_lv3c_hv_pack_current(int32_t value);
+extern int32_t get_var_lv3c_hv_pack_voltage();
+extern void set_var_lv3c_hv_pack_voltage(int32_t value);
+extern int32_t get_var_lv3c_sw_hv_motor();
+extern void set_var_lv3c_sw_hv_motor(int32_t value);
+extern int32_t get_var_lv3c_sw_hv_mppt();
+extern void set_var_lv3c_sw_hv_mppt(int32_t value);
+extern int32_t get_var_lv3c_hv_main_active();
+extern void set_var_lv3c_hv_main_active(int32_t value);
+extern int32_t get_var_lv3c_hv_motor_active();
+extern void set_var_lv3c_hv_motor_active(int32_t value);
+extern int32_t get_var_lv3c_hv_mppt_active();
+extern void set_var_lv3c_hv_mppt_active(int32_t value);
 
 #ifdef __cplusplus
 }

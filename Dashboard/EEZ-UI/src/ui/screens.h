@@ -49,8 +49,19 @@ typedef struct _objects_t {
     lv_obj_t *can_parameters_table;
     lv_obj_t *obj19;
     lv_obj_t *obj20;
-    lv_obj_t *cell_voltages_1_12;
     lv_obj_t *obj21;
+    lv_obj_t *soc;
+    lv_obj_t *lv3c_hv_pack_soc_bar;
+    lv_obj_t *lv3c_sw_hv_main;
+    lv_obj_t *hv_main_active;
+    lv_obj_t *lv3c_sw_hv_motor;
+    lv_obj_t *hv_motor_active;
+    lv_obj_t *lv3c_sw_hv_mppt;
+    lv_obj_t *hv_mppt_active;
+    lv_obj_t *hv_pack_voltage;
+    lv_obj_t *hv_pack_current;
+    lv_obj_t *hv_pack_temp;
+    lv_obj_t *cell_voltages_1_12;
     lv_obj_t *obj22;
     lv_obj_t *obj23;
     lv_obj_t *obj24;
@@ -62,8 +73,8 @@ typedef struct _objects_t {
     lv_obj_t *obj30;
     lv_obj_t *obj31;
     lv_obj_t *obj32;
-    lv_obj_t *cell_voltages_13_24;
     lv_obj_t *obj33;
+    lv_obj_t *cell_voltages_13_24;
     lv_obj_t *obj34;
     lv_obj_t *obj35;
     lv_obj_t *obj36;
@@ -75,6 +86,7 @@ typedef struct _objects_t {
     lv_obj_t *obj42;
     lv_obj_t *obj43;
     lv_obj_t *obj44;
+    lv_obj_t *obj45;
 } objects_t;
 
 extern objects_t objects;

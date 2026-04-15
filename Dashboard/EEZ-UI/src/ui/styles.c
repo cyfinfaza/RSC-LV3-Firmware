@@ -13,7 +13,7 @@ void init_style_basic_screen_MAIN_DEFAULT(lv_style_t *style) {
     lv_style_set_layout(style, LV_LAYOUT_FLEX);
     lv_style_set_flex_main_place(style, LV_FLEX_ALIGN_SPACE_BETWEEN);
     lv_style_set_text_font(style, &ui_font_barlow_16_medium);
-    lv_style_set_bg_color(style, lv_color_hex(0xff000000));
+    lv_style_set_bg_color(style, lv_color_hex(0x000000));
 };
 
 lv_style_t *get_style_basic_screen_MAIN_DEFAULT() {
@@ -335,6 +335,38 @@ void remove_style_heading(lv_obj_t *obj) {
 };
 
 //
+// Style: Grid LED No Shadow
+//
+
+void init_style_grid_led_no_shadow_MAIN_DEFAULT(lv_style_t *style) {
+    lv_style_set_grid_cell_column_pos(style, 1);
+    lv_style_set_grid_cell_row_pos(style, 1);
+    lv_style_set_grid_cell_x_align(style, LV_GRID_ALIGN_CENTER);
+    lv_style_set_shadow_width(style, 12);
+    lv_style_set_shadow_spread(style, 0);
+};
+
+lv_style_t *get_style_grid_led_no_shadow_MAIN_DEFAULT() {
+    static lv_style_t *style;
+    if (!style) {
+        style = (lv_style_t *)lv_malloc(sizeof(lv_style_t));
+        lv_style_init(style);
+        init_style_grid_led_no_shadow_MAIN_DEFAULT(style);
+    }
+    return style;
+};
+
+void add_style_grid_led_no_shadow(lv_obj_t *obj) {
+    (void)obj;
+    lv_obj_add_style(obj, get_style_grid_led_no_shadow_MAIN_DEFAULT(), LV_PART_MAIN | LV_STATE_DEFAULT);
+};
+
+void remove_style_grid_led_no_shadow(lv_obj_t *obj) {
+    (void)obj;
+    lv_obj_remove_style(obj, get_style_grid_led_no_shadow_MAIN_DEFAULT(), LV_PART_MAIN | LV_STATE_DEFAULT);
+};
+
+//
 //
 //
 
@@ -350,6 +382,7 @@ void add_style(lv_obj_t *obj, int32_t styleIndex) {
         add_style_label_in_icon_button,
         add_style_cell_voltage_container,
         add_style_heading,
+        add_style_grid_led_no_shadow,
     };
     add_style_funcs[styleIndex](obj);
 }
@@ -366,6 +399,7 @@ void remove_style(lv_obj_t *obj, int32_t styleIndex) {
         remove_style_label_in_icon_button,
         remove_style_cell_voltage_container,
         remove_style_heading,
+        remove_style_grid_led_no_shadow,
     };
     remove_style_funcs[styleIndex](obj);
 }

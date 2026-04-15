@@ -55,6 +55,11 @@ lv_style_t *get_style_heading_MAIN_DEFAULT();
 void add_style_heading(lv_obj_t *obj);
 void remove_style_heading(lv_obj_t *obj);
 
+// Style: Grid LED No Shadow
+lv_style_t *get_style_grid_led_no_shadow_MAIN_DEFAULT();
+void add_style_grid_led_no_shadow(lv_obj_t *obj);
+void remove_style_grid_led_no_shadow(lv_obj_t *obj);
+
 #ifdef __cplusplus
 }
 #endif
