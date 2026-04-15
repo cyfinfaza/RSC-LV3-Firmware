@@ -152,10 +152,14 @@ int main(void)
     main_contactor_enabled = !bms_dch_en && (local_contactor_enabled || lv3c_sw_hv_main);
     HAL_GPIO_WritePin(CONTACTOR_ENABLE_GPIO_Port, CONTACTOR_ENABLE_Pin, main_contactor_enabled);
 
-    // Backplane LED breathes with a 1-second triangle wave
+    // Backplane LED fades to 10% brightness when battery is enabled, otherwise breathes
     unsigned int tick = HAL_GetTick();
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1,
-        (tick % 2000 < 1000 ? tick % 1000 : 1000 - (tick % 1000)) / 10);
+    if (main_contactor_enabled) {
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 100);
+    } else {
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1,
+          (tick % 2000 < 1000 ? tick % 1000 : 1000 - (tick % 1000)) / 20);
+    }
 
     // Read GPIO inputs for next iteration
     e_stop_sense = HAL_GPIO_ReadPin(ESTOP_SENSE_GPIO_Port, ESTOP_SENSE_Pin);
