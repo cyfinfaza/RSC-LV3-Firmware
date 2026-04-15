@@ -23,9 +23,8 @@
 /* USER CODE BEGIN Includes */
 
 #include <stdbool.h>
-#include <stdint.h>
-#include <string.h>
-#include "LV3_CAN.h"
+#include "orion_bms_interface.h"
+#include "lv3_can_bindings.h"
 
 /* USER CODE END Includes */
 
@@ -76,154 +75,6 @@ static void MX_FDCAN3_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-bool e_stop_sense = false;
-bool bms_dch_en = false;
-
-uint32_t local_contactor_enabled = 0;
-
-uint32_t main_contactor_enabled = 0;
-
-unsigned int last_message_id = 0;
-
-uint16_t bms_supply_rail = 0;
-
-uint16_t pack_ccl = 0;
-uint16_t pack_dcl = 0;
-int16_t pack_current = 0;
-uint16_t pack_dod = 0;
-
-uint16_t bms_relay_state = 0;
-uint8_t pack_soc = 0;
-
-uint32_t reported_pack_soc = 0;
-uint32_t reported_pack_voltage = 0;
-
-// packed struct for cell voltage broadcast message
-typedef struct __attribute__((packed)) {
-  uint16_t voltage;             // * 0.1mV
-  uint16_t internal_resistance; // * 0.01mOhm
-  uint16_t open_voltage;        // * 0.1mV
-} cell_voltage_data_t;
-
-cell_voltage_data_t cell_voltage_data[24];
-
-uint32_t cell_voltages[24];
-
-int8_t thermistor_temp[8]; // degrees C
-
-void LV3_CAN_AUX_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan,
-                               uint32_t RxFifo0ITs) {
-  if (hfdcan->Instance == FDCAN3) {
-    if (RxFifo0ITs & FDCAN_IT_RX_FIFO0_NEW_MESSAGE) {
-      FDCAN_RxHeaderTypeDef rx_header;
-      uint8_t rx_data[8];
-      HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &rx_header, rx_data);
-      last_message_id = rx_header.Identifier;
-      if (last_message_id == 0x100) {
-        pack_soc = rx_data[6];
-        reported_pack_soc = pack_soc/2;
-        bms_relay_state = (rx_data[0] << 8) | rx_data[1];
-      }
-      if (last_message_id == 0x101) {
-        struct {
-          uint16_t ccl;
-          uint16_t dcl;
-          int16_t current;
-          uint16_t dod;
-        } __attribute__((packed)) * bms_status = (void *)rx_data;
-        pack_ccl = bms_status->ccl;
-        pack_dcl = bms_status->dcl;
-        pack_current = bms_status->current;
-        pack_dod = bms_status->dod;
-      }
-      if (last_message_id == 0x111) {
-        // copy bytes 2 and 3 to bms_supply_rail
-        bms_supply_rail = (rx_data[2] << 8) | rx_data[3];
-      }
-      if (last_message_id == 0x36) {
-        // cell voltage broadcast message
-        uint8_t cell_index = rx_data[0];
-        if (cell_index < 24) {
-          cell_voltage_data[cell_index].voltage = (rx_data[1] << 8) | rx_data[2];
-          cell_voltage_data[cell_index].internal_resistance =
-              (rx_data[3] << 8) | rx_data[4];
-          cell_voltage_data[cell_index].open_voltage =
-              (rx_data[5] << 8) | rx_data[6];
-          cell_voltages[cell_index] = cell_voltage_data[cell_index].voltage;
-        }
-        // recompute pack voltage
-        uint32_t pack_voltage_sum = 0;
-        for (int i = 0; i < 24; i++) {
-          pack_voltage_sum += cell_voltages[i];
-        }
-        reported_pack_voltage = pack_voltage_sum;
-      }
-      if (last_message_id == 0x76) {
-        // thermistor broadcast message
-        uint8_t thermistor_index = rx_data[0];
-        if (thermistor_index < 8) {
-          thermistor_temp[thermistor_index] = rx_data[1];
-        }
-      }
-    }
-  }
-}
-
-void send_bms_obd2_clear_faults() {
-  FDCAN_TxHeaderTypeDef tx_header;
-  // OBD2 clear faults message with ID 0x7E3 and data [0x01, 0x04, 0, 0, 0, 0, 0, 0]
-  uint8_t tx_data[8] = {0x01, 0x04, 0, 0, 0, 0, 0, 0};
-  tx_header.Identifier = 0x7E3;
-  tx_header.IdType = FDCAN_STANDARD_ID;
-  tx_header.TxFrameType = FDCAN_DATA_FRAME;
-  tx_header.DataLength = FDCAN_DLC_BYTES_8;
-  tx_header.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
-  tx_header.BitRateSwitch = FDCAN_BRS_OFF;
-  tx_header.FDFormat = FDCAN_CLASSIC_CAN;
-  tx_header.TxEventFifoControl = FDCAN_NO_TX_EVENTS;
-  tx_header.MessageMarker = 0;
-
-  HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan3, &tx_header, tx_data);
-}
-
-int32_t average_thermistor_temp = 0;
-int32_t max_thermistor_temp = 0;
-
-uint32_t sw_hv_main = 0;
-
-const LV3_CAN_Binding lv3_can_bindings[] = {
-    {&sw_hv_main, SW_HV_MAIN, LV3_CAN_BindMode_Read},
-    {&main_contactor_enabled, HV_MAIN_ACTIVE, LV3_CAN_BindMode_Write},
-    {&average_thermistor_temp, HV_PACK_TEMP, LV3_CAN_BindMode_Write},
-    {&max_thermistor_temp, HV_PACK_MAX_TEMP, LV3_CAN_BindMode_Write},
-    {&reported_pack_soc, HV_PACK_SOC, LV3_CAN_BindMode_Write},
-    {&reported_pack_voltage, HV_PACK_VOLTAGE, LV3_CAN_BindMode_Write},
-    {&cell_voltages[0], HV_CELL_VOLTAGE_1, LV3_CAN_BindMode_Write},
-    {&cell_voltages[1], HV_CELL_VOLTAGE_2, LV3_CAN_BindMode_Write},
-    {&cell_voltages[2], HV_CELL_VOLTAGE_3, LV3_CAN_BindMode_Write},
-    {&cell_voltages[3], HV_CELL_VOLTAGE_4, LV3_CAN_BindMode_Write},
-    {&cell_voltages[4], HV_CELL_VOLTAGE_5, LV3_CAN_BindMode_Write},
-    {&cell_voltages[5], HV_CELL_VOLTAGE_6, LV3_CAN_BindMode_Write},
-    {&cell_voltages[6], HV_CELL_VOLTAGE_7, LV3_CAN_BindMode_Write},
-    {&cell_voltages[7], HV_CELL_VOLTAGE_8, LV3_CAN_BindMode_Write},
-    {&cell_voltages[8], HV_CELL_VOLTAGE_9, LV3_CAN_BindMode_Write},
-    {&cell_voltages[9], HV_CELL_VOLTAGE_10, LV3_CAN_BindMode_Write},
-    {&cell_voltages[10], HV_CELL_VOLTAGE_11, LV3_CAN_BindMode_Write},
-    {&cell_voltages[11], HV_CELL_VOLTAGE_12, LV3_CAN_BindMode_Write},
-    {&cell_voltages[12], HV_CELL_VOLTAGE_13, LV3_CAN_BindMode_Write},
-    {&cell_voltages[13], HV_CELL_VOLTAGE_14, LV3_CAN_BindMode_Write},
-    {&cell_voltages[14], HV_CELL_VOLTAGE_15, LV3_CAN_BindMode_Write},
-    {&cell_voltages[15], HV_CELL_VOLTAGE_16, LV3_CAN_BindMode_Write},
-    {&cell_voltages[16], HV_CELL_VOLTAGE_17, LV3_CAN_BindMode_Write},
-    {&cell_voltages[17], HV_CELL_VOLTAGE_18, LV3_CAN_BindMode_Write},
-    {&cell_voltages[18], HV_CELL_VOLTAGE_19, LV3_CAN_BindMode_Write},
-    {&cell_voltages[19], HV_CELL_VOLTAGE_20, LV3_CAN_BindMode_Write},
-    {&cell_voltages[20], HV_CELL_VOLTAGE_21, LV3_CAN_BindMode_Write},
-    {&cell_voltages[21], HV_CELL_VOLTAGE_22, LV3_CAN_BindMode_Write},
-    {&cell_voltages[22], HV_CELL_VOLTAGE_23, LV3_CAN_BindMode_Write},
-    {&cell_voltages[23], HV_CELL_VOLTAGE_24, LV3_CAN_BindMode_Write},
-    };
-
 /* USER CODE END 0 */
 
 /**
@@ -266,25 +117,13 @@ int main(void)
 
   char last_usr_button_state = 0;
   char last_boot0_button_state = 0;
+  bool e_stop_sense = false;
+  bool bms_dch_en = false;
+  uint32_t local_contactor_enabled = 0;
+
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-
-  // Set up main CAN
-  LV3_CAN_Init(12, LV3_CAN_BusMode_Normal, &lv3_can_bindings, sizeof(lv3_can_bindings) / sizeof(LV3_CAN_Binding));
-
-  // Set up aux CAN
-  HAL_StatusTypeDef status;
-  status = HAL_FDCAN_Start(&hfdcan3);
-  status = HAL_FDCAN_ActivateNotification(&hfdcan3,
-                                          FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0);
-  // fdcan allow all messages
-  FDCAN_FilterTypeDef filter;
-  filter.IdType = FDCAN_STANDARD_ID;
-  filter.FilterIndex = 0;
-  filter.FilterType = FDCAN_FILTER_MASK;
-  filter.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
-  filter.FilterID1 = 0x000;
-  filter.FilterID2 = 0x000;
-  status = HAL_FDCAN_ConfigFilter(&hfdcan3, &filter);
+  OrionBMS_Init();
+  LV3_CAN_Init(12, LV3_CAN_BusMode_Normal, lv3_can_bindings, lv3_can_bindings_count);
 
   /* USER CODE END 2 */
 
@@ -294,41 +133,37 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+    // USR button: send OBD2 clear-faults on rising edge
     char button_state = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
     if (button_state && !last_usr_button_state) {
-      send_bms_obd2_clear_faults();
+      OrionBMS_SendClearFaults();
     }
     last_usr_button_state = button_state;
 
-    char boot0_button_state =
-        HAL_GPIO_ReadPin(BTN_BOOT0_GPIO_Port, BTN_BOOT0_Pin);
+    // BOOT0 button: toggle local contactor enable on rising edge
+    char boot0_button_state = HAL_GPIO_ReadPin(BTN_BOOT0_GPIO_Port, BTN_BOOT0_Pin);
     if (boot0_button_state && !last_boot0_button_state) {
       local_contactor_enabled = !local_contactor_enabled;
     }
-    main_contactor_enabled = !bms_dch_en && (local_contactor_enabled || sw_hv_main);
-    HAL_GPIO_WritePin(CONTACTOR_ENABLE_GPIO_Port, CONTACTOR_ENABLE_Pin, main_contactor_enabled);
-
     last_boot0_button_state = boot0_button_state;
 
+    // Contactor: enabled when BMS allows discharge and either local or remote request
+    main_contactor_enabled = !bms_dch_en && (local_contactor_enabled || lv3c_sw_hv_main);
+    HAL_GPIO_WritePin(CONTACTOR_ENABLE_GPIO_Port, CONTACTOR_ENABLE_Pin, main_contactor_enabled);
+
+    // Backplane LED breathes with a 1-second triangle wave
     unsigned int tick = HAL_GetTick();
-    __HAL_TIM_SET_COMPARE(
-        &htim1, TIM_CHANNEL_1,
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1,
         (tick % 2000 < 1000 ? tick % 1000 : 1000 - (tick % 1000)) / 10);
 
+    // Read GPIO inputs for next iteration
     e_stop_sense = HAL_GPIO_ReadPin(ESTOP_SENSE_GPIO_Port, ESTOP_SENSE_Pin);
+    (void)e_stop_sense; // read but not yet used; placeholder for future fault logic
     bms_dch_en = HAL_GPIO_ReadPin(BMS_DCH_EN_GPIO_Port, BMS_DCH_EN_Pin);
     HAL_GPIO_WritePin(LED_USR_GPIO_Port, LED_USR_Pin, !bms_dch_en);
 
-    int thermistor_temp_sum = 0;
-    max_thermistor_temp = -128;
-    for (int i = 0; i < 8; i++) {
-      thermistor_temp_sum += thermistor_temp[i];
-      if (thermistor_temp[i] > max_thermistor_temp) {
-        max_thermistor_temp = thermistor_temp[i];
-      }
-    }
-    average_thermistor_temp = thermistor_temp_sum / 8;
-
+    OrionBMS_Loop();
     LV3_CAN_Loop();
   }
   /* USER CODE END 3 */
