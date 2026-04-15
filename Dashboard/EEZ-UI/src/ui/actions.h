@@ -10,6 +10,8 @@ extern "C" {
 extern void action_accept_gesture(lv_event_t * e);
 extern void action_save_settings(lv_event_t * e);
 extern void action_reboot(lv_event_t * e);
+extern void action_send_bms_obd2_clear(lv_event_t * e);
+extern void action_toggle_hvbps_local_enable(lv_event_t * e);
 
 #ifdef __cplusplus
 }

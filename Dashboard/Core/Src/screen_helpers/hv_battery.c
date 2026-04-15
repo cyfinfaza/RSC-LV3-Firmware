@@ -1,9 +1,11 @@
 #include "hv_battery.h"
 #include "can_interface.h"
+#include "actions.h"
 #include "screens.h"
 #include <src/core/lv_obj_tree.h>
 #include <src/widgets/label/lv_label.h>
 #include <stdint.h>
+#include <stddef.h>
 #include <stdio.h>
 
 #define CELLS_PER_STACK 12
@@ -19,6 +21,16 @@ const uint32_t* cell_voltages[24] = {
     &lv3c_param_hv_cell_voltage_17, &lv3c_param_hv_cell_voltage_18, &lv3c_param_hv_cell_voltage_19, &lv3c_param_hv_cell_voltage_20,
     &lv3c_param_hv_cell_voltage_21, &lv3c_param_hv_cell_voltage_22, &lv3c_param_hv_cell_voltage_23, &lv3c_param_hv_cell_voltage_24
 };
+
+void action_toggle_hvbps_local_enable(lv_event_t *e) {
+    (void)e;
+    LV3_CAN_SendTrigger(LV3_CAN_Trigger_toggle_hv_bps_local_enable, 4, NULL, 0);
+}
+
+void action_send_bms_obd2_clear(lv_event_t *e) {
+    (void)e;
+    LV3_CAN_SendTrigger(LV3_CAN_Trigger_send_orion_obd2_clear, 4, NULL, 0);
+}
 
 void HVBattery_Init(void) {
     for (int i = 0; i < CELLS_PER_STACK * STACKS; i++) {

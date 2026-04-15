@@ -43,3 +43,16 @@ const LV3_CAN_Binding lv3_can_bindings[] = {
 };
 
 const unsigned int lv3_can_bindings_count = sizeof(lv3_can_bindings) / sizeof(LV3_CAN_Binding);
+
+volatile uint8_t flag_toggle_local_enable = 0;
+volatile uint8_t flag_send_orion_clear = 0;
+
+void LV3_CAN_TriggerCallback(LV3_CAN_Trigger trigger_id, uint8_t sender_module_id,
+                              const uint8_t *data, uint8_t length) {
+    (void)sender_module_id; (void)data; (void)length;
+    if (trigger_id == LV3_CAN_Trigger_toggle_hv_bps_local_enable) {
+        flag_toggle_local_enable = 1;
+    } else if (trigger_id == LV3_CAN_Trigger_send_orion_obd2_clear) {
+        flag_send_orion_clear = 1;
+    }
+}

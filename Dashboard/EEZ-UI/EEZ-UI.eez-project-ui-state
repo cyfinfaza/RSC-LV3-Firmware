@@ -1,13 +1,12 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/0",
+    "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/4",
     "selectedUserWidgetObject": "[EEZ-UI.eez-project]:/userWidgets/0",
-    "selectedActionObject": "[EEZ-UI.eez-project]:/actions/0",
-    "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/1",
-    "selectedStyleObject": "[EEZ-UI.eez-project]:/lvglStyles/styles/2",
+    "selectedActionObject": "[EEZ-UI.eez-project]:/actions/2",
+    "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/3",
+    "selectedStyleObject": "[EEZ-UI.eez-project]:/lvglStyles/styles/6",
     "selectedThemeObject": "[EEZ-UI.eez-project]:/themes/0",
     "selectedThemeColorObject": "[EEZ-UI.eez-project]:/colors/1",
-    "selectedFontObject": "[EEZ-UI.eez-project]:/fonts/2",
     "selectedBitmapObject": "[EEZ-UI.eez-project]:/bitmaps/8",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
@@ -31,6 +30,7 @@
           },
           {
             "type": "border",
+            "selected": 1,
             "size": 207.5,
             "location": "right",
             "children": [
@@ -203,33 +203,20 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 45.44857026057524,
-              "selected": 2,
+              "weight": 40.60568982297296,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
                 {
                   "type": "tab",
                   "id": "#e19d0844-67f3-40f5-ab44-c8bf4dae3898",
-                  "name": "Driver Dashboard",
+                  "name": "HV Battery",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[EEZ-UI.eez-project]:/userPages/3",
+                    "objectPath": "[EEZ-UI.eez-project]:/userPages/4",
                     "permanent": false
                   },
                   "icon": "svg:page"
-                },
-                {
-                  "type": "tab",
-                  "id": "#f22e533b-1e56-4350-951a-9edfc20c16f0",
-                  "name": "Settings",
-                  "component": "editor",
-                  "config": {
-                    "objectPath": "[EEZ-UI.eez-project]:/settings",
-                    "subObjectPath": "[EEZ-UI.eez-project]:/settings",
-                    "permanent": false
-                  },
-                  "icon": "material:settings"
                 },
                 {
                   "type": "tab",
@@ -253,18 +240,17 @@
                   },
                   "icon": "svg:page"
                 }
-              ],
-              "active": true
+              ]
             },
             {
               "type": "row",
               "id": "#41bbf7fd-bc44-4075-b81b-fde1180a5fd0",
-              "weight": 28.98277677272749,
+              "weight": 33.825657210329766,
               "children": [
                 {
                   "type": "tabset",
                   "id": "#82376b0b-d463-4531-a345-c26fce362f02",
-                  "weight": 1.7482614742698193,
+                  "weight": 2.0945757997218357,
                   "children": [
                     {
                       "type": "tab",
@@ -274,12 +260,13 @@
                       "enableClose": false,
                       "icon": "svg:properties"
                     }
-                  ]
+                  ],
+                  "active": true
                 },
                 {
                   "type": "tabset",
                   "id": "#a5775af4-8fc8-4720-b8af-2ffc9e532790",
-                  "weight": 1.2517385257301807,
+                  "weight": 0.9054242002781642,
                   "children": [
                     {
                       "type": "tab",
@@ -748,7 +735,8 @@
                   "component": "editor",
                   "enableClose": false
                 }
-              ]
+              ],
+              "active": true
             }
           ]
         }
@@ -1132,14 +1120,17 @@
             "7": {}
           }
         },
-        "1": {}
+        "1": {},
+        "3": {
+          "$selected": true
+        }
       },
       "transform": {
         "translate": {
-          "x": -186.40234375,
-          "y": -132.08984375
+          "x": -275.2421875,
+          "y": -130.578125
         },
-        "scale": 0.9
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
@@ -1169,34 +1160,31 @@
       "0": {},
       "1": {},
       "2": {
-        "0": {},
-        "$selected": true
+        "0": {}
       },
       "3": {},
-      "4": {}
+      "4": {},
+      "6": {
+        "$selected": true
+      }
     },
     "[EEZ-UI.eez-project]:/userPages/1[flow-state]": {
       "selectionFront": {},
       "selectionBack": {
         "0": {
-          "0": {
-            "0": {
-              "$selected": true
-            }
-          },
           "1": {
-            "0": {
-              "0": {}
-            }
+            "3": {},
+            "4": {},
+            "5": {}
           }
         }
       },
       "transform": {
         "translate": {
-          "x": -159.28858856656666,
-          "y": -177.8937906293727
+          "x": -184.26171875,
+          "y": -87.26171875
         },
-        "scale": 0.9
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
@@ -1217,13 +1205,23 @@
     },
     "[EEZ-UI.eez-project]:/userPages/2[flow-state]": {
       "selectionFront": {},
-      "selectionBack": {},
+      "selectionBack": {
+        "0": {
+          "0": {
+            "1": {
+              "$selected": true
+            }
+          },
+          "1": {}
+        },
+        "3": {}
+      },
       "transform": {
         "translate": {
-          "x": -658,
-          "y": -154
+          "x": -203.0035227272727,
+          "y": -143.39093975468995
         },
-        "scale": 1
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
@@ -1235,20 +1233,70 @@
     "[EEZ-UI.eez-project]:/userPages/3[flow-state]": {
       "selectionFront": {},
       "selectionBack": {
-        "0": {}
+        "0": {
+          "0": {
+            "$selected": true
+          }
+        }
       },
       "transform": {
         "translate": {
-          "x": -397.15234375,
-          "y": -137.3671875
+          "x": -240,
+          "y": -136
         },
-        "scale": 0.9
+        "scale": 0.8
       },
       "timeline": {
         "isEditorActive": false,
         "position": 0,
         "secondToPx": 200,
         "scrollLeft": 0
+      }
+    },
+    "[EEZ-UI.eez-project]:/actions/2[flow-state]": {
+      "selection": {},
+      "transform": {
+        "translate": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1
+      }
+    },
+    "[EEZ-UI.eez-project]:/userPages/4[flow-state]": {
+      "selectionFront": {},
+      "selectionBack": {
+        "0": {
+          "0": {
+            "$selected": true
+          },
+          "1": {
+            "1": {}
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -158.2378979492188,
+          "y": -166.6015104166667
+        },
+        "scale": 0.8
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[EEZ-UI.eez-project]:/actions/1[flow-state]": {
+      "selection": {},
+      "transform": {
+        "translate": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1
       }
     }
   },
@@ -1265,17 +1313,19 @@
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
-  "lvglPart": "MAIN",
+  "lvglPart": "SELECTED",
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
-    "TEXT",
-    "BORDER",
     "MISCELLANEOUS",
-    "PADDING"
+    "IMAGE",
+    "TEXT",
+    "PADDING",
+    "MARGIN",
+    "LAYOUT"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 0.9,
+  "flowZoom": 0.8,
   "implementationLanguage": "C",
-  "openDialogDefaultPath": "C:\\Users\\cyfin\\Downloads\\settings_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png"
+  "openDialogDefaultPath": "/Users/cywestbrook/Downloads/fontawesome-free-7.2.0-desktop/otfs/Font Awesome 7 Free-Regular-400.otf"
 }

@@ -18,3 +18,7 @@ extern uint32_t main_contactor_enabled;
 
 extern const LV3_CAN_Binding lv3_can_bindings[];
 extern const unsigned int lv3_can_bindings_count;
+
+// Volatile flags set by LV3_CAN_TriggerCallback on trigger receipt (ISR context); checked and cleared in main loop
+extern volatile uint8_t flag_toggle_local_enable;
+extern volatile uint8_t flag_send_orion_clear;

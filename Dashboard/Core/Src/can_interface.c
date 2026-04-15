@@ -23,3 +23,4 @@ void CAN_Interface_Init(void) {
     LV3_CAN_Init(98, LV3_CAN_BusMode_Normal, lv3_can_bindings,
                  sizeof(lv3_can_bindings) / sizeof(LV3_CAN_Binding));
 }
+

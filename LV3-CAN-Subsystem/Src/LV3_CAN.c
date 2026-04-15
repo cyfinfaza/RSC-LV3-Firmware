@@ -7,6 +7,7 @@ static LV3_CAN_Binding* bindings;
 static unsigned int num_bindings = 0;
 static uint8_t this_module_id = 0;
 
+
 static LV3_CAN_ParamMetadataStruct param_metadata[LV3_CAN_ParamCount] = {
 #define X(_can_id, _name, _refresh_interval, _ttl, _has_safe_state, _safe_state) \
 	{.can_id = {.raw = _can_id},                                                 \
@@ -169,6 +170,9 @@ LV3_CAN_Result LV3_CAN_PushNewMessage(uint32_t id, uint8_t* data, uint8_t length
 			}
 		}
 	}
+	if (can_id.elements.message_type == LV3_CAN_MessageType_Trigger) {
+		LV3_CAN_TriggerCallback((LV3_CAN_Trigger)can_id.elements.parameter, can_id.elements.sender, data, length);
+	}
 	if (can_id.elements.message_type == LV3_CAN_MessageType_Heartbeat) {
 		heartbeat_counter++;
 	}
@@ -178,4 +182,18 @@ LV3_CAN_Result LV3_CAN_PushNewMessage(uint32_t id, uint8_t* data, uint8_t length
 LV3_CAN_Result LV3_CAN_ForceSend(LV3_CAN_Param param_id) {
 	(void)param_id;
 	return LV3_CAN_OK;
+}
+
+__weak void LV3_CAN_TriggerCallback(LV3_CAN_Trigger trigger_id, uint8_t sender_module_id, const uint8_t* data,
+                                    uint8_t length) {
+	(void)trigger_id; (void)sender_module_id; (void)data; (void)length;
+}
+
+LV3_CAN_Result LV3_CAN_SendTrigger(LV3_CAN_Trigger trigger_id, uint8_t priority, const uint8_t* data, uint8_t length) {
+	LV3_CAN_CompositeID can_id = {.elements = {.sender = this_module_id,
+	                                           .parameter = trigger_id,
+	                                           .message_type = LV3_CAN_MessageType_Trigger,
+	                                           .priority = priority,
+	                                           ._reserved = 0}};
+	return LV3_CAN_Driver_SendMessage(can_id.raw, data, length);
 }

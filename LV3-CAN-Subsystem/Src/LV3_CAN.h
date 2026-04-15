@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include "LV3_CAN_Parameters_XMacro.h"
+#include "LV3_CAN_Triggers.h"
 
 #define LV3_CAN_HEARTBEAT_INTERVAL 1000
 #define LV3_CAN_HEARTBEAT_PULSE 250
@@ -224,3 +225,23 @@ LV3_CAN_Result LV3_CAN_PushNewMessage(uint32_t id, uint8_t* data, uint8_t length
  * @param param_id The LV3_CAN_Param ID of the parameter to send
  */
 LV3_CAN_Result LV3_CAN_ForceSend(LV3_CAN_Param param_id);
+
+/**
+ * @brief Called when a trigger is received. Override this weak function to handle triggers.
+ *
+ * @param trigger_id The trigger that fired
+ * @param sender_module_id The module ID of the sender
+ * @param data Pointer to the optional payload (may be NULL if length is 0)
+ * @param length Length of the payload in bytes
+ */
+void LV3_CAN_TriggerCallback(LV3_CAN_Trigger trigger_id, uint8_t sender_module_id, const uint8_t* data, uint8_t length);
+
+/**
+ * @brief Send a trigger on the CAN bus.
+ *
+ * @param trigger_id The trigger to send
+ * @param priority Message priority (0 = highest, 15 = lowest)
+ * @param data Optional payload (may be NULL if length is 0)
+ * @param length Length of the payload in bytes (0-8)
+ */
+LV3_CAN_Result LV3_CAN_SendTrigger(LV3_CAN_Trigger trigger_id, uint8_t priority, const uint8_t* data, uint8_t length);

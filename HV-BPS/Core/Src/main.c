@@ -148,6 +148,17 @@ int main(void)
     }
     last_boot0_button_state = boot0_button_state;
 
+    // CAN trigger: toggle local contactor enable
+    if (flag_toggle_local_enable) {
+      flag_toggle_local_enable = 0;
+      local_contactor_enabled = !local_contactor_enabled;
+    }
+    // CAN trigger: send OBD2 clear-faults to BMS
+    if (flag_send_orion_clear) {
+      flag_send_orion_clear = 0;
+      OrionBMS_SendClearFaults();
+    }
+
     // Contactor: enabled when BMS allows discharge and either local or remote request
     main_contactor_enabled = !bms_dch_en && (local_contactor_enabled || lv3c_sw_hv_main);
     HAL_GPIO_WritePin(CONTACTOR_ENABLE_GPIO_Port, CONTACTOR_ENABLE_Pin, main_contactor_enabled);
