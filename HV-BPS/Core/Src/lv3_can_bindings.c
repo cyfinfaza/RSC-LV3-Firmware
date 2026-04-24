@@ -16,6 +16,7 @@ const LV3_CAN_Binding lv3_can_bindings[] = {
     {(uint32_t*)&max_thermistor_temp,     hv_pack_max_temp,   LV3_CAN_BindMode_Write},
     {&reported_pack_soc,            hv_pack_soc,         LV3_CAN_BindMode_Write},
     {&reported_pack_voltage,        hv_pack_voltage,     LV3_CAN_BindMode_Write},
+    {&reported_pack_current,        hv_pack_current,     LV3_CAN_BindMode_Write},
     {&cell_voltages[0],             hv_cell_voltage_1,   LV3_CAN_BindMode_Write},
     {&cell_voltages[1],             hv_cell_voltage_2,   LV3_CAN_BindMode_Write},
     {&cell_voltages[2],             hv_cell_voltage_3,   LV3_CAN_BindMode_Write},

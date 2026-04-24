@@ -89,6 +89,8 @@ void Error_Handler(void);
 #define BMS_DCH_EN_GPIO_Port GPIOC
 #define AUX_CAN_RX_Pin GPIO_PIN_8
 #define AUX_CAN_RX_GPIO_Port GPIOA
+#define FAN_PWM_Pin GPIO_PIN_15
+#define FAN_PWM_GPIO_Port GPIOA
 #define ESTOP_SENSE_Pin GPIO_PIN_2
 #define ESTOP_SENSE_GPIO_Port GPIOD
 #define AUX_CAN_TX_Pin GPIO_PIN_4

@@ -20,6 +20,7 @@ extern uint16_t bms_supply_rail; // BMS supply voltage (raw)
 // Per-cell voltages (* 0.1 mV) and pack voltage aggregate
 extern uint32_t cell_voltages[24];
 extern uint32_t reported_pack_voltage; // sum of all 24 cell voltages (* 0.1 mV)
+extern int32_t reported_pack_current; // conversion of pack_current to int32_t for LV3 CAN binding
 extern uint32_t reported_pack_soc;     // pack_soc / 2 (percentage)
 
 // Thermistor temperatures (degrees C) and aggregates

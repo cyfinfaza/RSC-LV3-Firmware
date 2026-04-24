@@ -35,6 +35,8 @@ uint32_t cell_voltages[24] = {0};
 // running sum of all 24 cell voltages on every 0x36 update.
 uint32_t reported_pack_voltage = 0;
 
+int32_t reported_pack_current = 0; // conversion of pack_current to int32_t for LV3 CAN binding
+
 // Orion BMS2 reports SOC as 0-200 (0.5% steps); halve it for a 0-100% value.
 uint32_t reported_pack_soc = 0;
 
@@ -74,6 +76,9 @@ void LV3_CAN_AUX_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan,
             pack_dcl = s->dcl;
             pack_current = s->current;
             pack_dod = s->dod;
+
+            reported_pack_current = (int32_t)pack_current; // sign-extend for LV3 CAN binding
+
             break;
         }
 

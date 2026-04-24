@@ -2,8 +2,8 @@
   "navigation": {
     "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/4",
     "selectedUserWidgetObject": "[EEZ-UI.eez-project]:/userWidgets/0",
-    "selectedActionObject": "[EEZ-UI.eez-project]:/actions/2",
-    "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/3",
+    "selectedActionObject": "[EEZ-UI.eez-project]:/actions/4",
+    "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/9",
     "selectedStyleObject": "[EEZ-UI.eez-project]:/lvglStyles/styles/6",
     "selectedThemeObject": "[EEZ-UI.eez-project]:/themes/0",
     "selectedThemeColorObject": "[EEZ-UI.eez-project]:/colors/1",
@@ -30,7 +30,6 @@
           },
           {
             "type": "border",
-            "selected": 1,
             "size": 207.5,
             "location": "right",
             "children": [
@@ -132,7 +131,7 @@
             {
               "type": "row",
               "id": "#a020c8f4-892d-4dff-b88b-d9af35fff223",
-              "weight": 25.568652966697293,
+              "weight": 32.51289472176055,
               "children": [
                 {
                   "type": "tabset",
@@ -203,10 +202,22 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 40.60568982297296,
+              "weight": 33.661448067909696,
+              "selected": 1,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
+                {
+                  "type": "tab",
+                  "id": "#e804cfc9-00d0-4e52-9d2c-c5785c098ea4",
+                  "name": "toggle_hvbps_local_enable",
+                  "component": "editor",
+                  "config": {
+                    "objectPath": "[EEZ-UI.eez-project]:/actions/4",
+                    "permanent": false
+                  },
+                  "icon": "material:code"
+                },
                 {
                   "type": "tab",
                   "id": "#e19d0844-67f3-40f5-ab44-c8bf4dae3898",
@@ -1268,7 +1279,11 @@
       "selectionBack": {
         "0": {
           "0": {
-            "$selected": true
+            "0": {},
+            "3": {
+              "$selected": true
+            },
+            "6": {}
           },
           "1": {
             "1": {}
@@ -1277,8 +1292,8 @@
       },
       "transform": {
         "translate": {
-          "x": -158.2378979492188,
-          "y": -166.6015104166667
+          "x": -146.0269604492188,
+          "y": -141.2655729166667
         },
         "scale": 0.8
       },
@@ -1290,6 +1305,26 @@
       }
     },
     "[EEZ-UI.eez-project]:/actions/1[flow-state]": {
+      "selection": {},
+      "transform": {
+        "translate": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1
+      }
+    },
+    "[EEZ-UI.eez-project]:/actions/3[flow-state]": {
+      "selection": {},
+      "transform": {
+        "translate": {
+          "x": 0,
+          "y": 0
+        },
+        "scale": 1
+      }
+    },
+    "[EEZ-UI.eez-project]:/actions/4[flow-state]": {
       "selection": {},
       "transform": {
         "translate": {
@@ -1313,15 +1348,10 @@
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
-  "lvglPart": "SELECTED",
+  "lvglPart": "MAIN",
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
-    "MISCELLANEOUS",
-    "IMAGE",
-    "TEXT",
-    "PADDING",
-    "MARGIN",
-    "LAYOUT"
+    "MISCELLANEOUS"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
