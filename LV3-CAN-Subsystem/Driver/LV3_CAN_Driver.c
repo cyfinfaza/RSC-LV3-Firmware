@@ -1,7 +1,8 @@
 #include "LV3_CAN_Driver.h"
 
 #if defined(LV3_CAN_DRIVER_IMPL__LV3_CORE_R0) ||                               \
-    defined(LV3_CAN_DRIVER_IMPL__LV3_DASH_R0)
+    defined(LV3_CAN_DRIVER_IMPL__LV3_DASH_R0) ||                               \
+    defined(LV3_CAN_DRIVER_IMPL__LV3_G0B1CBT)
 
 __weak void LV3_CAN_AUX_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan,
                                       uint32_t RxFifo0ITs) {
@@ -66,6 +67,28 @@ void LV3_CAN_Driver_Init() {
   HAL_FDCAN_ConfigFilter(&hfdcan2, &filter);
 
 #endif
+
+#ifdef LV3_CAN_DRIVER_IMPL__LV3_G0B1CBT
+
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1); // G
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2); // R
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3); // B
+
+  HAL_FDCAN_Start(&hfdcan1);
+
+  HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0);
+
+  // fdcan allow all messages
+  FDCAN_FilterTypeDef filter;
+  filter.IdType = FDCAN_STANDARD_ID;
+  filter.FilterIndex = 0;
+  filter.FilterType = FDCAN_FILTER_MASK;
+  filter.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
+  filter.FilterID1 = 0x000;
+  filter.FilterID2 = 0x000;
+  HAL_FDCAN_ConfigFilter(&hfdcan1, &filter);
+
+#endif
 }
 
 LV3_CAN_Result LV3_CAN_Driver_SendMessage(uint32_t id, uint8_t *data,
@@ -99,6 +122,11 @@ void LV3_CAN_Driver_SetLED(uint32_t color) {
   __HAL_TIM_SET_COMPARE(&htim5, TIM_CHANNEL_2, color & 0x000000FF); // R
   __HAL_TIM_SET_COMPARE(&htim5, TIM_CHANNEL_3, color & 0x00FF0000); // B
 #endif
+#ifdef LV3_CAN_DRIVER_IMPL__LV3_G0B1CBT
+  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, color & 0x0000FF00); // G
+  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, color & 0x000000FF); // R
+  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, color & 0x00FF0000); // B
+#endif
 }
 
 uint32_t LV3_CAN_Driver_GetTick() { return HAL_GetTick(); }
@@ -115,4 +143,4 @@ LV3_CAN_SystemHealthData LV3_CAN_Driver_GetSystemHealthData() {
   return health;
 }
 
-#endif // LV3_CAN_DRIVER_IMPL__LV3_CORE_R0 || LV3_CAN_DRIVER_IMPL__LV3_DASH_R0
+#endif // LV3_CAN_DRIVER_IMPL__LV3_CORE_R0 || LV3_CAN_DRIVER_IMPL__LV3_DASH_R0 || LV3_CAN_DRIVER_IMPL__LV3_G0B1CBT

@@ -21,16 +21,81 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "LV3_CAN.h"
+#include <stdint.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
+// Battery relay will not turn on if any of these faults are set
+typedef union {
+  uint8_t raw;
+  struct {
+    uint8_t startup_delay         : 1; // System has not yet been on for SETPOINT_STARTUP_DELAY_MS
+    uint8_t startup_undervoltage  : 1; // Battery voltage is below SETPOINT_STARTUP_THRESHOLD_V
+    uint8_t undervoltage  : 1; // Battery voltage has gone below SETPOINT_UNDERVOLTAGE_V
+    uint8_t overvoltage   : 1; // Battery voltage has gone above SETPOINT_OVERVOLTAGE_V
+    uint8_t overcurrent  : 1; // Battery current has gone above SETPOINT_MAX_CURRENT_A
+    uint8_t undercurrent : 1; // Battery current has gone below SETPOINT_MIN_CURRENT_A
+    uint8_t precharge_timeout : 1; // Precharge has lasted longer than PRECHARGE_TIMEOUT_MS
+    uint8_t relay_fault       : 1; // Voltage difference exceeded precharge threshold while relay was on
+  };
+} Bat_Relay_Faults;
+
+// DCDC relay will not turn on if any of these faults are set
+typedef union {
+  uint8_t raw;
+  struct {
+    uint8_t dcdc_startup_undervoltage  : 1; // DCDC voltage is below SETPOINT_STARTUP_THRESHOLD_V
+    uint8_t dcdc_startup_overvoltage  : 1; // DCDC voltage is above SETPOINT_MAX_CHARGE_V
+    uint8_t dcdc_undervoltage  : 1; // DCDC voltage is below SETPOINT_UNDERVOLTAGE_V
+    uint8_t dcdc_overvoltage   : 1; // DCDC voltage is above SETPOINT_MAX_CHARGE_V
+    uint8_t dcdc_overcurrent  : 1; // DCDC is causing battery current to go below SETPOINT_MIN_CURRENT_A
+    uint8_t dcdc_sink : 1; // DCDC is sinking current
+  };
+} DCDC_Relay_Faults;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+// Battery relay will not turn on until HAL_GetTick() exceeds this value, sets startup delay fault
+#define SETPOINT_STARTUP_DELAY_MS        500
+
+// Battery will be cut off no matter what if voltage gets this low, latches undervoltage fault
+#define SETPOINT_UNDERVOLTAGE_V    11.0f
+
+// Battery will be cut off no matter what if voltage gets this high, latches overvoltage fault
+#define SETPOINT_OVERVOLTAGE_V        14.8f
+
+// Bus will not transition from off to on if battery voltage is below this threshold, sets startup undervoltage fault
+// DCDC relay will not turn on if battery voltage is below this threshold, sets DCDC startup undervoltage fault
+// If DCDC relay is on and battery voltage goes below this threshold, DCDC relay will turn off, latches DCDC undervoltage fault
+#define SETPOINT_STARTUP_THRESHOLD_V 11.8f
+
+// DCDC relay will turn on if DCDC voltage and battery voltage is below this threshold, sets DCDC startup undervoltage fault
+// If DCDC relay is on and battery voltage exceeds this threshold, DCDC relay will turn off, latches DCDC overvoltage fault
+#define SETPOINT_MAX_CHARGE_V       13.8f
+
+// Battery will be cut off no matter what if battery current exceeds this threshold for SETPOINT_OVERCURRENT_TIME_MS, latches overcurrent fault
+#define SETPOINT_MAX_CURRENT_A       7.0f
+#define SETPOINT_OVERCURRENT_TIME_MS      100
+
+// If DCDC relay is on and difference between battery current and load current exceeds this threshold, DCDC relay will turn off, latches DCDC overcurrent fault
+// If load current remains goes below this threshold for SETPOINT_UNDERCURRENT_TIME_MS, battery will be cut off, latches undercurrent fault
+#define SETPOINT_MIN_CURRENT_A      -2.0f
+#define SETPOINT_UNDERCURRENT_TIME_MS     100
+
+// If difference between battery current and load current exceeds this threshold, DCDC relay will turn off, latches DCDC sink fault
+#define DCDC_MAX_SINK_CURRENT_A          0.0f
+
+// If precharging lasts longer than this time, latches precharge timeout fault
+#define PRECHARGE_TIMEOUT_MS                500
+
+// Maximum voltage difference between battery and load for precharge
+#define PRECHARGE_THRESHOLD_V  3.0f
+
 
 /* USER CODE END PD */
 
@@ -73,6 +138,38 @@ float v_sense_12_dcdc; // V_pin * (100 + 5.1) / 5.1
 float v_sense_12_load; // V_pin * (100 + 5.1) / 5.1
 float i_sense_bat;     // (V_pin - 3.3/2) / (0.002 * 50)  — 2mΩ shunt, 50x INA181, bidir ref at midpoint
 float i_sense_load;    // (V_pin - 3.3/2) / (0.002 * 50)
+
+// Input state
+GPIO_PinState BTN_USR;
+GPIO_PinState BTN_USR_PREV = GPIO_PIN_RESET;
+
+// Output state (0 = off, 1 = on)
+uint8_t RELAY_CONTROL_BAT = 0;
+uint8_t RELAY_CONTROL_DCDC = 0;
+uint8_t PRECHARGE_CONTROL_BAT = 0;
+
+uint8_t lv_bus_enabled = 1;
+uint8_t bat_charge_enable = 1;
+Bat_Relay_Faults bat_faults = {0};
+uint8_t bat_faults_latched = 0;
+DCDC_Relay_Faults dcdc_faults = {0};
+uint32_t overcurrent_start_tick = 0;
+uint32_t undercurrent_start_tick = 0;
+uint32_t precharge_start_tick = 0;
+uint32_t relay_fault_start_tick = 0;
+uint8_t precharge_complete = 0;
+
+// LV3 CAN bound variables (integer mV / mA for CAN transmission)
+uint32_t lv_bat_voltage_mv = 0;
+uint32_t lv_bat_current_ma = 0;
+uint32_t lv_sys_current_ma = 0;
+
+const LV3_CAN_Binding lv3_can_bindings[] = {
+    {&lv_bat_voltage_mv, lv_bat_voltage, LV3_CAN_BindMode_Write},
+    {&lv_bat_current_ma, lv_bat_current, LV3_CAN_BindMode_Write},
+    {&lv_sys_current_ma, lv_sys_current, LV3_CAN_BindMode_Write},
+};
+const unsigned int lv3_can_bindings_count = sizeof(lv3_can_bindings) / sizeof(LV3_CAN_Binding);
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -144,16 +241,12 @@ int main(void)
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
 
   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
-  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 0);
-  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, 0);
-  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, 0);
+
+  LV3_CAN_Init(15, LV3_CAN_BusMode_Normal, lv3_can_bindings, lv3_can_bindings_count);
 
   /* USER CODE END 2 */
 
@@ -165,6 +258,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
+    // --- Read inputs ---
     V_SENSE_5        = adc_buf[0];
     V_SENSE_12_BAT   = adc_buf[1];
     V_SENSE_12_DCDC  = adc_buf[2];
@@ -195,11 +289,134 @@ int main(void)
     adc_pin_voltage = (I_SENSE_LOAD / (4095.0f * 64.0f / 4.0f)) * 3.3f;
     i_sense_load = (adc_pin_voltage - 3.3f / 2.0f) / (0.002f * 50.0f);
 
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 100);
-    HAL_Delay(1000);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
-    HAL_Delay(1000);
-    
+    BTN_USR = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
+
+    // --- Process state ---
+    lv_bat_voltage_mv = (uint32_t)(v_sense_12_bat * 1000.0f);
+    lv_bat_current_ma = (uint32_t)(i_sense_bat * 1000.0f);
+    lv_sys_current_ma = (uint32_t)(i_sense_load * 1000.0f);
+
+    // USR button toggles lv_bus_enabled on rising edge
+    if (BTN_USR == GPIO_PIN_SET && BTN_USR_PREV == GPIO_PIN_RESET) {
+      lv_bus_enabled ^= 1;
+    }
+    BTN_USR_PREV = BTN_USR;
+
+    // DCDC current: battery current minus load current (positive = DCDC sourcing into bat, negative = sinking from bat)
+    float dcdc_current = i_sense_bat - i_sense_load;
+
+    // Clear all bat faults each loop unless latched, so faults reflect live conditions when relay is off
+    if (!bat_faults_latched) bat_faults.raw = 0;
+
+    // Non-latching startup faults: only relevant when relay is off; gate turn-on, not turn-off
+    bat_faults.startup_delay        = !RELAY_CONTROL_BAT && (HAL_GetTick() < SETPOINT_STARTUP_DELAY_MS);
+    bat_faults.startup_undervoltage = !RELAY_CONTROL_BAT && (v_sense_12_bat < SETPOINT_STARTUP_THRESHOLD_V);
+
+    // Bat faults: set from live conditions every loop
+    if (v_sense_12_bat < SETPOINT_UNDERVOLTAGE_V)                                        bat_faults.undervoltage = 1;
+    if (v_sense_12_bat > SETPOINT_OVERVOLTAGE_V)                                         bat_faults.overvoltage  = 1;
+    if (RELAY_CONTROL_BAT && v_sense_12_bat - v_sense_12_load >= PRECHARGE_THRESHOLD_V) {
+      if (relay_fault_start_tick == 0) relay_fault_start_tick = HAL_GetTick();
+      if (HAL_GetTick() - relay_fault_start_tick >= PRECHARGE_TIMEOUT_MS) bat_faults.relay_fault = 1;
+    } else {
+      relay_fault_start_tick = 0;
+    }
+
+    // Timed overcurrent: i_sense_bat must exceed max for the full timeout before setting
+    if (i_sense_bat > SETPOINT_MAX_CURRENT_A) {
+      if (overcurrent_start_tick == 0) overcurrent_start_tick = HAL_GetTick();
+      if (HAL_GetTick() - overcurrent_start_tick >= SETPOINT_OVERCURRENT_TIME_MS) bat_faults.overcurrent = 1;
+    } else {
+      overcurrent_start_tick = 0;
+    }
+
+    // Timed undercurrent: i_sense_load must go below min for the full timeout before setting
+    if (i_sense_load < SETPOINT_MIN_CURRENT_A) {
+      if (undercurrent_start_tick == 0) undercurrent_start_tick = HAL_GetTick();
+      if (HAL_GetTick() - undercurrent_start_tick >= SETPOINT_UNDERCURRENT_TIME_MS) bat_faults.undercurrent = 1;
+    } else {
+      undercurrent_start_tick = 0;
+    }
+
+    // Precharge state machine
+    uint8_t want_bus = lv_bus_enabled && !bat_faults.raw;
+    if (want_bus && !PRECHARGE_CONTROL_BAT) {  // precharge just requested (once)
+      precharge_start_tick = HAL_GetTick();
+    }
+    PRECHARGE_CONTROL_BAT = want_bus;  // precharge always matches bus intent
+    if (want_bus) {
+      if (v_sense_12_bat - v_sense_12_load < PRECHARGE_THRESHOLD_V) {  // within threshold (repeatedly)
+        precharge_complete = 1;
+      }
+      if (precharge_complete) {  // precharge was successful (repeatedly)
+        RELAY_CONTROL_BAT = 1;
+      } else if (HAL_GetTick() - precharge_start_tick >= PRECHARGE_TIMEOUT_MS) {  // precharge timed out (once)
+        bat_faults.precharge_timeout = 1;
+      }
+    } else {
+      RELAY_CONTROL_BAT = 0;
+      precharge_complete = 0;
+      precharge_start_tick = 0;
+    }
+
+    // Latch if relay is on and a latching fault is present, or if precharge timed out
+    if ((RELAY_CONTROL_BAT && (bat_faults.undervoltage || bat_faults.overvoltage
+                             || bat_faults.overcurrent  || bat_faults.undercurrent
+                             || bat_faults.relay_fault))
+        || bat_faults.precharge_timeout) {
+      bat_faults_latched = 1;
+    }
+
+    // Non-latching DCDC startup faults: only relevant when relay is off; gate turn-on, not turn-off
+    dcdc_faults.dcdc_startup_undervoltage = !RELAY_CONTROL_DCDC && (v_sense_12_bat < SETPOINT_STARTUP_THRESHOLD_V
+                                                                  || v_sense_12_dcdc < SETPOINT_STARTUP_THRESHOLD_V);
+    dcdc_faults.dcdc_startup_overvoltage  = !RELAY_CONTROL_DCDC && (v_sense_12_bat >= SETPOINT_MAX_CHARGE_V
+                                                                  || v_sense_12_dcdc >= SETPOINT_MAX_CHARGE_V);
+
+    // Latching DCDC faults: only accumulate while DCDC relay is on, never clear
+    if (RELAY_CONTROL_DCDC) {
+      if (v_sense_12_bat < SETPOINT_STARTUP_THRESHOLD_V) dcdc_faults.dcdc_undervoltage = 1;
+      if (v_sense_12_bat > SETPOINT_MAX_CHARGE_V)        dcdc_faults.dcdc_overvoltage  = 1;
+      if (dcdc_current < SETPOINT_MIN_CURRENT_A)         dcdc_faults.dcdc_overcurrent  = 1; // DCDC pushing too much into bat
+      if (dcdc_current > DCDC_MAX_SINK_CURRENT_A)        dcdc_faults.dcdc_sink         = 1; // DCDC sinking from bat
+    }
+
+    // DCDC relay: on when BAT relay is on, bat_charge_enable set, and no dcdc faults (startup faults clear automatically)
+    RELAY_CONTROL_DCDC = RELAY_CONTROL_BAT && bat_charge_enable && !dcdc_faults.raw;
+
+    // --- Apply outputs ---
+    HAL_GPIO_WritePin(RELAY_CONTROL_BAT_GPIO_Port, RELAY_CONTROL_BAT_Pin, RELAY_CONTROL_BAT);
+    HAL_GPIO_WritePin(RELAY_CONTROL_DCDC_GPIO_Port, RELAY_CONTROL_DCDC_Pin, RELAY_CONTROL_DCDC);
+    HAL_GPIO_WritePin(PRECHARGE_CONTROL_BAT_GPIO_Port, PRECHARGE_CONTROL_BAT_Pin, PRECHARGE_CONTROL_BAT);
+
+    // STAT0 LED: battery voltage mapped as hue red→yellow→green→cyan→blue across undervoltage→overvoltage
+    float v_norm = (v_sense_12_bat - SETPOINT_UNDERVOLTAGE_V) / (SETPOINT_OVERVOLTAGE_V - SETPOINT_UNDERVOLTAGE_V);
+    if (v_norm < 0.0f) v_norm = 0.0f;
+    if (v_norm > 1.0f) v_norm = 1.0f;
+    float hue = v_norm * 240.0f;  // red=0, yellow=60, green=120, cyan=180, blue=240
+    float hf = hue / 60.0f;
+    int   hs = (int)hf;
+    float f  = hf - hs;
+    float r, g, b;
+    switch (hs) {
+      case 0:  r=1.0f;   g=f;      b=0.0f;  break;  // red → yellow
+      case 1:  r=1.0f-f; g=1.0f;   b=0.0f;  break;  // yellow → green
+      case 2:  r=0.0f;   g=1.0f;   b=f;     break;  // green → cyan
+      case 3:  r=0.0f;   g=1.0f-f; b=1.0f;  break;  // cyan → blue
+      default: r=0.0f;   g=0.0f;   b=1.0f;  break;
+    }
+
+    uint8_t led_on;
+    if      (bat_faults_latched)  led_on = (HAL_GetTick() % 200) < 100;   // fast blink: latching fault
+    else if (bat_faults.raw)      led_on = (HAL_GetTick() % 1000) < 500;  // slow blink: non-latching fault
+    else                          led_on = 1;
+
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, led_on ? (uint32_t)(g * 100) : 0);  // G
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, led_on ? (uint32_t)(r * 100) : 0);  // R
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, led_on ? (uint32_t)(b * 100) : 0);  // B
+
+    LV3_CAN_Loop();
+
   }
   /* USER CODE END 3 */
 }
@@ -444,10 +661,10 @@ static void MX_FDCAN1_Init(void)
   hfdcan1.Init.AutoRetransmission = DISABLE;
   hfdcan1.Init.TransmitPause = DISABLE;
   hfdcan1.Init.ProtocolException = DISABLE;
-  hfdcan1.Init.NominalPrescaler = 16;
+  hfdcan1.Init.NominalPrescaler = 12;
   hfdcan1.Init.NominalSyncJumpWidth = 1;
-  hfdcan1.Init.NominalTimeSeg1 = 1;
-  hfdcan1.Init.NominalTimeSeg2 = 1;
+  hfdcan1.Init.NominalTimeSeg1 = 13;
+  hfdcan1.Init.NominalTimeSeg2 = 2;
   hfdcan1.Init.DataPrescaler = 1;
   hfdcan1.Init.DataSyncJumpWidth = 1;
   hfdcan1.Init.DataTimeSeg1 = 1;

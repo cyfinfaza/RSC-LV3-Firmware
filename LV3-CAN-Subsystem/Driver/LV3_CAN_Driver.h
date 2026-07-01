@@ -18,12 +18,21 @@ extern FDCAN_HandleTypeDef hfdcan2;
 #define LV3_CAN_INSTANCE FDCAN2
 #endif
 
+#ifdef LV3_CAN_DRIVER_IMPL__LV3_G0B1CBT
+#include "stm32g0xx_hal.h"
+extern TIM_HandleTypeDef htim2;
+extern FDCAN_HandleTypeDef hfdcan1;
+#define LV3_CAN_HANDLE hfdcan1
+#define LV3_CAN_INSTANCE FDCAN1
+#endif
+
 /**
  * @brief Initialize the LV3 CAN driver for the specific hardware platform
  *
  * @pre The correct LV3_CAN_DRIVER_IMPL__* macro must be defined to select the implementation. Possible values are:
  * - LV3_CAN_DRIVER_IMPL__LV3_CORE_R0: For RSC "LV3 Core" Revision 0 board
  * - LV3_CAN_DRIVER_IMPL__LV3_DASH_R0: For RSC "LV3 Dash" Revision 0 board
+ * - LV3_CAN_DRIVER_IMPL__LV3_G0B1CBT: For RSC boards using STM32G0B1CBT (e.g. LVBPS)
  */
 void LV3_CAN_Driver_Init();
 
