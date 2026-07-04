@@ -88,13 +88,19 @@ typedef union {
 #define SETPOINT_UNDERCURRENT_TIME_MS     100
 
 // If difference between battery current and load current exceeds this threshold, DCDC relay will turn off, latches DCDC sink fault
-#define DCDC_MAX_SINK_CURRENT_A          0.0f
+#define DCDC_MAX_SINK_CURRENT_A          0.5f
 
 // If precharging lasts longer than this time, latches precharge timeout fault
 #define PRECHARGE_TIMEOUT_MS                500
 
 // Maximum voltage difference between battery and load for precharge
 #define PRECHARGE_THRESHOLD_V  3.0f
+
+// i_sense_load offset calibration: power the baord off USB and see what it measures
+#define I_SENSE_LOAD_OFFSET -0.1f
+
+// i_sense_bat offset calibration: power the board off USB and see what it measures
+#define I_SENSE_BAT_OFFSET 0.15f
 
 
 /* USER CODE END PD */
@@ -284,10 +290,10 @@ int main(void)
     v_sense_12_load = adc_pin_voltage * (100.0f + 5.1f) / 5.1f;
 
     adc_pin_voltage = (I_SENSE_BAT / (4095.0f * 64.0f / 4.0f)) * 3.3f;
-    i_sense_bat = (adc_pin_voltage - 3.3f / 2.0f) / (0.002f * 50.0f);
+    i_sense_bat = (adc_pin_voltage - 3.3f / 2.0f) / (0.002f * 50.0f) - I_SENSE_BAT_OFFSET;
 
     adc_pin_voltage = (I_SENSE_LOAD / (4095.0f * 64.0f / 4.0f)) * 3.3f;
-    i_sense_load = (adc_pin_voltage - 3.3f / 2.0f) / (0.002f * 50.0f);
+    i_sense_load = (adc_pin_voltage - 3.3f / 2.0f) / (0.002f * 50.0f) - I_SENSE_LOAD_OFFSET;
 
     BTN_USR = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
 
