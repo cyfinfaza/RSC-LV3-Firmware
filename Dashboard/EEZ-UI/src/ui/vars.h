@@ -50,6 +50,8 @@ extern int32_t get_var_lv3c_hv_motor_active();
 extern void set_var_lv3c_hv_motor_active(int32_t value);
 extern int32_t get_var_lv3c_hv_mppt_active();
 extern void set_var_lv3c_hv_mppt_active(int32_t value);
+extern int32_t get_var_lv3c_lv_bat_voltage();
+extern void set_var_lv3c_lv_bat_voltage(int32_t value);
 
 #ifdef __cplusplus
 }

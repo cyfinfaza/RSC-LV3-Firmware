@@ -58,6 +58,8 @@ TIM_HandleTypeDef htim5;
 
 /* USER CODE BEGIN PV */
 
+uint32_t local_contactor_enabled = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -123,7 +125,6 @@ int main(void)
   char last_boot0_button_state = 0;
   bool e_stop_sense = false;
   bool bms_dch_en = false;
-  uint32_t local_contactor_enabled = 0;
 
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1); // backplane LED
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1); // fan PWM

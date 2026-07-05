@@ -65,6 +65,7 @@ typedef union {
 
 // Battery will be cut off no matter what if voltage gets this low, latches undervoltage fault
 #define SETPOINT_UNDERVOLTAGE_V    11.0f
+#define SETPOINT_UNDERVOLTAGE_TIME_MS     500
 
 // Battery will be cut off no matter what if voltage gets this high, latches overvoltage fault
 #define SETPOINT_OVERVOLTAGE_V        14.8f
@@ -80,7 +81,7 @@ typedef union {
 
 // Battery will be cut off no matter what if battery current exceeds this threshold for SETPOINT_OVERCURRENT_TIME_MS, latches overcurrent fault
 #define SETPOINT_MAX_CURRENT_A       7.0f
-#define SETPOINT_OVERCURRENT_TIME_MS      100
+#define SETPOINT_OVERCURRENT_TIME_MS      500
 
 // If DCDC relay is on and difference between battery current and load current exceeds this threshold, DCDC relay will turn off, latches DCDC overcurrent fault
 // If load current remains goes below this threshold for SETPOINT_UNDERCURRENT_TIME_MS, battery will be cut off, latches undercurrent fault
@@ -159,6 +160,7 @@ uint8_t bat_charge_enable = 1;
 Bat_Relay_Faults bat_faults = {0};
 uint8_t bat_faults_latched = 0;
 DCDC_Relay_Faults dcdc_faults = {0};
+uint32_t undervoltage_start_tick = 0;
 uint32_t overcurrent_start_tick = 0;
 uint32_t undercurrent_start_tick = 0;
 uint32_t precharge_start_tick = 0;
@@ -319,7 +321,12 @@ int main(void)
     bat_faults.startup_undervoltage = !RELAY_CONTROL_BAT && (v_sense_12_bat < SETPOINT_STARTUP_THRESHOLD_V);
 
     // Bat faults: set from live conditions every loop
-    if (v_sense_12_bat < SETPOINT_UNDERVOLTAGE_V)                                        bat_faults.undervoltage = 1;
+    if (v_sense_12_bat < SETPOINT_UNDERVOLTAGE_V) {
+      if (undervoltage_start_tick == 0) undervoltage_start_tick = HAL_GetTick();
+      if (HAL_GetTick() - undervoltage_start_tick >= SETPOINT_UNDERVOLTAGE_TIME_MS) bat_faults.undervoltage = 1;
+    } else {
+      undervoltage_start_tick = 0;
+    }
     if (v_sense_12_bat > SETPOINT_OVERVOLTAGE_V)                                         bat_faults.overvoltage  = 1;
     if (RELAY_CONTROL_BAT && v_sense_12_bat - v_sense_12_load >= PRECHARGE_THRESHOLD_V) {
       if (relay_fault_start_tick == 0) relay_fault_start_tick = HAL_GetTick();
@@ -345,6 +352,7 @@ int main(void)
     }
 
     // Precharge state machine
+    uint8_t relay_was_on = RELAY_CONTROL_BAT;
     uint8_t want_bus = lv_bus_enabled && !bat_faults.raw;
     if (want_bus && !PRECHARGE_CONTROL_BAT) {  // precharge just requested (once)
       precharge_start_tick = HAL_GetTick();
@@ -365,10 +373,10 @@ int main(void)
       precharge_start_tick = 0;
     }
 
-    // Latch if relay is on and a latching fault is present, or if precharge timed out
-    if ((RELAY_CONTROL_BAT && (bat_faults.undervoltage || bat_faults.overvoltage
-                             || bat_faults.overcurrent  || bat_faults.undercurrent
-                             || bat_faults.relay_fault))
+    // Latch if relay was on this loop and a latching fault fired (relay may now be off due to the fault)
+    if ((relay_was_on && (bat_faults.undervoltage || bat_faults.overvoltage
+                        || bat_faults.overcurrent  || bat_faults.undercurrent
+                        || bat_faults.relay_fault))
         || bat_faults.precharge_timeout) {
       bat_faults_latched = 1;
     }
