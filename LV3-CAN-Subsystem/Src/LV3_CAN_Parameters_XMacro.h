@@ -35,9 +35,15 @@ X(0xA019308, mppt4_temp, 500, 2000, 0, 0) \
 \
 \
 X(0x6000110, lv_bat_voltage, 500, 1000, 0, 0) \
-X(0x6000210, lv_bat_current, 200, 1000, 0, 0) \
-X(0x6000310, lv_sys_current, 200, 1000, 0, 0) \
-X(0x6000410, lv_bat_temp, 500, 1000, 0, 0) \
+X(0x6000210, lv_dcdc_voltage, 500, 1000, 0, 0) \
+X(0x6000310, lv_load_voltage, 500, 1000, 0, 0) \
+X(0x6000410, lv_bat_current, 200, 1000, 0, 0) \
+X(0x6000510, lv_sys_current, 200, 1000, 0, 0) \
+X(0x6000610, lv_bat_temp, 500, 1000, 0, 0) \
+X(0x6000710, lv_bat_faults, 0, 1000, 0, 0) \
+X(0x6000810, lv_dcdc_faults, 0, 1000, 0, 0) \
+X(0x6000910, lv_bat_relay, 0, 1000, 0, 0) \
+X(0x6000A10, lv_dcdc_relay, 0, 1000, 0, 0) \
 \
 \
 X(0x400010C, hv_fault, 0, 500, 1, 1) \
@@ -72,4 +78,4 @@ X(0xC00770C, hv_cell_voltage_20, 1000, 2000, 0, 0) \
 X(0xC00780C, hv_cell_voltage_21, 1000, 2000, 0, 0) \
 X(0xC00790C, hv_cell_voltage_22, 1000, 2000, 0, 0) \
 X(0xC007A0C, hv_cell_voltage_23, 1000, 2000, 0, 0) \
-X(0xC007B0C, hv_cell_voltage_24, 1000, 2000, 0, 0) \
+X(0xC007B0C, hv_cell_voltage_24, 1000, 2000, 0, 0)

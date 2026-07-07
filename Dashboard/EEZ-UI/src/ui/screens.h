@@ -16,7 +16,8 @@ enum ScreensEnum {
     SCREEN_ID_CAN_PARAMETERS = 3,
     SCREEN_ID_DRIVER_DASHBOARD = 4,
     SCREEN_ID_HV_BATTERY = 5,
-    _SCREEN_ID_LAST = 5
+    SCREEN_ID_LV_BATTERY = 6,
+    _SCREEN_ID_LAST = 6
 };
 
 typedef struct _objects_t {
@@ -25,6 +26,7 @@ typedef struct _objects_t {
     lv_obj_t *can_parameters;
     lv_obj_t *driver_dashboard;
     lv_obj_t *hv_battery;
+    lv_obj_t *lv_battery;
     lv_obj_t *obj0;
     lv_obj_t *obj1;
     lv_obj_t *obj2;
@@ -37,17 +39,17 @@ typedef struct _objects_t {
     lv_obj_t *obj9;
     lv_obj_t *obj10;
     lv_obj_t *obj11;
-    lv_obj_t *brightness_slider;
     lv_obj_t *obj12;
-    lv_obj_t *default_screen_dropdown;
+    lv_obj_t *brightness_slider;
     lv_obj_t *obj13;
+    lv_obj_t *default_screen_dropdown;
     lv_obj_t *obj14;
     lv_obj_t *obj15;
     lv_obj_t *obj16;
     lv_obj_t *obj17;
     lv_obj_t *obj18;
-    lv_obj_t *can_parameters_table;
     lv_obj_t *obj19;
+    lv_obj_t *can_parameters_table;
     lv_obj_t *obj20;
     lv_obj_t *obj21;
     lv_obj_t *obj22;
@@ -55,6 +57,7 @@ typedef struct _objects_t {
     lv_obj_t *obj24;
     lv_obj_t *obj25;
     lv_obj_t *obj26;
+    lv_obj_t *obj27;
     lv_obj_t *soc;
     lv_obj_t *lv3c_hv_pack_soc_bar;
     lv_obj_t *lv3c_sw_hv_main;
@@ -65,10 +68,9 @@ typedef struct _objects_t {
     lv_obj_t *hv_mppt_active;
     lv_obj_t *hv_pack_voltage_current;
     lv_obj_t *hv_pack_temp;
-    lv_obj_t *obj27;
     lv_obj_t *obj28;
-    lv_obj_t *cell_voltages_1_12;
     lv_obj_t *obj29;
+    lv_obj_t *cell_voltages_1_12;
     lv_obj_t *obj30;
     lv_obj_t *obj31;
     lv_obj_t *obj32;
@@ -80,8 +82,8 @@ typedef struct _objects_t {
     lv_obj_t *obj38;
     lv_obj_t *obj39;
     lv_obj_t *obj40;
-    lv_obj_t *cell_voltages_13_24;
     lv_obj_t *obj41;
+    lv_obj_t *cell_voltages_13_24;
     lv_obj_t *obj42;
     lv_obj_t *obj43;
     lv_obj_t *obj44;
@@ -93,6 +95,14 @@ typedef struct _objects_t {
     lv_obj_t *obj50;
     lv_obj_t *obj51;
     lv_obj_t *obj52;
+    lv_obj_t *obj53;
+    lv_obj_t *obj54;
+    lv_obj_t *obj55;
+    lv_obj_t *obj56;
+    lv_obj_t *obj57;
+    lv_obj_t *obj58;
+    lv_obj_t *obj59;
+    lv_obj_t *obj60;
 } objects_t;
 
 extern objects_t objects;
@@ -111,6 +121,9 @@ void tick_screen_driver_dashboard();
 
 void create_screen_hv_battery();
 void tick_screen_hv_battery();
+
+void create_screen_lv_battery();
+void tick_screen_lv_battery();
 
 void create_user_widget_widget1(lv_obj_t *parent_obj, void *flowState, int startWidgetIndex);
 void tick_user_widget_widget1(void *flowState, int startWidgetIndex);

@@ -52,6 +52,24 @@ extern int32_t get_var_lv3c_hv_mppt_active();
 extern void set_var_lv3c_hv_mppt_active(int32_t value);
 extern int32_t get_var_lv3c_lv_bat_voltage();
 extern void set_var_lv3c_lv_bat_voltage(int32_t value);
+extern int32_t get_var_lv3c_lv_dcdc_voltage();
+extern void set_var_lv3c_lv_dcdc_voltage(int32_t value);
+extern int32_t get_var_lv3c_lv_load_voltage();
+extern void set_var_lv3c_lv_load_voltage(int32_t value);
+extern int32_t get_var_lv3c_lv_bat_current();
+extern void set_var_lv3c_lv_bat_current(int32_t value);
+extern int32_t get_var_lv3c_lv_sys_current();
+extern void set_var_lv3c_lv_sys_current(int32_t value);
+extern int32_t get_var_lv3c_lv_bat_temp();
+extern void set_var_lv3c_lv_bat_temp(int32_t value);
+extern int32_t get_var_lv3c_lv_bat_faults();
+extern void set_var_lv3c_lv_bat_faults(int32_t value);
+extern int32_t get_var_lv3c_lv_dcdc_faults();
+extern void set_var_lv3c_lv_dcdc_faults(int32_t value);
+extern int32_t get_var_lv3c_lv_bat_relay();
+extern void set_var_lv3c_lv_bat_relay(int32_t value);
+extern int32_t get_var_lv3c_lv_dcdc_relay();
+extern void set_var_lv3c_lv_dcdc_relay(int32_t value);
 
 #ifdef __cplusplus
 }

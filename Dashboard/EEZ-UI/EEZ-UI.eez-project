@@ -246,6 +246,78 @@
         "defaultValue": "0",
         "persistent": false,
         "native": true
+      },
+      {
+        "objID": "0407ad42-1acb-4391-8f6b-703a76ac7317",
+        "name": "lv3c_lv_dcdc_voltage",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": true
+      },
+      {
+        "objID": "d64ffa16-d5f3-4eff-d4fe-b63666d4fe47",
+        "name": "lv3c_lv_load_voltage",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": true
+      },
+      {
+        "objID": "ab272753-a9c2-4c37-906a-ff2bde18f632",
+        "name": "lv3c_lv_bat_current",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": true
+      },
+      {
+        "objID": "02f8556b-5a6f-466c-d638-f30684d1e6be",
+        "name": "lv3c_lv_sys_current",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": true
+      },
+      {
+        "objID": "62be8354-e0d1-47c9-84ec-41634f8e6fab",
+        "name": "lv3c_lv_bat_temp",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": true
+      },
+      {
+        "objID": "d76e092f-0681-4f2f-dbdd-38861b4201df",
+        "name": "lv3c_lv_bat_faults",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": true
+      },
+      {
+        "objID": "7783c7b5-d1ff-4894-e20e-42786bfa2d87",
+        "name": "lv3c_lv_dcdc_faults",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": true
+      },
+      {
+        "objID": "df573e37-d01e-4d79-e09e-88807c81a617",
+        "name": "lv3c_lv_bat_relay",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": true
+      },
+      {
+        "objID": "a85c1462-9498-42ea-c619-fc3914ec1220",
+        "name": "lv3c_lv_dcdc_relay",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": true
       }
     ],
     "structures": [],
@@ -989,7 +1061,15 @@
                     "childStyles": []
                   },
                   "timeline": [],
-                  "eventHandlers": [],
+                  "eventHandlers": [
+                    {
+                      "objID": "3ff79e27-57b0-463a-8c13-153b34c7feca",
+                      "eventName": "PRESSED",
+                      "handlerType": "flow",
+                      "action": "accept_gesture",
+                      "userData": 0
+                    }
+                  ],
                   "leftUnit": "px",
                   "topUnit": "px",
                   "widthUnit": "%",
@@ -1896,6 +1976,32 @@
               "useStackType": "literal"
             }
           ]
+        },
+        {
+          "objID": "4d9a90c5-1720-451e-98c4-30579317a916",
+          "type": "LVGLActionComponent",
+          "left": 537,
+          "top": 120,
+          "width": 336,
+          "height": 53,
+          "customInputs": [],
+          "customOutputs": [],
+          "actions": [
+            {
+              "objID": "7bfc7aff-f545-4ace-a061-db72d8c812e7",
+              "action": "changeScreen",
+              "screen": "LV Battery",
+              "screenType": "literal",
+              "fadeMode": "OVER_LEFT",
+              "fadeModeType": "literal",
+              "speed": 120,
+              "speedType": "literal",
+              "delay": 0,
+              "delayType": "literal",
+              "useStack": true,
+              "useStackType": "literal"
+            }
+          ]
         }
       ],
       "connectionLines": [
@@ -1925,6 +2031,13 @@
           "source": "c9ea28fa-9c08-413f-dbfb-a86f834eb5bd",
           "output": "PRESSED",
           "target": "7a6cac4f-426d-4e7d-8396-e65f16ca84cf",
+          "input": "@seqin"
+        },
+        {
+          "objID": "afd9519e-5e81-44b1-a91d-80e5796b1c13",
+          "source": "47e4517b-62e5-415b-8c24-719053a54275",
+          "output": "PRESSED",
+          "target": "4d9a90c5-1720-451e-98c4-30579317a916",
           "input": "@seqin"
         }
       ],
@@ -3341,8 +3454,8 @@
           "type": "LVGLActionComponent",
           "left": 834,
           "top": 207,
-          "width": 341,
-          "height": 52,
+          "width": 342,
+          "height": 53,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -3376,8 +3489,8 @@
           "type": "LVGLActionComponent",
           "left": 104,
           "top": -107,
-          "width": 298,
-          "height": 52,
+          "width": 299,
+          "height": 53,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -8863,6 +8976,762 @@
       "componentGroups": [],
       "userProperties": [],
       "name": "HV Battery",
+      "left": 0,
+      "top": 0,
+      "width": 480,
+      "height": 272,
+      "isUsedAsUserWidget": false,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
+    },
+    {
+      "objID": "8e8c74b8-31d8-4c1c-99fe-b40dc12cd899",
+      "components": [
+        {
+          "objID": "6073aaa0-4670-41a8-97ea-3e136c6b1948",
+          "type": "LVGLScreenWidget",
+          "left": 0,
+          "top": 0,
+          "width": 480,
+          "height": 272,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "285fc322-d983-472c-d4c8-bfc9655af26b",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [
+            {
+              "objID": "418a1699-452d-4785-b941-8b7f0bcba39c",
+              "eventName": "GESTURE",
+              "handlerType": "action",
+              "action": "accept_gesture",
+              "userData": 0
+            },
+            {
+              "objID": "5bfdcb1f-4c30-4099-f180-395128cd2507",
+              "eventName": "GESTURE",
+              "handlerType": "flow",
+              "action": "accept_gesture",
+              "userData": 0
+            }
+          ],
+          "leftUnit": "px",
+          "topUnit": "px",
+          "widthUnit": "px",
+          "heightUnit": "px",
+          "children": [
+            {
+              "objID": "8de450f3-a511-496a-bca9-6ccf8d7db376",
+              "type": "LVGLContainerWidget",
+              "left": 0,
+              "top": 0,
+              "width": 416,
+              "height": 100,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "3dd88ebb-df73-4330-a346-bf049f2de295",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "%",
+              "children": [
+                {
+                  "objID": "7737b4d2-1221-4dfe-e36d-55340361a189",
+                  "type": "LVGLContainerWidget",
+                  "left": 184,
+                  "top": 158,
+                  "width": 174,
+                  "height": 50,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "c1754921-bcfb-410b-f0e0-25b6edf78395",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [
+                    {
+                      "objID": "b6118540-7845-464f-9947-e8738e7203ef",
+                      "type": "LVGLButtonWidget",
+                      "left": 23,
+                      "top": 27,
+                      "width": 50,
+                      "height": 50,
+                      "customInputs": [],
+                      "customOutputs": [],
+                      "style": {
+                        "objID": "6a7685f7-8cdf-4476-d285-52edbd74d069",
+                        "useStyle": "default",
+                        "conditionalStyles": [],
+                        "childStyles": []
+                      },
+                      "timeline": [],
+                      "eventHandlers": [
+                        {
+                          "objID": "f0fd6ab5-ba7a-47e1-979b-27d17dda24bb",
+                          "eventName": "PRESSED",
+                          "handlerType": "flow",
+                          "action": "accept_gesture",
+                          "userData": 0
+                        }
+                      ],
+                      "leftUnit": "px",
+                      "topUnit": "px",
+                      "widthUnit": "px",
+                      "heightUnit": "px",
+                      "children": [
+                        {
+                          "objID": "43a0e988-e60c-4ab6-ae4c-8585f0938094",
+                          "type": "LVGLImageWidget",
+                          "left": 0,
+                          "top": 0,
+                          "width": 24,
+                          "height": 24,
+                          "customInputs": [],
+                          "customOutputs": [],
+                          "style": {
+                            "objID": "00f78134-1946-4d80-9960-b59d65b44a67",
+                            "useStyle": "default",
+                            "conditionalStyles": [],
+                            "childStyles": []
+                          },
+                          "timeline": [],
+                          "eventHandlers": [],
+                          "leftUnit": "px",
+                          "topUnit": "px",
+                          "widthUnit": "content",
+                          "heightUnit": "content",
+                          "children": [],
+                          "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                          "hiddenFlagType": "literal",
+                          "clickableFlagType": "literal",
+                          "flagScrollbarMode": "",
+                          "flagScrollDirection": "",
+                          "scrollSnapX": "",
+                          "scrollSnapY": "",
+                          "checkedStateType": "literal",
+                          "disabledStateType": "literal",
+                          "states": "",
+                          "useStyle": "Inline Icon",
+                          "localStyles": {
+                            "objID": "71141ac1-ad4e-4731-cf74-f7858256326d"
+                          },
+                          "group": "",
+                          "groupIndex": 0,
+                          "image": "Home_Icon",
+                          "setPivot": false,
+                          "pivotX": 0,
+                          "pivotY": 0,
+                          "zoom": 256,
+                          "angle": 0,
+                          "innerAlign": "CENTER",
+                          "sizeMode": "VIRTUAL",
+                          "value": 0,
+                          "valueType": "literal",
+                          "previewValue": 0
+                        }
+                      ],
+                      "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_ON_FOCUS|SCROLL_WITH_ARROW|SNAPPABLE",
+                      "hiddenFlagType": "literal",
+                      "clickableFlag": true,
+                      "clickableFlagType": "literal",
+                      "flagScrollbarMode": "",
+                      "flagScrollDirection": "",
+                      "scrollSnapX": "",
+                      "scrollSnapY": "",
+                      "checkedStateType": "literal",
+                      "disabledStateType": "literal",
+                      "states": "",
+                      "useStyle": "Square Icon Button",
+                      "localStyles": {
+                        "objID": "6605ec4c-feb3-47f8-a155-d27689c350ea"
+                      },
+                      "group": "",
+                      "groupIndex": 0
+                    },
+                    {
+                      "objID": "8013b9f1-2449-4365-ff9d-e14984dbb234",
+                      "type": "LVGLLabelWidget",
+                      "left": 0,
+                      "top": 0,
+                      "width": 112,
+                      "height": 25,
+                      "customInputs": [],
+                      "customOutputs": [],
+                      "style": {
+                        "objID": "fa5e3eef-96a9-46da-ef28-0acee7279326",
+                        "useStyle": "default",
+                        "conditionalStyles": [],
+                        "childStyles": []
+                      },
+                      "timeline": [],
+                      "eventHandlers": [],
+                      "leftUnit": "px",
+                      "topUnit": "px",
+                      "widthUnit": "content",
+                      "heightUnit": "content",
+                      "children": [],
+                      "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                      "hiddenFlagType": "literal",
+                      "clickableFlagType": "literal",
+                      "flagScrollbarMode": "",
+                      "flagScrollDirection": "",
+                      "scrollSnapX": "",
+                      "scrollSnapY": "",
+                      "checkedStateType": "literal",
+                      "disabledStateType": "literal",
+                      "states": "",
+                      "useStyle": "Heading",
+                      "localStyles": {
+                        "objID": "1421cc9d-6470-4bc2-e1c1-bf3560d25813"
+                      },
+                      "group": "",
+                      "groupIndex": 0,
+                      "text": "LV Battery",
+                      "textType": "literal",
+                      "longMode": "WRAP",
+                      "recolor": false
+                    }
+                  ],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlag": true,
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "b0e270c0-824e-4a31-ba98-14c833b04b25",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "layout": "FLEX",
+                          "flex_flow": "ROW",
+                          "flex_cross_place": "CENTER",
+                          "pad_column": 12
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0
+                },
+                {
+                  "objID": "e7b83dbc-6cec-4256-f9ae-232dabe79398",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 188,
+                  "height": 16,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "bc66970f-df37-4c94-beb2-09a516b02431",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "60006ccb-e38e-4639-aeea-2726a959e768"
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "`LV Battery Voltage: ${lv3c_lv_bat_voltage/1000} V`",
+                  "textType": "expression",
+                  "longMode": "WRAP",
+                  "recolor": false,
+                  "previewValue": "LV Battery Voltage: 12.12 V"
+                },
+                {
+                  "objID": "c66d3d2a-9059-4b77-f897-85aba86bdad2",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 194,
+                  "height": 16,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "413d7981-bd50-4fa9-8a5d-52fbc25c98b1",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "32775ed9-7ab8-48e3-b2b0-e52333c74b0e"
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "`DCDC Input Voltage: ${lv3c_lv_dcdc_voltage/1000} V`",
+                  "textType": "expression",
+                  "longMode": "WRAP",
+                  "recolor": false,
+                  "previewValue": "DCDC Input Voltage: 13.80 V"
+                },
+                {
+                  "objID": "e37ca97e-c2dd-4f6f-aff2-db5e3b6274e2",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 194,
+                  "height": 16,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "d177ac53-360e-490e-c170-cbdfae89f91c",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "5c304c3c-6bdc-49e4-d8c5-2ac51ce2f8b7"
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "`Main LV Bus Voltage: ${lv3c_lv_load_voltage/1000} V`",
+                  "textType": "expression",
+                  "longMode": "WRAP",
+                  "recolor": false,
+                  "previewValue": "Main LV Bus Voltage: 12.11 V"
+                },
+                {
+                  "objID": "10981188-f14a-4f81-8c94-903a374afc5a",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 194,
+                  "height": 16,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "88719943-18ea-4443-fb3b-0cb00e552863",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "cca78b46-7a74-4a03-9ec8-ccb52d3a3898"
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "`LV Battery Current: ${lv3c_lv_bat_current/1000} A`",
+                  "textType": "expression",
+                  "longMode": "WRAP",
+                  "recolor": false,
+                  "previewValue": "LV Battery Current: 0.450 A"
+                },
+                {
+                  "objID": "6bd60f21-f847-4141-f63d-b99bb1944cda",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 188,
+                  "height": 16,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "f77fc683-4ad7-45ea-b5a4-489c1a60f9da",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "e42dbd84-cf4f-4bdf-f82d-5fbc7143eb3a"
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "`LV System Current: ${lv3c_lv_sys_current/1000} A`",
+                  "textType": "expression",
+                  "longMode": "WRAP",
+                  "recolor": false,
+                  "previewValue": "LV System Current: 0.110 A"
+                },
+                {
+                  "objID": "45612f96-e178-4e9f-9d76-3f6e16219196",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 209,
+                  "height": 16,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "4a6270cc-a566-41f2-d0be-249cf6d2df79",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "0136a955-1a81-4c8a-b76c-4c4bfd76a8cd"
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "`LV Battery Temperature: ${lv3c_lv_bat_temp} C`",
+                  "textType": "expression",
+                  "longMode": "WRAP",
+                  "recolor": false,
+                  "previewValue": "LV Battery Temperature: 25 C"
+                }
+              ],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlag": true,
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "9a157752-4008-4a99-fdf0-13a6294b002f",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "layout": "FLEX",
+                      "flex_flow": "COLUMN",
+                      "pad_top": 12,
+                      "pad_bottom": 12,
+                      "pad_left": 12,
+                      "pad_right": 12,
+                      "pad_row": 12,
+                      "flex_grow": 1
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0
+            },
+            {
+              "objID": "3c7a1d9d-e58e-4256-b337-f3d446399ed9",
+              "type": "LVGLContainerWidget",
+              "left": 295,
+              "top": 0,
+              "width": 54,
+              "height": 100,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "2f964b22-2d6e-4b7e-cb00-71507d32021f",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "%",
+              "children": [
+                {
+                  "objID": "64ec6850-b15f-47ef-ae00-a8cc46a70066",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 30,
+                  "height": 16,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "7098fda5-5139-43eb-f673-90f4dbdc21da",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "6fa7df1e-03b9-4e3b-a67c-add6b8648acf"
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "Text",
+                  "textType": "literal",
+                  "longMode": "WRAP",
+                  "recolor": false
+                }
+              ],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlag": true,
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "6abc341c-97ed-4ef9-834a-5eba1e4c1030",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "flex_flow": "COLUMN",
+                      "layout": "FLEX",
+                      "pad_top": 13,
+                      "pad_bottom": 12,
+                      "pad_left": 12,
+                      "pad_right": 12
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0
+            }
+          ],
+          "widgetFlags": "CLICKABLE|PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLLABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER",
+          "hiddenFlagType": "literal",
+          "clickableFlag": true,
+          "clickableFlagType": "literal",
+          "checkedStateType": "literal",
+          "disabledStateType": "literal",
+          "states": "",
+          "useStyle": "Basic Screen",
+          "localStyles": {
+            "objID": "c692a97c-fe9f-4fac-b413-6a784b13233d",
+            "definition": {
+              "MAIN": {
+                "DEFAULT": {
+                  "flex_main_place": "SPACE_BETWEEN"
+                }
+              }
+            }
+          },
+          "groupIndex": 0
+        },
+        {
+          "objID": "9433d488-807b-4f45-b173-ca4516c41e30",
+          "type": "LVGLActionComponent",
+          "left": 954,
+          "top": 186,
+          "width": 342,
+          "height": 53,
+          "customInputs": [],
+          "customOutputs": [],
+          "actions": [
+            {
+              "objID": "92d8c485-d5dd-4eac-c690-cf7b0d040290",
+              "action": "changeToPreviousScreen",
+              "fadeMode": "OUT_RIGHT",
+              "fadeModeType": "literal",
+              "speed": 120,
+              "speedType": "literal",
+              "delay": 0,
+              "delayType": "literal"
+            }
+          ]
+        },
+        {
+          "objID": "929770ef-0c32-439d-fb0e-8570cc0cdb8f",
+          "type": "CompareActionComponent",
+          "left": 676,
+          "top": 82,
+          "width": 186,
+          "height": 69,
+          "customInputs": [],
+          "customOutputs": [],
+          "A": "gesture_direction",
+          "B": "2",
+          "operator": "="
+        },
+        {
+          "objID": "366aa0f4-08b8-4db5-bfd5-16e7a31cdf34",
+          "type": "LVGLActionComponent",
+          "left": 88,
+          "top": -149,
+          "width": 299,
+          "height": 53,
+          "customInputs": [],
+          "customOutputs": [],
+          "actions": [
+            {
+              "objID": "639d5fe6-8dae-4e80-dde5-d3b8e5a70f03",
+              "action": "changeScreen",
+              "screen": "Main",
+              "screenType": "literal",
+              "fadeMode": "OUT_RIGHT",
+              "fadeModeType": "literal",
+              "speed": 120,
+              "speedType": "literal",
+              "delay": 0,
+              "delayType": "literal",
+              "useStack": true,
+              "useStackType": "literal"
+            }
+          ]
+        }
+      ],
+      "connectionLines": [
+        {
+          "objID": "77819db8-a159-4299-95cc-6c4ab2a2ccfa",
+          "source": "929770ef-0c32-439d-fb0e-8570cc0cdb8f",
+          "output": "True",
+          "target": "9433d488-807b-4f45-b173-ca4516c41e30",
+          "input": "@seqin"
+        },
+        {
+          "objID": "398572a0-9466-48b4-d5ab-e8d5462a3f77",
+          "source": "6073aaa0-4670-41a8-97ea-3e136c6b1948",
+          "output": "GESTURE",
+          "target": "929770ef-0c32-439d-fb0e-8570cc0cdb8f",
+          "input": "@seqin"
+        },
+        {
+          "objID": "3ff0bffd-5e9a-4385-e8a9-3afaef8cca49",
+          "source": "b6118540-7845-464f-9947-e8738e7203ef",
+          "output": "PRESSED",
+          "target": "366aa0f4-08b8-4db5-bfd5-16e7a31cdf34",
+          "input": "@seqin"
+        }
+      ],
+      "localVariables": [],
+      "componentGroups": [],
+      "userProperties": [],
+      "name": "LV Battery",
       "left": 0,
       "top": 0,
       "width": 480,

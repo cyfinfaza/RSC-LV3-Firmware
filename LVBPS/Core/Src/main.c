@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "LV3_CAN.h"
+#include "adc_sense.h"
 #include <stdint.h>
 /* USER CODE END Includes */
 
@@ -69,6 +70,7 @@ typedef union {
 
 // Battery will be cut off no matter what if voltage gets this high, latches overvoltage fault
 #define SETPOINT_OVERVOLTAGE_V        14.8f
+#define SETPOINT_OVERVOLTAGE_TIME_MS       500
 
 // Bus will not transition from off to on if battery voltage is below this threshold, sets startup undervoltage fault
 // DCDC relay will not turn on if battery voltage is below this threshold, sets DCDC startup undervoltage fault
@@ -87,21 +89,19 @@ typedef union {
 // If load current remains goes below this threshold for SETPOINT_UNDERCURRENT_TIME_MS, battery will be cut off, latches undercurrent fault
 #define SETPOINT_MIN_CURRENT_A      -2.0f
 #define SETPOINT_UNDERCURRENT_TIME_MS     100
+#define DCDC_OVERCURRENT_TIMEOUT_MS       500
 
 // If difference between battery current and load current exceeds this threshold, DCDC relay will turn off, latches DCDC sink fault
 #define DCDC_MAX_SINK_CURRENT_A          0.5f
+#define DCDC_UNDERVOLTAGE_TIMEOUT_MS      500
+#define DCDC_OVERVOLTAGE_TIMEOUT_MS       500
+#define DCDC_SINK_TIMEOUT_MS              500
 
 // If precharging lasts longer than this time, latches precharge timeout fault
 #define PRECHARGE_TIMEOUT_MS                500
 
 // Maximum voltage difference between battery and load for precharge
 #define PRECHARGE_THRESHOLD_V  3.0f
-
-// i_sense_load offset calibration: power the baord off USB and see what it measures
-#define I_SENSE_LOAD_OFFSET -0.1f
-
-// i_sense_bat offset calibration: power the board off USB and see what it measures
-#define I_SENSE_BAT_OFFSET 0.15f
 
 
 /* USER CODE END PD */
@@ -125,27 +125,6 @@ TIM_HandleTypeDef htim2;
 PCD_HandleTypeDef hpcd_USB_DRD_FS;
 
 /* USER CODE BEGIN PV */
-uint16_t adc_buf[9];
-
-uint16_t V_SENSE_5;
-uint16_t V_SENSE_12_BAT;
-uint16_t V_SENSE_12_DCDC;
-uint16_t V_SENSE_12_LOAD;
-uint16_t I_SENSE_BAT;
-uint16_t I_SENSE_LOAD;
-uint16_t THERMISTOR_SENSE;
-uint16_t ADC_TEMPSENSOR;
-uint16_t ADC_VREFINT;
-
-// 12-bit ADC, 64x oversampling, right shift 2: full scale = 4095 * 64 / 4
-// V_pin = (raw / (4095.0f * 64.0f / 4.0f)) * 3.3f
-float v_sense_5;       // V_pin * (1 + 1) / 1  — 1:1 divider
-float v_sense_12_bat;  // V_pin * (100 + 5.1) / 5.1
-float v_sense_12_dcdc; // V_pin * (100 + 5.1) / 5.1
-float v_sense_12_load; // V_pin * (100 + 5.1) / 5.1
-float i_sense_bat;     // (V_pin - 3.3/2) / (0.002 * 50)  — 2mΩ shunt, 50x INA181, bidir ref at midpoint
-float i_sense_load;    // (V_pin - 3.3/2) / (0.002 * 50)
-
 // Input state
 GPIO_PinState BTN_USR;
 GPIO_PinState BTN_USR_PREV = GPIO_PIN_RESET;
@@ -161,21 +140,40 @@ Bat_Relay_Faults bat_faults = {0};
 uint8_t bat_faults_latched = 0;
 DCDC_Relay_Faults dcdc_faults = {0};
 uint32_t undervoltage_start_tick = 0;
+uint32_t overvoltage_start_tick = 0;
 uint32_t overcurrent_start_tick = 0;
 uint32_t undercurrent_start_tick = 0;
 uint32_t precharge_start_tick = 0;
 uint32_t relay_fault_start_tick = 0;
+uint32_t dcdc_undervoltage_start_tick = 0;
+uint32_t dcdc_overvoltage_start_tick = 0;
+uint32_t dcdc_overcurrent_start_tick = 0;
+uint32_t dcdc_sink_start_tick = 0;
 uint8_t precharge_complete = 0;
 
 // LV3 CAN bound variables (integer mV / mA for CAN transmission)
 uint32_t lv_bat_voltage_mv = 0;
+uint32_t lv_dcdc_voltage_mv = 0;
+uint32_t lv_load_voltage_mv = 0;
 uint32_t lv_bat_current_ma = 0;
 uint32_t lv_sys_current_ma = 0;
+uint32_t lv_bat_temp_mv = 0;    // thermistor pin voltage in mV (raw; needs NTC curve for °C)
+uint32_t lv_bat_faults_val = 0;
+uint32_t lv_dcdc_faults_val = 0;
+uint32_t lv_bat_relay_val = 0;
+uint32_t lv_dcdc_relay_val = 0;
 
 const LV3_CAN_Binding lv3_can_bindings[] = {
-    {&lv_bat_voltage_mv, lv_bat_voltage, LV3_CAN_BindMode_Write},
-    {&lv_bat_current_ma, lv_bat_current, LV3_CAN_BindMode_Write},
-    {&lv_sys_current_ma, lv_sys_current, LV3_CAN_BindMode_Write},
+    {&lv_bat_voltage_mv,  lv_bat_voltage,  LV3_CAN_BindMode_Write},
+    {&lv_dcdc_voltage_mv, lv_dcdc_voltage, LV3_CAN_BindMode_Write},
+    {&lv_load_voltage_mv, lv_load_voltage, LV3_CAN_BindMode_Write},
+    {&lv_bat_current_ma,  lv_bat_current,  LV3_CAN_BindMode_Write},
+    {&lv_sys_current_ma,  lv_sys_current,  LV3_CAN_BindMode_Write},
+    {&lv_bat_temp_mv,     lv_bat_temp,     LV3_CAN_BindMode_Write},
+    {&lv_bat_faults_val,  lv_bat_faults,   LV3_CAN_BindMode_Write},
+    {&lv_dcdc_faults_val, lv_dcdc_faults,  LV3_CAN_BindMode_Write},
+    {&lv_bat_relay_val,   lv_bat_relay,    LV3_CAN_BindMode_Write},
+    {&lv_dcdc_relay_val,  lv_dcdc_relay,   LV3_CAN_BindMode_Write},
 };
 const unsigned int lv3_can_bindings_count = sizeof(lv3_can_bindings) / sizeof(LV3_CAN_Binding);
 /* USER CODE END PV */
@@ -196,6 +194,16 @@ static void MX_DAC1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+static uint8_t timed_fault(uint8_t condition, uint32_t *start_tick, uint32_t timeout_ms) {
+  if (condition) {
+    if (*start_tick == 0) *start_tick = HAL_GetTick();
+    if (HAL_GetTick() - *start_tick >= timeout_ms) return 1;
+  } else {
+    *start_tick = 0;
+  }
+  return 0;
+}
 
 /* USER CODE END 0 */
 
@@ -267,42 +275,16 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
     // --- Read inputs ---
-    V_SENSE_5        = adc_buf[0];
-    V_SENSE_12_BAT   = adc_buf[1];
-    V_SENSE_12_DCDC  = adc_buf[2];
-    V_SENSE_12_LOAD  = adc_buf[3];
-    I_SENSE_BAT      = adc_buf[4];
-    I_SENSE_LOAD     = adc_buf[5];
-    THERMISTOR_SENSE = adc_buf[6];
-    ADC_TEMPSENSOR   = adc_buf[7];
-    ADC_VREFINT      = adc_buf[8];
-
-    float adc_pin_voltage;
-
-    adc_pin_voltage = (V_SENSE_5 / (4095.0f * 64.0f / 4.0f)) * 3.3f;
-    v_sense_5 = adc_pin_voltage * (1.0f + 1.0f) / 1.0f;
-
-    adc_pin_voltage = (V_SENSE_12_BAT / (4095.0f * 64.0f / 4.0f)) * 3.3f;
-    v_sense_12_bat = adc_pin_voltage * (100.0f + 5.1f) / 5.1f;
-
-    adc_pin_voltage = (V_SENSE_12_DCDC / (4095.0f * 64.0f / 4.0f)) * 3.3f;
-    v_sense_12_dcdc = adc_pin_voltage * (100.0f + 5.1f) / 5.1f;
-
-    adc_pin_voltage = (V_SENSE_12_LOAD / (4095.0f * 64.0f / 4.0f)) * 3.3f;
-    v_sense_12_load = adc_pin_voltage * (100.0f + 5.1f) / 5.1f;
-
-    adc_pin_voltage = (I_SENSE_BAT / (4095.0f * 64.0f / 4.0f)) * 3.3f;
-    i_sense_bat = (adc_pin_voltage - 3.3f / 2.0f) / (0.002f * 50.0f) - I_SENSE_BAT_OFFSET;
-
-    adc_pin_voltage = (I_SENSE_LOAD / (4095.0f * 64.0f / 4.0f)) * 3.3f;
-    i_sense_load = (adc_pin_voltage - 3.3f / 2.0f) / (0.002f * 50.0f) - I_SENSE_LOAD_OFFSET;
-
+    ADC_Sense_Update();
     BTN_USR = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
 
     // --- Process state ---
-    lv_bat_voltage_mv = (uint32_t)(v_sense_12_bat * 1000.0f);
-    lv_bat_current_ma = (uint32_t)(i_sense_bat * 1000.0f);
-    lv_sys_current_ma = (uint32_t)(i_sense_load * 1000.0f);
+    lv_bat_voltage_mv  = (uint32_t)(adc_sense.v_sense_12_bat  * 1000.0f);
+    lv_dcdc_voltage_mv = (uint32_t)(adc_sense.v_sense_12_dcdc * 1000.0f);
+    lv_load_voltage_mv = (uint32_t)(adc_sense.v_sense_12_load * 1000.0f);
+    lv_bat_current_ma  = (uint32_t)(adc_sense.i_sense_bat     * 1000.0f);
+    lv_sys_current_ma  = (uint32_t)(adc_sense.i_sense_load    * 1000.0f);
+    lv_bat_temp_mv     = (uint32_t)(adc_sense.thermistor_mv);
 
     // USR button toggles lv_bus_enabled on rising edge
     if (BTN_USR == GPIO_PIN_SET && BTN_USR_PREV == GPIO_PIN_RESET) {
@@ -311,45 +293,21 @@ int main(void)
     BTN_USR_PREV = BTN_USR;
 
     // DCDC current: battery current minus load current (positive = DCDC sourcing into bat, negative = sinking from bat)
-    float dcdc_current = i_sense_bat - i_sense_load;
+    float dcdc_current = adc_sense.i_sense_bat - adc_sense.i_sense_load;
 
     // Clear all bat faults each loop unless latched, so faults reflect live conditions when relay is off
     if (!bat_faults_latched) bat_faults.raw = 0;
 
     // Non-latching startup faults: only relevant when relay is off; gate turn-on, not turn-off
     bat_faults.startup_delay        = !RELAY_CONTROL_BAT && (HAL_GetTick() < SETPOINT_STARTUP_DELAY_MS);
-    bat_faults.startup_undervoltage = !RELAY_CONTROL_BAT && (v_sense_12_bat < SETPOINT_STARTUP_THRESHOLD_V);
+    bat_faults.startup_undervoltage = !RELAY_CONTROL_BAT && (adc_sense.v_sense_12_bat < SETPOINT_STARTUP_THRESHOLD_V);
 
-    // Bat faults: set from live conditions every loop
-    if (v_sense_12_bat < SETPOINT_UNDERVOLTAGE_V) {
-      if (undervoltage_start_tick == 0) undervoltage_start_tick = HAL_GetTick();
-      if (HAL_GetTick() - undervoltage_start_tick >= SETPOINT_UNDERVOLTAGE_TIME_MS) bat_faults.undervoltage = 1;
-    } else {
-      undervoltage_start_tick = 0;
-    }
-    if (v_sense_12_bat > SETPOINT_OVERVOLTAGE_V)                                         bat_faults.overvoltage  = 1;
-    if (RELAY_CONTROL_BAT && v_sense_12_bat - v_sense_12_load >= PRECHARGE_THRESHOLD_V) {
-      if (relay_fault_start_tick == 0) relay_fault_start_tick = HAL_GetTick();
-      if (HAL_GetTick() - relay_fault_start_tick >= PRECHARGE_TIMEOUT_MS) bat_faults.relay_fault = 1;
-    } else {
-      relay_fault_start_tick = 0;
-    }
-
-    // Timed overcurrent: i_sense_bat must exceed max for the full timeout before setting
-    if (i_sense_bat > SETPOINT_MAX_CURRENT_A) {
-      if (overcurrent_start_tick == 0) overcurrent_start_tick = HAL_GetTick();
-      if (HAL_GetTick() - overcurrent_start_tick >= SETPOINT_OVERCURRENT_TIME_MS) bat_faults.overcurrent = 1;
-    } else {
-      overcurrent_start_tick = 0;
-    }
-
-    // Timed undercurrent: i_sense_load must go below min for the full timeout before setting
-    if (i_sense_load < SETPOINT_MIN_CURRENT_A) {
-      if (undercurrent_start_tick == 0) undercurrent_start_tick = HAL_GetTick();
-      if (HAL_GetTick() - undercurrent_start_tick >= SETPOINT_UNDERCURRENT_TIME_MS) bat_faults.undercurrent = 1;
-    } else {
-      undercurrent_start_tick = 0;
-    }
+    // Latching bat faults
+    if (timed_fault(adc_sense.v_sense_12_bat < SETPOINT_UNDERVOLTAGE_V,                                       &undervoltage_start_tick, SETPOINT_UNDERVOLTAGE_TIME_MS)) bat_faults.undervoltage = 1;
+    if (timed_fault(adc_sense.v_sense_12_bat > SETPOINT_OVERVOLTAGE_V,                                        &overvoltage_start_tick,  SETPOINT_OVERVOLTAGE_TIME_MS))  bat_faults.overvoltage  = 1;
+    if (timed_fault(adc_sense.i_sense_bat > SETPOINT_MAX_CURRENT_A,                                           &overcurrent_start_tick,  SETPOINT_OVERCURRENT_TIME_MS))  bat_faults.overcurrent  = 1;
+    if (timed_fault(adc_sense.i_sense_load < SETPOINT_MIN_CURRENT_A,                                          &undercurrent_start_tick, SETPOINT_UNDERCURRENT_TIME_MS)) bat_faults.undercurrent = 1;
+    if (timed_fault(RELAY_CONTROL_BAT && adc_sense.v_sense_12_bat - adc_sense.v_sense_12_load >= PRECHARGE_THRESHOLD_V, &relay_fault_start_tick,  PRECHARGE_TIMEOUT_MS))          bat_faults.relay_fault  = 1;
 
     // Precharge state machine
     uint8_t relay_was_on = RELAY_CONTROL_BAT;
@@ -359,7 +317,7 @@ int main(void)
     }
     PRECHARGE_CONTROL_BAT = want_bus;  // precharge always matches bus intent
     if (want_bus) {
-      if (v_sense_12_bat - v_sense_12_load < PRECHARGE_THRESHOLD_V) {  // within threshold (repeatedly)
+      if (adc_sense.v_sense_12_bat - adc_sense.v_sense_12_load < PRECHARGE_THRESHOLD_V) {  // within threshold (repeatedly)
         precharge_complete = 1;
       }
       if (precharge_complete) {  // precharge was successful (repeatedly)
@@ -382,18 +340,16 @@ int main(void)
     }
 
     // Non-latching DCDC startup faults: only relevant when relay is off; gate turn-on, not turn-off
-    dcdc_faults.dcdc_startup_undervoltage = !RELAY_CONTROL_DCDC && (v_sense_12_bat < SETPOINT_STARTUP_THRESHOLD_V
-                                                                  || v_sense_12_dcdc < SETPOINT_STARTUP_THRESHOLD_V);
-    dcdc_faults.dcdc_startup_overvoltage  = !RELAY_CONTROL_DCDC && (v_sense_12_bat >= SETPOINT_MAX_CHARGE_V
-                                                                  || v_sense_12_dcdc >= SETPOINT_MAX_CHARGE_V);
+    dcdc_faults.dcdc_startup_undervoltage = !RELAY_CONTROL_DCDC && (adc_sense.v_sense_12_bat < SETPOINT_STARTUP_THRESHOLD_V
+                                                                  || adc_sense.v_sense_12_dcdc < SETPOINT_STARTUP_THRESHOLD_V);
+    dcdc_faults.dcdc_startup_overvoltage  = !RELAY_CONTROL_DCDC && (adc_sense.v_sense_12_bat >= SETPOINT_MAX_CHARGE_V
+                                                                  || adc_sense.v_sense_12_dcdc >= SETPOINT_MAX_CHARGE_V);
 
-    // Latching DCDC faults: only accumulate while DCDC relay is on, never clear
-    if (RELAY_CONTROL_DCDC) {
-      if (v_sense_12_bat < SETPOINT_STARTUP_THRESHOLD_V) dcdc_faults.dcdc_undervoltage = 1;
-      if (v_sense_12_bat > SETPOINT_MAX_CHARGE_V)        dcdc_faults.dcdc_overvoltage  = 1;
-      if (dcdc_current < SETPOINT_MIN_CURRENT_A)         dcdc_faults.dcdc_overcurrent  = 1; // DCDC pushing too much into bat
-      if (dcdc_current > DCDC_MAX_SINK_CURRENT_A)        dcdc_faults.dcdc_sink         = 1; // DCDC sinking from bat
-    }
+    // Latching DCDC faults
+    if (timed_fault(RELAY_CONTROL_DCDC && adc_sense.v_sense_12_bat < SETPOINT_STARTUP_THRESHOLD_V, &dcdc_undervoltage_start_tick, DCDC_UNDERVOLTAGE_TIMEOUT_MS)) dcdc_faults.dcdc_undervoltage = 1;
+    if (timed_fault(RELAY_CONTROL_DCDC && adc_sense.v_sense_12_bat > SETPOINT_MAX_CHARGE_V,        &dcdc_overvoltage_start_tick,  DCDC_OVERVOLTAGE_TIMEOUT_MS))  dcdc_faults.dcdc_overvoltage  = 1;
+    if (timed_fault(RELAY_CONTROL_DCDC && dcdc_current < SETPOINT_MIN_CURRENT_A,         &dcdc_overcurrent_start_tick,  DCDC_OVERCURRENT_TIMEOUT_MS))  dcdc_faults.dcdc_overcurrent  = 1;
+    if (timed_fault(RELAY_CONTROL_DCDC && dcdc_current > DCDC_MAX_SINK_CURRENT_A,        &dcdc_sink_start_tick,         DCDC_SINK_TIMEOUT_MS))         dcdc_faults.dcdc_sink         = 1;
 
     // DCDC relay: on when BAT relay is on, bat_charge_enable set, and no dcdc faults (startup faults clear automatically)
     RELAY_CONTROL_DCDC = RELAY_CONTROL_BAT && bat_charge_enable && !dcdc_faults.raw;
@@ -404,7 +360,7 @@ int main(void)
     HAL_GPIO_WritePin(PRECHARGE_CONTROL_BAT_GPIO_Port, PRECHARGE_CONTROL_BAT_Pin, PRECHARGE_CONTROL_BAT);
 
     // STAT0 LED: battery voltage mapped as hue red→yellow→green→cyan→blue across undervoltage→overvoltage
-    float v_norm = (v_sense_12_bat - SETPOINT_UNDERVOLTAGE_V) / (SETPOINT_OVERVOLTAGE_V - SETPOINT_UNDERVOLTAGE_V);
+    float v_norm = (adc_sense.v_sense_12_bat - SETPOINT_UNDERVOLTAGE_V) / (SETPOINT_OVERVOLTAGE_V - SETPOINT_UNDERVOLTAGE_V);
     if (v_norm < 0.0f) v_norm = 0.0f;
     if (v_norm > 1.0f) v_norm = 1.0f;
     float hue = v_norm * 240.0f;  // red=0, yellow=60, green=120, cyan=180, blue=240
@@ -428,6 +384,11 @@ int main(void)
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, led_on ? (uint32_t)(g * 100) : 0);  // G
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, led_on ? (uint32_t)(r * 100) : 0);  // R
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, led_on ? (uint32_t)(b * 100) : 0);  // B
+
+    lv_bat_faults_val  = bat_faults.raw;
+    lv_dcdc_faults_val = dcdc_faults.raw;
+    lv_bat_relay_val   = RELAY_CONTROL_BAT;
+    lv_dcdc_relay_val  = RELAY_CONTROL_DCDC;
 
     LV3_CAN_Loop();
 
