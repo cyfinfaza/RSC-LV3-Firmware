@@ -1,0 +1,6 @@
+C:/Users/cyfin/Documents/Code not for onedrive/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/CMakeFiles/SwitchSense-Front.dir
+C:/Users/cyfin/Documents/Code not for onedrive/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/CMakeFiles/edit_cache.dir
+C:/Users/cyfin/Documents/Code not for onedrive/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/cyfin/Documents/Code not for onedrive/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
+C:/Users/cyfin/Documents/Code not for onedrive/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+C:/Users/cyfin/Documents/Code not for onedrive/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir

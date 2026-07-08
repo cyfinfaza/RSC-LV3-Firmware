@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/cyfin/Documents/Code not for onedrive/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/cmake_install.cmake",
+		"C:/Users/cyfin/Documents/Code not for onedrive/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/cmake/stm32cubemx/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
