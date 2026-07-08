@@ -101,7 +101,7 @@ typedef union {
 #define PRECHARGE_TIMEOUT_MS                500
 
 // Maximum voltage difference between battery and load for precharge
-#define PRECHARGE_THRESHOLD_V  3.0f
+#define PRECHARGE_THRESHOLD_V  9.0f
 
 
 /* USER CODE END PD */
@@ -377,7 +377,8 @@ int main(void)
     }
 
     uint8_t led_on;
-    if      (bat_faults_latched)  led_on = (HAL_GetTick() % 200) < 100;   // fast blink: latching fault
+    if      (bat_faults_latched)  
+    led_on = (HAL_GetTick() % 200) < 100;   // fast blink: latching fault
     else if (bat_faults.raw)      led_on = (HAL_GetTick() % 1000) < 500;  // slow blink: non-latching fault
     else                          led_on = 1;
 
