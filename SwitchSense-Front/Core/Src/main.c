@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "stm32g0xx_hal_gpio.h"
+#include "stm32g0xx_hal_rtc_ex.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -46,6 +48,8 @@ DMA_HandleTypeDef hdma_adc1;
 FDCAN_HandleTypeDef hfdcan1;
 FDCAN_HandleTypeDef hfdcan2;
 
+RTC_HandleTypeDef hrtc;
+
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
@@ -66,6 +70,9 @@ float v_sense_5;   // V_pin * (1 + 1) / 1 — 1:1 divider
 float v_sense_12;  // V_pin * (100 + 5.1) / 5.1
 
 GPIO_PinState in_1;
+GPIO_PinState in_10;
+
+uint32_t led_state = 0;
 
 uint8_t out_1_state = 0;
 uint32_t out_1_toggle_tick = 0;
@@ -84,6 +91,7 @@ static void MX_TIM4_Init(void);
 static void MX_TIM15_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_FDCAN2_Init(void);
+static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -132,16 +140,22 @@ int main(void)
   MX_TIM15_Init();
   MX_ADC1_Init();
   MX_FDCAN2_Init();
+  MX_RTC_Init();
   /* USER CODE BEGIN 2 */
 
   HAL_ADCEx_Calibration_Start(&hadc1);
 
   HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buf, 4);
 
+  HAL_PWR_EnableBkUpAccess();
+
+  led_state = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0);
+
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
 
+  GPIO_PinState last_button_state = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
 
   /* USER CODE END 2 */
 
@@ -166,6 +180,7 @@ int main(void)
     v_sense_12 = adc_pin_voltage * (100.0f + 5.1f) / 5.1f;
 
     in_1 = HAL_GPIO_ReadPin(IN_1_GPIO_Port, IN_1_Pin);
+    in_10 = HAL_GPIO_ReadPin(IN_10_GPIO_Port, IN_10_Pin);
 
     // --- Process state ---
 
@@ -175,9 +190,18 @@ int main(void)
       out_1_state ^= 1;
     }
 
+    GPIO_PinState button_state = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
+    if (button_state == GPIO_PIN_SET && last_button_state == GPIO_PIN_RESET) {
+      led_state ^= 1;
+      HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, led_state);
+    }
+    last_button_state = button_state;
+
     // --- Apply outputs ---
     HAL_GPIO_WritePin(OUT_1_GPIO_Port, OUT_1_Pin, out_1_state);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, in_1*100);  // 50% duty cycle
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, in_1*100);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, led_state*100);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, in_10*100);
   }
   /* USER CODE END 3 */
 }
@@ -195,11 +219,18 @@ void SystemClock_Config(void)
   */
   HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1);
 
+  /** Configure LSE Drive Capability
+  */
+  HAL_PWR_EnableBkUpAccess();
+  __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
+
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE|RCC_OSCILLATORTYPE_HSI48;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE|RCC_OSCILLATORTYPE_LSE
+                              |RCC_OSCILLATORTYPE_HSI48;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
   RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
@@ -393,6 +424,43 @@ static void MX_FDCAN2_Init(void)
   /* USER CODE BEGIN FDCAN2_Init 2 */
 
   /* USER CODE END FDCAN2_Init 2 */
+
+}
+
+/**
+  * @brief RTC Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_RTC_Init(void)
+{
+
+  /* USER CODE BEGIN RTC_Init 0 */
+
+  /* USER CODE END RTC_Init 0 */
+
+  /* USER CODE BEGIN RTC_Init 1 */
+
+  /* USER CODE END RTC_Init 1 */
+
+  /** Initialize RTC Only
+  */
+  hrtc.Instance = RTC;
+  hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+  hrtc.Init.AsynchPrediv = 127;
+  hrtc.Init.SynchPrediv = 255;
+  hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+  hrtc.Init.OutPutRemap = RTC_OUTPUT_REMAP_NONE;
+  hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+  hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+  hrtc.Init.OutPutPullUp = RTC_OUTPUT_PULLUP_NONE;
+  if (HAL_RTC_Init(&hrtc) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN RTC_Init 2 */
+
+  /* USER CODE END RTC_Init 2 */
 
 }
 

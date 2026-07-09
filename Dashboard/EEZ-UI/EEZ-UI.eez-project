@@ -318,6 +318,14 @@
         "defaultValue": "0",
         "persistent": false,
         "native": true
+      },
+      {
+        "objID": "ff7187d8-0691-4d5f-a775-5cc582e54bd7",
+        "name": "lv3c_motor_speed",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": true
       }
     ],
     "structures": [],
@@ -3717,6 +3725,55 @@
               "widthUnit": "px",
               "heightUnit": "%",
               "children": [
+                {
+                  "objID": "043be70f-bd5a-4283-8afd-3e2075315cfe",
+                  "type": "LVGLLabelWidget",
+                  "left": 81,
+                  "top": 120,
+                  "width": 432,
+                  "height": 25,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "2ce8d98f-e5fa-49ea-b8e9-478788d44fc2",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "a3dfa0f6-5961-4007-e983-5c9662dc5e44",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "text_font": "Barlow-24-Bold"
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "\"Speed: \" + lv3c_motor_speed + \" mph\"",
+                  "textType": "expression",
+                  "longMode": "WRAP",
+                  "recolor": false
+                },
                 {
                   "objID": "8506592f-9f3d-4504-c21c-bbccb92e45f2",
                   "type": "LVGLLabelWidget",

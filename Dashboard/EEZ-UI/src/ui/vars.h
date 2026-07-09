@@ -70,6 +70,8 @@ extern int32_t get_var_lv3c_lv_bat_relay();
 extern void set_var_lv3c_lv_bat_relay(int32_t value);
 extern int32_t get_var_lv3c_lv_dcdc_relay();
 extern void set_var_lv3c_lv_dcdc_relay(int32_t value);
+extern int32_t get_var_lv3c_motor_speed();
+extern void set_var_lv3c_motor_speed(int32_t value);
 
 #ifdef __cplusplus
 }

@@ -1,9 +1,9 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/4",
+    "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/5",
     "selectedUserWidgetObject": "[EEZ-UI.eez-project]:/userWidgets/0",
     "selectedActionObject": "[EEZ-UI.eez-project]:/actions/4",
-    "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/9",
+    "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/23",
     "selectedStyleObject": "[EEZ-UI.eez-project]:/lvglStyles/styles/6",
     "selectedThemeObject": "[EEZ-UI.eez-project]:/themes/0",
     "selectedThemeColorObject": "[EEZ-UI.eez-project]:/colors/1",
@@ -131,12 +131,12 @@
             {
               "type": "row",
               "id": "#a020c8f4-892d-4dff-b88b-d9af35fff223",
-              "weight": 32.51289472176055,
+              "weight": 25.491572138462,
               "children": [
                 {
                   "type": "tabset",
                   "id": "#4c6f70cb-82b7-4a29-965d-f09ab1812d94",
-                  "weight": 1,
+                  "weight": 0.649895178197065,
                   "enableClose": false,
                   "children": [
                     {
@@ -168,7 +168,7 @@
                 {
                   "type": "tabset",
                   "id": "#a491d414-9f02-472b-b669-15544a586a7d",
-                  "weight": 1,
+                  "weight": 0.8812893081761006,
                   "enableClose": false,
                   "children": [
                     {
@@ -184,7 +184,7 @@
                 {
                   "type": "tabset",
                   "id": "#285f3461-bca3-4b23-9d54-7bc672822265",
-                  "weight": 1,
+                  "weight": 1.4688155136268344,
                   "enableClose": false,
                   "children": [
                     {
@@ -202,7 +202,7 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 33.661448067909696,
+              "weight": 40.68277065120825,
               "selected": 1,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
@@ -221,10 +221,10 @@
                 {
                   "type": "tab",
                   "id": "#e19d0844-67f3-40f5-ab44-c8bf4dae3898",
-                  "name": "HV Battery",
+                  "name": "LV Battery",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[EEZ-UI.eez-project]:/userPages/4",
+                    "objectPath": "[EEZ-UI.eez-project]:/userPages/5",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1119,7 +1119,6 @@
       "selectionFront": {},
       "selectionBack": {
         "0": {
-          "0": {},
           "1": {
             "0": {},
             "1": {},
@@ -1132,14 +1131,15 @@
           }
         },
         "1": {},
-        "3": {
+        "3": {},
+        "5": {
           "$selected": true
         }
       },
       "transform": {
         "translate": {
-          "x": -275.2421875,
-          "y": -130.578125
+          "x": -409.2421875,
+          "y": -77.578125
         },
         "scale": 0.8
       },
@@ -1219,11 +1219,11 @@
       "selectionBack": {
         "0": {
           "0": {
-            "1": {
-              "$selected": true
-            }
+            "1": {}
           },
-          "1": {}
+          "1": {
+            "$selected": true
+          }
         },
         "3": {}
       },
@@ -1245,15 +1245,16 @@
       "selectionFront": {},
       "selectionBack": {
         "0": {
-          "0": {
+          "1": {
+            "4": {},
             "$selected": true
           }
         }
       },
       "transform": {
         "translate": {
-          "x": -240,
-          "y": -136
+          "x": -188.6953125,
+          "y": -127.5703125
         },
         "scale": 0.8
       },
@@ -1280,10 +1281,13 @@
         "0": {
           "0": {
             "0": {},
-            "3": {
-              "$selected": true
+            "1": {
+              "0": {}
             },
-            "6": {}
+            "3": {},
+            "6": {
+              "$selected": true
+            }
           },
           "1": {
             "1": {}
@@ -1292,8 +1296,8 @@
       },
       "transform": {
         "translate": {
-          "x": -146.0269604492188,
-          "y": -141.2655729166667
+          "x": -203.4566479492188,
+          "y": -161.8202604166667
         },
         "scale": 0.8
       },
@@ -1333,6 +1337,32 @@
         },
         "scale": 1
       }
+    },
+    "[EEZ-UI.eez-project]:/userPages/5[flow-state]": {
+      "selectionFront": {},
+      "selectionBack": {
+        "0": {
+          "0": {
+            "6": {
+              "$selected": true
+            }
+          },
+          "1": {}
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -258.4606060606061,
+          "y": -41.04848484848492
+        },
+        "scale": 0.8
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
     }
   },
   "activeOutputSection": 0,
@@ -1351,7 +1381,9 @@
   "lvglPart": "MAIN",
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
-    "MISCELLANEOUS"
+    "TEXT",
+    "LAYOUT",
+    "PADDING"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
