@@ -59,7 +59,7 @@
 /* USER CODE END 0 */
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
-                                                            /**
+                                                                                /**
   * Initializes the Global MSP.
   */
 void HAL_MspInit(void)
@@ -193,6 +193,11 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef* hfdcan)
     GPIO_InitStruct.Alternate = GPIO_AF3_FDCAN1;
     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
+    /* FDCAN1 interrupt Init */
+    HAL_NVIC_SetPriority(TIM16_FDCAN_IT0_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(TIM16_FDCAN_IT0_IRQn);
+    HAL_NVIC_SetPriority(TIM17_FDCAN_IT1_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(TIM17_FDCAN_IT1_IRQn);
     /* USER CODE BEGIN FDCAN1_MspInit 1 */
 
     /* USER CODE END FDCAN1_MspInit 1 */
@@ -231,6 +236,11 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef* hfdcan)
     GPIO_InitStruct.Alternate = GPIO_AF3_FDCAN2;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+    /* FDCAN2 interrupt Init */
+    HAL_NVIC_SetPriority(TIM16_FDCAN_IT0_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(TIM16_FDCAN_IT0_IRQn);
+    HAL_NVIC_SetPriority(TIM17_FDCAN_IT1_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(TIM17_FDCAN_IT1_IRQn);
     /* USER CODE BEGIN FDCAN2_MspInit 1 */
 
     /* USER CODE END FDCAN2_MspInit 1 */
@@ -263,6 +273,23 @@ void HAL_FDCAN_MspDeInit(FDCAN_HandleTypeDef* hfdcan)
     */
     HAL_GPIO_DeInit(GPIOD, GPIO_PIN_0|GPIO_PIN_1);
 
+    /* FDCAN1 interrupt DeInit */
+    /* USER CODE BEGIN FDCAN1:TIM16_FDCAN_IT0_IRQn disable */
+    /**
+    * Uncomment the line below to disable the "TIM16_FDCAN_IT0_IRQn" interrupt
+    * Be aware, disabling shared interrupt may affect other IPs
+    */
+    /* HAL_NVIC_DisableIRQ(TIM16_FDCAN_IT0_IRQn); */
+    /* USER CODE END FDCAN1:TIM16_FDCAN_IT0_IRQn disable */
+
+    /* USER CODE BEGIN FDCAN1:TIM17_FDCAN_IT1_IRQn disable */
+    /**
+    * Uncomment the line below to disable the "TIM17_FDCAN_IT1_IRQn" interrupt
+    * Be aware, disabling shared interrupt may affect other IPs
+    */
+    /* HAL_NVIC_DisableIRQ(TIM17_FDCAN_IT1_IRQn); */
+    /* USER CODE END FDCAN1:TIM17_FDCAN_IT1_IRQn disable */
+
     /* USER CODE BEGIN FDCAN1_MspDeInit 1 */
 
     /* USER CODE END FDCAN1_MspDeInit 1 */
@@ -283,6 +310,23 @@ void HAL_FDCAN_MspDeInit(FDCAN_HandleTypeDef* hfdcan)
     PB5     ------> FDCAN2_RX
     */
     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_13|GPIO_PIN_5);
+
+    /* FDCAN2 interrupt DeInit */
+    /* USER CODE BEGIN FDCAN2:TIM16_FDCAN_IT0_IRQn disable */
+    /**
+    * Uncomment the line below to disable the "TIM16_FDCAN_IT0_IRQn" interrupt
+    * Be aware, disabling shared interrupt may affect other IPs
+    */
+    /* HAL_NVIC_DisableIRQ(TIM16_FDCAN_IT0_IRQn); */
+    /* USER CODE END FDCAN2:TIM16_FDCAN_IT0_IRQn disable */
+
+    /* USER CODE BEGIN FDCAN2:TIM17_FDCAN_IT1_IRQn disable */
+    /**
+    * Uncomment the line below to disable the "TIM17_FDCAN_IT1_IRQn" interrupt
+    * Be aware, disabling shared interrupt may affect other IPs
+    */
+    /* HAL_NVIC_DisableIRQ(TIM17_FDCAN_IT1_IRQn); */
+    /* USER CODE END FDCAN2:TIM17_FDCAN_IT1_IRQn disable */
 
     /* USER CODE BEGIN FDCAN2_MspDeInit 1 */
 
@@ -333,6 +377,18 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef* htim_pwm)
     /* USER CODE BEGIN TIM2_MspInit 1 */
 
     /* USER CODE END TIM2_MspInit 1 */
+  }
+  else if(htim_pwm->Instance==TIM3)
+  {
+    /* USER CODE BEGIN TIM3_MspInit 0 */
+
+    /* USER CODE END TIM3_MspInit 0 */
+
+    /* Peripheral clock enable */
+    __HAL_RCC_TIM3_CLK_ENABLE();
+    /* USER CODE BEGIN TIM3_MspInit 1 */
+
+    /* USER CODE END TIM3_MspInit 1 */
   }
   else if(htim_pwm->Instance==TIM4)
   {
@@ -425,6 +481,27 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
 
     /* USER CODE END TIM2_MspPostInit 1 */
   }
+  else if(htim->Instance==TIM3)
+  {
+    /* USER CODE BEGIN TIM3_MspPostInit 0 */
+
+    /* USER CODE END TIM3_MspPostInit 0 */
+
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    /**TIM3 GPIO Configuration
+    PA6     ------> TIM3_CH1
+    */
+    GPIO_InitStruct.Pin = MODULE_LED_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF1_TIM3;
+    HAL_GPIO_Init(MODULE_LED_GPIO_Port, &GPIO_InitStruct);
+
+    /* USER CODE BEGIN TIM3_MspPostInit 1 */
+
+    /* USER CODE END TIM3_MspPostInit 1 */
+  }
   else if(htim->Instance==TIM4)
   {
     /* USER CODE BEGIN TIM4_MspPostInit 0 */
@@ -477,6 +554,17 @@ void HAL_TIM_PWM_MspDeInit(TIM_HandleTypeDef* htim_pwm)
     /* USER CODE BEGIN TIM2_MspDeInit 1 */
 
     /* USER CODE END TIM2_MspDeInit 1 */
+  }
+  else if(htim_pwm->Instance==TIM3)
+  {
+    /* USER CODE BEGIN TIM3_MspDeInit 0 */
+
+    /* USER CODE END TIM3_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_TIM3_CLK_DISABLE();
+    /* USER CODE BEGIN TIM3_MspDeInit 1 */
+
+    /* USER CODE END TIM3_MspDeInit 1 */
   }
   else if(htim_pwm->Instance==TIM4)
   {

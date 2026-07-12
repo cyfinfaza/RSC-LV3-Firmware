@@ -22,6 +22,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "LV3_CAN.h"
+#include "orion_bms_interface.h"
+#include "lv3_can_bindings.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,6 +35,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+// MODULE_LED breathes at this period (ms) while the contactor is disabled, mirroring
+// the backplane-LED breathing effect from the original G4 HV-BPS.
+#define MODULE_LED_BREATHE_PERIOD_MS 2000
 
 /* USER CODE END PD */
 
@@ -47,6 +55,7 @@ FDCAN_HandleTypeDef hfdcan2;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim4;
 
 PCD_HandleTypeDef hpcd_USB_DRD_FS;
@@ -65,12 +74,19 @@ static void MX_TIM2_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_FDCAN2_Init(void);
 static void MX_TIM4_Init(void);
+static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+// local_contactor_enabled: latched on/off state requested locally over CAN
+// (there's no physical BOOT0-style button on this board, unlike the old G4
+// HV-BPS, so this can currently only be toggled via the
+// toggle_hv_bps_local_enable CAN trigger).
+uint32_t local_contactor_enabled = 0;
 
 /* USER CODE END 0 */
 
@@ -110,13 +126,27 @@ int main(void)
   MX_ADC1_Init();
   MX_FDCAN2_Init();
   MX_TIM4_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
-  int last_usr_btn_state = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
+  // STAT0 (TIM1 CH1/2/3 = R/G/B): app-controlled module/contactor status LED.
+  // STAT1 (TIM2 CH1/2/3): driven automatically by the LV3 CAN driver (link status LED).
+  // MODULE_LED (TIM3 CH1): breathing backplane-style indicator, mirrors old G4 HV-BPS.
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 
+  // Fans: run at a fixed duty for now; tach inputs are wired but not yet read.
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);
   __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 5);
+  __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, 5);
+
+  GPIO_PinState last_usr_btn_state = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
+
+  OrionBMS_Init();
+  LV3_CAN_Init(12, LV3_CAN_BusMode_Normal, lv3_can_bindings, lv3_can_bindings_count);
 
   /* USER CODE END 2 */
 
@@ -127,12 +157,53 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    if (HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin) == GPIO_PIN_SET && last_usr_btn_state == GPIO_PIN_RESET)
-    {
-      HAL_GPIO_TogglePin(MAIN_CONTACTOR_ENABLE_GPIO_Port, MAIN_CONTACTOR_ENABLE_Pin);
+
+    // USR button: send OBD2 clear-faults on rising edge
+    GPIO_PinState usr_btn_state = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
+    if (usr_btn_state == GPIO_PIN_SET && last_usr_btn_state == GPIO_PIN_RESET) {
+      OrionBMS_SendClearFaults();
     }
-    last_usr_btn_state = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, HAL_GPIO_ReadPin(E_STOP_SENSE_GPIO_Port, E_STOP_SENSE_Pin) * 100);
+    last_usr_btn_state = usr_btn_state;
+
+    // CAN trigger: toggle local contactor enable
+    if (flag_toggle_local_enable) {
+      flag_toggle_local_enable = 0;
+      local_contactor_enabled = !local_contactor_enabled;
+    }
+    // CAN trigger: send OBD2 clear-faults to BMS
+    if (flag_send_orion_clear) {
+      flag_send_orion_clear = 0;
+      OrionBMS_SendClearFaults();
+    }
+
+    // Contactor: enabled when BMS allows discharge and either local or remote request.
+    // BMS_DE_SENSE polarity carried over from the old G4 firmware's bms_dch_en
+    // signal (active = discharge NOT allowed) — verify against schematic.
+    GPIO_PinState bms_de_sense = HAL_GPIO_ReadPin(BMS_DE_SENSE_GPIO_Port, BMS_DE_SENSE_Pin);
+    main_contactor_enabled = !bms_de_sense && (local_contactor_enabled || lv3c_sw_hv_main);
+    HAL_GPIO_WritePin(MAIN_CONTACTOR_ENABLE_GPIO_Port, MAIN_CONTACTOR_ENABLE_Pin, main_contactor_enabled);
+
+    // E-stop switch LED mirrors the sense pin (illuminated switch wiring TBD)
+    HAL_GPIO_WritePin(E_STOP_SWITCH_LED_GPIO_Port, E_STOP_SWITCH_LED_Pin,
+                       HAL_GPIO_ReadPin(E_STOP_SENSE_GPIO_Port, E_STOP_SENSE_Pin));
+
+    // STAT0: solid green when contactor enabled, off otherwise
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0); // R
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, main_contactor_enabled ? 100 : 0); // G
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0); // B
+
+    // MODULE_LED: fades to full brightness when the contactor is enabled, otherwise breathes
+    unsigned int tick = HAL_GetTick();
+    if (main_contactor_enabled) {
+      __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 100);
+    } else {
+      unsigned int half = MODULE_LED_BREATHE_PERIOD_MS / 2;
+      unsigned int phase = tick % MODULE_LED_BREATHE_PERIOD_MS;
+      __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, (phase < half ? phase : MODULE_LED_BREATHE_PERIOD_MS - phase) / (half / 100));
+    }
+
+    OrionBMS_Loop();
+    LV3_CAN_Loop();
   }
   /* USER CODE END 3 */
 }
@@ -487,6 +558,55 @@ static void MX_TIM2_Init(void)
 }
 
 /**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 10;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 100;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_PWM_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 0;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
+  HAL_TIM_MspPostInit(&htim3);
+
+}
+
+/**
   * @brief TIM4 Initialization Function
   * @param None
   * @retval None
@@ -592,7 +712,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, E_STOP_SWITCH_LED_Pin|MAIN_CONTACTOR_ENABLE_Pin|MODULE_LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, E_STOP_SWITCH_LED_Pin|MAIN_CONTACTOR_ENABLE_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : BTN_USR_Pin */
   GPIO_InitStruct.Pin = BTN_USR_Pin;
@@ -606,8 +726,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : E_STOP_SWITCH_LED_Pin MAIN_CONTACTOR_ENABLE_Pin MODULE_LED_Pin */
-  GPIO_InitStruct.Pin = E_STOP_SWITCH_LED_Pin|MAIN_CONTACTOR_ENABLE_Pin|MODULE_LED_Pin;
+  /*Configure GPIO pins : E_STOP_SWITCH_LED_Pin MAIN_CONTACTOR_ENABLE_Pin */
+  GPIO_InitStruct.Pin = E_STOP_SWITCH_LED_Pin|MAIN_CONTACTOR_ENABLE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
