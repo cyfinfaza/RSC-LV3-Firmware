@@ -27,6 +27,11 @@ extern uint32_t reported_pack_soc;     // pack_soc / 2 (percentage)
 extern int8_t thermistor_temp[8];
 extern int32_t average_thermistor_temp;
 extern int32_t max_thermistor_temp;
+extern int32_t min_thermistor_temp;
+
+// Aux CAN frames received from the BMS, in messages/second. Sampled over a
+// 250 ms window in OrionBMS_Loop; 0 means the BMS link is dead.
+extern uint32_t orion_message_rate;
 
 // Initialize Aux CAN for BMS communication (start, filter, RX interrupt)
 void OrionBMS_Init(void);

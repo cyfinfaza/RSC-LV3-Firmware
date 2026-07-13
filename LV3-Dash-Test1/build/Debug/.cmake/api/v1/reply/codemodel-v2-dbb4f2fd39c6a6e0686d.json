@@ -1,0 +1,147 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "cmake/stm32cubemx",
+					"jsonFile" : "directory-cmake.stm32cubemx-Debug-a874d3cc84b5982fda2e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "cmake/stm32cubemx",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "Drivers/lvgl",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-Drivers.lvgl-Debug-f0c82e09945f1c0a084f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "Drivers/lvgl",
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "LV3-Dash-Test1",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "lvgl",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "LV3-Dash-Test1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-LV3-Dash-Test1-Debug-b7e72456ecbd952fdd53.json",
+					"name" : "LV3-Dash-Test1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "STM32_Drivers::@768a070a0fe75716b479",
+					"jsonFile" : "target-STM32_Drivers-Debug-6699ad93978e643ff234.json",
+					"name" : "STM32_Drivers",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "lvgl::@1fa4b05916f83ce061c7",
+					"jsonFile" : "target-lvgl-Debug-c134ebadf0b4468aab53.json",
+					"name" : "lvgl",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "lvgl_demos::@1fa4b05916f83ce061c7",
+					"jsonFile" : "target-lvgl_demos-Debug-a43ae490bdbf2194bc9d.json",
+					"name" : "lvgl_demos",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "lvgl_examples::@1fa4b05916f83ce061c7",
+					"jsonFile" : "target-lvgl_examples-Debug-bba52e90fcfb7e082411.json",
+					"name" : "lvgl_examples",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/cyfin/Documents/code/RSC-LV3-Firmware/LV3-Dash-Test1/build/Debug",
+		"source" : "C:/Users/cyfin/Documents/code/RSC-LV3-Firmware/LV3-Dash-Test1"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 8
+	}
+}

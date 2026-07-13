@@ -1,0 +1,192 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "cmake/stm32cubemx",
+					"jsonFile" : "directory-cmake.stm32cubemx-Release-a874d3cc84b5982fda2e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "cmake/stm32cubemx",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "Drivers/lvgl",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-Drivers.lvgl-Release-0bd2e391072f9963cae2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "Drivers/lvgl",
+					"targetIndexes" : 
+					[
+						4,
+						5,
+						6,
+						7
+					]
+				},
+				{
+					"build" : "eez-ui",
+					"jsonFile" : "directory-eez-ui-Release-ae0387ed0fcc810ebfb2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "eez-ui",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "LV3-CAN-Subsystem",
+					"jsonFile" : "directory-LV3-CAN-Subsystem-Release-d55d9104530ad3cf5ee5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "C:/Users/cyfin/Documents/code/RSC-LV3-Firmware/LV3-CAN-Subsystem",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					],
+					"name" : "LV3-Dash-Test2",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 4,
+					"id" : "LV3-CAN-Subsystem::@38531348e8d1824f717e",
+					"jsonFile" : "target-LV3-CAN-Subsystem-Release-235d23ad5a450846d63f.json",
+					"name" : "LV3-CAN-Subsystem",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "LV3-Dash-Test2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-LV3-Dash-Test2-Release-f025e475776f0209ab36.json",
+					"name" : "LV3-Dash-Test2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "STM32_Drivers::@768a070a0fe75716b479",
+					"jsonFile" : "target-STM32_Drivers-Release-1d8c3a81770f9b29f79a.json",
+					"name" : "STM32_Drivers",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "eez-ui::@85cfcc7af148d05e600d",
+					"jsonFile" : "target-eez-ui-Release-3063843c5075ff140895.json",
+					"name" : "eez-ui",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "lvgl::@1fa4b05916f83ce061c7",
+					"jsonFile" : "target-lvgl-Release-3f099b44135a444e8472.json",
+					"name" : "lvgl",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "lvgl_demos::@1fa4b05916f83ce061c7",
+					"jsonFile" : "target-lvgl_demos-Release-4cf206300a16053a955b.json",
+					"name" : "lvgl_demos",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "lvgl_examples::@1fa4b05916f83ce061c7",
+					"jsonFile" : "target-lvgl_examples-Release-5ad2a0d0c60fc837a009.json",
+					"name" : "lvgl_examples",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "lvgl_thorvg::@1fa4b05916f83ce061c7",
+					"jsonFile" : "target-lvgl_thorvg-Release-7e9a4580e1206e092620.json",
+					"name" : "lvgl_thorvg",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/cyfin/Documents/code/RSC-LV3-Firmware/LV3-Dash-Test2/build/Release",
+		"source" : "C:/Users/cyfin/Documents/code/RSC-LV3-Firmware/LV3-Dash-Test2"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 8
+	}
+}

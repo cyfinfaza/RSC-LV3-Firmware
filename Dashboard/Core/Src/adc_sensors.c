@@ -4,12 +4,19 @@
 // ADC handle defined by CubeMX in main.c
 extern ADC_HandleTypeDef hadc1;
 
-// DMA destination buffer placed in D2 SRAM (0x30000000 region).
-// D2 SRAM is accessible by DMA1/DMA2 and is non-cacheable by default on
-// STM32H7, so the CPU always reads the values DMA last wrote with no cache
-// flush/invalidate needed.
+// DMA destination buffer placed in D2 SRAM (0x30000000 region), which DMA1/DMA2
+// can reach. D2 SRAM IS cached (D-cache is on and no MPU region marks it
+// otherwise), so readers must invalidate before reading what DMA wrote.
+//
+// Cache maintenance works on whole 32-byte lines, so this buffer must not share
+// a line with anything else — invalidating it would discard the CPU's pending
+// writes to whatever else lives in that line. LVGL's heap is also in .ram_d2,
+// so the buffer is aligned to, and padded out to, a full cache line to keep it
+// isolated. (See LV_ATTRIBUTE_LARGE_RAM_ARRAY in lv_conf.h.)
+//
 // [0] = V_SENSE_5 (ADC1 rank 1), [1] = V_SENSE_12 (ADC1 rank 2)
-volatile uint32_t adc_dma_buf[2] __attribute__((section(".ram_d2")));
+volatile uint32_t adc_dma_buf[ADC_DMA_BUF_LEN]
+    __attribute__((section(".ram_d2"), aligned(ADC_CACHE_LINE_SIZE)));
 
 void ADC_Sensors_Init(void) {
     // Offset calibration should run before starting conversions

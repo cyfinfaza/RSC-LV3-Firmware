@@ -1,0 +1,10 @@
+prefix="C:/Program Files (x86)/LV3-Dash-Test1"
+includedir="${prefix}/include/lvgl"
+libdir=${prefix}/lib
+
+Name: lvgl
+Description: Light and Versatile Graphics Library
+URL: https://lvgl.io/
+Version: 8.3.11
+Cflags: -I${includedir}
+Libs: -L${libdir} -llvgl

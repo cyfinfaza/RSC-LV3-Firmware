@@ -69,6 +69,7 @@ typedef struct _objects_t {
     lv_obj_t *hv_mppt_active;
     lv_obj_t *hv_pack_voltage_current;
     lv_obj_t *hv_pack_temp;
+    lv_obj_t *hv_fault_table;
     lv_obj_t *obj29;
     lv_obj_t *obj30;
     lv_obj_t *cell_voltages_1_12;

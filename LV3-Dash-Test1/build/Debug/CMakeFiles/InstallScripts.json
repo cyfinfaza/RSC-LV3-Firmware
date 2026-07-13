@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/cyfin/Documents/code/RSC-LV3-Firmware/LV3-Dash-Test1/build/Debug/cmake_install.cmake",
+		"C:/Users/cyfin/Documents/code/RSC-LV3-Firmware/LV3-Dash-Test1/build/Debug/cmake/stm32cubemx/cmake_install.cmake",
+		"C:/Users/cyfin/Documents/code/RSC-LV3-Firmware/LV3-Dash-Test1/build/Debug/Drivers/lvgl/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

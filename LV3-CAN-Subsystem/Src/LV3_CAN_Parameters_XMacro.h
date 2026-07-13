@@ -7,31 +7,35 @@ X(0x2000004, sw_hv_main, 0, 500, 1, 0) \
 X(0x2000104, sw_hv_motor, 0, 500, 1, 0) \
 X(0x2000204, sw_hv_mppt, 0, 500, 1, 0) \
 X(0x2000304, sw_motor_reverse, 0, 500, 0, 0) \
-X(0x2000404, sw_motor_eco, 0, 500, 0, 0) \
+X(0x2000404, sw_motor_power_mode, 0, 500, 0, 0) \
 X(0x4000504, sw_service_brake, 0, 500, 0, 0) \
 X(0x4000604, sw_parking_brake, 0, 500, 0, 0) \
 X(0x4000704, sw_turn_right, 0, 500, 0, 0) \
 X(0x4000804, sw_turn_left, 0, 500, 0, 0) \
+X(0xA006404, mppt1_voltage, 500, 2000, 0, 0) \
+X(0xA006504, mppt1_current, 500, 2000, 0, 0) \
+X(0xA006604, mppt1_batt_rail, 500, 2000, 0, 0) \
+X(0xA006704, mppt1_temp, 500, 2000, 0, 0) \
+X(0xA00C804, mppt2_voltage, 500, 2000, 0, 0) \
+X(0xA00C904, mppt2_current, 500, 2000, 0, 0) \
+X(0xA00CA04, mppt2_batt_rail, 500, 2000, 0, 0) \
+X(0xA00CB04, mppt2_temp, 500, 2000, 0, 0) \
+X(0xA012C04, mppt3_voltage, 500, 2000, 0, 0) \
+X(0xA012D04, mppt3_current, 500, 2000, 0, 0) \
+X(0xA012E04, mppt3_batt_rail, 500, 2000, 0, 0) \
+X(0xA012F04, mppt3_temp, 500, 2000, 0, 0) \
+X(0xA019004, mppt4_voltage, 500, 2000, 0, 0) \
+X(0xA019104, mppt4_current, 500, 2000, 0, 0) \
+X(0xA019204, mppt4_batt_rail, 500, 2000, 0, 0) \
+X(0xA019304, mppt4_temp, 500, 2000, 0, 0) \
 \
 \
 X(0x8000008, motor_rpm, 100, 500, 0, 0) \
 X(0x4000108, motor_speed, 100, 500, 0, 0) \
-X(0xA006408, mppt1_voltage, 500, 2000, 0, 0) \
-X(0xA006508, mppt1_current, 500, 2000, 0, 0) \
-X(0xA006608, mppt1_batt_rail, 500, 2000, 0, 0) \
-X(0xA006708, mppt1_temp, 500, 2000, 0, 0) \
-X(0xA00C808, mppt2_voltage, 500, 2000, 0, 0) \
-X(0xA00C908, mppt2_current, 500, 2000, 0, 0) \
-X(0xA00CA08, mppt2_batt_rail, 500, 2000, 0, 0) \
-X(0xA00CB08, mppt2_temp, 500, 2000, 0, 0) \
-X(0xA012C08, mppt3_voltage, 500, 2000, 0, 0) \
-X(0xA012D08, mppt3_current, 500, 2000, 0, 0) \
-X(0xA012E08, mppt3_batt_rail, 500, 2000, 0, 0) \
-X(0xA012F08, mppt3_temp, 500, 2000, 0, 0) \
-X(0xA019008, mppt4_voltage, 500, 2000, 0, 0) \
-X(0xA019108, mppt4_current, 500, 2000, 0, 0) \
-X(0xA019208, mppt4_batt_rail, 500, 2000, 0, 0) \
-X(0xA019308, mppt4_temp, 500, 2000, 0, 0) \
+X(0x208, motor_reverse, 0, 0, 0, 0) \
+X(0x308, motor_power_mode, 0, 0, 0, 0) \
+X(0x408, hv_motor_active, 0, 0, 0, 0) \
+X(0x508, hv_mppt_active, 0, 0, 0, 0) \
 \
 \
 X(0x6000110, lv_bat_voltage, 500, 1000, 0, 0) \
@@ -48,13 +52,13 @@ X(0x6000A10, lv_dcdc_relay, 0, 1000, 0, 0) \
 \
 X(0x400010C, hv_fault, 0, 500, 1, 1) \
 X(0x800020C, hv_main_active, 0, 500, 0, 0) \
-X(0x800030C, hv_motor_active, 0, 500, 0, 0) \
-X(0x800040C, hv_mppt_active, 0, 500, 0, 0) \
 X(0x600050C, hv_pack_voltage, 100, 1000, 0, 0) \
 X(0x600060C, hv_pack_current, 100, 1000, 0, 0) \
-X(0x600070C, hv_pack_temp, 500, 1000, 0, 0) \
-X(0x600080C, hv_pack_max_temp, 500, 1000, 0, 0) \
+X(0x600070C, hv_pack_temp, 250, 1000, 0, 0) \
+X(0x600080C, hv_pack_max_temp, 250, 1000, 0, 0) \
 X(0x600090C, hv_pack_soc, 500, 1000, 0, 0) \
+X(0x6000A0C, orion_relay_state, 0, 1000, 0, 0) \
+X(0xC000B0C, orion_can_message_rate, 250, 2000, 0, 0) \
 X(0xC00640C, hv_cell_voltage_1, 1000, 2000, 0, 0) \
 X(0xC00650C, hv_cell_voltage_2, 1000, 2000, 0, 0) \
 X(0xC00660C, hv_cell_voltage_3, 1000, 2000, 0, 0) \

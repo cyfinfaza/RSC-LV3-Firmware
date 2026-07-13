@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "LV3-CAN-Subsystem",
+		"source" : "C:/Users/cyfin/Documents/code/RSC-LV3-Firmware/LV3-CAN-Subsystem"
+	}
+}

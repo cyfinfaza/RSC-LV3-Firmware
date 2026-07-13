@@ -40,6 +40,15 @@
 // the backplane-LED breathing effect from the original G4 HV-BPS.
 #define MODULE_LED_BREATHE_PERIOD_MS 2000
 
+#define LOCAL_CELL_OVERVOLTAGE 42000 // * 0.1 mV
+#define LOCAL_CELL_UNDERVOLTAGE 38000  // * 0.1 mV
+#define LOCAL_PACK_OVERCURRENT 800 // * 0.1 A
+#define LOCAL_PACK_UNDERCURRENT -250 // * 0.1 A
+#define LOCAL_PACK_MAX_DISCHARGE_TEMP 60 // C
+#define LOCAL_PACK_MIN_DISCHARGE_TEMP 0 // C
+#define LOCAL_PACK_MAX_CHARGE_TEMP 45 // C
+#define LOCAL_PACK_MIN_CHARGE_TEMP 10 // C
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -61,6 +70,12 @@ TIM_HandleTypeDef htim4;
 PCD_HandleTypeDef hpcd_USB_DRD_FS;
 
 /* USER CODE BEGIN PV */
+
+// bitfield union for the possible faults; layout defined by the hv_fault XMacro
+// in the LV3 CAN subsystem, and bound to the hv_fault CAN parameter via .raw
+hvbps_faults_t hvbps_faults = {.raw = 0};
+
+int faults_latched = 0; // whether faults have latched
 
 /* USER CODE END PV */
 
@@ -129,12 +144,12 @@ int main(void)
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
-  // STAT0 (TIM1 CH1/2/3 = R/G/B): app-controlled module/contactor status LED.
-  // STAT1 (TIM2 CH1/2/3): driven automatically by the LV3 CAN driver (link status LED).
-  // MODULE_LED (TIM3 CH1): breathing backplane-style indicator, mirrors old G4 HV-BPS.
+  // STAT0
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+  
+  // MODULE_LED
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 
   // Fans: run at a fixed duty for now; tach inputs are wired but not yet read.
@@ -158,10 +173,9 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-    // USR button: send OBD2 clear-faults on rising edge
     GPIO_PinState usr_btn_state = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
     if (usr_btn_state == GPIO_PIN_SET && last_usr_btn_state == GPIO_PIN_RESET) {
-      OrionBMS_SendClearFaults();
+      local_contactor_enabled = !local_contactor_enabled;
     }
     last_usr_btn_state = usr_btn_state;
 
@@ -176,21 +190,52 @@ int main(void)
       OrionBMS_SendClearFaults();
     }
 
-    // Contactor: enabled when BMS allows discharge and either local or remote request.
+    // Unlatched faults are recomputed from scratch every iteration, so a fault
+    // that goes away clears itself. Once latched, the fault word is frozen.
+    if (!faults_latched) hvbps_faults.raw = 0;
+
     // BMS_DE_SENSE polarity carried over from the old G4 firmware's bms_dch_en
     // signal (active = discharge NOT allowed) — verify against schematic.
     GPIO_PinState bms_de_sense = HAL_GPIO_ReadPin(BMS_DE_SENSE_GPIO_Port, BMS_DE_SENSE_Pin);
-    main_contactor_enabled = !bms_de_sense && (local_contactor_enabled || lv3c_sw_hv_main);
+    GPIO_PinState e_stop_sense = !HAL_GPIO_ReadPin(E_STOP_SENSE_GPIO_Port, E_STOP_SENSE_Pin);
+
+    if (bms_de_sense) hvbps_faults.flags.orion_de_fault = 1;
+    if (e_stop_sense) hvbps_faults.flags.e_stop_fault = 1;
+
+    for (int i = 0; i < 24; i++) {
+      if (cell_voltages[i] > LOCAL_CELL_OVERVOLTAGE) hvbps_faults.flags.cell_overvoltage = 1;
+      if (cell_voltages[i] < LOCAL_CELL_UNDERVOLTAGE) hvbps_faults.flags.cell_undervoltage = 1;
+    }
+
+    if (reported_pack_current > LOCAL_PACK_OVERCURRENT) hvbps_faults.flags.pack_overcurrent = 1;
+    if (reported_pack_current < LOCAL_PACK_UNDERCURRENT) hvbps_faults.flags.pack_undercurrent = 1;
+
+    if (max_thermistor_temp > LOCAL_PACK_MAX_DISCHARGE_TEMP) hvbps_faults.flags.pack_overtemp_discharge = 1;
+    if (min_thermistor_temp < LOCAL_PACK_MIN_DISCHARGE_TEMP) hvbps_faults.flags.pack_undertemp_discharge = 1;
+    if (max_thermistor_temp > LOCAL_PACK_MAX_CHARGE_TEMP) hvbps_faults.flags.pack_overtemp_charge = 1;
+    if (min_thermistor_temp < LOCAL_PACK_MIN_CHARGE_TEMP) hvbps_faults.flags.pack_undertemp_charge = 1;
+
+    // A fault appearing while the contactor is closed latches it off. main_contactor_enabled
+    // still holds last iteration's value here, i.e. whether the contactor is on right now.
+    if (main_contactor_enabled && hvbps_faults.raw) faults_latched = 1;
+
+    // Contactor: closed only when requested and completely fault-free.
+    main_contactor_enabled = (local_contactor_enabled || lv3c_sw_hv_main) && !hvbps_faults.raw;
     HAL_GPIO_WritePin(MAIN_CONTACTOR_ENABLE_GPIO_Port, MAIN_CONTACTOR_ENABLE_Pin, main_contactor_enabled);
 
     // E-stop switch LED mirrors the sense pin (illuminated switch wiring TBD)
-    HAL_GPIO_WritePin(E_STOP_SWITCH_LED_GPIO_Port, E_STOP_SWITCH_LED_Pin,
-                       HAL_GPIO_ReadPin(E_STOP_SENSE_GPIO_Port, E_STOP_SENSE_Pin));
+    HAL_GPIO_WritePin(E_STOP_SWITCH_LED_GPIO_Port, E_STOP_SWITCH_LED_Pin, e_stop_sense);
 
-    // STAT0: solid green when contactor enabled, off otherwise
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0); // R
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, main_contactor_enabled ? 100 : 0); // G
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0); // B
+    // STAT0: red = faults latched, yellow = faults present, blue = contactor on,
+    // green = healthy and idle.
+    uint8_t stat_r = 0, stat_g = 0, stat_b = 0;
+    if (faults_latched)              { stat_r = 100; }
+    else if (hvbps_faults.raw)       { stat_r = 100; stat_g = 100; }
+    else if (main_contactor_enabled) { stat_b = 100; }
+    else                             { stat_g = 100; }
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, stat_r);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, stat_g);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, stat_b);
 
     // MODULE_LED: fades to full brightness when the contactor is enabled, otherwise breathes
     unsigned int tick = HAL_GetTick();

@@ -12,11 +12,13 @@ uint32_t main_contactor_enabled = 0;
 const LV3_CAN_Binding lv3_can_bindings[] = {
     {&lv3c_sw_hv_main,              sw_hv_main,          LV3_CAN_BindMode_Read},
     {&main_contactor_enabled,       hv_main_active,      LV3_CAN_BindMode_Write},
+    {&hvbps_faults.raw,             hv_fault,            LV3_CAN_BindMode_Write},
     {(uint32_t*)&average_thermistor_temp, hv_pack_temp,       LV3_CAN_BindMode_Write},
     {(uint32_t*)&max_thermistor_temp,     hv_pack_max_temp,   LV3_CAN_BindMode_Write},
     {&reported_pack_soc,            hv_pack_soc,         LV3_CAN_BindMode_Write},
     {&reported_pack_voltage,        hv_pack_voltage,     LV3_CAN_BindMode_Write},
     {&reported_pack_current,        hv_pack_current,     LV3_CAN_BindMode_Write},
+    {&orion_message_rate,           orion_can_message_rate, LV3_CAN_BindMode_Write},
     {&cell_voltages[0],             hv_cell_voltage_1,   LV3_CAN_BindMode_Write},
     {&cell_voltages[1],             hv_cell_voltage_2,   LV3_CAN_BindMode_Write},
     {&cell_voltages[2],             hv_cell_voltage_3,   LV3_CAN_BindMode_Write},

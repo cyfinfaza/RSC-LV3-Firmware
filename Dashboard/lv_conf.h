@@ -69,7 +69,7 @@
 
 #if LV_USE_STDLIB_MALLOC == LV_STDLIB_BUILTIN
     /** Size of memory available for `lv_malloc()` in bytes (>= 2kB) */
-    #define LV_MEM_SIZE (64 * 1024U)          /**< [bytes] */
+    #define LV_MEM_SIZE (256 * 1024U)          /**< [bytes] */
 
     /** Size of the memory expand for `lv_malloc()` in bytes */
     #define LV_MEM_POOL_EXPAND_SIZE 0
@@ -625,8 +625,17 @@
 /** Attribute to mark large constant arrays, for example for font bitmaps */
 #define LV_ATTRIBUTE_LARGE_CONST
 
-/** Compiler prefix for a large array declaration in RAM */
-#define LV_ATTRIBUTE_LARGE_RAM_ARRAY
+/** Compiler prefix for a large array declaration in RAM.
+ * Places LVGL's heap (LV_MEM_SIZE) in the D2 domain SRAM, which is otherwise
+ * almost entirely unused. The default (.bss) puts it in DTCMRAM, which is only
+ * 128 KB and already holds the rest of .bss plus the stack — that capped the
+ * heap at 64 KB and left it running at ~90% full.
+ *
+ * Aligned to a 32-byte cache line: adc_dma_buf also lives in .ram_d2 and gets
+ * invalidated by the CPU after DMA writes. Cache maintenance acts on whole
+ * lines, so if the heap began part-way into adc_dma_buf's line, invalidating
+ * that buffer would throw away dirty heap metadata and corrupt the allocator. */
+#define LV_ATTRIBUTE_LARGE_RAM_ARRAY __attribute__((section(".ram_d2"), aligned(32)))
 
 /** Place performance critical functions into a faster memory (e.g RAM) */
 #define LV_ATTRIBUTE_FAST_MEM
@@ -1127,7 +1136,7 @@
     /** 1: Show used memory and memory fragmentation.
      *     - Requires `LV_USE_STDLIB_MALLOC = LV_STDLIB_BUILTIN`
      *     - Requires `LV_USE_SYSMON = 1`*/
-    #define LV_USE_MEM_MONITOR 0
+    #define LV_USE_MEM_MONITOR 1
     #if LV_USE_MEM_MONITOR
         #define LV_USE_MEM_MONITOR_POS LV_ALIGN_BOTTOM_LEFT
     #endif

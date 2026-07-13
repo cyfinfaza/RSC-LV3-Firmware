@@ -20,7 +20,14 @@ void ADC_Sensors_Init(void);
 
 // Raw 16-bit oversampled ADC counts for each channel, as written by DMA.
 // Index 0 = V_SENSE_5, index 1 = V_SENSE_12.
-extern volatile uint32_t adc_dma_buf[2];
+//
+// Padded out to a full 32-byte cache line even though only 2 words are used:
+// the CPU invalidates this buffer's cache line after DMA writes, and cache
+// maintenance acts on whole lines, so it must not share one with any neighbour
+// in .ram_d2 (notably LVGL's heap). See the definition in adc_sensors.c.
+#define ADC_CACHE_LINE_SIZE 32
+#define ADC_DMA_BUF_LEN (ADC_CACHE_LINE_SIZE / sizeof(uint32_t))
+extern volatile uint32_t adc_dma_buf[ADC_DMA_BUF_LEN];
 
 // EEZ Studio variable bindings — return the converted voltage in volts.
 // Setters are no-ops; these are read-only sensor values.

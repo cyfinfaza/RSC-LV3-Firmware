@@ -60,6 +60,12 @@ lv_style_t *get_style_grid_led_no_shadow_MAIN_DEFAULT();
 void add_style_grid_led_no_shadow(lv_obj_t *obj);
 void remove_style_grid_led_no_shadow(lv_obj_t *obj);
 
+// Style: Faults Table
+lv_style_t *get_style_faults_table_ITEMS_DEFAULT();
+lv_style_t *get_style_faults_table_MAIN_DEFAULT();
+void add_style_faults_table(lv_obj_t *obj);
+void remove_style_faults_table(lv_obj_t *obj);
+
 #ifdef __cplusplus
 }
 #endif

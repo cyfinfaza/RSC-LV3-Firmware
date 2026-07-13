@@ -20,9 +20,7 @@
       "resourceFiles": [],
       "hiddenWidgetLines": "dimmed",
       "dimmedLinesOpacity": "20",
-      "embedBitmaps": true,
-      "embedFonts": true,
-      "cacheFonts": false
+      "embedFonts": true
     },
     "build": {
       "objID": "72794a43-a0fc-13c2-7eb5-67dd952141a4",
@@ -1964,7 +1962,7 @@
           "type": "LVGLActionComponent",
           "left": 537,
           "top": 38,
-          "width": 336,
+          "width": 335,
           "height": 53,
           "customInputs": [],
           "customOutputs": [],
@@ -1990,7 +1988,7 @@
           "type": "LVGLActionComponent",
           "left": 537,
           "top": 120,
-          "width": 336,
+          "width": 335,
           "height": 53,
           "customInputs": [],
           "customOutputs": [],
@@ -3877,7 +3875,7 @@
                   "type": "LVGLLabelWidget",
                   "left": 81,
                   "top": 120,
-                  "width": 551,
+                  "width": 523,
                   "height": 25,
                   "customInputs": [],
                   "customOutputs": [],
@@ -3916,7 +3914,7 @@
                   },
                   "group": "",
                   "groupIndex": 0,
-                  "text": "\"HV Current: \" + lv3c_hv_pack_current/1000 + \" A\"",
+                  "text": "\"HV Current: \" + lv3c_hv_pack_current/10 + \" A\"",
                   "textType": "expression",
                   "longMode": "WRAP",
                   "recolor": false
@@ -4119,7 +4117,7 @@
           "type": "LVGLActionComponent",
           "left": 829,
           "top": 170,
-          "width": 342,
+          "width": 341,
           "height": 53,
           "customInputs": [],
           "customOutputs": [],
@@ -4142,7 +4140,7 @@
           "left": 551,
           "top": 66,
           "width": 186,
-          "height": 69,
+          "height": 71,
           "customInputs": [],
           "customOutputs": [],
           "A": "gesture_direction",
@@ -4154,7 +4152,7 @@
           "type": "LVGLActionComponent",
           "left": 199,
           "top": -156,
-          "width": 299,
+          "width": 298,
           "height": 53,
           "customInputs": [],
           "customOutputs": [],
@@ -4571,9 +4569,7 @@
                       "group": "",
                       "groupIndex": 0,
                       "min": 0,
-                      "minType": "literal",
                       "max": 100,
-                      "maxType": "literal",
                       "mode": "NORMAL",
                       "value": "lv3c_hv_pack_soc",
                       "valueType": "expression",
@@ -5265,7 +5261,7 @@
                   },
                   "group": "",
                   "groupIndex": 0,
-                  "text": "`Voltage: ${Math.round(lv3c_hv_pack_voltage/10000,2)} V | Current: ${lv3c_hv_pack_current} A`",
+                  "text": "`Voltage: ${Math.round(lv3c_hv_pack_voltage/10000,2)} V | Current: ${lv3c_hv_pack_current/10} A`",
                   "textType": "expression",
                   "longMode": "WRAP",
                   "recolor": false,
@@ -5314,6 +5310,54 @@
                   "longMode": "WRAP",
                   "recolor": false,
                   "previewValue": "Avg Temp: 67 C | Max Temp 67 C"
+                },
+                {
+                  "objID": "b7c8c8cb-11fe-4f7a-dda8-30ac6e3e2afe",
+                  "type": "LVGLTableWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 100,
+                  "height": 27,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "ed69c206-1057-4c5f-83e1-4b260cde83f5",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "identifier": "hv_fault_table",
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "%",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlag": true,
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "useStyle": "Faults Table",
+                  "localStyles": {
+                    "objID": "e4486055-59a4-4f3c-9eb9-dd41f65f887f",
+                    "definition": {
+                      "ITEMS": {
+                        "DEFAULT": {
+                          "border_side": "INTERNAL"
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0
                 },
                 {
                   "objID": "a3e134f6-59be-4b60-bab6-d4e97dfdb631",
@@ -8949,7 +8993,7 @@
           "type": "LVGLActionComponent",
           "left": 954,
           "top": 186,
-          "width": 342,
+          "width": 341,
           "height": 53,
           "customInputs": [],
           "customOutputs": [],
@@ -8972,7 +9016,7 @@
           "left": 676,
           "top": 82,
           "width": 186,
-          "height": 69,
+          "height": 71,
           "customInputs": [],
           "customOutputs": [],
           "A": "gesture_direction",
@@ -8984,7 +9028,7 @@
           "type": "LVGLActionComponent",
           "left": 88,
           "top": -149,
-          "width": 299,
+          "width": 298,
           "height": 53,
           "customInputs": [],
           "customOutputs": [],
@@ -9705,7 +9749,7 @@
           "type": "LVGLActionComponent",
           "left": 954,
           "top": 186,
-          "width": 342,
+          "width": 341,
           "height": 53,
           "customInputs": [],
           "customOutputs": [],
@@ -9728,7 +9772,7 @@
           "left": 676,
           "top": 82,
           "width": 186,
-          "height": 69,
+          "height": 71,
           "customInputs": [],
           "customOutputs": [],
           "A": "gesture_direction",
@@ -9740,7 +9784,7 @@
           "type": "LVGLActionComponent",
           "left": 88,
           "top": -149,
-          "width": 299,
+          "width": 298,
           "height": 53,
           "customInputs": [],
           "customOutputs": [],
@@ -10101,6 +10145,32 @@
             }
           }
         }
+      },
+      {
+        "objID": "608c143c-6061-42a4-b6b8-b19d1aae219d",
+        "name": "Faults Table",
+        "forWidgetType": "LVGLTableWidget",
+        "childStyles": [],
+        "definition": {
+          "objID": "8f318e26-a02c-428e-e79d-8655549dcfda",
+          "definition": {
+            "ITEMS": {
+              "DEFAULT": {
+                "pad_top": 4,
+                "pad_bottom": 4,
+                "pad_left": 4,
+                "pad_right": 4,
+                "bg_color": "#000000"
+              }
+            },
+            "MAIN": {
+              "DEFAULT": {
+                "border_width": 2,
+                "radius": 4
+              }
+            }
+          }
+        }
       }
     ],
     "defaultStyles": {}
@@ -10128,7 +10198,6 @@
       "glyphs": [],
       "lvglRanges": "32-127",
       "lvglSymbols": "",
-      "lvglAdditionalSources": [],
       "lvglGlyphs": {
         "encodings": [
           {
@@ -10156,7 +10225,6 @@
       "glyphs": [],
       "lvglRanges": "32-127",
       "lvglSymbols": "0xF107",
-      "lvglAdditionalSources": [],
       "lvglGlyphs": {
         "encodings": [
           {
@@ -10186,7 +10254,6 @@
       "glyphs": [],
       "lvglRanges": "32-127",
       "lvglSymbols": "",
-      "lvglAdditionalSources": [],
       "lvglGlyphs": {
         "encodings": [
           {
@@ -10215,7 +10282,6 @@
       "glyphs": [],
       "lvglRanges": "32-127",
       "lvglSymbols": "",
-      "lvglAdditionalSources": [],
       "lvglGlyphs": {
         "encodings": [
           {
