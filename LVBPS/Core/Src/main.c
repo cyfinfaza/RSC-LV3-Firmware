@@ -22,40 +22,37 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "LV3_CAN.h"
+#include "LV3_CAN_Bitfield_XMacro.h"
 #include "adc_sense.h"
 #include <stdint.h>
+#include <math.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
-// Battery relay will not turn on if any of these faults are set
+// Battery relay will not turn on if any of these faults are set. Flag list and
+// bit order come from the shared lv_bat_faults XMacro; packed so the flags
+// occupy bits 0..N-1 of raw with no padding.
+#define X(name, label) uint32_t name : 1;
 typedef union {
-  uint8_t raw;
-  struct {
-    uint8_t startup_delay         : 1; // System has not yet been on for SETPOINT_STARTUP_DELAY_MS
-    uint8_t startup_undervoltage  : 1; // Battery voltage is below SETPOINT_STARTUP_THRESHOLD_V
-    uint8_t undervoltage  : 1; // Battery voltage has gone below SETPOINT_UNDERVOLTAGE_V
-    uint8_t overvoltage   : 1; // Battery voltage has gone above SETPOINT_OVERVOLTAGE_V
-    uint8_t overcurrent  : 1; // Battery current has gone above SETPOINT_MAX_CURRENT_A
-    uint8_t undercurrent : 1; // Battery current has gone below SETPOINT_MIN_CURRENT_A
-    uint8_t precharge_timeout : 1; // Precharge has lasted longer than PRECHARGE_TIMEOUT_MS
-    uint8_t relay_fault       : 1; // Voltage difference exceeded precharge threshold while relay was on
+  struct __attribute__((packed)) {
+    LV3_CAN_Bitfield_lv_bat_faults_XMacro
   };
+  uint32_t raw;
 } Bat_Relay_Faults;
+#undef X
 
-// DCDC relay will not turn on if any of these faults are set
+// DCDC relay will not turn on if any of these faults are set. Flag list and
+// bit order come from the shared lv_dcdc_faults XMacro.
+#define X(name, label) uint32_t name : 1;
 typedef union {
-  uint8_t raw;
-  struct {
-    uint8_t dcdc_startup_undervoltage  : 1; // DCDC voltage is below SETPOINT_STARTUP_THRESHOLD_V
-    uint8_t dcdc_startup_overvoltage  : 1; // DCDC voltage is above SETPOINT_MAX_CHARGE_V
-    uint8_t dcdc_undervoltage  : 1; // DCDC voltage is below SETPOINT_UNDERVOLTAGE_V
-    uint8_t dcdc_overvoltage   : 1; // DCDC voltage is above SETPOINT_MAX_CHARGE_V
-    uint8_t dcdc_overcurrent  : 1; // DCDC is causing battery current to go below SETPOINT_MIN_CURRENT_A
-    uint8_t dcdc_sink : 1; // DCDC is sinking current
+  struct __attribute__((packed)) {
+    LV3_CAN_Bitfield_lv_dcdc_faults_XMacro
   };
+  uint32_t raw;
 } DCDC_Relay_Faults;
+#undef X
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -102,6 +99,9 @@ typedef union {
 
 // Maximum voltage difference between battery and load for precharge
 #define PRECHARGE_THRESHOLD_V  9.0f
+
+// System will not operate when NTC is above this temperature (°C)
+#define SETPOINT_MAX_TEMP_C  57.0f
 
 
 /* USER CODE END PD */
@@ -157,7 +157,7 @@ uint32_t lv_dcdc_voltage_mv = 0;
 uint32_t lv_load_voltage_mv = 0;
 uint32_t lv_bat_current_ma = 0;
 uint32_t lv_sys_current_ma = 0;
-uint32_t lv_bat_temp_mv = 0;    // thermistor pin voltage in mV (raw; needs NTC curve for °C)
+int32_t lv_bat_temp_c = 0;    // thermistor pin voltage in mV (raw; needs NTC curve for °C)
 uint32_t lv_bat_faults_val = 0;
 uint32_t lv_dcdc_faults_val = 0;
 uint32_t lv_bat_relay_val = 0;
@@ -169,7 +169,7 @@ const LV3_CAN_Binding lv3_can_bindings[] = {
     {&lv_load_voltage_mv, lv_load_voltage, LV3_CAN_BindMode_Write},
     {&lv_bat_current_ma,  lv_bat_current,  LV3_CAN_BindMode_Write},
     {&lv_sys_current_ma,  lv_sys_current,  LV3_CAN_BindMode_Write},
-    {&lv_bat_temp_mv,     lv_bat_temp,     LV3_CAN_BindMode_Write},
+    {&lv_bat_temp_c,     lv_bat_temp,     LV3_CAN_BindMode_Write},
     {&lv_bat_faults_val,  lv_bat_faults,   LV3_CAN_BindMode_Write},
     {&lv_dcdc_faults_val, lv_dcdc_faults,  LV3_CAN_BindMode_Write},
     {&lv_bat_relay_val,   lv_bat_relay,    LV3_CAN_BindMode_Write},
@@ -284,7 +284,7 @@ int main(void)
     lv_load_voltage_mv = (uint32_t)(adc_sense.v_sense_12_load * 1000.0f);
     lv_bat_current_ma  = (uint32_t)(adc_sense.i_sense_bat     * 1000.0f);
     lv_sys_current_ma  = (uint32_t)(adc_sense.i_sense_load    * 1000.0f);
-    lv_bat_temp_mv     = (uint32_t)(adc_sense.thermistor_mv);
+    lv_bat_temp_c     = (1.0 / ((1.0 / 298.15) + (1.0 / 3950.0) * log((10000.0 * (adc_sense.thermistor_mv / (3300.0 - adc_sense.thermistor_mv))) / 10000.0))) - 273.15;
 
     // USR button toggles lv_bus_enabled on rising edge
     if (BTN_USR == GPIO_PIN_SET && BTN_USR_PREV == GPIO_PIN_RESET) {
@@ -308,6 +308,7 @@ int main(void)
     if (timed_fault(adc_sense.i_sense_bat > SETPOINT_MAX_CURRENT_A,                                           &overcurrent_start_tick,  SETPOINT_OVERCURRENT_TIME_MS))  bat_faults.overcurrent  = 1;
     if (timed_fault(adc_sense.i_sense_load < SETPOINT_MIN_CURRENT_A,                                          &undercurrent_start_tick, SETPOINT_UNDERCURRENT_TIME_MS)) bat_faults.undercurrent = 1;
     if (timed_fault(RELAY_CONTROL_BAT && adc_sense.v_sense_12_bat - adc_sense.v_sense_12_load >= PRECHARGE_THRESHOLD_V, &relay_fault_start_tick,  PRECHARGE_TIMEOUT_MS))          bat_faults.relay_fault  = 1;
+    if (lv_bat_temp_c > SETPOINT_MAX_TEMP_C) bat_faults.overtemperature = 1;
 
     // Precharge state machine
     uint8_t relay_was_on = RELAY_CONTROL_BAT;
@@ -334,7 +335,7 @@ int main(void)
     // Latch if relay was on this loop and a latching fault fired (relay may now be off due to the fault)
     if ((relay_was_on && (bat_faults.undervoltage || bat_faults.overvoltage
                         || bat_faults.overcurrent  || bat_faults.undercurrent
-                        || bat_faults.relay_fault))
+                        || bat_faults.relay_fault || bat_faults.overtemperature))
         || bat_faults.precharge_timeout) {
       bat_faults_latched = 1;
     }
@@ -385,6 +386,7 @@ int main(void)
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, led_on ? (uint32_t)(g * 100) : 0);  // G
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, led_on ? (uint32_t)(r * 100) : 0);  // R
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, led_on ? (uint32_t)(b * 100) : 0);  // B
+    HAL_GPIO_WritePin(POWER_SWITCH_LED_GPIO_Port, POWER_SWITCH_LED_Pin, led_on);
 
     lv_bat_faults_val  = bat_faults.raw;
     lv_dcdc_faults_val = dcdc_faults.raw;

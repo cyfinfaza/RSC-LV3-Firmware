@@ -99,6 +99,8 @@ typedef struct _objects_t {
     lv_obj_t *obj53;
     lv_obj_t *obj54;
     lv_obj_t *obj55;
+    lv_obj_t *lv_bat_fault_table;
+    lv_obj_t *lv_dcdc_fault_table;
     lv_obj_t *obj56;
     lv_obj_t *obj57;
     lv_obj_t *obj58;

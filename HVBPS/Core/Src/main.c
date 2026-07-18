@@ -40,13 +40,13 @@
 // the backplane-LED breathing effect from the original G4 HV-BPS.
 #define MODULE_LED_BREATHE_PERIOD_MS 2000
 
-#define LOCAL_CELL_OVERVOLTAGE 42000 // * 0.1 mV
-#define LOCAL_CELL_UNDERVOLTAGE 38000  // * 0.1 mV
-#define LOCAL_PACK_OVERCURRENT 800 // * 0.1 A
+#define LOCAL_CELL_OVERVOLTAGE 41900 // * 0.1 mV
+#define LOCAL_CELL_UNDERVOLTAGE 28100  // * 0.1 mV
+#define LOCAL_PACK_OVERCURRENT 799 // * 0.1 A
 #define LOCAL_PACK_UNDERCURRENT -250 // * 0.1 A
-#define LOCAL_PACK_MAX_DISCHARGE_TEMP 60 // C
+#define LOCAL_PACK_MAX_DISCHARGE_TEMP 59 // C
 #define LOCAL_PACK_MIN_DISCHARGE_TEMP 0 // C
-#define LOCAL_PACK_MAX_CHARGE_TEMP 45 // C
+#define LOCAL_PACK_MAX_CHARGE_TEMP 44 // C
 #define LOCAL_PACK_MIN_CHARGE_TEMP 10 // C
 
 /* USER CODE END PD */
@@ -155,8 +155,8 @@ int main(void)
   // Fans: run at a fixed duty for now; tach inputs are wired but not yet read.
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);
-  __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 5);
-  __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, 5);
+  __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 10);
+  __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, 10);
 
   GPIO_PinState last_usr_btn_state = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
 
@@ -204,7 +204,8 @@ int main(void)
 
     for (int i = 0; i < 24; i++) {
       if (cell_voltages[i] > LOCAL_CELL_OVERVOLTAGE) hvbps_faults.flags.cell_overvoltage = 1;
-      if (cell_voltages[i] < LOCAL_CELL_UNDERVOLTAGE) hvbps_faults.flags.cell_undervoltage = 1;
+      if (cell_voltages[i] < LOCAL_CELL_UNDERVOLTAGE) 
+        hvbps_faults.flags.cell_undervoltage = 1;
     }
 
     if (reported_pack_current > LOCAL_PACK_OVERCURRENT) hvbps_faults.flags.pack_overcurrent = 1;
@@ -233,8 +234,8 @@ int main(void)
     else if (hvbps_faults.raw)       { stat_r = 100; stat_g = 100; }
     else if (main_contactor_enabled) { stat_b = 100; }
     else                             { stat_g = 100; }
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, stat_r);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, stat_g);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, stat_r);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, stat_g);
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, stat_b);
 
     // MODULE_LED: fades to full brightness when the contactor is enabled, otherwise breathes

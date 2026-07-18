@@ -1,9 +1,9 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/5",
+    "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/0",
     "selectedUserWidgetObject": "[EEZ-UI.eez-project]:/userWidgets/0",
     "selectedActionObject": "[EEZ-UI.eez-project]:/actions/4",
-    "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/23",
+    "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/26",
     "selectedStyleObject": "[EEZ-UI.eez-project]:/lvglStyles/styles/6",
     "selectedThemeObject": "[EEZ-UI.eez-project]:/themes/0",
     "selectedThemeColorObject": "[EEZ-UI.eez-project]:/colors/1",
@@ -179,7 +179,8 @@
                       "enableClose": false,
                       "icon": "svg:hierarchy"
                     }
-                  ]
+                  ],
+                  "active": true
                 },
                 {
                   "type": "tabset",
@@ -221,10 +222,10 @@
                 {
                   "type": "tab",
                   "id": "#e19d0844-67f3-40f5-ab44-c8bf4dae3898",
-                  "name": "LV Battery",
+                  "name": "HV Battery",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[EEZ-UI.eez-project]:/userPages/5",
+                    "objectPath": "[EEZ-UI.eez-project]:/userPages/4",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -271,8 +272,7 @@
                       "enableClose": false,
                       "icon": "svg:properties"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
@@ -1138,8 +1138,8 @@
       },
       "transform": {
         "translate": {
-          "x": -409.2421875,
-          "y": -77.578125
+          "x": -274.2421875,
+          "y": -116.578125
         },
         "scale": 0.8
       },
@@ -1246,7 +1246,6 @@
       "selectionBack": {
         "0": {
           "1": {
-            "4": {},
             "$selected": true
           }
         }
@@ -1280,14 +1279,10 @@
       "selectionBack": {
         "0": {
           "0": {
-            "0": {},
-            "1": {
-              "0": {}
-            },
-            "3": {},
-            "6": {
+            "0": {
               "$selected": true
-            }
+            },
+            "3": {}
           },
           "1": {
             "1": {}
@@ -1296,8 +1291,8 @@
       },
       "transform": {
         "translate": {
-          "x": -203.4566479492188,
-          "y": -161.8202604166667
+          "x": -210.4566479492188,
+          "y": -130.8202604166667
         },
         "scale": 0.8
       },
@@ -1343,11 +1338,11 @@
       "selectionBack": {
         "0": {
           "0": {
-            "6": {
-              "$selected": true
-            }
+            "6": {}
           },
-          "1": {}
+          "1": {
+            "$selected": true
+          }
         }
       },
       "transform": {

@@ -1,6 +1,7 @@
 #include "screen_helper.h"
 #include "can_parameters.h"
 #include "hv_battery.h"
+#include "lv_battery.h"
 #include "settings.h"
 #include "screens.h"
 #include "lvgl.h"
@@ -8,6 +9,7 @@
 void ScreenHelper_Init(void) {
     CanParameters_Init();
     HVBattery_Init();
+    LVBattery_Init();
     Settings_Init();  // populates dropdown, fixes font, and navigates to default screen
 }
 
@@ -18,6 +20,8 @@ void ScreenHelper_Loop(void) {
         CanParameters_Update();
     } else if (active == objects.hv_battery) {
         HVBattery_Update();
+    } else if (active == objects.lv_battery) {
+        LVBattery_Update();
     }
     // main, settings, and driver_dashboard have no periodic updater yet
 }

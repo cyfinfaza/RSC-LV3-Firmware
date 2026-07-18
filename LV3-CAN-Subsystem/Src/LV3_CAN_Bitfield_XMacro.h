@@ -31,3 +31,26 @@ X(pack_overtemp_discharge,  "Pack Overtemp (Discharge)") \
 X(pack_undertemp_discharge, "Pack Undertemp (Discharge)") \
 X(pack_overtemp_charge,     "Pack Overtemp (Charge)") \
 X(pack_undertemp_charge,    "Pack Undertemp (Charge)")
+
+// Battery relay will not turn on if any of these faults are set.
+#define LV3_CAN_Bitfield_lv_bat_faults_XMacro \
+\
+X(startup_delay,         "Startup Delay")        /* System has not yet been on for SETPOINT_STARTUP_DELAY_MS */ \
+X(startup_undervoltage,  "Startup Undervoltage") /* Battery voltage is below SETPOINT_STARTUP_THRESHOLD_V */ \
+X(undervoltage,          "Undervoltage")         /* Battery voltage has gone below SETPOINT_UNDERVOLTAGE_V */ \
+X(overvoltage,           "Overvoltage")          /* Battery voltage has gone above SETPOINT_OVERVOLTAGE_V */ \
+X(overcurrent,           "Overcurrent")          /* Battery current has gone above SETPOINT_MAX_CURRENT_A */ \
+X(undercurrent,          "Undercurrent")         /* Battery current has gone below SETPOINT_MIN_CURRENT_A */ \
+X(precharge_timeout,     "Precharge Timeout")    /* Precharge has lasted longer than PRECHARGE_TIMEOUT_MS */ \
+X(relay_fault,           "Relay Fault")          /* Voltage difference exceeded precharge threshold while relay was on */ \
+X(overtemperature,       "Overtemperature")      /* NTC temperature has exceeded SETPOINT_MAX_TEMP_C */
+
+// DCDC relay will not turn on if any of these faults are set.
+#define LV3_CAN_Bitfield_lv_dcdc_faults_XMacro \
+\
+X(dcdc_startup_undervoltage, "Startup Undervoltage") /* DCDC voltage is below SETPOINT_STARTUP_THRESHOLD_V */ \
+X(dcdc_startup_overvoltage,  "Startup Overvoltage")  /* DCDC voltage is above SETPOINT_MAX_CHARGE_V */ \
+X(dcdc_undervoltage,         "Undervoltage")         /* DCDC voltage is below SETPOINT_UNDERVOLTAGE_V */ \
+X(dcdc_overvoltage,          "Overvoltage")          /* DCDC voltage is above SETPOINT_MAX_CHARGE_V */ \
+X(dcdc_overcurrent,          "Overcurrent")          /* DCDC is causing battery current to go below SETPOINT_MIN_CURRENT_A */ \
+X(dcdc_sink,                 "Sink Current")         /* DCDC is sinking current */
