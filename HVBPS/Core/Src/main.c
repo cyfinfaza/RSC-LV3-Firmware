@@ -213,8 +213,8 @@ int main(void)
 
     if (max_thermistor_temp > LOCAL_PACK_MAX_DISCHARGE_TEMP) hvbps_faults.flags.pack_overtemp_discharge = 1;
     if (min_thermistor_temp < LOCAL_PACK_MIN_DISCHARGE_TEMP) hvbps_faults.flags.pack_undertemp_discharge = 1;
-    if (max_thermistor_temp > LOCAL_PACK_MAX_CHARGE_TEMP) hvbps_faults.flags.pack_overtemp_charge = 1;
-    if (min_thermistor_temp < LOCAL_PACK_MIN_CHARGE_TEMP) hvbps_faults.flags.pack_undertemp_charge = 1;
+    if (max_thermistor_temp > LOCAL_PACK_MAX_CHARGE_TEMP && reported_pack_current < -5) hvbps_faults.flags.pack_overtemp_charge = 1;
+    if (min_thermistor_temp < LOCAL_PACK_MIN_CHARGE_TEMP && reported_pack_current < -5) hvbps_faults.flags.pack_undertemp_charge = 1;
 
     // A fault appearing while the contactor is closed latches it off. main_contactor_enabled
     // still holds last iteration's value here, i.e. whether the contactor is on right now.

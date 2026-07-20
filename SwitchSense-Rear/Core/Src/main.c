@@ -24,6 +24,7 @@
 
 #include <math.h>
 
+#include "stm32g0xx_hal.h"
 #include "stm32g0xx_hal_gpio.h"
 #include "stm32g0xx_hal_rtc_ex.h"
 #include "LV3_CAN.h"
@@ -114,10 +115,16 @@ float speed_mph_filtered = 0.0f;
 // --- LV3 CAN bindings (module id 8, rounded to nearest integer) ---
 uint32_t motor_rpm_val = 0;
 uint32_t motor_speed_val = 0;
+uint32_t main_contactor_switch = 0;
+uint32_t main_contactor_enabled = 0;
+uint32_t _hv_faults = 0;
 
 const LV3_CAN_Binding lv3_can_bindings[] = {
     {&motor_rpm_val,   motor_rpm,   LV3_CAN_BindMode_Write},
     {&motor_speed_val, motor_speed, LV3_CAN_BindMode_Write},
+    {&main_contactor_switch, sw_hv_main, LV3_CAN_BindMode_Write},
+    {&main_contactor_enabled, hv_main_active, LV3_CAN_BindMode_Read},
+    {&_hv_faults, hv_fault, LV3_CAN_BindMode_Read},
 };
 const unsigned int lv3_can_bindings_count = sizeof(lv3_can_bindings) / sizeof(LV3_CAN_Binding);
 /* USER CODE END PV */
@@ -201,8 +208,6 @@ int main(void)
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
 
-
-
   LV3_CAN_Init(8, LV3_CAN_BusMode_Normal, lv3_can_bindings, lv3_can_bindings_count);
 
   GPIO_PinState last_button_state = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
@@ -230,6 +235,7 @@ int main(void)
     v_sense_12 = adc_pin_voltage * (100.0f + 5.1f) / 5.1f;
 
     in_1 = HAL_GPIO_ReadPin(IN_1_GPIO_Port, IN_1_Pin);
+    main_contactor_switch = !HAL_GPIO_ReadPin(IN_2_GPIO_Port, IN_2_Pin);
     in_10 = HAL_GPIO_ReadPin(IN_10_GPIO_Port, IN_10_Pin);
 
     // --- Process state ---
@@ -283,6 +289,13 @@ int main(void)
 
     // --- Apply outputs ---
     HAL_GPIO_WritePin(OUT_1_GPIO_Port, OUT_1_Pin, out_1_state);
+    HAL_GPIO_WritePin(OUT_2_GPIO_Port, OUT_2_Pin, main_contactor_enabled);
+    if (_hv_faults) {
+      HAL_GPIO_WritePin(OUT_2_GPIO_Port, OUT_2_Pin, HAL_GetTick() % 200);
+      HAL_GPIO_WritePin(OUT_3_GPIO_Port, OUT_3_Pin, HAL_GetTick() % 200);
+    } else {
+      HAL_GPIO_WritePin(OUT_3_GPIO_Port, OUT_3_Pin, GPIO_PIN_RESET);
+    }
     // __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, in_1*100);
     // __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, led_state*100);
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, in_10*100);
