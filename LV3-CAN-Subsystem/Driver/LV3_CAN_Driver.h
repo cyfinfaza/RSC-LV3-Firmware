@@ -77,3 +77,12 @@ LV3_CAN_SystemHealthData LV3_CAN_Driver_GetSystemHealthData();
  * @brief Called by the LV3 CAN library to forward received CAN messages from CAN peripherals other than LV3_CAN_INSTANCE
  */
 void LV3_CAN_AUX_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs);
+
+/**
+ * @brief Called by the LV3 CAN library whenever a message is received on LV3_CAN_INSTANCE, before it is processed by the library
+ *
+ * @param id The raw 29-bit CAN ID of the message
+ * @param data Pointer to the data payload
+ * @param length Length of the data payload in bytes
+ */
+void LV3_CAN_PRIMARY_RxFifo0Callback(uint32_t id, uint8_t *data, uint8_t length);

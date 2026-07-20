@@ -9,6 +9,11 @@ __weak void LV3_CAN_AUX_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan,
   // Default weak implementation does nothing, can be overridden by user code if needed
 }
 
+__weak void LV3_CAN_PRIMARY_RxFifo0Callback(uint32_t id, uint8_t *data,
+                                          uint8_t length) {
+  // Default weak implementation does nothing, can be overridden by user code if needed
+}
+
 void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan,
                                uint32_t RxFifo0ITs) {
   if (hfdcan->Instance == LV3_CAN_INSTANCE) {
@@ -16,6 +21,8 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan,
       FDCAN_RxHeaderTypeDef rx_header;
       uint8_t rx_data[8];
       HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &rx_header, rx_data);
+      LV3_CAN_PRIMARY_RxFifo0Callback(rx_header.Identifier, rx_data,
+                                      rx_header.DataLength);
       LV3_CAN_PushNewMessage(rx_header.Identifier, rx_data,
                              rx_header.DataLength);
     }

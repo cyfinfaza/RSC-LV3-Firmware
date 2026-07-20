@@ -210,6 +210,19 @@ int main(void)
 
   LV3_CAN_Init(8, LV3_CAN_BusMode_Normal, lv3_can_bindings, lv3_can_bindings_count);
 
+  HAL_FDCAN_Start(&hfdcan2);
+  HAL_FDCAN_ActivateNotification(&hfdcan2, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0);
+
+  // fdcan allow all messages
+  FDCAN_FilterTypeDef aux_filter;
+  aux_filter.IdType = FDCAN_STANDARD_ID;
+  aux_filter.FilterIndex = 0;
+  aux_filter.FilterType = FDCAN_FILTER_MASK;
+  aux_filter.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
+  aux_filter.FilterID1 = 0x000;
+  aux_filter.FilterID2 = 0x000;
+  HAL_FDCAN_ConfigFilter(&hfdcan2, &aux_filter);
+
   GPIO_PinState last_button_state = HAL_GPIO_ReadPin(BTN_USR_GPIO_Port, BTN_USR_Pin);
 
   /* USER CODE END 2 */
@@ -503,10 +516,10 @@ static void MX_FDCAN2_Init(void)
   hfdcan2.Init.AutoRetransmission = DISABLE;
   hfdcan2.Init.TransmitPause = DISABLE;
   hfdcan2.Init.ProtocolException = DISABLE;
-  hfdcan2.Init.NominalPrescaler = 16;
+  hfdcan2.Init.NominalPrescaler = 6;
   hfdcan2.Init.NominalSyncJumpWidth = 1;
-  hfdcan2.Init.NominalTimeSeg1 = 1;
-  hfdcan2.Init.NominalTimeSeg2 = 1;
+  hfdcan2.Init.NominalTimeSeg1 = 13;
+  hfdcan2.Init.NominalTimeSeg2 = 2;
   hfdcan2.Init.DataPrescaler = 1;
   hfdcan2.Init.DataSyncJumpWidth = 1;
   hfdcan2.Init.DataTimeSeg1 = 1;
@@ -1042,6 +1055,22 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void LV3_CAN_PRIMARY_RxFifo0Callback(uint32_t id, uint8_t *data, uint8_t length)
+{
+  FDCAN_TxHeaderTypeDef tx_header;
+  tx_header.IdType = FDCAN_EXTENDED_ID;
+  tx_header.Identifier = id;
+  tx_header.TxFrameType = FDCAN_DATA_FRAME;
+  tx_header.DataLength = length;
+  tx_header.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
+  tx_header.BitRateSwitch = FDCAN_BRS_OFF;
+  tx_header.FDFormat = FDCAN_CLASSIC_CAN;
+  tx_header.TxEventFifoControl = FDCAN_NO_TX_EVENTS;
+  tx_header.MessageMarker = 0;
+
+  HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan2, &tx_header, data);
+}
 
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
 {
