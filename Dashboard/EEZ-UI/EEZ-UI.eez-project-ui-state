@@ -3,7 +3,7 @@
     "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/0",
     "selectedUserWidgetObject": "[EEZ-UI.eez-project]:/userWidgets/0",
     "selectedActionObject": "[EEZ-UI.eez-project]:/actions/4",
-    "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/26",
+    "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/27",
     "selectedStyleObject": "[EEZ-UI.eez-project]:/lvglStyles/styles/6",
     "selectedThemeObject": "[EEZ-UI.eez-project]:/themes/0",
     "selectedThemeColorObject": "[EEZ-UI.eez-project]:/colors/1",
@@ -179,8 +179,7 @@
                       "enableClose": false,
                       "icon": "svg:hierarchy"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
@@ -222,10 +221,10 @@
                 {
                   "type": "tab",
                   "id": "#e19d0844-67f3-40f5-ab44-c8bf4dae3898",
-                  "name": "HV Battery",
+                  "name": "Driver Dashboard",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[EEZ-UI.eez-project]:/userPages/4",
+                    "objectPath": "[EEZ-UI.eez-project]:/userPages/3",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -252,7 +251,8 @@
                   },
                   "icon": "svg:page"
                 }
-              ]
+              ],
+              "active": true
             },
             {
               "type": "row",
@@ -1245,15 +1245,13 @@
       "selectionFront": {},
       "selectionBack": {
         "0": {
-          "1": {
-            "$selected": true
-          }
+          "1": {}
         }
       },
       "transform": {
         "translate": {
-          "x": -188.6953125,
-          "y": -127.5703125
+          "x": -180.6953125,
+          "y": -125.5703125
         },
         "scale": 0.8
       },
@@ -1279,10 +1277,11 @@
       "selectionBack": {
         "0": {
           "0": {
-            "0": {
+            "0": {},
+            "3": {},
+            "5": {
               "$selected": true
-            },
-            "3": {}
+            }
           },
           "1": {
             "1": {}
@@ -1338,10 +1337,9 @@
       "selectionBack": {
         "0": {
           "0": {
-            "6": {}
-          },
-          "1": {
-            "$selected": true
+            "1": {
+              "$selected": true
+            }
           }
         }
       },
@@ -1377,7 +1375,9 @@
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
     "TEXT",
+    "BORDER",
     "LAYOUT",
+    "SHADOW",
     "PADDING"
   ],
   "showInactiveFlowsInDebugger": true,
