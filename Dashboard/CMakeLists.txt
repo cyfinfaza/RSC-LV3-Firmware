@@ -85,6 +85,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/screen_helpers/hv_battery.c
     Core/Src/screen_helpers/lv_battery.c
     Core/Src/screen_helpers/settings.c
+    Core/Src/screen_helpers/driver_dashboard.c
 )
 
 # Add include paths

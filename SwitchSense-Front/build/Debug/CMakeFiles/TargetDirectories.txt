@@ -4,3 +4,6 @@
 /Users/cywestbrook/Documents/code/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
 /Users/cywestbrook/Documents/code/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
 /Users/cywestbrook/Documents/code/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir
+/Users/cywestbrook/Documents/code/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/LV3-CAN-Subsystem/CMakeFiles/LV3-CAN-Subsystem.dir
+/Users/cywestbrook/Documents/code/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/LV3-CAN-Subsystem/CMakeFiles/edit_cache.dir
+/Users/cywestbrook/Documents/code/RSC-LV3-Firmware/SwitchSense-Front/build/Debug/LV3-CAN-Subsystem/CMakeFiles/rebuild_cache.dir

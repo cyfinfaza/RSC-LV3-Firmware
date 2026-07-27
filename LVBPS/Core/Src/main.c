@@ -72,7 +72,7 @@ typedef union {
 // Bus will not transition from off to on if battery voltage is below this threshold, sets startup undervoltage fault
 // DCDC relay will not turn on if battery voltage is below this threshold, sets DCDC startup undervoltage fault
 // If DCDC relay is on and battery voltage goes below this threshold, DCDC relay will turn off, latches DCDC undervoltage fault
-#define SETPOINT_STARTUP_THRESHOLD_V 11.8f
+#define SETPOINT_STARTUP_THRESHOLD_V 11.0f
 
 // DCDC relay will turn on if DCDC voltage and battery voltage is below this threshold, sets DCDC startup undervoltage fault
 // If DCDC relay is on and battery voltage exceeds this threshold, DCDC relay will turn off, latches DCDC overvoltage fault
@@ -84,7 +84,7 @@ typedef union {
 
 // If DCDC relay is on and difference between battery current and load current exceeds this threshold, DCDC relay will turn off, latches DCDC overcurrent fault
 // If load current remains goes below this threshold for SETPOINT_UNDERCURRENT_TIME_MS, battery will be cut off, latches undercurrent fault
-#define SETPOINT_MIN_CURRENT_A      -2.0f
+#define SETPOINT_MIN_CURRENT_A      -9.0f
 #define SETPOINT_UNDERCURRENT_TIME_MS     100
 #define DCDC_OVERCURRENT_TIMEOUT_MS       500
 

@@ -3,6 +3,7 @@
 #include "hv_battery.h"
 #include "lv_battery.h"
 #include "settings.h"
+#include "driver_dashboard.h"
 #include "screens.h"
 #include "lvgl.h"
 
@@ -11,6 +12,7 @@ void ScreenHelper_Init(void) {
     HVBattery_Init();
     LVBattery_Init();
     Settings_Init();  // populates dropdown, fixes font, and navigates to default screen
+    DriverDashboard_Init();
 }
 
 void ScreenHelper_Loop(void) {
@@ -22,6 +24,8 @@ void ScreenHelper_Loop(void) {
         HVBattery_Update();
     } else if (active == objects.lv_battery) {
         LVBattery_Update();
+    } else if (active == objects.driver_dashboard) {
+        DriverDashboard_Update();
     }
-    // main, settings, and driver_dashboard have no periodic updater yet
+    // main and settings have no periodic updater yet
 }

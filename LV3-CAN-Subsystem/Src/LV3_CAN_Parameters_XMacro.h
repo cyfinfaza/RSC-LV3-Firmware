@@ -3,6 +3,10 @@
 // X(can_id, name, refresh_interval, ttl, has_safe_state, safe_state)
 #define LV3_CAN_Parameters_XMacro \
 \
+X(0x4000018, signal_left, 0, 500, 0, 0) \
+X(0x4000118, signal_right, 0, 500, 0, 0) \
+\
+\
 X(0x2000004, sw_hv_main, 0, 500, 1, 0) \
 X(0x2000104, sw_hv_motor, 0, 500, 1, 0) \
 X(0x2000204, sw_hv_mppt, 0, 500, 1, 0) \

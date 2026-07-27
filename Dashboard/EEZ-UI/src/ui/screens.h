@@ -51,6 +51,9 @@ typedef struct _objects_t {
     lv_obj_t *obj19;
     lv_obj_t *can_parameters_table;
     lv_obj_t *obj20;
+    lv_obj_t *hazards_button;
+    lv_obj_t *left_signal_button;
+    lv_obj_t *right_signal_button;
     lv_obj_t *obj21;
     lv_obj_t *obj22;
     lv_obj_t *obj23;

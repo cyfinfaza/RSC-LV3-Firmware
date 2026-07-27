@@ -1,6 +1,6 @@
 #include "images.h"
 
-const ext_img_desc_t images[10] = {
+const ext_img_desc_t images[13] = {
     { "RSC_Short_Transparent", &img_rsc_short_transparent },
     { "Driver_Dashboard_Icon", &img_driver_dashboard_icon },
     { "HV_Battery_Icon", &img_hv_battery_icon },
@@ -11,4 +11,7 @@ const ext_img_desc_t images[10] = {
     { "List_Icon", &img_list_icon },
     { "Settings_Icon", &img_settings_icon },
     { "Home_Icon", &img_home_icon },
+    { "Left_Icon", &img_left_icon },
+    { "Right_Icon", &img_right_icon },
+    { "Hazards_Icon", &img_hazards_icon },
 };

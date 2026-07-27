@@ -1,13 +1,13 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/0",
+    "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/3",
     "selectedUserWidgetObject": "[EEZ-UI.eez-project]:/userWidgets/0",
     "selectedActionObject": "[EEZ-UI.eez-project]:/actions/4",
     "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/27",
     "selectedStyleObject": "[EEZ-UI.eez-project]:/lvglStyles/styles/6",
     "selectedThemeObject": "[EEZ-UI.eez-project]:/themes/0",
     "selectedThemeColorObject": "[EEZ-UI.eez-project]:/colors/1",
-    "selectedBitmapObject": "[EEZ-UI.eez-project]:/bitmaps/8",
+    "selectedBitmapObject": "[EEZ-UI.eez-project]:/bitmaps/12",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -30,6 +30,7 @@
           },
           {
             "type": "border",
+            "selected": 2,
             "size": 207.5,
             "location": "right",
             "children": [
@@ -1245,7 +1246,13 @@
       "selectionFront": {},
       "selectionBack": {
         "0": {
-          "1": {}
+          "0": {
+            "1": {
+              "$selected": true
+            },
+            "2": {},
+            "3": {}
+          }
         }
       },
       "transform": {
@@ -1376,13 +1383,13 @@
   "lvglExpandedPropertiesGroup": [
     "TEXT",
     "BORDER",
-    "LAYOUT",
     "SHADOW",
+    "MARGIN",
     "PADDING"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
   "flowZoom": 0.8,
   "implementationLanguage": "C",
-  "openDialogDefaultPath": "/Users/cywestbrook/Downloads/fontawesome-free-7.2.0-desktop/otfs/Font Awesome 7 Free-Regular-400.otf"
+  "openDialogDefaultPath": "/Users/cywestbrook/Downloads/triangle_circle_24dp_1F1F1F_FILL1_wght400_GRAD0_opsz24.png"
 }

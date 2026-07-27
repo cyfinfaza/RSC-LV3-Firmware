@@ -37,6 +37,12 @@ add_executable(${CMAKE_PROJECT_NAME})
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
+# Add LV3-CAN-Subsystem library
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../LV3-CAN-Subsystem ${CMAKE_CURRENT_BINARY_DIR}/LV3-CAN-Subsystem)
+target_compile_definitions(LV3-CAN-Subsystem PRIVATE
+    LV3_CAN_DRIVER_IMPL__LV3_G0B1CBT
+)
+
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
@@ -63,6 +69,7 @@ list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
+    LV3-CAN-Subsystem
 
     # Add user defined libraries
 )
