@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "usb_device.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -26,6 +27,7 @@
 #include "persistent_settings.h"
 #include "can_interface.h"
 #include "adc_sensors.h"
+#include "usb_telemetry.h"
 #include "screen_helper.h"
 #include "ui.h"
 
@@ -65,8 +67,6 @@ TIM_HandleTypeDef htim1;
 
 UART_HandleTypeDef huart4;
 
-HCD_HandleTypeDef hhcd_USB_OTG_FS;
-
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -78,7 +78,6 @@ static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_I2S1_Init(void);
 static void MX_LTDC_Init(void);
-static void MX_USB_OTG_FS_HCD_Init(void);
 static void MX_ADC3_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_I2C4_Init(void);
@@ -138,7 +137,6 @@ int main(void)
   MX_DMA_Init();
   MX_I2S1_Init();
   MX_LTDC_Init();
-  MX_USB_OTG_FS_HCD_Init();
   MX_ADC3_Init();
   MX_ADC1_Init();
   MX_I2C4_Init();
@@ -146,6 +144,7 @@ int main(void)
   MX_UART4_Init();
   MX_FDCAN2_Init();
   MX_DMA2D_Init();
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
 
   PersistentSettings_Init();
@@ -154,6 +153,7 @@ int main(void)
   CAN_Interface_Init();
   ADC_Sensors_Init();
   ScreenHelper_Init();
+  USB_Telemetry_Init();
 
   /* USER CODE END 2 */
 
@@ -169,6 +169,7 @@ int main(void)
     ui_tick();
     LV3_CAN_Loop();
     ScreenHelper_Loop();
+    USB_Telemetry_Loop();
 
   }
   /* USER CODE END 3 */
@@ -756,37 +757,6 @@ static void MX_UART4_Init(void)
   /* USER CODE BEGIN UART4_Init 2 */
 
   /* USER CODE END UART4_Init 2 */
-
-}
-
-/**
-  * @brief USB_OTG_FS Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_USB_OTG_FS_HCD_Init(void)
-{
-
-  /* USER CODE BEGIN USB_OTG_FS_Init 0 */
-
-  /* USER CODE END USB_OTG_FS_Init 0 */
-
-  /* USER CODE BEGIN USB_OTG_FS_Init 1 */
-
-  /* USER CODE END USB_OTG_FS_Init 1 */
-  hhcd_USB_OTG_FS.Instance = USB_OTG_FS;
-  hhcd_USB_OTG_FS.Init.Host_channels = 16;
-  hhcd_USB_OTG_FS.Init.speed = HCD_SPEED_FULL;
-  hhcd_USB_OTG_FS.Init.dma_enable = DISABLE;
-  hhcd_USB_OTG_FS.Init.phy_itface = HCD_PHY_EMBEDDED;
-  hhcd_USB_OTG_FS.Init.Sof_enable = DISABLE;
-  if (HAL_HCD_Init(&hhcd_USB_OTG_FS) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN USB_OTG_FS_Init 2 */
-
-  /* USER CODE END USB_OTG_FS_Init 2 */
 
 }
 

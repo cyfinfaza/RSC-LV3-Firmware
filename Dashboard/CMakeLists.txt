@@ -80,6 +80,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/persistent_settings.c
     Core/Src/can_interface.c
     Core/Src/adc_sensors.c
+    Core/Src/usb_telemetry.c
     Core/Src/screen_helpers/screen_helper.c
     Core/Src/screen_helpers/can_parameters.c
     Core/Src/screen_helpers/hv_battery.c

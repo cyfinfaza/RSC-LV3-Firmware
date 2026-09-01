@@ -61,6 +61,7 @@ void FDCAN2_IT1_IRQHandler(void);
 void FDCAN_CAL_IRQHandler(void);
 void LTDC_IRQHandler(void);
 void LTDC_ER_IRQHandler(void);
+void OTG_FS_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */
