@@ -25,6 +25,8 @@
 #include "LV3_CAN.h"
 #include "stm32g0xx_hal_gpio.h"
 
+#include "mppt_interface.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -78,6 +80,26 @@ const LV3_CAN_Binding lv3_can_bindings[] = {
     {&sw_service_brake_val, sw_service_brake, LV3_CAN_BindMode_Write},
     {&signal_left_val, signal_left, LV3_CAN_BindMode_Read},
     {&signal_right_val, signal_right, LV3_CAN_BindMode_Read},
+
+    {&mppt_data[0].arrayVoltage, mppt1_voltage, LV3_CAN_BindMode_Write},
+    {&mppt_data[0].arrayCurrent, mppt1_current, LV3_CAN_BindMode_Write},
+    {&mppt_data[0].batteryVoltage, mppt1_batt_rail, LV3_CAN_BindMode_Write},
+    {&mppt_data[0].batteryTemp, mppt1_temp, LV3_CAN_BindMode_Write},
+
+    {&mppt_data[1].arrayVoltage, mppt2_voltage, LV3_CAN_BindMode_Write},
+    {&mppt_data[1].arrayCurrent, mppt2_current, LV3_CAN_BindMode_Write},
+    {&mppt_data[1].batteryVoltage, mppt2_batt_rail, LV3_CAN_BindMode_Write},
+    {&mppt_data[1].batteryTemp, mppt2_temp, LV3_CAN_BindMode_Write},
+
+    {&mppt_data[2].arrayVoltage, mppt3_voltage, LV3_CAN_BindMode_Write},
+    {&mppt_data[2].arrayCurrent, mppt3_current, LV3_CAN_BindMode_Write},
+    {&mppt_data[2].batteryVoltage, mppt3_batt_rail, LV3_CAN_BindMode_Write},
+    {&mppt_data[2].batteryTemp, mppt3_temp, LV3_CAN_BindMode_Write},
+
+    {&mppt_data[3].arrayVoltage, mppt4_voltage, LV3_CAN_BindMode_Write},
+    {&mppt_data[3].arrayCurrent, mppt4_current, LV3_CAN_BindMode_Write},
+    {&mppt_data[3].batteryVoltage, mppt4_batt_rail, LV3_CAN_BindMode_Write},
+    {&mppt_data[3].batteryTemp, mppt4_temp, LV3_CAN_BindMode_Write},
 };
 const unsigned int lv3_can_bindings_count = sizeof(lv3_can_bindings) / sizeof(LV3_CAN_Binding);
 /* USER CODE END PV */
@@ -151,7 +173,10 @@ int main(void)
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
 
-  HAL_GPIO_WritePin(OUT_4_GPIO_Port, OUT_4_Pin, 1);
+  //power on MPPT
+  HAL_GPIO_WritePin(OUT_4_GPIO_Port, OUT_4_Pin, GPIO_PIN_SET);
+
+  MPPT_Init();
 
   LV3_CAN_Init(4, LV3_CAN_BusMode_Normal, lv3_can_bindings, lv3_can_bindings_count);
 
@@ -389,10 +414,10 @@ static void MX_FDCAN2_Init(void)
   hfdcan2.Init.AutoRetransmission = DISABLE;
   hfdcan2.Init.TransmitPause = DISABLE;
   hfdcan2.Init.ProtocolException = DISABLE;
-  hfdcan2.Init.NominalPrescaler = 16;
+  hfdcan2.Init.NominalPrescaler = 6;
   hfdcan2.Init.NominalSyncJumpWidth = 1;
-  hfdcan2.Init.NominalTimeSeg1 = 1;
-  hfdcan2.Init.NominalTimeSeg2 = 1;
+  hfdcan2.Init.NominalTimeSeg1 = 13;
+  hfdcan2.Init.NominalTimeSeg2 = 2;
   hfdcan2.Init.DataPrescaler = 1;
   hfdcan2.Init.DataSyncJumpWidth = 1;
   hfdcan2.Init.DataTimeSeg1 = 1;
