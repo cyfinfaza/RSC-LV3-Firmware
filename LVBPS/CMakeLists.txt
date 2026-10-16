@@ -71,3 +71,15 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
     LV3-CAN-Subsystem
 )
+
+# ---- RSC: copy build outputs to committed bin/ folder ----
+# Copies the .elf and .map to bin/<build type>/ after every build so they can
+# be committed (build/ itself is gitignored). See the repo README.
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}
+    COMMAND ${CMAKE_COMMAND} -E copy
+        $<TARGET_FILE:${CMAKE_PROJECT_NAME}>
+        ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.map
+        ${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/
+)
+# ---- end RSC ----

@@ -1,7 +1,3 @@
-# Build output: ignore everything except the flashable .elf and the .map
-/build/**
-!/build/*/
-!/build/*/*.elf
-!/build/*/*.map
+/build/
 mx.scratch
 !.settings
