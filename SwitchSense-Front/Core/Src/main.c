@@ -75,11 +75,15 @@ GPIO_PinState in_1;
 uint32_t sw_service_brake_val = 0;
 uint32_t signal_left_val = 0;
 uint32_t signal_right_val = 0;
+uint32_t main_contactor_switch = 0;
 
 const LV3_CAN_Binding lv3_can_bindings[] = {
     {&sw_service_brake_val, sw_service_brake, LV3_CAN_BindMode_Write},
+
     {&signal_left_val, signal_left, LV3_CAN_BindMode_Read},
     {&signal_right_val, signal_right, LV3_CAN_BindMode_Read},
+
+    {&main_contactor_switch, sw_hv_main, LV3_CAN_BindMode_Write},
 
     {&mppt_data[0].arrayVoltage, mppt1_voltage, LV3_CAN_BindMode_Write},
     {&mppt_data[0].arrayCurrent, mppt1_current, LV3_CAN_BindMode_Write},
@@ -204,6 +208,7 @@ int main(void)
 
     in_1 = HAL_GPIO_ReadPin(IN_1_GPIO_Port, IN_1_Pin);
 
+    main_contactor_switch = !HAL_GPIO_ReadPin(IN_3_GPIO_Port, IN_3_Pin);
     // --- LV3 CAN ---
     sw_service_brake_val = in_1;
     LV3_CAN_Loop();

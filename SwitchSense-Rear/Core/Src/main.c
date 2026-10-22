@@ -115,14 +115,12 @@ float speed_mph_filtered = 0.0f;
 // --- LV3 CAN bindings (module id 8, rounded to nearest integer) ---
 uint32_t motor_rpm_val = 0;
 uint32_t motor_speed_val = 0;
-uint32_t main_contactor_switch = 0;
 uint32_t main_contactor_enabled = 0;
 uint32_t _hv_faults = 0;
 
 const LV3_CAN_Binding lv3_can_bindings[] = {
     {&motor_rpm_val,   motor_rpm,   LV3_CAN_BindMode_Write},
     {&motor_speed_val, motor_speed, LV3_CAN_BindMode_Write},
-    {&main_contactor_switch, sw_hv_main, LV3_CAN_BindMode_Write},
     {&main_contactor_enabled, hv_main_active, LV3_CAN_BindMode_Read},
     {&_hv_faults, hv_fault, LV3_CAN_BindMode_Read},
 };
@@ -248,7 +246,6 @@ int main(void)
     v_sense_12 = adc_pin_voltage * (100.0f + 5.1f) / 5.1f;
 
     in_1 = HAL_GPIO_ReadPin(IN_1_GPIO_Port, IN_1_Pin);
-    main_contactor_switch = !HAL_GPIO_ReadPin(IN_2_GPIO_Port, IN_2_Pin);
     in_10 = HAL_GPIO_ReadPin(IN_10_GPIO_Port, IN_10_Pin);
 
     // --- Process state ---

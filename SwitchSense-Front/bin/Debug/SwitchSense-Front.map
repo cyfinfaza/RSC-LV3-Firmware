@@ -4457,7 +4457,7 @@ LOAD C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1
                 0x08000000                g_pfnVectors
                 0x080000bc                        . = ALIGN (0x4)
 
-.text           0x080000bc     0x7188
+.text           0x080000bc     0x71a4
                 0x080000bc                        . = ALIGN (0x4)
  *(.text)
  .text          0x080000bc       0x48 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
@@ -4775,238 +4775,238 @@ LOAD C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1
  .text.MPPT_Init
                 0x080058a0       0x44 CMakeFiles/SwitchSense-Front.dir/Core/Src/mppt_interface.c.obj
                 0x080058a0                MPPT_Init
- .text.main     0x080058e4      0x1c0 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+ .text.main     0x080058e4      0x1dc CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
                 0x080058e4                main
  .text.SystemClock_Config
-                0x08005aa4       0xb8 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
-                0x08005aa4                SystemClock_Config
+                0x08005ac0       0xb8 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x08005ac0                SystemClock_Config
  .text.MX_ADC1_Init
-                0x08005b5c      0x130 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x08005b78      0x130 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
  .text.MX_FDCAN1_Init
-                0x08005c8c       0x90 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x08005ca8       0x90 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
  .text.MX_FDCAN2_Init
-                0x08005d1c       0x90 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x08005d38       0x90 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
  .text.MX_TIM1_Init
-                0x08005dac      0x180 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x08005dc8      0x180 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
  .text.MX_TIM2_Init
-                0x08005f2c       0xe4 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x08005f48       0xe4 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
  .text.MX_TIM3_Init
-                0x08006010       0xd8 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x0800602c       0xd8 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
  .text.MX_TIM4_Init
-                0x080060e8       0xd8 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x08006104       0xd8 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
  .text.MX_USB_DRD_FS_PCD_Init
-                0x080061c0       0x6c CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x080061dc       0x6c CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
  .text.MX_DMA_Init
-                0x0800622c       0x3c CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x08006248       0x3c CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
  .text.MX_GPIO_Init
-                0x08006268      0x13c CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x08006284      0x13c CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
  .text.Error_Handler
-                0x080063a4        0xc CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
-                0x080063a4                Error_Handler
+                0x080063c0        0xc CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x080063c0                Error_Handler
  .text.NMI_Handler
-                0x080063b0        0x8 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
-                0x080063b0                NMI_Handler
+                0x080063cc        0x8 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
+                0x080063cc                NMI_Handler
  .text.HardFault_Handler
-                0x080063b8        0x8 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
-                0x080063b8                HardFault_Handler
+                0x080063d4        0x8 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
+                0x080063d4                HardFault_Handler
  .text.SVC_Handler
-                0x080063c0        0xa CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
-                0x080063c0                SVC_Handler
+                0x080063dc        0xa CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
+                0x080063dc                SVC_Handler
  .text.PendSV_Handler
-                0x080063ca        0xa CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
-                0x080063ca                PendSV_Handler
+                0x080063e6        0xa CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
+                0x080063e6                PendSV_Handler
  .text.SysTick_Handler
-                0x080063d4        0xe CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
-                0x080063d4                SysTick_Handler
- *fill*         0x080063e2        0x2 
+                0x080063f0        0xe CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
+                0x080063f0                SysTick_Handler
+ *fill*         0x080063fe        0x2 
  .text.DMA1_Channel1_IRQHandler
-                0x080063e4       0x18 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
-                0x080063e4                DMA1_Channel1_IRQHandler
+                0x08006400       0x18 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
+                0x08006400                DMA1_Channel1_IRQHandler
  .text.ADC1_COMP_IRQHandler
-                0x080063fc       0x18 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
-                0x080063fc                ADC1_COMP_IRQHandler
+                0x08006418       0x18 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
+                0x08006418                ADC1_COMP_IRQHandler
  .text.TIM16_FDCAN_IT0_IRQHandler
-                0x08006414       0x24 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
-                0x08006414                TIM16_FDCAN_IT0_IRQHandler
+                0x08006430       0x24 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
+                0x08006430                TIM16_FDCAN_IT0_IRQHandler
  .text.TIM17_FDCAN_IT1_IRQHandler
-                0x08006438       0x24 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
-                0x08006438                TIM17_FDCAN_IT1_IRQHandler
+                0x08006454       0x24 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
+                0x08006454                TIM17_FDCAN_IT1_IRQHandler
  .text.HAL_MspInit
-                0x0800645c       0x50 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
-                0x0800645c                HAL_MspInit
+                0x08006478       0x50 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
+                0x08006478                HAL_MspInit
  .text.HAL_ADC_MspInit
-                0x080064ac       0xf8 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
-                0x080064ac                HAL_ADC_MspInit
+                0x080064c8       0xf8 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
+                0x080064c8                HAL_ADC_MspInit
  .text.HAL_FDCAN_MspInit
-                0x080065a4      0x1c4 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
-                0x080065a4                HAL_FDCAN_MspInit
+                0x080065c0      0x1c4 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
+                0x080065c0                HAL_FDCAN_MspInit
  .text.HAL_TIM_PWM_MspInit
-                0x08006768       0xe4 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
-                0x08006768                HAL_TIM_PWM_MspInit
+                0x08006784       0xe4 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
+                0x08006784                HAL_TIM_PWM_MspInit
  .text.HAL_TIM_MspPostInit
-                0x0800684c      0x250 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
-                0x0800684c                HAL_TIM_MspPostInit
+                0x08006868      0x250 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
+                0x08006868                HAL_TIM_MspPostInit
  .text.HAL_PCD_MspInit
-                0x08006a9c       0xb0 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
-                0x08006a9c                HAL_PCD_MspInit
+                0x08006ab8       0xb0 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
+                0x08006ab8                HAL_PCD_MspInit
  .text.Reset_Handler
-                0x08006b4c       0x50 CMakeFiles/SwitchSense-Front.dir/startup_stm32g0b1xx.s.obj
-                0x08006b4c                Reset_Handler
+                0x08006b68       0x50 CMakeFiles/SwitchSense-Front.dir/startup_stm32g0b1xx.s.obj
+                0x08006b68                Reset_Handler
  .text.Default_Handler
-                0x08006b9c        0x2 CMakeFiles/SwitchSense-Front.dir/startup_stm32g0b1xx.s.obj
-                0x08006b9c                I2C2_3_IRQHandler
-                0x08006b9c                USART3_4_5_6_LPUART1_IRQHandler
-                0x08006b9c                TIM1_CC_IRQHandler
-                0x08006b9c                I2C1_IRQHandler
-                0x08006b9c                TIM7_LPTIM2_IRQHandler
-                0x08006b9c                DMA1_Ch4_7_DMA2_Ch1_5_DMAMUX1_OVR_IRQHandler
-                0x08006b9c                RCC_CRS_IRQHandler
-                0x08006b9c                RTC_TAMP_IRQHandler
-                0x08006b9c                SPI1_IRQHandler
-                0x08006b9c                USB_UCPD1_2_IRQHandler
-                0x08006b9c                EXTI2_3_IRQHandler
-                0x08006b9c                USART2_LPUART2_IRQHandler
-                0x08006b9c                PVD_VDDIO2_IRQHandler
-                0x08006b9c                EXTI4_15_IRQHandler
-                0x08006b9c                Default_Handler
-                0x08006b9c                CEC_IRQHandler
-                0x08006b9c                TIM14_IRQHandler
-                0x08006b9c                TIM15_IRQHandler
-                0x08006b9c                TIM3_TIM4_IRQHandler
-                0x08006b9c                EXTI0_1_IRQHandler
-                0x08006b9c                SPI2_3_IRQHandler
-                0x08006b9c                TIM6_DAC_LPTIM1_IRQHandler
-                0x08006b9c                WWDG_IRQHandler
-                0x08006b9c                TIM2_IRQHandler
-                0x08006b9c                DMA1_Channel2_3_IRQHandler
-                0x08006b9c                FLASH_IRQHandler
-                0x08006b9c                USART1_IRQHandler
-                0x08006b9c                TIM1_BRK_UP_TRG_COM_IRQHandler
- *fill*         0x08006b9e        0x2 
+                0x08006bb8        0x2 CMakeFiles/SwitchSense-Front.dir/startup_stm32g0b1xx.s.obj
+                0x08006bb8                I2C2_3_IRQHandler
+                0x08006bb8                USART3_4_5_6_LPUART1_IRQHandler
+                0x08006bb8                TIM1_CC_IRQHandler
+                0x08006bb8                I2C1_IRQHandler
+                0x08006bb8                TIM7_LPTIM2_IRQHandler
+                0x08006bb8                DMA1_Ch4_7_DMA2_Ch1_5_DMAMUX1_OVR_IRQHandler
+                0x08006bb8                RCC_CRS_IRQHandler
+                0x08006bb8                RTC_TAMP_IRQHandler
+                0x08006bb8                SPI1_IRQHandler
+                0x08006bb8                USB_UCPD1_2_IRQHandler
+                0x08006bb8                EXTI2_3_IRQHandler
+                0x08006bb8                USART2_LPUART2_IRQHandler
+                0x08006bb8                PVD_VDDIO2_IRQHandler
+                0x08006bb8                EXTI4_15_IRQHandler
+                0x08006bb8                Default_Handler
+                0x08006bb8                CEC_IRQHandler
+                0x08006bb8                TIM14_IRQHandler
+                0x08006bb8                TIM15_IRQHandler
+                0x08006bb8                TIM3_TIM4_IRQHandler
+                0x08006bb8                EXTI0_1_IRQHandler
+                0x08006bb8                SPI2_3_IRQHandler
+                0x08006bb8                TIM6_DAC_LPTIM1_IRQHandler
+                0x08006bb8                WWDG_IRQHandler
+                0x08006bb8                TIM2_IRQHandler
+                0x08006bb8                DMA1_Channel2_3_IRQHandler
+                0x08006bb8                FLASH_IRQHandler
+                0x08006bb8                USART1_IRQHandler
+                0x08006bb8                TIM1_BRK_UP_TRG_COM_IRQHandler
+ *fill*         0x08006bba        0x2 
  .text.LV3_CAN_Init
-                0x08006ba0       0x6c LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
-                0x08006ba0                LV3_CAN_Init
+                0x08006bbc       0x6c LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+                0x08006bbc                LV3_CAN_Init
  .text.LV3_CAN_Loop
-                0x08006c0c      0x2b4 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
-                0x08006c0c                LV3_CAN_Loop
+                0x08006c28      0x2b4 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+                0x08006c28                LV3_CAN_Loop
  .text.LV3_CAN_PushNewMessage
-                0x08006ec0      0x12c LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
-                0x08006ec0                LV3_CAN_PushNewMessage
+                0x08006edc      0x12c LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+                0x08006edc                LV3_CAN_PushNewMessage
  .text.LV3_CAN_TriggerCallback
-                0x08006fec       0x28 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
-                0x08006fec                LV3_CAN_TriggerCallback
+                0x08007008       0x28 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+                0x08007008                LV3_CAN_TriggerCallback
  .text.LV3_CAN_PRIMARY_RxFifo0Callback
-                0x08007014       0x16 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
-                0x08007014                LV3_CAN_PRIMARY_RxFifo0Callback
- *fill*         0x0800702a        0x2 
+                0x08007030       0x16 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
+                0x08007030                LV3_CAN_PRIMARY_RxFifo0Callback
+ *fill*         0x08007046        0x2 
  .text.HAL_FDCAN_RxFifo0Callback
-                0x0800702c       0x6c LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
-                0x0800702c                HAL_FDCAN_RxFifo0Callback
+                0x08007048       0x6c LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
+                0x08007048                HAL_FDCAN_RxFifo0Callback
  .text.LV3_CAN_Driver_Init
-                0x08007098       0x78 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
-                0x08007098                LV3_CAN_Driver_Init
+                0x080070b4       0x78 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
+                0x080070b4                LV3_CAN_Driver_Init
  .text.LV3_CAN_Driver_SendMessage
-                0x08007110       0x78 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
-                0x08007110                LV3_CAN_Driver_SendMessage
+                0x0800712c       0x78 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
+                0x0800712c                LV3_CAN_Driver_SendMessage
  .text.LV3_CAN_Driver_SetLED
-                0x08007188       0x3c LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
-                0x08007188                LV3_CAN_Driver_SetLED
+                0x080071a4       0x3c LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
+                0x080071a4                LV3_CAN_Driver_SetLED
  .text.LV3_CAN_Driver_GetTick
-                0x080071c4       0x10 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
-                0x080071c4                LV3_CAN_Driver_GetTick
- .text.memset   0x080071d4       0x10 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-memset.o)
-                0x080071d4                memset
+                0x080071e0       0x10 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
+                0x080071e0                LV3_CAN_Driver_GetTick
+ .text.memset   0x080071f0       0x10 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-memset.o)
+                0x080071f0                memset
  .text.__libc_init_array
-                0x080071e4       0x48 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-init.o)
-                0x080071e4                __libc_init_array
+                0x08007200       0x48 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-init.o)
+                0x08007200                __libc_init_array
  *(.glue_7)
- .glue_7        0x0800722c        0x0 linker stubs
+ .glue_7        0x08007248        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x0800722c        0x0 linker stubs
+ .glue_7t       0x08007248        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x0800722c        0x0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
+ .eh_frame      0x08007248        0x0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
  *(.init)
- .init          0x0800722c        0x4 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o
-                0x0800722c                _init
- .init          0x08007230        0x8 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtn.o
+ .init          0x08007248        0x4 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o
+                0x08007248                _init
+ .init          0x0800724c        0x8 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtn.o
  *(.fini)
- .fini          0x08007238        0x4 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o
-                0x08007238                _fini
- .fini          0x0800723c        0x8 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtn.o
-                0x08007244                        . = ALIGN (0x4)
-                0x08007244                        _etext = .
+ .fini          0x08007254        0x4 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o
+                0x08007254                _fini
+ .fini          0x08007258        0x8 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtn.o
+                0x08007260                        . = ALIGN (0x4)
+                0x08007260                        _etext = .
 
-.vfp11_veneer   0x08007244        0x0
- .vfp11_veneer  0x08007244        0x0 linker stubs
+.vfp11_veneer   0x08007260        0x0
+ .vfp11_veneer  0x08007260        0x0 linker stubs
 
-.v4_bx          0x08007244        0x0
- .v4_bx         0x08007244        0x0 linker stubs
+.v4_bx          0x08007260        0x0
+ .v4_bx         0x08007260        0x0 linker stubs
 
-.iplt           0x08007244        0x0
- .iplt          0x08007244        0x0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
+.iplt           0x08007260        0x0
+ .iplt          0x08007260        0x0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
 
-.rodata         0x08007244      0x730
-                0x08007244                        . = ALIGN (0x4)
+.rodata         0x08007260      0x73c
+                0x08007260                        . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x08007244       0x18 CMakeFiles/SwitchSense-Front.dir/Core/Src/mppt_interface.c.obj
- .rodata        0x0800725c      0x511 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
- *fill*         0x0800776d        0x3 
- .rodata        0x08007770       0x7c C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp\libgcc.a(divsf3.o)
+ .rodata        0x08007260       0x18 CMakeFiles/SwitchSense-Front.dir/Core/Src/mppt_interface.c.obj
+ .rodata        0x08007278      0x511 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+ *fill*         0x08007789        0x3 
+ .rodata        0x0800778c       0x7c C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp\libgcc.a(divsf3.o)
  *(.rodata*)
  .rodata.AHBPrescTable
-                0x080077ec       0x40 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g0xx.c.obj
-                0x080077ec                AHBPrescTable
+                0x08007808       0x40 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g0xx.c.obj
+                0x08007808                AHBPrescTable
  .rodata.DLCtoBytes
-                0x0800782c       0x10 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_fdcan.c.obj
+                0x08007848       0x10 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_fdcan.c.obj
  .rodata.HAL_TIM_PWM_ConfigChannel
-                0x0800783c       0x54 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_tim.c.obj
+                0x08007858       0x54 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_tim.c.obj
  .rodata.lv3_can_bindings
-                0x08007890       0xe4 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
-                0x08007890                lv3_can_bindings
-                0x08007974                        . = ALIGN (0x4)
+                0x080078ac       0xf0 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x080078ac                lv3_can_bindings
+                0x0800799c                        . = ALIGN (0x4)
 
-.ARM.extab      0x08007974        0x0
-                0x08007974                        . = ALIGN (0x4)
+.ARM.extab      0x0800799c        0x0
+                0x0800799c                        . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x08007974                        . = ALIGN (0x4)
+                0x0800799c                        . = ALIGN (0x4)
 
-.ARM            0x08007974        0x0
-                0x08007974                        . = ALIGN (0x4)
-                0x08007974                        __exidx_start = .
+.ARM            0x0800799c        0x0
+                0x0800799c                        . = ALIGN (0x4)
+                0x0800799c                        __exidx_start = .
  *(.ARM.exidx*)
-                0x08007974                        __exidx_end = .
-                0x08007974                        . = ALIGN (0x4)
+                0x0800799c                        __exidx_end = .
+                0x0800799c                        . = ALIGN (0x4)
 
-.preinit_array  0x08007974        0x0
-                0x08007974                        . = ALIGN (0x4)
-                0x08007974                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x0800799c        0x0
+                0x0800799c                        . = ALIGN (0x4)
+                0x0800799c                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x08007974                        PROVIDE (__preinit_array_end = .)
-                0x08007974                        . = ALIGN (0x4)
+                0x0800799c                        PROVIDE (__preinit_array_end = .)
+                0x0800799c                        . = ALIGN (0x4)
 
-.init_array     0x08007974        0x4
-                0x08007974                        . = ALIGN (0x4)
-                0x08007974                        PROVIDE (__init_array_start = .)
+.init_array     0x0800799c        0x4
+                0x0800799c                        . = ALIGN (0x4)
+                0x0800799c                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x08007974        0x4 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
-                0x08007978                        PROVIDE (__init_array_end = .)
-                0x08007978                        . = ALIGN (0x4)
+ .init_array    0x0800799c        0x4 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
+                0x080079a0                        PROVIDE (__init_array_end = .)
+                0x080079a0                        . = ALIGN (0x4)
 
-.fini_array     0x08007978        0x4
-                0x08007978                        . = ALIGN (0x4)
+.fini_array     0x080079a0        0x4
+                0x080079a0                        . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08007978        0x4 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
+ .fini_array    0x080079a0        0x4 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x0800797c                        . = ALIGN (0x4)
-                0x0800797c                        _sidata = LOADADDR (.data)
+                0x080079a4                        . = ALIGN (0x4)
+                0x080079a4                        _sidata = LOADADDR (.data)
 
-.rel.dyn        0x0800797c        0x0
- .rel.iplt      0x0800797c        0x0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
+.rel.dyn        0x080079a4        0x0
+ .rel.iplt      0x080079a4        0x0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
 
-.data           0x20000000      0x72c load address 0x0800797c
+.data           0x20000000      0x72c load address 0x080079a4
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -5027,10 +5027,10 @@ LOAD C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1
  *(.RamFunc*)
                 0x2000072c                        . = ALIGN (0x4)
 
-.igot.plt       0x2000072c        0x0 load address 0x080080a8
+.igot.plt       0x2000072c        0x0 load address 0x080080d0
  .igot.plt      0x2000072c        0x0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
 
-.tdata          0x2000072c        0x0 load address 0x080080a8
+.tdata          0x2000072c        0x0 load address 0x080080d0
  *(.tdata .tdata.* .gnu.linkonce.td.*)
                 0x2000072c                        . = ALIGN (0x4)
                 0x2000072c                        _edata = .
@@ -5047,7 +5047,7 @@ LOAD C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1
                 [!provide]                        PROVIDE (__data_source_end = __tdata_source_end)
                 [!provide]                        PROVIDE (__data_source_size = (__data_source_end - __data_source))
 
-.tbss           0x2000072c        0x0 load address 0x080080a8
+.tbss           0x2000072c        0x0 load address 0x080080d0
                 0x2000072c                        _sbss = .
                 0x2000072c                        __bss_start__ = _sbss
  *(.tbss .tbss.*)
@@ -5064,7 +5064,7 @@ LOAD C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1
                 [!provide]                        PROVIDE (__arm32_tls_tcb_offset = MAX (0x8, __tls_align))
                 [!provide]                        PROVIDE (__arm64_tls_tcb_offset = MAX (0x10, __tls_align))
 
-.bss            0x2000072c      0xb00 load address 0x080080a8
+.bss            0x2000072c      0xb04 load address 0x080080d0
  *(.bss)
  .bss           0x2000072c       0x1c C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
  *(.bss*)
@@ -5119,45 +5119,47 @@ LOAD C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1
  .bss.signal_right_val
                 0x20000d48        0x4 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
                 0x20000d48                signal_right_val
+ .bss.main_contactor_switch
+                0x20000d4c        0x4 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                0x20000d4c                main_contactor_switch
  .bss.HAL_RCC_FDCAN_CLK_ENABLED
-                0x20000d4c        0x4 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
- .bss.bindings  0x20000d50        0x4 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+                0x20000d50        0x4 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
+ .bss.bindings  0x20000d54        0x4 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
  .bss.num_bindings
-                0x20000d54        0x4 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+                0x20000d58        0x4 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
  .bss.this_module_id
-                0x20000d58        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
- *fill*         0x20000d59        0x3 
+                0x20000d5c        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+ *fill*         0x20000d5d        0x3 
  .bss.param_state
-                0x20000d5c      0x4c0 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+                0x20000d60      0x4c0 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
  .bss.stale_data
-                0x2000121c        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
- .bss.tx_error  0x2000121d        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+                0x20001220        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+ .bss.tx_error  0x20001221        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
  .bss.bus_conflict
-                0x2000121e        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+                0x20001222        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
  .bss.system_status
-                0x2000121f        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+                0x20001223        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
  .bss.heartbeat_timestamp
-                0x20001220        0x4 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
- .bss.heartbeat_counter
                 0x20001224        0x4 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+ .bss.heartbeat_counter
+                0x20001228        0x4 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
  .bss.heartbeat_pulse_in_progress
-                0x20001228        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+                0x2000122c        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
  .bss.heartbeat_reset_occurred
-                0x20001229        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+                0x2000122d        0x1 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
  *(COMMON)
-                0x2000122c                        . = ALIGN (0x4)
- *fill*         0x2000122a        0x2 
-                0x2000122c                        _ebss = .
-                0x2000122c                        __bss_end__ = _ebss
+                0x20001230                        . = ALIGN (0x4)
+ *fill*         0x2000122e        0x2 
+                0x20001230                        _ebss = .
+                0x20001230                        __bss_end__ = _ebss
                 [!provide]                        PROVIDE (__bss_end = .)
                 [!provide]                        PROVIDE (__non_tls_bss_start = ADDR (.bss))
                 [!provide]                        PROVIDE (__bss_start = __tbss_start)
                 [!provide]                        PROVIDE (__bss_size = (__bss_end - __bss_start))
 
 ._user_heap_stack
-                0x2000122c      0x604 load address 0x080080a8
+                0x20001230      0x600 load address 0x080080d0
                 0x20001230                        . = ALIGN (0x8)
- *fill*         0x2000122c        0x4 
                 [!provide]                        PROVIDE (end = .)
                 0x20001230                        PROVIDE (_end = .)
                 0x20001430                        . = (. + _Min_Heap_Size)
@@ -5296,7 +5298,7 @@ LOAD linker stubs
  .comment       0x00000043        0x0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-init.o)
                                  0x44 (size before relaxing)
 
-.debug_info     0x00000000    0x16738
+.debug_info     0x00000000    0x16749
  .debug_info    0x00000000      0x316 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g0xx.c.obj
  .debug_info    0x00000316     0x15cf cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_adc.c.obj
  .debug_info    0x000018e5      0xb8e cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_adc_ex.c.obj
@@ -5314,14 +5316,14 @@ LOAD linker stubs
  .debug_info    0x0000d8b8      0x7e7 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_pcd_ex.c.obj
  .debug_info    0x0000e09f     0x1319 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_ll_usb.c.obj
  .debug_info    0x0000f3b8      0x836 CMakeFiles/SwitchSense-Front.dir/Core/Src/mppt_interface.c.obj
- .debug_info    0x0000fbee     0x247a CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
- .debug_info    0x00012068      0xc89 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
- .debug_info    0x00012cf1     0x1d66 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
- .debug_info    0x00014a57       0x30 CMakeFiles/SwitchSense-Front.dir/startup_stm32g0b1xx.s.obj
- .debug_info    0x00014a87      0x949 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
- .debug_info    0x000153d0     0x117d LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
- .debug_info    0x0001654d       0xe0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-memset.o)
- .debug_info    0x0001662d      0x10b C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-init.o)
+ .debug_info    0x0000fbee     0x248b CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+ .debug_info    0x00012079      0xc89 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
+ .debug_info    0x00012d02     0x1d66 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
+ .debug_info    0x00014a68       0x30 CMakeFiles/SwitchSense-Front.dir/startup_stm32g0b1xx.s.obj
+ .debug_info    0x00014a98      0x949 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+ .debug_info    0x000153e1     0x117d LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
+ .debug_info    0x0001655e       0xe0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-memset.o)
+ .debug_info    0x0001663e      0x10b C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-init.o)
 
 .debug_abbrev   0x00000000     0x3459
  .debug_abbrev  0x00000000      0x119 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g0xx.c.obj
@@ -5529,7 +5531,7 @@ LOAD linker stubs
  .debug_macro   0x0001ec01       0x10 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
  .debug_macro   0x0001ec11      0x241 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
 
-.debug_line     0x00000000    0x18da7
+.debug_line     0x00000000    0x18db8
  .debug_line    0x00000000      0x96c cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g0xx.c.obj
  .debug_line    0x0000096c     0x1ae6 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_adc.c.obj
  .debug_line    0x00002452      0xc5d cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_adc_ex.c.obj
@@ -5547,65 +5549,65 @@ LOAD linker stubs
  .debug_line    0x0001283f      0xa7c cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_pcd_ex.c.obj
  .debug_line    0x000132bb     0x12ef cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_ll_usb.c.obj
  .debug_line    0x000145aa      0x980 CMakeFiles/SwitchSense-Front.dir/Core/Src/mppt_interface.c.obj
- .debug_line    0x00014f2a      0xe7c CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
- .debug_line    0x00015da6      0x9b8 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
- .debug_line    0x0001675e      0xc1f CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
- .debug_line    0x0001737d       0x7b CMakeFiles/SwitchSense-Front.dir/startup_stm32g0b1xx.s.obj
- .debug_line    0x000173f8      0xc2c LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
- .debug_line    0x00018024      0xa9f LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
- .debug_line    0x00018ac3      0x178 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-memset.o)
- .debug_line    0x00018c3b      0x16c C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-init.o)
+ .debug_line    0x00014f2a      0xe8d CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+ .debug_line    0x00015db7      0x9b8 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
+ .debug_line    0x0001676f      0xc1f CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
+ .debug_line    0x0001738e       0x7b CMakeFiles/SwitchSense-Front.dir/startup_stm32g0b1xx.s.obj
+ .debug_line    0x00017409      0xc2c LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+ .debug_line    0x00018035      0xa9f LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
+ .debug_line    0x00018ad4      0x178 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-memset.o)
+ .debug_line    0x00018c4c      0x16c C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-init.o)
 
-.debug_str      0x00000000    0xc77d7
- .debug_str     0x00000000    0xc77d7 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g0xx.c.obj
+.debug_str      0x00000000    0xc77ed
+ .debug_str     0x00000000    0xc77ed cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g0xx.c.obj
                               0xbec60 (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_adc.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_adc.c.obj
                               0xbfa42 (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_adc_ex.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_adc_ex.c.obj
                               0xbf41e (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_rcc.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_rcc.c.obj
                               0xbf42c (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_rcc_ex.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_rcc_ex.c.obj
                               0xbf2bc (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_gpio.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_gpio.c.obj
                               0xbedc3 (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_dma.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_dma.c.obj
                               0xbf110 (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_pwr_ex.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_pwr_ex.c.obj
                               0xbf1e2 (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_cortex.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_cortex.c.obj
                               0xbf171 (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal.c.obj
                               0xbf540 (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_fdcan.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_fdcan.c.obj
                               0xc02f0 (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_tim.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_tim.c.obj
                               0xc01cf (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_tim_ex.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_tim_ex.c.obj
                               0xbfb57 (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_pcd.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_pcd.c.obj
                               0xbf53e (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_pcd_ex.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_pcd_ex.c.obj
                               0xbf10f (size before relaxing)
- .debug_str     0x000c77d7        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_ll_usb.c.obj
+ .debug_str     0x000c77ed        0x0 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_ll_usb.c.obj
                               0xbf0c5 (size before relaxing)
- .debug_str     0x000c77d7        0x0 CMakeFiles/SwitchSense-Front.dir/Core/Src/mppt_interface.c.obj
+ .debug_str     0x000c77ed        0x0 CMakeFiles/SwitchSense-Front.dir/Core/Src/mppt_interface.c.obj
                               0xbf0c3 (size before relaxing)
- .debug_str     0x000c77d7        0x0 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
-                              0xc1d11 (size before relaxing)
- .debug_str     0x000c77d7        0x0 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
+ .debug_str     0x000c77ed        0x0 CMakeFiles/SwitchSense-Front.dir/Core/Src/main.c.obj
+                              0xc1d27 (size before relaxing)
+ .debug_str     0x000c77ed        0x0 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_it.c.obj
                               0xbf979 (size before relaxing)
- .debug_str     0x000c77d7        0x0 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
+ .debug_str     0x000c77ed        0x0 CMakeFiles/SwitchSense-Front.dir/Core/Src/stm32g0xx_hal_msp.c.obj
                               0xc05c9 (size before relaxing)
- .debug_str     0x000c77d7        0x0 CMakeFiles/SwitchSense-Front.dir/startup_stm32g0b1xx.s.obj
+ .debug_str     0x000c77ed        0x0 CMakeFiles/SwitchSense-Front.dir/startup_stm32g0b1xx.s.obj
                                  0xc8 (size before relaxing)
- .debug_str     0x000c77d7        0x0 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
+ .debug_str     0x000c77ed        0x0 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN.c.obj)
                               0xc0511 (size before relaxing)
- .debug_str     0x000c77d7        0x0 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
+ .debug_str     0x000c77ed        0x0 LV3-CAN-Subsystem/libLV3-CAN-Subsystem.a(LV3_CAN_Driver.c.obj)
                               0xc06d4 (size before relaxing)
- .debug_str     0x000c77d7        0x0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-memset.o)
+ .debug_str     0x000c77ed        0x0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-memset.o)
                                 0x20a (size before relaxing)
- .debug_str     0x000c77d7        0x0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-init.o)
+ .debug_str     0x000c77ed        0x0 C:/Users/Alyosha/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libg_nano.a(libc_a-init.o)
                                 0x26b (size before relaxing)
 
 .debug_frame    0x00000000     0x4afc
