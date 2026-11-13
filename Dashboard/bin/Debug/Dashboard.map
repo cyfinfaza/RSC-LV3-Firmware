@@ -38946,7 +38946,7 @@ LOAD C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+s
 .iplt           0x080b9d84        0x0
  .iplt          0x080b9d84        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+dp/hard/crtbegin.o
 
-.rodata         0x080b9d88    0x28a50
+.rodata         0x080b9d88    0x28a98
                 0x080b9d88                        . = ALIGN (0x4)
  *(.rodata)
  .rodata        0x080b9d88       0x4c cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_fdcan.c.obj
@@ -39366,310 +39366,309 @@ LOAD C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+s
  .rodata.remove_style_funcs.0
                 0x080c2b94       0x30 EEZ-UI/libEEZ-UI.a(styles.c.obj)
  .rodata.assets
-                0x080c2bc4     0x4d44 EEZ-UI/libEEZ-UI.a(ui.c.obj)
+                0x080c2bc4     0x4d90 EEZ-UI/libEEZ-UI.a(ui.c.obj)
                 0x080c2bc4                assets
  .rodata.glyph_bitmap
-                0x080c7908     0x1505 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
- *fill*         0x080c8e0d        0x3 
+                0x080c7954     0x1505 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
+ *fill*         0x080c8e59        0x3 
  .rodata.glyph_dsc
-                0x080c8e10      0x300 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
- .rodata.cmaps  0x080c9110       0x14 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
+                0x080c8e5c      0x300 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
+ .rodata.cmaps  0x080c915c       0x14 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
  .rodata.kern_left_class_mapping
-                0x080c9124       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
+                0x080c9170       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
  .rodata.kern_right_class_mapping
-                0x080c9184       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
+                0x080c91d0       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
  .rodata.kern_class_values
-                0x080c91e4      0x681 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
- *fill*         0x080c9865        0x3 
+                0x080c9230      0x681 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
+ *fill*         0x080c98b1        0x3 
  .rodata.kern_classes
-                0x080c9868       0x10 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
+                0x080c98b4       0x10 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
  .rodata.font_dsc
-                0x080c9878       0x18 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
+                0x080c98c4       0x18 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
  .rodata.ui_font_barlow_14_semibold
-                0x080c9890       0x24 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
-                0x080c9890                ui_font_barlow_14_semibold
+                0x080c98dc       0x24 EEZ-UI/libEEZ-UI.a(ui_font_barlow_14_semibold.c.obj)
+                0x080c98dc                ui_font_barlow_14_semibold
  .rodata.glyph_bitmap
-                0x080c98b4      0xd93 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
- *fill*         0x080ca647        0x1 
+                0x080c9900      0xd93 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
+ *fill*         0x080ca693        0x1 
  .rodata.glyph_dsc
-                0x080ca648      0x300 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
- .rodata.cmaps  0x080ca948       0x14 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
+                0x080ca694      0x300 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
+ .rodata.cmaps  0x080ca994       0x14 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
  .rodata.kern_left_class_mapping
-                0x080ca95c       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
+                0x080ca9a8       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
  .rodata.kern_right_class_mapping
-                0x080ca9bc       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
+                0x080caa08       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
  .rodata.kern_class_values
-                0x080caa1c      0x681 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
- *fill*         0x080cb09d        0x3 
+                0x080caa68      0x681 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
+ *fill*         0x080cb0e9        0x3 
  .rodata.kern_classes
-                0x080cb0a0       0x10 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
+                0x080cb0ec       0x10 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
  .rodata.font_dsc
-                0x080cb0b0       0x18 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
+                0x080cb0fc       0x18 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
  .rodata.ui_font_barlow_16_medium
-                0x080cb0c8       0x24 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
-                0x080cb0c8                ui_font_barlow_16_medium
+                0x080cb114       0x24 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_medium.c.obj)
+                0x080cb114                ui_font_barlow_16_medium
  .rodata.glyph_bitmap
-                0x080cb0ec      0xe37 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
- *fill*         0x080cbf23        0x1 
+                0x080cb138      0xe37 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
+ *fill*         0x080cbf6f        0x1 
  .rodata.glyph_dsc
-                0x080cbf24      0x300 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
- .rodata.cmaps  0x080cc224       0x14 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
+                0x080cbf70      0x300 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
+ .rodata.cmaps  0x080cc270       0x14 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
  .rodata.kern_left_class_mapping
-                0x080cc238       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
+                0x080cc284       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
  .rodata.kern_right_class_mapping
-                0x080cc298       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
+                0x080cc2e4       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
  .rodata.kern_class_values
-                0x080cc2f8      0x681 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
- *fill*         0x080cc979        0x3 
+                0x080cc344      0x681 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
+ *fill*         0x080cc9c5        0x3 
  .rodata.kern_classes
-                0x080cc97c       0x10 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
+                0x080cc9c8       0x10 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
  .rodata.font_dsc
-                0x080cc98c       0x18 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
+                0x080cc9d8       0x18 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
  .rodata.ui_font_barlow_16_semibold
-                0x080cc9a4       0x24 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
-                0x080cc9a4                ui_font_barlow_16_semibold
+                0x080cc9f0       0x24 EEZ-UI/libEEZ-UI.a(ui_font_barlow_16_semibold.c.obj)
+                0x080cc9f0                ui_font_barlow_16_semibold
  .rodata.glyph_bitmap
-                0x080cc9c8     0x2177 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
- *fill*         0x080ceb3f        0x1 
+                0x080cca14     0x2177 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
+ *fill*         0x080ceb8b        0x1 
  .rodata.glyph_dsc
-                0x080ceb40      0x300 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
- .rodata.cmaps  0x080cee40       0x14 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
+                0x080ceb8c      0x300 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
+ .rodata.cmaps  0x080cee8c       0x14 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
  .rodata.kern_left_class_mapping
-                0x080cee54       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
+                0x080ceea0       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
  .rodata.kern_right_class_mapping
-                0x080ceeb4       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
+                0x080cef00       0x60 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
  .rodata.kern_class_values
-                0x080cef14      0x681 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
- *fill*         0x080cf595        0x3 
+                0x080cef60      0x681 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
+ *fill*         0x080cf5e1        0x3 
  .rodata.kern_classes
-                0x080cf598       0x10 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
+                0x080cf5e4       0x10 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
  .rodata.font_dsc
-                0x080cf5a8       0x18 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
+                0x080cf5f4       0x18 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
  .rodata.ui_font_barlow_24_bold
-                0x080cf5c0       0x24 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
-                0x080cf5c0                ui_font_barlow_24_bold
+                0x080cf60c       0x24 EEZ-UI/libEEZ-UI.a(ui_font_barlow_24_bold.c.obj)
+                0x080cf60c                ui_font_barlow_24_bold
  .rodata.images
-                0x080cf5e4       0x68 EEZ-UI/libEEZ-UI.a(images.c.obj)
-                0x080cf5e4                images
+                0x080cf630       0x68 EEZ-UI/libEEZ-UI.a(images.c.obj)
+                0x080cf630                images
  .rodata.img_console_icon_map
-                0x080cf64c      0x120 EEZ-UI/libEEZ-UI.a(ui_image_console_icon.c.obj)
+                0x080cf698      0x120 EEZ-UI/libEEZ-UI.a(ui_image_console_icon.c.obj)
  .rodata.img_console_icon
-                0x080cf76c       0x1c EEZ-UI/libEEZ-UI.a(ui_image_console_icon.c.obj)
-                0x080cf76c                img_console_icon
+                0x080cf7b8       0x1c EEZ-UI/libEEZ-UI.a(ui_image_console_icon.c.obj)
+                0x080cf7b8                img_console_icon
  .rodata.img_driver_dashboard_icon_map
-                0x080cf788      0x120 EEZ-UI/libEEZ-UI.a(ui_image_driver_dashboard_icon.c.obj)
+                0x080cf7d4      0x120 EEZ-UI/libEEZ-UI.a(ui_image_driver_dashboard_icon.c.obj)
  .rodata.img_driver_dashboard_icon
-                0x080cf8a8       0x1c EEZ-UI/libEEZ-UI.a(ui_image_driver_dashboard_icon.c.obj)
-                0x080cf8a8                img_driver_dashboard_icon
+                0x080cf8f4       0x1c EEZ-UI/libEEZ-UI.a(ui_image_driver_dashboard_icon.c.obj)
+                0x080cf8f4                img_driver_dashboard_icon
  .rodata.img_hazards_icon_map
-                0x080cf8c4      0x120 EEZ-UI/libEEZ-UI.a(ui_image_hazards_icon.c.obj)
+                0x080cf910      0x120 EEZ-UI/libEEZ-UI.a(ui_image_hazards_icon.c.obj)
  .rodata.img_hazards_icon
-                0x080cf9e4       0x1c EEZ-UI/libEEZ-UI.a(ui_image_hazards_icon.c.obj)
-                0x080cf9e4                img_hazards_icon
+                0x080cfa30       0x1c EEZ-UI/libEEZ-UI.a(ui_image_hazards_icon.c.obj)
+                0x080cfa30                img_hazards_icon
  .rodata.img_health_monitor_icon_map
-                0x080cfa00      0x120 EEZ-UI/libEEZ-UI.a(ui_image_health_monitor_icon.c.obj)
+                0x080cfa4c      0x120 EEZ-UI/libEEZ-UI.a(ui_image_health_monitor_icon.c.obj)
  .rodata.img_health_monitor_icon
-                0x080cfb20       0x1c EEZ-UI/libEEZ-UI.a(ui_image_health_monitor_icon.c.obj)
-                0x080cfb20                img_health_monitor_icon
+                0x080cfb6c       0x1c EEZ-UI/libEEZ-UI.a(ui_image_health_monitor_icon.c.obj)
+                0x080cfb6c                img_health_monitor_icon
  .rodata.img_home_icon_map
-                0x080cfb3c      0x120 EEZ-UI/libEEZ-UI.a(ui_image_home_icon.c.obj)
+                0x080cfb88      0x120 EEZ-UI/libEEZ-UI.a(ui_image_home_icon.c.obj)
  .rodata.img_home_icon
-                0x080cfc5c       0x1c EEZ-UI/libEEZ-UI.a(ui_image_home_icon.c.obj)
-                0x080cfc5c                img_home_icon
+                0x080cfca8       0x1c EEZ-UI/libEEZ-UI.a(ui_image_home_icon.c.obj)
+                0x080cfca8                img_home_icon
  .rodata.img_hv_battery_icon_map
-                0x080cfc78      0x120 EEZ-UI/libEEZ-UI.a(ui_image_hv_battery_icon.c.obj)
+                0x080cfcc4      0x120 EEZ-UI/libEEZ-UI.a(ui_image_hv_battery_icon.c.obj)
  .rodata.img_hv_battery_icon
-                0x080cfd98       0x1c EEZ-UI/libEEZ-UI.a(ui_image_hv_battery_icon.c.obj)
-                0x080cfd98                img_hv_battery_icon
+                0x080cfde4       0x1c EEZ-UI/libEEZ-UI.a(ui_image_hv_battery_icon.c.obj)
+                0x080cfde4                img_hv_battery_icon
  .rodata.img_left_icon_map
-                0x080cfdb4      0x120 EEZ-UI/libEEZ-UI.a(ui_image_left_icon.c.obj)
+                0x080cfe00      0x120 EEZ-UI/libEEZ-UI.a(ui_image_left_icon.c.obj)
  .rodata.img_left_icon
-                0x080cfed4       0x1c EEZ-UI/libEEZ-UI.a(ui_image_left_icon.c.obj)
-                0x080cfed4                img_left_icon
+                0x080cff20       0x1c EEZ-UI/libEEZ-UI.a(ui_image_left_icon.c.obj)
+                0x080cff20                img_left_icon
  .rodata.img_list_icon_map
-                0x080cfef0      0x120 EEZ-UI/libEEZ-UI.a(ui_image_list_icon.c.obj)
+                0x080cff3c      0x120 EEZ-UI/libEEZ-UI.a(ui_image_list_icon.c.obj)
  .rodata.img_list_icon
-                0x080d0010       0x1c EEZ-UI/libEEZ-UI.a(ui_image_list_icon.c.obj)
-                0x080d0010                img_list_icon
+                0x080d005c       0x1c EEZ-UI/libEEZ-UI.a(ui_image_list_icon.c.obj)
+                0x080d005c                img_list_icon
  .rodata.img_lv_battery_icon_map
-                0x080d002c      0x120 EEZ-UI/libEEZ-UI.a(ui_image_lv_battery_icon.c.obj)
+                0x080d0078      0x120 EEZ-UI/libEEZ-UI.a(ui_image_lv_battery_icon.c.obj)
  .rodata.img_lv_battery_icon
-                0x080d014c       0x1c EEZ-UI/libEEZ-UI.a(ui_image_lv_battery_icon.c.obj)
-                0x080d014c                img_lv_battery_icon
+                0x080d0198       0x1c EEZ-UI/libEEZ-UI.a(ui_image_lv_battery_icon.c.obj)
+                0x080d0198                img_lv_battery_icon
  .rodata.img_mppt_icon_map
-                0x080d0168      0x120 EEZ-UI/libEEZ-UI.a(ui_image_mppt_icon.c.obj)
+                0x080d01b4      0x120 EEZ-UI/libEEZ-UI.a(ui_image_mppt_icon.c.obj)
  .rodata.img_mppt_icon
-                0x080d0288       0x1c EEZ-UI/libEEZ-UI.a(ui_image_mppt_icon.c.obj)
-                0x080d0288                img_mppt_icon
+                0x080d02d4       0x1c EEZ-UI/libEEZ-UI.a(ui_image_mppt_icon.c.obj)
+                0x080d02d4                img_mppt_icon
  .rodata.img_right_icon_map
-                0x080d02a4      0x120 EEZ-UI/libEEZ-UI.a(ui_image_right_icon.c.obj)
+                0x080d02f0      0x120 EEZ-UI/libEEZ-UI.a(ui_image_right_icon.c.obj)
  .rodata.img_right_icon
-                0x080d03c4       0x1c EEZ-UI/libEEZ-UI.a(ui_image_right_icon.c.obj)
-                0x080d03c4                img_right_icon
+                0x080d0410       0x1c EEZ-UI/libEEZ-UI.a(ui_image_right_icon.c.obj)
+                0x080d0410                img_right_icon
  .rodata.img_rsc_short_transparent_map
-                0x080d03e0     0xf618 EEZ-UI/libEEZ-UI.a(ui_image_rsc_short_transparent.c.obj)
+                0x080d042c     0xf618 EEZ-UI/libEEZ-UI.a(ui_image_rsc_short_transparent.c.obj)
  .rodata.img_rsc_short_transparent
-                0x080df9f8       0x1c EEZ-UI/libEEZ-UI.a(ui_image_rsc_short_transparent.c.obj)
-                0x080df9f8                img_rsc_short_transparent
+                0x080dfa44       0x1c EEZ-UI/libEEZ-UI.a(ui_image_rsc_short_transparent.c.obj)
+                0x080dfa44                img_rsc_short_transparent
  .rodata.img_settings_icon_map
-                0x080dfa14      0x120 EEZ-UI/libEEZ-UI.a(ui_image_settings_icon.c.obj)
+                0x080dfa60      0x120 EEZ-UI/libEEZ-UI.a(ui_image_settings_icon.c.obj)
  .rodata.img_settings_icon
-                0x080dfb34       0x1c EEZ-UI/libEEZ-UI.a(ui_image_settings_icon.c.obj)
-                0x080dfb34                img_settings_icon
+                0x080dfb80       0x1c EEZ-UI/libEEZ-UI.a(ui_image_settings_icon.c.obj)
+                0x080dfb80                img_settings_icon
  .rodata.log10.str1.1
-                0x080dfb50      0x244 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-w_log10.o)
+                0x080dfb9c      0x244 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-w_log10.o)
                                   0x1 (size before relaxing)
  .rodata.log10f.str1.1
-                0x080dfd94        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-wf_log10.o)
+                0x080dfde0        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-wf_log10.o)
                                   0x1 (size before relaxing)
- *fill*         0x080dfd94        0x4 
  .rodata.__log_data
-                0x080dfd98      0x890 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-log_data.o)
-                0x080dfd98                __log_data
+                0x080dfde0      0x890 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-log_data.o)
+                0x080dfde0                __log_data
  .rodata.__pow_log_data
-                0x080e0628     0x1048 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-pow_log_data.o)
-                0x080e0628                __pow_log_data
+                0x080e0670     0x1048 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-pow_log_data.o)
+                0x080e0670                __pow_log_data
  .rodata.__logf_data
-                0x080e1670      0x120 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-sf_log_data.o)
-                0x080e1670                __logf_data
+                0x080e16b8      0x120 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-sf_log_data.o)
+                0x080e16b8                __logf_data
  .rodata.__inv_pio4
-                0x080e1790       0x60 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-sincosf_data.o)
-                0x080e1790                __inv_pio4
+                0x080e17d8       0x60 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-sincosf_data.o)
+                0x080e17d8                __inv_pio4
  .rodata.__sincosf_table
-                0x080e17f0       0xe0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-sincosf_data.o)
-                0x080e17f0                __sincosf_table
+                0x080e1838       0xe0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-sincosf_data.o)
+                0x080e1838                __sincosf_table
  .rodata.npio2_hw
-                0x080e18d0       0x80 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-e_rem_pio2.o)
+                0x080e1918       0x80 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-e_rem_pio2.o)
  .rodata.two_over_pi
-                0x080e1950      0x108 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-e_rem_pio2.o)
+                0x080e1998      0x108 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-e_rem_pio2.o)
  .rodata.__exp_data
-                0x080e1a58      0x870 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-exp_data.o)
-                0x080e1a58                __exp_data
+                0x080e1aa0      0x870 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-exp_data.o)
+                0x080e1aa0                __exp_data
  .rodata.__exp2f_data
-                0x080e22c8      0x148 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-sf_exp2_data.o)
-                0x080e22c8                __exp2f_data
+                0x080e2310      0x148 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-sf_exp2_data.o)
+                0x080e2310                __exp2f_data
  .rodata.__powf_log2_data
-                0x080e2410      0x128 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-sf_pow_log2_data.o)
-                0x080e2410                __powf_log2_data
- .rodata.PIo2   0x080e2538       0x40 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-k_rem_pio2.o)
+                0x080e2458      0x128 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-sf_pow_log2_data.o)
+                0x080e2458                __powf_log2_data
+ .rodata.PIo2   0x080e2580       0x40 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-k_rem_pio2.o)
  .rodata.init_jk
-                0x080e2578       0x10 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-k_rem_pio2.o)
+                0x080e25c0       0x10 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libm.a(libm_a-k_rem_pio2.o)
  .rodata.__assert_func.str1.1
-                0x080e2588        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-assert.o)
+                0x080e25d0        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-assert.o)
                                  0x3d (size before relaxing)
  .rodata._strtod_l.str1.1
-                0x080e2588        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strtod.o)
+                0x080e25d0        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strtod.o)
                                   0xf (size before relaxing)
  .rodata.fpinan.0
-                0x080e2588       0x14 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strtod.o)
- .rodata.fpi.1  0x080e259c       0x14 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strtod.o)
+                0x080e25d0       0x14 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strtod.o)
+ .rodata.fpi.1  0x080e25e4       0x14 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strtod.o)
  .rodata.tinytens
-                0x080e25b0       0x28 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strtod.o)
+                0x080e25f8       0x28 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strtod.o)
  .rodata._ctype_
-                0x080e25d8      0x101 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-ctype_.o)
-                0x080e25d8                _ctype_
+                0x080e2620      0x101 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-ctype_.o)
+                0x080e2620                _ctype_
  .rodata._printf_float.str1.1
-                0x080e26d9        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-vfprintf_float.o)
+                0x080e2721        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-vfprintf_float.o)
                                  0x12 (size before relaxing)
  .rodata._printf_i.str1.1
-                0x080e26d9        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-vfprintf_i.o)
+                0x080e2721        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-vfprintf_i.o)
                                  0x22 (size before relaxing)
  .rodata.strtok.str1.1
-                0x080e26d9        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strtok.o)
+                0x080e2721        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strtok.o)
                                  0x71 (size before relaxing)
  .rodata._setlocale_r.str1.1
-                0x080e26d9        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-locale.o)
+                0x080e2721        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-locale.o)
                                   0x9 (size before relaxing)
  .rodata.str1.1
-                0x080e26d9        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-locale.o)
+                0x080e2721        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-locale.o)
                                   0x2 (size before relaxing)
  .rodata._dtoa_r.str1.1
-                0x080e26d9        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-dtoa.o)
+                0x080e2721        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-dtoa.o)
                                  0x8f (size before relaxing)
  .rodata.__gethex.str1.1
-                0x080e26d9        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-gdtoa-gethex.o)
+                0x080e2721        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-gdtoa-gethex.o)
                                  0x73 (size before relaxing)
  .rodata._Balloc.str1.1
-                0x080e26d9        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-mprec.o)
+                0x080e2721        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-mprec.o)
                                  0x70 (size before relaxing)
  .rodata.__multadd.str1.1
-                0x080e26d9        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-mprec.o)
+                0x080e2721        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-mprec.o)
                                  0x11 (size before relaxing)
- *fill*         0x080e26d9        0x3 
- .rodata.p05.0  0x080e26dc        0xc C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-mprec.o)
+ *fill*         0x080e2721        0x3 
+ .rodata.p05.0  0x080e2724        0xc C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-mprec.o)
  .rodata.__mprec_bigtens
-                0x080e26e8       0x28 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-mprec.o)
-                0x080e26e8                __mprec_bigtens
+                0x080e2730       0x28 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-mprec.o)
+                0x080e2730                __mprec_bigtens
  .rodata.__mprec_tens
-                0x080e2710       0xc8 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-mprec.o)
-                0x080e2710                __mprec_tens
+                0x080e2758       0xc8 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-mprec.o)
+                0x080e2758                __mprec_tens
  .rodata._svfprintf_r.str1.1
-                0x080e27d8        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-svfprintf.o)
+                0x080e2820        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-svfprintf.o)
                                  0x11 (size before relaxing)
  .rodata.__ssvfscanf_r.str1.1
-                0x080e27d8        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-svfscanf.o)
+                0x080e2820        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-svfscanf.o)
                                   0x4 (size before relaxing)
  .rodata._vfprintf_r.str1.1
-                0x080e27d8        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-vfprintf.o)
+                0x080e2820        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-vfprintf.o)
                                  0x11 (size before relaxing)
  .rodata._scanf_i.str1.1
-                0x080e27d8        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-vfscanf_i.o)
+                0x080e2820        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-vfscanf_i.o)
                                  0x12 (size before relaxing)
  .rodata.str1.1
-                0x080e27d8        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-vfscanf_i.o)
+                0x080e2820        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-nano-vfscanf_i.o)
                                   0x9 (size before relaxing)
-                0x080e27d8                        . = ALIGN (0x4)
+                0x080e2820                        . = ALIGN (0x4)
 
-.ARM.extab      0x080e27d8        0x0
-                0x080e27d8                        . = ALIGN (0x4)
+.ARM.extab      0x080e2820        0x0
+                0x080e2820                        . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x080e27d8                        . = ALIGN (0x4)
+                0x080e2820                        . = ALIGN (0x4)
 
-.ARM            0x080e27d8        0x8
-                0x080e27d8                        . = ALIGN (0x4)
-                0x080e27d8                        __exidx_start = .
+.ARM            0x080e2820        0x8
+                0x080e2820                        . = ALIGN (0x4)
+                0x080e2820                        __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x080e27d8        0x8 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+dp/hard\libgcc.a(_udivmoddi4.o)
- .ARM.exidx     0x080e27e0        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strcmp.o)
+ .ARM.exidx     0x080e2820        0x8 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+dp/hard\libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x080e2828        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strcmp.o)
                                   0x8 (size before relaxing)
- .ARM.exidx     0x080e27e0        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-memchr.o)
+ .ARM.exidx     0x080e2828        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-memchr.o)
                                   0x8 (size before relaxing)
- .ARM.exidx     0x080e27e0        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strlen.o)
+ .ARM.exidx     0x080e2828        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libg_nano.a(libc_a-strlen.o)
                                   0x8 (size before relaxing)
-                0x080e27e0                        __exidx_end = .
-                0x080e27e0                        . = ALIGN (0x4)
+                0x080e2828                        __exidx_end = .
+                0x080e2828                        . = ALIGN (0x4)
 
-.preinit_array  0x080e27e0        0x0
-                0x080e27e0                        . = ALIGN (0x4)
-                0x080e27e0                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x080e2828        0x0
+                0x080e2828                        . = ALIGN (0x4)
+                0x080e2828                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x080e27e0                        PROVIDE (__preinit_array_end = .)
-                0x080e27e0                        . = ALIGN (0x4)
+                0x080e2828                        PROVIDE (__preinit_array_end = .)
+                0x080e2828                        . = ALIGN (0x4)
 
-.init_array     0x080e27e0        0x8
-                0x080e27e0                        . = ALIGN (0x4)
-                0x080e27e0                        PROVIDE (__init_array_start = .)
+.init_array     0x080e2828        0x8
+                0x080e2828                        . = ALIGN (0x4)
+                0x080e2828                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x080e27e0        0x4 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+dp/hard/crtbegin.o
- .init_array    0x080e27e4        0x4 EEZ-UI/libEEZ-UI.a(eez-flow.cpp.obj)
-                0x080e27e8                        PROVIDE (__init_array_end = .)
-                0x080e27e8                        . = ALIGN (0x4)
+ .init_array    0x080e2828        0x4 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+dp/hard/crtbegin.o
+ .init_array    0x080e282c        0x4 EEZ-UI/libEEZ-UI.a(eez-flow.cpp.obj)
+                0x080e2830                        PROVIDE (__init_array_end = .)
+                0x080e2830                        . = ALIGN (0x4)
 
-.fini_array     0x080e27e8        0x4
-                0x080e27e8                        . = ALIGN (0x4)
+.fini_array     0x080e2830        0x4
+                0x080e2830                        . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x080e27e8        0x4 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+dp/hard/crtbegin.o
+ .fini_array    0x080e2830        0x4 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+dp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x080e27ec                        . = ALIGN (0x4)
-                0x080e27ec                        _sidata = LOADADDR (.data)
+                0x080e2834                        . = ALIGN (0x4)
+                0x080e2834                        _sidata = LOADADDR (.data)
 
-.rel.dyn        0x080e27ec        0x0
- .rel.iplt      0x080e27ec        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+dp/hard/crtbegin.o
+.rel.dyn        0x080e2834        0x0
+ .rel.iplt      0x080e2834        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+dp/hard/crtbegin.o
 
-.data           0x20000000     0x1668 load address 0x080e27ec
+.data           0x20000000     0x1668 load address 0x080e2834
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -39882,10 +39881,10 @@ LOAD C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+s
  *(.RamFunc*)
                 0x20001668                        . = ALIGN (0x4)
 
-.igot.plt       0x20001668        0x0 load address 0x080e3e54
+.igot.plt       0x20001668        0x0 load address 0x080e3e9c
  .igot.plt      0x20001668        0x0 C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+dp/hard/crtbegin.o
 
-.tdata          0x20001668        0x0 load address 0x080e3e54
+.tdata          0x20001668        0x0 load address 0x080e3e9c
  *(.tdata .tdata.* .gnu.linkonce.td.*)
                 0x20001668                        . = ALIGN (0x4)
                 0x20001668                        _edata = .
@@ -39902,7 +39901,7 @@ LOAD C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+s
                 [!provide]                        PROVIDE (__data_source_end = __tdata_source_end)
                 [!provide]                        PROVIDE (__data_source_size = (__data_source_end - __data_source))
 
-.tbss           0x20001668        0x0 load address 0x080e3e54
+.tbss           0x20001668        0x0 load address 0x080e3e9c
                 0x20001668                        _sbss = .
                 0x20001668                        __bss_start__ = _sbss
  *(.tbss .tbss.*)
@@ -39919,7 +39918,7 @@ LOAD C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+s
                 [!provide]                        PROVIDE (__arm32_tls_tcb_offset = MAX (0x8, __tls_align))
                 [!provide]                        PROVIDE (__arm64_tls_tcb_offset = MAX (0x10, __tls_align))
 
-.bss            0x20001668     0x4ae4 load address 0x080e3e54
+.bss            0x20001668     0x4ae4 load address 0x080e3e9c
  *(.bss)
  .bss           0x20001668       0x1c C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+st.9/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+dp/hard/crtbegin.o
  *(.bss*)
@@ -40446,7 +40445,7 @@ LOAD C:/Users/tyler/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/13.3.1+s
                 [!provide]                        PROVIDE (__bss_size = (__bss_end - __bss_start))
 
 ._user_heap_stack
-                0x2000614c      0x604 load address 0x080e3e54
+                0x2000614c      0x604 load address 0x080e3e9c
                 0x20006150                        . = ALIGN (0x8)
  *fill*         0x2000614c        0x4 
                 [!provide]                        PROVIDE (end = .)
