@@ -13,7 +13,7 @@ extern "C" {
 // Flow global variables
 
 enum FlowGlobalVariables {
-    FLOW_GLOBAL_VARIABLE_NONE
+    FLOW_GLOBAL_VARIABLE_CHANNEL_SELECT = 0
 };
 
 // Native global variables
@@ -74,6 +74,38 @@ extern int32_t get_var_lv3c_motor_speed();
 extern void set_var_lv3c_motor_speed(int32_t value);
 extern int32_t get_var_lv3c_hv_fault();
 extern void set_var_lv3c_hv_fault(int32_t value);
+extern int32_t get_var_lv3c_mppt1_voltage();
+extern void set_var_lv3c_mppt1_voltage(int32_t value);
+extern int32_t get_var_lv3c_mppt1_current();
+extern void set_var_lv3c_mppt1_current(int32_t value);
+extern int32_t get_var_lv3c_mppt1_batt_rail();
+extern void set_var_lv3c_mppt1_batt_rail(int32_t value);
+extern int32_t get_var_lv3c_mppt1_temp();
+extern void set_var_lv3c_mppt1_temp(int32_t value);
+extern int32_t get_var_lv3c_mppt2_voltage();
+extern void set_var_lv3c_mppt2_voltage(int32_t value);
+extern int32_t get_var_lv3c_mppt2_current();
+extern void set_var_lv3c_mppt2_current(int32_t value);
+extern int32_t get_var_lv3c_mppt2_batt_rail();
+extern void set_var_lv3c_mppt2_batt_rail(int32_t value);
+extern int32_t get_var_lv3c_mppt2_temp();
+extern void set_var_lv3c_mppt2_temp(int32_t value);
+extern int32_t get_var_lv3c_mppt3_voltage();
+extern void set_var_lv3c_mppt3_voltage(int32_t value);
+extern int32_t get_var_lv3c_mppt3_current();
+extern void set_var_lv3c_mppt3_current(int32_t value);
+extern int32_t get_var_lv3c_mppt3_batt_rail();
+extern void set_var_lv3c_mppt3_batt_rail(int32_t value);
+extern int32_t get_var_lv3c_mppt3_temp();
+extern void set_var_lv3c_mppt3_temp(int32_t value);
+extern int32_t get_var_lv3c_mppt4_voltage();
+extern void set_var_lv3c_mppt4_voltage(int32_t value);
+extern int32_t get_var_lv3c_mppt4_current();
+extern void set_var_lv3c_mppt4_current(int32_t value);
+extern int32_t get_var_lv3c_mppt4_batt_rail();
+extern void set_var_lv3c_mppt4_batt_rail(int32_t value);
+extern int32_t get_var_lv3c_mppt4_temp();
+extern void set_var_lv3c_mppt4_temp(int32_t value);
 
 #ifdef __cplusplus
 }

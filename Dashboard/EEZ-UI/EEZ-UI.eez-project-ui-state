@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/3",
+    "selectedUserPageObject": "[EEZ-UI.eez-project]:/userPages/0",
     "selectedUserWidgetObject": "[EEZ-UI.eez-project]:/userWidgets/0",
     "selectedActionObject": "[EEZ-UI.eez-project]:/actions/4",
     "selectedGlobalVariableObject": "[EEZ-UI.eez-project]:/variables/globalVariables/27",
@@ -222,10 +222,10 @@
                 {
                   "type": "tab",
                   "id": "#e19d0844-67f3-40f5-ab44-c8bf4dae3898",
-                  "name": "Driver Dashboard",
+                  "name": "MPPT",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[EEZ-UI.eez-project]:/userPages/3",
+                    "objectPath": "[EEZ-UI.eez-project]:/userPages/6",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1354,6 +1354,23 @@
         "translate": {
           "x": -258.4606060606061,
           "y": -41.04848484848492
+        },
+        "scale": 0.8
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[EEZ-UI.eez-project]:/userPages/6[flow-state]": {
+      "selectionFront": {},
+      "selectionBack": {},
+      "transform": {
+        "translate": {
+          "x": -240,
+          "y": -136
         },
         "scale": 0.8
       },

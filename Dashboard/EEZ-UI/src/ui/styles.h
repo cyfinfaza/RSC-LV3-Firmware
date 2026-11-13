@@ -66,6 +66,11 @@ lv_style_t *get_style_faults_table_MAIN_DEFAULT();
 void add_style_faults_table(lv_obj_t *obj);
 void remove_style_faults_table(lv_obj_t *obj);
 
+// Style: mpptcont
+lv_style_t *get_style_mpptcont_MAIN_DEFAULT();
+void add_style_mpptcont(lv_obj_t *obj);
+void remove_style_mpptcont(lv_obj_t *obj);
+
 #ifdef __cplusplus
 }
 #endif

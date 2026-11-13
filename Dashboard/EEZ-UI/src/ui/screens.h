@@ -17,7 +17,8 @@ enum ScreensEnum {
     SCREEN_ID_DRIVER_DASHBOARD = 4,
     SCREEN_ID_HV_BATTERY = 5,
     SCREEN_ID_LV_BATTERY = 6,
-    _SCREEN_ID_LAST = 6
+    SCREEN_ID_MPPT = 7,
+    _SCREEN_ID_LAST = 7
 };
 
 typedef struct _objects_t {
@@ -27,6 +28,7 @@ typedef struct _objects_t {
     lv_obj_t *driver_dashboard;
     lv_obj_t *hv_battery;
     lv_obj_t *lv_battery;
+    lv_obj_t *mppt;
     lv_obj_t *obj0;
     lv_obj_t *obj1;
     lv_obj_t *obj2;
@@ -40,21 +42,21 @@ typedef struct _objects_t {
     lv_obj_t *obj10;
     lv_obj_t *obj11;
     lv_obj_t *obj12;
-    lv_obj_t *brightness_slider;
     lv_obj_t *obj13;
-    lv_obj_t *default_screen_dropdown;
+    lv_obj_t *hello;
     lv_obj_t *obj14;
+    lv_obj_t *default_screen_dropdown;
     lv_obj_t *obj15;
     lv_obj_t *obj16;
     lv_obj_t *obj17;
     lv_obj_t *obj18;
     lv_obj_t *obj19;
-    lv_obj_t *can_parameters_table;
     lv_obj_t *obj20;
+    lv_obj_t *can_parameters_table;
+    lv_obj_t *obj21;
     lv_obj_t *hazards_button;
     lv_obj_t *left_signal_button;
     lv_obj_t *right_signal_button;
-    lv_obj_t *obj21;
     lv_obj_t *obj22;
     lv_obj_t *obj23;
     lv_obj_t *obj24;
@@ -63,6 +65,7 @@ typedef struct _objects_t {
     lv_obj_t *obj27;
     lv_obj_t *obj28;
     lv_obj_t *obj29;
+    lv_obj_t *obj30;
     lv_obj_t *soc;
     lv_obj_t *lv3c_hv_pack_soc_bar;
     lv_obj_t *lv3c_sw_hv_main;
@@ -74,10 +77,9 @@ typedef struct _objects_t {
     lv_obj_t *hv_pack_voltage_current;
     lv_obj_t *hv_pack_temp;
     lv_obj_t *hv_fault_table;
-    lv_obj_t *obj30;
     lv_obj_t *obj31;
-    lv_obj_t *cell_voltages_1_12;
     lv_obj_t *obj32;
+    lv_obj_t *cell_voltages_1_12;
     lv_obj_t *obj33;
     lv_obj_t *obj34;
     lv_obj_t *obj35;
@@ -89,8 +91,8 @@ typedef struct _objects_t {
     lv_obj_t *obj41;
     lv_obj_t *obj42;
     lv_obj_t *obj43;
-    lv_obj_t *cell_voltages_13_24;
     lv_obj_t *obj44;
+    lv_obj_t *cell_voltages_13_24;
     lv_obj_t *obj45;
     lv_obj_t *obj46;
     lv_obj_t *obj47;
@@ -103,14 +105,32 @@ typedef struct _objects_t {
     lv_obj_t *obj54;
     lv_obj_t *obj55;
     lv_obj_t *obj56;
+    lv_obj_t *obj57;
     lv_obj_t *lv_bat_fault_table;
     lv_obj_t *lv_dcdc_fault_table;
-    lv_obj_t *obj57;
     lv_obj_t *obj58;
     lv_obj_t *obj59;
     lv_obj_t *obj60;
     lv_obj_t *obj61;
     lv_obj_t *obj62;
+    lv_obj_t *obj63;
+    lv_obj_t *obj64;
+    lv_obj_t *obj65;
+    lv_obj_t *obj66;
+    lv_obj_t *obj67;
+    lv_obj_t *obj68;
+    lv_obj_t *obj69;
+    lv_obj_t *obj70;
+    lv_obj_t *obj71;
+    lv_obj_t *obj72;
+    lv_obj_t *obj73;
+    lv_obj_t *obj74;
+    lv_obj_t *obj75;
+    lv_obj_t *obj76;
+    lv_obj_t *obj77;
+    lv_obj_t *obj78;
+    lv_obj_t *obj79;
+    lv_obj_t *obj80;
 } objects_t;
 
 extern objects_t objects;
@@ -132,6 +152,9 @@ void tick_screen_hv_battery();
 
 void create_screen_lv_battery();
 void tick_screen_lv_battery();
+
+void create_screen_mppt();
+void tick_screen_mppt();
 
 void create_user_widget_widget1(lv_obj_t *parent_obj, void *flowState, int startWidgetIndex);
 void tick_user_widget_widget1(void *flowState, int startWidgetIndex);
